@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+
+  custom-text-service:
+    image: custom-text-service
+    container_name: custom-text-service-1
+    build:
+      context: ./custom-text-service
+      dockerfile: Dockerfile
+    ports:
+      - "9090:9090"
+    networks:
+      - network 
+
+  custom-greeting-service:
+    image: custom-greeting-service
+    build:
+      context: ./custom-greeting-service
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - network
+    depends_on:
+      - custom-text-service
+
+networks:
+  network:
+    name: custom-network

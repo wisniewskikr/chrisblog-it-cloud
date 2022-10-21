@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: system-api-gateway-service
+  cloud:
+    gateway:
+      routes:
+        - id: custom-text-service
+          uri: lb://custom-text-service
+          predicates:
+            - Path=/text/**
+        - id: custom-greeting-service
+          uri: lb://custom-greeting-service
+          predicates:
+            - Path=/greeting/**
+
+server:
+  port: ${port:8090}

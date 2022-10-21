@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+
+  system-eureka-naming-server-service:
+    image: system-eureka-naming-server-service
+    container_name: system-eureka-naming-server-service
+    build:
+      context: ./system-eureka-naming-server-service
+      dockerfile: Dockerfile-Fast
+    ports:
+      - "8761:8761"
+    networks:
+      - network
+  
+  custom-text-service:
+    image: custom-text-service
+    container_name: custom-text-service
+    build:
+      context: ./custom-text-service
+      dockerfile: Dockerfile-Fast
+    ports:
+      - "9090:9090"
+    networks:
+      - network
+    depends_on:
+      - system-eureka-naming-server-service
+
+  custom-greeting-service:
+    image: custom-greeting-service
+    container_name: custom-greeting-service
+    build:
+      context: ./custom-greeting-service
+      dockerfile: Dockerfile-Fast
+    ports:
+      - "8080:8080"
+    networks:
+      - network
+    depends_on:
+      - custom-text-service
+      - system-eureka-naming-server-service
+
+networks:
+  network:
+    name: custom-network

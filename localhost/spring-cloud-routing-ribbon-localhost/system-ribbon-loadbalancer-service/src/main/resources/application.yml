@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: system-ribbon-loadbalancer-service
+
+custom-text-service-ribbon:
+  ribbon:
+    eureka:
+      enabled: false
+    listOfServers: localhost:9090,localhost:9091,localhost:9092
+    ServerListRefreshInterval: 2000
+
+server:
+  port: ${port:9080}

@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+
+  custom-text-service:
+    image: custom-text-service
+    container_name: custom-text-service
+    build:
+      context: ./custom-text-service
+      dockerfile: Dockerfile-Fast
+    ports:
+      - "9090:9090"
+    networks:
+      - network 
+
+  custom-greeting-service:
+    image: custom-greeting-service
+    container_name: custom-greeting-service
+    build:
+      context: ./custom-greeting-service
+      dockerfile: Dockerfile-Fast
+    ports:
+      - "8080:8080"
+    networks:
+      - network
+    depends_on:
+      - custom-text-service
+
+  system-api-gateway-service:
+    image: system-api-gateway-service
+    container_name: system-api-gateway-service
+    build:
+      context: ./system-api-gateway-service
+      dockerfile: Dockerfile-Fast
+    ports:
+      - "8090:8090"
+    networks:
+      - network
+    depends_on:
+      - custom-text-service
+      - custom-greeting-service
+
+networks:
+  network:
+    name: custom-network

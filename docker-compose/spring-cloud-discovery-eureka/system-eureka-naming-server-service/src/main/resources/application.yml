@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: system-eureka-naming-server-service
+
+server:
+  port: ${port:8761}
+
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false

@@ -9,6 +9,7 @@
     <version>0.1.0</version>
     <modules>
 		<module>service-discovery</module>
+		<module>service-gateway</module>
     	<module>service-helloworld-1</module>
 		<module>service-helloworld-2</module>
     </modules>

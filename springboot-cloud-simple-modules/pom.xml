@@ -8,8 +8,9 @@
     <artifactId>springboot-cloud-simple-modules</artifactId>
     <version>0.1.0</version>
     <modules>
-    	<module>helloworld-service-1</module>
-		<module>helloworld-service-2</module>
+		<module>service-discovery</module>
+    	<module>service-helloworld-1</module>
+		<module>service-helloworld-2</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -9,7 +9,7 @@
 		<relativePath/>
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>helloworld-service-1</artifactId>
+	<artifactId>service-helloworld-1</artifactId>
 	<version>0.1.0</version>
 
 	<properties>

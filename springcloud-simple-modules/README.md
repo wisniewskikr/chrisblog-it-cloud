@@ -13,6 +13,7 @@ Ports:
 - service-helloworld-2: 8081
 - service-gateway: 8762
 - service-traking: 9411
+- service-logging:
 
 You can start custom service by:
 - Custom Service

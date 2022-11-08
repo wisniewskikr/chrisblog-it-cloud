@@ -19,3 +19,11 @@ You can start custom service by:
 - Custom Service
 - Discovery Service
 - Gateway Service
+
+Zipkin:
+- download and install otp
+- download and install rabbitmq
+- use command: rabbitmq-plugins enable rabbitmq_management
+- check rabbitmq: http://localhost:15672
+- download zipkin: curl -sSL https://zipkin.io/quickstart.sh | bash -s
+- start zipkin with: RABBIT_URI=amqp://localhost java -jar zipkin.jar

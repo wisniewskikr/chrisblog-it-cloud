@@ -24,7 +24,7 @@ You can start custom service by:
 
 Zipkin:
 - download and install otp
-- download and install rabbitmq
+- download and install rabbitmq (as administrator)
 - use command: rabbitmq-plugins enable rabbitmq_management
 - check rabbitmq: http://localhost:15672
 - download zipkin: curl -sSL https://zipkin.io/quickstart.sh | bash -s

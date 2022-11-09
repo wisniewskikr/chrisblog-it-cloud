@@ -1,5 +1,7 @@
+Endpoint:
 - http://localhost:8761
 
+Launch:
 - mvn -f ./service-discovery spring-boot:run
 - mvn -f ./service-config spring-boot:run
 - mvn -f ./service-helloworld-1 spring-boot:run

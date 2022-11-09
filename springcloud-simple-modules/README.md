@@ -29,3 +29,16 @@ Zipkin:
 - check rabbitmq: http://localhost:15672
 - download zipkin: curl -sSL https://zipkin.io/quickstart.sh | bash -s
 - start zipkin with: RABBIT_URI=amqp://localhost java -jar zipkin.jar
+
+OTP
+
+Link: https://www.erlang.org/downloads
+
+RABBITMQ
+
+Link: https://www.rabbitmq.com/download.html
+
+ZIPKIN
+
+Link: https://zipkin.io/pages/quickstart.html
+

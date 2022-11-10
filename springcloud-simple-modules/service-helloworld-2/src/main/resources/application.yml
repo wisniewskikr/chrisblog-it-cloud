@@ -29,4 +29,4 @@ eureka:
 
 # Logging
 logging:
-  file: C:\IT\logs
+  file: C:\IT\logs\springcloud-simple-modules.log

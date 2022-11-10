@@ -42,3 +42,62 @@ ZIPKIN
 
 Link: https://zipkin.io/pages/quickstart.html
 
+
+EKL
+
+Elasticsearch:
+- Download: https://www.elastic.co/downloads/elasticsearch
+- Run: bin/elasticsearch.bat
+- URL: http://localhos:9200
+
+Kibana:
+- Download: https://www.elastic.co/downloads/kibana
+- Run: bin/kibana.bat
+- URL: http://localhost:5601
+- Kibana -> Dev Tools
+
+PUT /javatechie
+{
+  "settings": {
+  "index": {
+    "number_of_shards" : 3,
+    "number_of_replicas" : 2
+  }
+  }
+}
+
+POST /javatechie/default
+{
+  "name": "event_processing",
+  "instructor": {
+    "firstName": "java",
+    "lastName": "techie"
+  }
+}
+
+Logstash:
+- Download: https://www.elastic.co/downloads/logstash
+- Create bin/logstash.conf
+
+input {
+	file {
+		path => "C:\IT\logs\springcloud-simple-modules.log"
+		start_position => "beginning"
+	}
+}
+
+output {
+	
+	stdout {
+		codec => rubydebug
+	}
+	
+	elasticsearch {
+		hosts => ["localhost:9200"]
+		index => "javatechie-%{+yyyy.MM.dd}"
+	}
+	
+}
+
+- Run: bin/logstash.bat -f logstash.conf
+

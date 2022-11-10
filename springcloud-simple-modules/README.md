@@ -28,7 +28,7 @@ Zipkin:
 - use command: rabbitmq-plugins enable rabbitmq_management
 - check rabbitmq: http://localhost:15672
 - download zipkin: curl -sSL https://zipkin.io/quickstart.sh | bash -s
-- start zipkin with: RABBIT_URI=amqp://localhost java -jar zipkin.jar
+- start zipkin (GIT bash) with: RABBIT_URI=amqp://localhost java -jar zipkin.jar
 
 OTP
 

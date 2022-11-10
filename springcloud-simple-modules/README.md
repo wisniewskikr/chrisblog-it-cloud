@@ -48,7 +48,7 @@ EKL
 Elasticsearch:
 - Download: https://www.elastic.co/downloads/elasticsearch
 - Run: bin/elasticsearch.bat
-- URL: http://localhos:9200
+- URL: http://localhost:9200
 
 Kibana:
 - Download: https://www.elastic.co/downloads/kibana
@@ -74,6 +74,9 @@ POST /javatechie/default
     "lastName": "techie"
   }
 }
+
+- Kibana -> Management - Index Pattern -> Create Index Pattern -> Pattern "javatechie*" -> "I don't want to use the Time Filter"
+- Kibana -> Discover
 
 Logstash:
 - Download: https://www.elastic.co/downloads/logstash

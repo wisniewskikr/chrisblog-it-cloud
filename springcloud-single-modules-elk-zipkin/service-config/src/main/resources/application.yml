@@ -6,7 +6,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/wisniewskikr/springcloud-simple-modules
+          uri: https://github.com/wisniewskikr/springcloud-single-modules-elk-zipkin
           clone-on-start: true
 
 # Port

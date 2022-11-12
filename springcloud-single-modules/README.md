@@ -2,7 +2,7 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to implement **microservices** using **Java** programming language and **Spring Boot Cloud** framework. This project consists of few microservices implemented as independent **Maven modules**.
+The goal of this project is to present how to implement **microservices** using **Java** programming language and **Spring Boot Cloud** framework. This project consists of few microservices implemented as independent **Maven modules**. But in the system there is only **single module** of custom service - Service HelloWorld. This service is run as two instances to present load balancing usage. The rest of services in the system are provided by Spring Boot Cloud and they are used for system management. 
 
 #### Service
 This project consists of following services:
@@ -56,7 +56,7 @@ Usage steps:
 1. Fifth Command Line: Start Service Gateway with `mvn -f ./service-gateway spring-boot:run`
 1. (Optional) In any browser check services list with `http://localhost:8761`
 1. In any REST Client (for instance Postman) connect with Service HelloWorld via Service Gateway with (method GET): `http://localhost:8762/service-helloworld`
-1. (Optional) In any Rest Client run following request many time to check load balancing (response port should be changed) (method GET): `http://localhost:8762/service-helloworld`
+1. (Optional) In any Rest Client run following request many times to check load balancing (response port should be changed every request) (method GET): `http://localhost:8762/service-helloworld`
 1. Fifth Command Line: Clean up environment with `ctrl + C`
 1. Fourth Command Line: Clean up environment with `ctrl + C`
 1. Third Command Line: Clean up environment with `ctrl + C`

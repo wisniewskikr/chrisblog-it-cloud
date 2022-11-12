@@ -53,13 +53,79 @@ PRECONDITIONS
 * **Download**, **install** and **run** tool **RabbitMQ** (required by Zipkin):
      * Download installation file from: `https://www.rabbitmq.com/download.html`
      * Run downloaded file as administrator
-     * Run RabbitMQ service with (Command Line tool in location: "{rabbitmq_home}/bin"): `rabbitmq-service.bat start`
-     * Check RabbitMQ service with `http://localhost:15672`
-* **Download** and **run** tool **Zipkin**:
-      * Download package with tool from `https://zipkin.io/pages/quickstart.html`
-      * Extract package
-      * Start Zipkin with (GIT bash tool in location: "{zipkin_home}/bin"): `RABBIT_URI=amqp://localhost java -jar zipkin.jar`
-      * Check Zipkin service with `http://localhost:9411`
+     * Run service with (bu Command Line tool in location: "{tool_home}/bin"): `rabbitmq-service.bat start`
+     * Check service with `http://localhost:15672`
+* **Download**, **extract** and **run** tool **Zipkin**:
+     * Download package with tool from `https://zipkin.io/pages/quickstart.html`
+     * Extract package
+     * Start service with (by GIT bash tool in location: "{tool_home}/bin"): `RABBIT_URI=amqp://localhost java -jar zipkin.jar`
+     * Check service with `http://localhost:9411`
+* **Download**, **extract** and **run** tool **Elasticsearch** (required by ELK in version 7.6.2):
+     * Download package with tool from `https://www.elastic.co/downloads/elasticsearch`
+     * Extract package
+     * Start service with (by Command Line tool in location: "{tool_home}/bin"): `elasticsearch.bat`
+     * Check service with `http://localhost:9200`
+* **Download**, **extract** and **run** tool **Kibana** (required by ELK in version 7.6.2):
+     * Download package with tool from `https://www.elastic.co/downloads/kibana`
+     * Extract package
+     * Start service with (by Command Line tool in location: "{tool_home}/bin"): `kibana.bat`
+     * Open tool console with `http://localhost:5601`
+     * In tool console create index in section "Kibana -> Dev Tools" (check code snippets below)     
+     * In tool console create index pattern in section "Kibana -> Management - Index Pattern -> Create Index Pattern -> Pattern 'helloworld*' -> 'I don't want to use the Time Filter'"
+     * In tool console check logs in section "Kibana -> Discover"
+               
+```
+PUT /helloworld	
+{
+  "settings": {
+  "index": {
+    "number_of_shards" : 3,
+    "number_of_replicas" : 2
+  }
+  }
+}
+```
+
+```
+POST /helloworld/default
+{
+  "name": "event_processing",
+  "instructor": {
+    "firstName": "Hello",
+    "lastName": "World"
+  }
+}
+```
+     
+* **Download**, **extract** and **run** tool **Logstash** (required by ELK in version 7.6.2):
+     * Download package with tool from `https://www.elastic.co/downloads/logstash`
+     * Extract package
+     * Create following file: "{tool_home}/bin/logstash.conf"
+     * Fill created file with data from code snippet below
+     * Start service with (by Command Line tool in location: "{tool_home}/bin"): `logstash.bat -f logstash.conf`
+     
+```
+input {
+	file {
+		path => "C:\logs\springcloud-simple-modules-elk-zipkin.log"
+		start_position => "beginning"
+	}
+}
+
+output {
+	
+	stdout {
+		codec => rubydebug
+	}
+	
+	elasticsearch {
+		hosts => ["localhost:9200"]
+		index => "helloworld-%{+yyyy.MM.dd}"
+	}
+	
+}
+```
+
 * **Download** source code using Git 
 * Open any **Command Line** (for instance "Windonw PowerShell" on Windows OS) tool on **project's folder** (exact localization of project you can check in GIT repositories on page `https://github.com/wisniewskikr/chrisblog-it-cloud`)
 
@@ -76,6 +142,8 @@ Usage steps:
 1. (Optional) In any browser check services list with `http://localhost:8761`
 1. In any REST Client (for instance Postman) connect with Service HelloWorld via Service Gateway with (method GET): `http://localhost:8762/service-helloworld`
 1. (Optional) In any Rest Client run following request many times to check load balancing (response port should be changed every request) (method GET): `http://localhost:8762/service-helloworld`
+1. Check distributed tracking (Zipkin) with `http:\\localhost:9411`
+1. Check centralized logging (ELK) with `http:\\localhost:5601`
 1. Fifth Command Line: Clean up environment with `ctrl + C`
 1. Fourth Command Line: Clean up environment with `ctrl + C`
 1. Third Command Line: Clean up environment with `ctrl + C`
@@ -83,147 +151,81 @@ Usage steps:
 1. First Command Line: Clean up environment with `ctrl + C`
 
 
+ZIPKIN CONFIGURATION - PRINTSCREENS
+-----------------------------------
+
+##### Otp
+
+![My Image](otp-1.png)
+
+![My Image](otp-2.png)
+
+![My Image](otp-3.png)
+
+![My Image](otp-4.png)
+
+#### RabbitMQ
+
+![My Image](rabbitmq-1.png)
+
+![My Image](rabbitmq-2.png)
+
+![My Image](rabbitmq-3.png)
+
+![My Image](rabbitmq-4.png)
+
+![My Image](rabbitmq-5.png)
+
+![My Image](rabbitmq-6.png)
+
+![My Image](rabbitmq-7.png)
+
+![My Image](rabbitmq-8.png)
+
+![My Image](rabbitmq-9.png)
+
+![My Image](rabbitmq-10.png)
+
+#### Zipkin
+
+![My Image](zipkin-1.png)
+
+![My Image](zipkin-2.png)
+
+![My Image](zipkin-3.png)
 
 
+ELK CONFIGURATION - PRINTSCREENS
+--------------------------------
 
+#### Elasticsearch
 
+![My Image](elasticsearch-1.png)
 
+![My Image](elasticsearch-2.png)
 
+#### Kibana
 
+![My Image](kibana-1.png)
 
+![My Image](kibana-2.png)
 
+![My Image](kibana-3.png)
 
+![My Image](kibana-4.png)
 
+![My Image](kibana-5.png)
 
+![My Image](kibana-6.png)
 
+![My Image](kibana-7.png)
 
+![My Image](kibana-8.png)
 
+#### Logstash
 
+![My Image](logstash-1.png)
 
+![My Image](logstash-2.png)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Endpoint:
-- http://localhost:8761
-
-Launch:
-- mvn -f ./service-discovery spring-boot:run
-- mvn -f ./service-config spring-boot:run
-- mvn -f ./service-helloworld-1 spring-boot:run
-- mvn -f ./service-helloworld-2 spring-boot:run
-- mvn -f ./service-gateway spring-boot:run
-
-Ports:
-- service-discovery: 8761
-- service-config: 8888
-- service-helloworld-1: 8080
-- service-helloworld-2: 8081
-- service-gateway: 8762
-- service-traking: 9411
-- service-logging:
-
-You can start custom service by:
-- Custom Service
-- Discovery Service
-- Gateway Service
-
-Zipkin:
-- download and install otp
-- download and install rabbitmq (as administrator)
-- use command: rabbitmq-plugins enable rabbitmq_management
-- check rabbitmq: http://localhost:15672
-- download zipkin: curl -sSL https://zipkin.io/quickstart.sh | bash -s
-- start zipkin (GIT bash) with: RABBIT_URI=amqp://localhost java -jar zipkin.jar
-
-OTP
-
-Link: https://www.erlang.org/downloads
-
-RABBITMQ
-
-Link: https://www.rabbitmq.com/download.html
-
-ZIPKIN
-
-Link: https://zipkin.io/pages/quickstart.html
-
-
-EKL
-
-Elasticsearch:
-- Download: https://www.elastic.co/downloads/elasticsearch
-- Run: bin/elasticsearch.bat
-- URL: http://localhost:9200
-
-Kibana:
-- Download: https://www.elastic.co/downloads/kibana
-- Run: bin/kibana.bat
-- URL: http://localhost:5601
-- Kibana -> Dev Tools
-
-PUT /javatechie
-{
-  "settings": {
-  "index": {
-    "number_of_shards" : 3,
-    "number_of_replicas" : 2
-  }
-  }
-}
-
-POST /javatechie/default
-{
-  "name": "event_processing",
-  "instructor": {
-    "firstName": "java",
-    "lastName": "techie"
-  }
-}
-
-- Kibana -> Management - Index Pattern -> Create Index Pattern -> Pattern "javatechie*" -> "I don't want to use the Time Filter"
-- Kibana -> Discover
-
-Logstash:
-- Download: https://www.elastic.co/downloads/logstash
-- Create bin/logstash.conf
-
-input {
-	file {
-		path => "C:\IT\logs\springcloud-simple-modules.log"
-		start_position => "beginning"
-	}
-}
-
-output {
-	
-	stdout {
-		codec => rubydebug
-	}
-	
-	elasticsearch {
-		hosts => ["localhost:9200"]
-		index => "javatechie-%{+yyyy.MM.dd}"
-	}
-	
-}
-
-- Run: bin/logstash.bat -f logstash.conf
-
+![My Image](logstash-3.png)

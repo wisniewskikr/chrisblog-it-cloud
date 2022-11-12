@@ -30,4 +30,4 @@ eureka:
 # Logging
 logging:
   file:
-    name: C:/IT/logs/springcloud-simple-modules.log
+    name: C:/logs/springcloud-single-modules-elk-zipkin.log

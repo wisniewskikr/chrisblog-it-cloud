@@ -1,13 +1,13 @@
 package com.example.jsons;
 
-public class HelloWorldJson {
+public class HelloWorldStorageJson {
 	
 	private String message;
 	private String port;
 	
-	public HelloWorldJson() {}
+	public HelloWorldStorageJson() {}
 
-	public HelloWorldJson(String message, String port) {		
+	public HelloWorldStorageJson(String message, String port) {		
 		this.message = message;
 		this.port = port;
 	}

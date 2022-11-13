@@ -8,7 +8,9 @@ import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.jsons.HelloWorldJson;
+import com.example.feigns.StorageFeignClient;
+import com.example.jsons.HelloWorldDisplayJson;
+import com.example.jsons.HelloWorldStorageJson;
 
 @RestController
 public class HelloWorldController {
@@ -18,19 +20,23 @@ public class HelloWorldController {
 	@Value("${service.helloworld.message}")
 	private String message;
 	
-	private Environment environment;	
+	private Environment environment;
+	private StorageFeignClient storageFeignClient;
 	
 	@Autowired
-	public HelloWorldController(Environment environment) {
+	public HelloWorldController(Environment environment, StorageFeignClient storageFeignClient) {
 		this.environment = environment;
+		this.storageFeignClient = storageFeignClient;
 	}
 
 	@RequestMapping(value="/")
-	public HelloWorldJson helloWorld() {
+	public HelloWorldDisplayJson helloWorld() {
 		
-		logger.info("Hello World 1");
+		logger.info("Service Hello World Display");
+		
 		String port = environment.getProperty("local.server.port");
-		return new HelloWorldJson(message, port);
+		HelloWorldStorageJson storageJson = storageFeignClient.getHelloWorldFromStorage();
+		return new HelloWorldDisplayJson(storageJson.getMessage(), port, storageJson.getPort());
 		
 	}
 	

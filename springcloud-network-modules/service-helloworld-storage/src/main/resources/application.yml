@@ -1,7 +1,7 @@
 # Spring
 spring:
   application:
-    name: service-helloworld
+    name: service-helloworld-storage
   config:
     import: optional:configserver:http://localhost:8888
 

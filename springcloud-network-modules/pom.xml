@@ -22,8 +22,8 @@
     <modules>
 		<module>service-discovery</module>		
 		<module>service-config</module>
-    	<module>service-helloworld-1</module>
-		<module>service-helloworld-2</module>
+    	<module>service-helloworld-display</module>
+		<module>service-helloworld-storage</module>
 		<module>service-gateway</module>
     </modules>
     <packaging>pom</packaging>

@@ -8,7 +8,7 @@
 		<artifactId>springcloud-network-modules</artifactId>
 		<version>0.1.0</version>
 	</parent>
-	<artifactId>service-helloworld-2</artifactId>	
+	<artifactId>service-helloworld-storage</artifactId>	
 
 	<properties>
 		<java.version>8</java.version>

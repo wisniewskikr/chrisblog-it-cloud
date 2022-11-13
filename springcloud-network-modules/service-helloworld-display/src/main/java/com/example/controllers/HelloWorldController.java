@@ -3,7 +3,6 @@ package com.example.controllers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,9 +15,6 @@ import com.example.jsons.HelloWorldStorageJson;
 public class HelloWorldController {
 	
 	Logger logger = LoggerFactory.getLogger(HelloWorldController.class);
-	
-	@Value("${service.helloworld.message}")
-	private String message;
 	
 	private Environment environment;
 	private StorageFeignClient storageFeignClient;

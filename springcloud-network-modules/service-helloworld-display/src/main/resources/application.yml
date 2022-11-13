@@ -2,8 +2,6 @@
 spring:
   application:
     name: service-helloworld-display
-  config:
-    import: optional:configserver:http://localhost:8888
 
 # Port
 server:
@@ -24,8 +22,6 @@ eureka:
   client:
     service-url:
       default-zone: http://localhost:8761/eureka
-  instance:
-    instance-id: service-helloworld-1
 
 # Feign
 service:

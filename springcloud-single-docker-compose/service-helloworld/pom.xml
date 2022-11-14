@@ -8,7 +8,7 @@
 		<artifactId>springcloud-single-docker-compose</artifactId>
 		<version>0.1.0</version>
 	</parent>
-	<artifactId>service-helloworld-1</artifactId>	
+	<artifactId>service-helloworld</artifactId>	
 	
 	<dependencies>
 		<dependency>

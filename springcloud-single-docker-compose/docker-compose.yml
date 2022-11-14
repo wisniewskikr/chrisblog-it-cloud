@@ -26,27 +26,14 @@ services:
     networks:
       - helloworld-network
 
-  service-helloworld-1:
-    image: service-helloworld-1-image
-    container_name: service-helloworld-1-container
+  service-helloworld:
+    image: service-helloworld-image
+    container_name: service-helloworld-container
     build:
-      context: ./service-helloworld-1
+      context: ./service-helloworld
       dockerfile: Dockerfile
     ports:
       - 8080:8080
-    depends_on:
-      - service-config
-    networks:
-      - helloworld-network
-
-  service-helloworld-2:
-    image: service-helloworld-2-image
-    container_name: service-helloworld-2-container
-    build:
-      context: ./service-helloworld-2
-      dockerfile: Dockerfile
-    ports:
-      - 8081:8081
     depends_on:
       - service-config
     networks:
@@ -62,8 +49,7 @@ services:
       - 8762:8762
     depends_on:
       - service-config
-      - service-helloworld-1
-      - service-helloworld-2
+      - service-helloworld
     networks:
       - helloworld-network
 

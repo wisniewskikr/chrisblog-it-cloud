@@ -20,5 +20,3 @@ eureka:
   client:
     service-url:
       default-zone: http://service-discovery:8761/eureka
-  instance:
-    instance-id: service-helloworld-1

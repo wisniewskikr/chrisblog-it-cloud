@@ -6,10 +6,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class ServiceHelloWorldStorageApplication {
+public class ServiceHelloWorldStorage1Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ServiceHelloWorldStorageApplication.class, args);
+		SpringApplication.run(ServiceHelloWorldStorage1Application.class, args);
 	}
 
 }

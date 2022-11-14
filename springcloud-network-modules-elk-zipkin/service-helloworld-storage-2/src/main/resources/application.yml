@@ -1,0 +1,29 @@
+# Spring
+spring:
+  application:
+    name: service-helloworld-storage
+  config:
+    import: optional:configserver:http://localhost:8888
+
+# Port
+server:
+  port: ${port:8082}
+
+# Actuator
+management:
+  endpoints:
+    jmx:
+      exposure:
+        include: health,info,env,beans
+    web:
+      exposure:
+        include: health,info,env,beans
+
+# Eureka
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka
+  instance:
+    hostname: localhost
+    instance-id: service-helloworld-storage-2

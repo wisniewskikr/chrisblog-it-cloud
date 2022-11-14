@@ -1,0 +1,32 @@
+# Spring
+spring:
+  application:
+    name: service-helloworld-display
+
+# Port
+server:
+  port: ${port:8080}
+
+# Actuator
+management:
+  endpoints:
+    jmx:
+      exposure:
+        include: health,info,env,beans
+    web:
+      exposure:
+        include: health,info,env,beans
+
+# Eureka
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka
+  instance:
+    hostname: localhost
+
+# Feign
+service:
+  helloworld:
+    storage:
+      name: service-helloworld-storage

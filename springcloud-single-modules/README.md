@@ -4,7 +4,7 @@ DESCRIPTION
 ##### Goal
 The goal of this project is to present how to implement **microservices** using **Java** programming language and **Spring Boot Cloud** framework. This project consists of few microservices implemented as independent **Maven modules**. But in the system there is only **single module** of custom service - Service HelloWorld. This service is run as two instances to present load balancing usage. The rest of services in the system are provided by Spring Boot Cloud and they are used for system management. 
 
-#### Service
+##### Service
 This project consists of following services:
 * **Service Discovery**: port **8761**. This service displays list of all active services in system
 * **Service Config**: port **8888**. This service provides flexible configuration variables. These variables can be taken for instance from Github

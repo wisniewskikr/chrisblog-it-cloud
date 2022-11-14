@@ -8,7 +8,7 @@ This project also presents how to configure and use **Zipkin** - tool for distri
 
 This project also presents how to configure and use **EKL** (Elasticsearch, Kibana, Logstash) - tool for centralized logging. It enables to display in one place logs from all services in system. 
 
-#### Service
+##### Service
 This project consists of following services:
 * **Service Discovery**: port **8761**. This service displays list of all active services in system
 * **Service Config**: port **8888**. This service provides flexible configuration variables. These variables can be taken for instance from Github

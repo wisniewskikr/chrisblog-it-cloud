@@ -2,24 +2,25 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to implement **microservices** using **Java** programming language and **Spring Boot Cloud** framework. This project consists of few microservices implemented as independent **Maven modules**. But in the system there is only **single module** of custom service - Service HelloWorld. This service is run as two instances to present load balancing usage. The rest of services in the system are provided by Spring Boot Cloud and they are used for system management. 
+The goal of this project is to present how to implement **microservices** using **Java** programming language and **Spring Boot Cloud** framework. This project consists of few microservices implemented as independent **Maven modules**. In the system there are two Hello World modules - Display and Storage - which are connected in the **network**. Network means that Service HelloWorld Display displays message received from Service HelloWorld Storage. Additionally service Storage is run as two instances to present load balancing usage. The rest of services in the system are provided by Spring Boot Cloud and they are used for system management. 
 
-#### Service
+##### Service
 This project consists of following services:
 * **Service Discovery**: port **8761**. This service displays list of all active services in system
 * **Service Config**: port **8888**. This service provides flexible configuration variables. These variables can be taken for instance from Github
-* **Service HelloWorld 1**: port **8080**. First instance of Service HelloWorld which provides JSON with message and port
-* **Service HelloWorld 2**: port **8081**. Second instance of Service HelloWorld which provides JSON with message and port
+* **Service HelloWorld Storage 1**: port **8081**. First instance of Service HelloWorld Storage which provides JSON with message and port
+* **Service HelloWorld Storage 2**: port **8082**. Second instance of Service HelloWorld Storage which provides JSON with message and port
+* **Service HelloWorld Display**: port **8080**. This service displays to the user three information: message from Storage, port from Storage and port from Display
 * **Service Gateway**: port **8762**. This service redirects request from outside system to service inside system. It also takes care of load balancing
 
 ##### Flow
 The following flow takes place in this project:
-1. User via any REST Client (for instance Postman) sends request to Service HellWorld for content. This request is not sent directly but through Service Gateway. 
+1. User via any REST Client (for instance Postman) sends request to Service HellWorld Display for content. This request is not sent directly but through Service Gateway. 
 1. Service Gateway takes location of all services in system from Service Discovery.
-1. This example system consists of two Services HelloWorld. In such situation Service Gateway also performs load balancing - first request is sent to Service HelloWorld 1,
-second to Service HelloWorld 2, third again to Service HelloWorld 1 etc. 
-1. Service HelloWorld which receives request connects with Service Config for text of message. This text is taken from Github project
-1. Service HelloWorld sends response to User via REST Client. This response contains message and port of this exact instance of Servie HelloWorld. 
+1. Service HelloWorld Display sends request for content to Service HelloWorld Storage. In this example system there are two instances of Storage. In such situation Service Gateway performs load balancing - first request is sent to Service HelloWorld Storage 1, second to Service HelloWorld Storage 2, third again to Service HelloWorld Storage 1 etc. 
+1. Service HelloWorld Storage connects with Service Config for text of message. This text is taken from Github project
+1. Service HelloWorld Storage sends response to Service HelloWorld Display
+1. Service HelloWorld Display sends response to User via REST Client. This response contains message, port of Display and port of instance of Storage. 
 After every request this port is changed because of Service Gateway and load balancing
 
 ##### Launch
@@ -51,12 +52,14 @@ USAGE
 Usage steps:
 1. First Command Line: Start Service Discovery with `mvn -f ./service-discovery spring-boot:run`
 1. Second Command Line: Start Service Config with `mvn -f ./service-config spring-boot:run`
-1. Third Command Line: Start Service HelloWorld 1 with `mvn -f ./service-helloworld-1 spring-boot:run`
-1. Fourth Command Line: Start Service HelloWorld 2 with `mvn -f ./service-helloworld-2 spring-boot:run`
-1. Fifth Command Line: Start Service Gateway with `mvn -f ./service-gateway spring-boot:run`
+1. Third Command Line: Start Service HelloWorld Storage 1 with `mvn -f ./service-helloworld-storage-1 spring-boot:run`
+1. Fourth Command Line: Start Service HelloWorld Storage 2 with `mvn -f ./service-helloworld-storage-2 spring-boot:run`
+1. Fifth Command Line: Start Service HelloWorld Display with `mvn -f ./service-helloworld-display spring-boot:run`
+1. Sixth Command Line: Start Service Gateway with `mvn -f ./service-gateway spring-boot:run`
 1. (Optional) In any browser check services list with `http://localhost:8761`
-1. In any REST Client (for instance Postman) connect with Service HelloWorld via Service Gateway with (method GET): `http://localhost:8762/service-helloworld`
-1. (Optional) In any Rest Client run following request many times to check load balancing (response port should be changed every request) (method GET): `http://localhost:8762/service-helloworld`
+1. In any REST Client (for instance Postman) connect with Service HelloWorld via Service Gateway with (method GET): `http://localhost:8762/service-helloworld-display`
+1. (Optional) In any Rest Client run following request many times to check load balancing (port of Storage should be changed every request) (method GET): `http://localhost:8762/service-helloworld-display`
+1. Sixth Command Line: Clean up environment with `ctrl + C`
 1. Fifth Command Line: Clean up environment with `ctrl + C`
 1. Fourth Command Line: Clean up environment with `ctrl + C`
 1. Third Command Line: Clean up environment with `ctrl + C`

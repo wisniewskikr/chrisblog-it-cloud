@@ -30,3 +30,8 @@ service:
   helloworld:
     storage:
       name: service-helloworld-storage
+
+# Logging
+logging:
+  file:
+    name: C:/logs/springcloud-network-modules-elk-zipkin.log

@@ -27,3 +27,8 @@ eureka:
   instance:
     hostname: localhost
     instance-id: service-helloworld-storage-1
+
+# Logging
+logging:
+  file:
+    name: C:/logs/springcloud-network-modules-elk-zipkin.log

@@ -1,0 +1,72 @@
+version: '3'
+
+services:
+
+  service-discovery:
+    image: service-discovery-image
+    container_name: service-discovery-container
+    build:
+      context: ./service-discovery
+      dockerfile: Dockerfile
+    ports:
+      - 8761:8761
+    networks:
+      - helloworld-network
+
+  service-config:
+    image: service-config-image
+    container_name: service-config-container
+    build:
+      context: ./service-config
+      dockerfile: Dockerfile
+    ports:
+      - 8888:8888
+    depends_on:
+      - service-discovery
+    networks:
+      - helloworld-network
+
+  service-helloworld-1:
+    image: service-helloworld-1-image
+    container_name: service-helloworld-1-container
+    build:
+      context: ./service-helloworld-1
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - service-config
+    networks:
+      - helloworld-network
+
+  service-helloworld-2:
+    image: service-helloworld-2-image
+    container_name: service-helloworld-2-container
+    build:
+      context: ./service-helloworld-2
+      dockerfile: Dockerfile
+    ports:
+      - 8081:8081
+    depends_on:
+      - service-config
+    networks:
+      - helloworld-network
+
+  service-gateway:
+    image: service-gateway-image
+    container_name: service-gateway-container
+    build:
+      context: ./service-gateway
+      dockerfile: Dockerfile
+    ports:
+      - 8762:8762
+    depends_on:
+      - service-config
+      - service-helloworld-1
+      - service-helloworld-2
+    networks:
+      - helloworld-network
+
+networks:
+  network:
+    name: helloworld-network

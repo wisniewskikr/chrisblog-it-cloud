@@ -3,6 +3,10 @@ spring:
   application:
     name: service-discovery
 
+# Port
+server:
+  port: ${port:8761}
+
 # Eureka
 eureka:
   client:

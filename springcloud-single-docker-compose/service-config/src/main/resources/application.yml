@@ -9,6 +9,10 @@ spring:
           uri: https://github.com/wisniewskikr/springcloud-single-modules
           clone-on-start: true
 
+# Port
+server:
+  port: ${port:8888}
+
 # Actuator
 management:
   endpoints:
@@ -19,8 +23,7 @@ management:
       exposure:
         include: health,info,env,beans
 
-# Eureka
 eureka:
   client:
-    service-url:
-      default-zone: http://service-discovery:8761/eureka
+    serviceUrl:
+      defaultZone: http://service-discovery:8761/eureka

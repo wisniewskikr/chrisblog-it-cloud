@@ -22,5 +22,5 @@ management:
 # Eureka
 eureka:
   client:
-    service-url:
-      default-zone: http://service-discovery:8761/eureka
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER:http://service-discovery:8761/eureka}

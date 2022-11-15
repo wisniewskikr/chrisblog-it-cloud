@@ -10,6 +10,8 @@ services:
       dockerfile: Dockerfile
     environment:
       - server.port=8761
+      - eureka.client.fetch-registry=false
+      - eureka.client.register-with-eureka=false
     ports:
       - 8761:8761
     networks:
@@ -23,7 +25,11 @@ services:
       dockerfile: Dockerfile
     environment:
       - server.port=8888
+      - spring.cloud.config.server.git.uri=https://github.com/wisniewskikr/springcloud-single-modules
+      - spring.cloud.config.server.git.clone-on-start=true
       - eureka.client.service-url.defaultZone=http://service-discovery:8761/eureka
+      - management.endpoints.jmx.exposure.include=health,info,env,beans
+      - management.endpoints.web.exposure.include=health,info,env,beans
     ports:
       - 8888:8888
     depends_on:

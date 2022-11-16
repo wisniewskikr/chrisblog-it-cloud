@@ -29,12 +29,12 @@ services:
     environment:
       - spring.application.name=service-config
       - server.port=8888
-      - spring.cloud.config.server.git.uri=https://github.com/wisniewskikr/springcloud-single-docker-compose
-      - spring.cloud.config.server.git.clone-on-start=true
       - eureka.client.service-url.defaultZone=http://service-discovery:8761/eureka
       - eureka.instance.hostname=localhost
       - management.endpoints.jmx.exposure.include=health,info,env,beans
       - management.endpoints.web.exposure.include=health,info,env,beans
+      - spring.cloud.config.server.git.uri=https://github.com/wisniewskikr/springcloud-single-docker-compose
+      - spring.cloud.config.server.git.clone-on-start=true
     ports:
       - 8888:8888
     healthcheck:

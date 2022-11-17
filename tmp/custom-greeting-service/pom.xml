@@ -10,20 +10,13 @@
 	</parent>
 	<artifactId>custom-greeting-service</artifactId>
 
-	<properties>
-		<java.version>8</java.version>
-		<spring-cloud.version>Hoxton.SR9</spring-cloud.version>
-	</properties>
-
 	<dependencies>
 	
-		<!-- Spring dependencies -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-		<!-- Hot swapping, disable cache for template, enable live reload -->
 		<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>

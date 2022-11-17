@@ -10,6 +10,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8761:8761"
+    healthcheck:
+      test: "exit 0"
     networks:
       - network
 
@@ -21,10 +23,13 @@ services:
       dockerfile: Dockerfile
     ports:
       - "9090:9090"
+    healthcheck:
+      test: "exit 0"
     networks:
       - network
     depends_on:
-      - system-eureka-naming-server-service
+      system-eureka-naming-server-service:
+        condition: service_healthy
 
   custom-greeting-service:
     image: custom-greeting-service
@@ -34,11 +39,13 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
+    healthcheck:
+      test: "exit 0"
     networks:
       - network
     depends_on:
-      - custom-text-service
-      - system-eureka-naming-server-service
+      custom-text-service:
+        condition: service_healthy
 
   system-api-gateway-service:
     image: system-api-gateway-service
@@ -48,12 +55,13 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8090:8090"
+    healthcheck:
+      test: "exit 0"
     networks:
       - network
     depends_on:
-      - custom-text-service
-      - custom-greeting-service
-      - system-eureka-naming-server-service
+      custom-greeting-service:
+        condition: service_healthy
 
 networks:
   network:

@@ -31,29 +31,11 @@
             <optional>true</optional>
         </dependency>
         
-        <!-- Spring JPA dependencies -->
-		<dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-		
-		<!-- H2 database dependencies -->
-		<dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
-        
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
-		
+	
 	</dependencies>
 	
 	<dependencyManagement>
@@ -77,44 +59,5 @@
 			</plugin>
 		</plugins>
 	</build>
-	
-	<profiles>
-	
-		<profile>
-	      <id>refreshContainer</id>
-	      <build>
-	         <plugins>	 		         
-		         <plugin>
-			        <artifactId>maven-antrun-plugin</artifactId>
-			        <executions>
-			          <execution>
-			            <phase>package</phase>
-			            <configuration>
-			
-			                <target>                 
-  								<exec executable="docker-compose">                      
-  									<arg value="-f"/> 
-  									<arg value="../docker-compose-fast.yml"/> 
-  									<arg value="up"/> 
-  									<arg value="-d"/> 
-  									<arg value="--build"/> 
-  									<arg value="--force-recreate"/> 
-  									<arg value="--no-deps"/> 
-  									<arg value="${project.artifactId}"/>       
-  								</exec> 
-  							</target>
-			
-			            </configuration>
-			            <goals>
-			              <goal>run</goal>
-			            </goals>
-			          </execution>
-			        </executions>
-			      </plugin>	                 
-	         </plugins>
-	      </build>
-	   </profile>	 
-	   
-	</profiles>
 
 </project>

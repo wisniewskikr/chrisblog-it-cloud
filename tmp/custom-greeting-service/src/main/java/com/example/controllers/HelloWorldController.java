@@ -15,8 +15,8 @@ public class HelloWorldController {
 	
 	Logger logger = LoggerFactory.getLogger(HelloWorldController.class);
 	
-//	@Value("${service.helloworld.message}")
-	private String message = "Hello World!";
+	@Value("${service.helloworld.message}")
+	private String message;
 	
 	private Environment environment;	
 	

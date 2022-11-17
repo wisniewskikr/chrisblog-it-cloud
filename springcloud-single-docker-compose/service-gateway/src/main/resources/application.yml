@@ -1,8 +1,0 @@
-spring:
-  cloud:
-    gateway:
-      routes:
-        - id: service-helloworld
-          uri: lb://service-helloworld
-          predicates:
-            - Path=/service-helloworld/**

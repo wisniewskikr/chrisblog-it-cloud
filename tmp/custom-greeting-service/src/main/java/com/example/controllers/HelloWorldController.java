@@ -25,7 +25,7 @@ public class HelloWorldController {
 		this.environment = environment;
 	}
 
-	@RequestMapping(value="/greeting")
+	@RequestMapping(value="/")
 	public HelloWorldJson helloWorld() {
 		
 		logger.info("Hello World");

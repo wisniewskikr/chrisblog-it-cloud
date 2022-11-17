@@ -1,4 +1,4 @@
-http://localhost:8090/greeting
+http://localhost:8090/
 
 LOCALHOST URL
 -------------

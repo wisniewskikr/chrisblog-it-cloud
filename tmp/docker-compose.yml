@@ -8,6 +8,11 @@ services:
     build:
       context: ./system-eureka-naming-server-service
       dockerfile: Dockerfile
+    environment:
+      - spring.application.name=system-eureka-naming-server-service
+      - server.port=8761
+      - eureka.client.fetch-registry=false
+      - eureka.client.register-with-eureka=false
     ports:
       - "8761:8761"
     healthcheck:
@@ -21,6 +26,14 @@ services:
     build:
       context: ./custom-text-service
       dockerfile: Dockerfile
+    environment:
+      - spring.application.name=custom-text-service
+      - server.port=9090
+      - eureka.client.service-url.defaultZone=http://system-eureka-naming-server-service:8761/eureka
+      - datasource.driver-class=org.h2.Driver
+      - datasource.url:jdbc=h2:mem:db-embedded;DB_CLOSE_DELAY=-1
+      - datasource.username=sa
+      - datasource.password=password
     ports:
       - "9090:9090"
     healthcheck:
@@ -37,6 +50,10 @@ services:
     build:
       context: ./custom-greeting-service
       dockerfile: Dockerfile
+    environment:
+      - spring.application.name=custom-greeting-service
+      - server.port=8080
+      - eureka.client.service-url.defaultZone=http://system-eureka-naming-server-service:8761/eureka
     ports:
       - "8080:8080"
     healthcheck:

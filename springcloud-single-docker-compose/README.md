@@ -1,3 +1,11 @@
+- spring.cloud.gateway.routes[0].filters[0]=RewritePath=/**
+
+- Dodanie: http://localhost:8762/service-helloworld
+- config: jeden dla wszystkich
+- Dwie instancje
+- Readme
+- Dokerfile fast
+
 DESCRIPTION
 -----------
 

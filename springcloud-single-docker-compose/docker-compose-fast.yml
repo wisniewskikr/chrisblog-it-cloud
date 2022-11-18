@@ -7,7 +7,7 @@ services:
     container_name: service-discovery-container
     build:
       context: ./service-discovery
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-Fast
     environment:
       - spring.application.name=service-discovery
       - server.port=8761
@@ -25,7 +25,7 @@ services:
     container_name: service-config-container
     build:
       context: ./service-config
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-Fast
     environment:
       - spring.application.name=service-config
       - server.port=8888
@@ -48,7 +48,7 @@ services:
     image: service-helloworld-image
     build:
       context: ./service-helloworld
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-Fast
     environment:
       - spring.application.name=service-helloworld
       - eureka.client.service-url.defaultZone=http://service-discovery:8761/eureka
@@ -70,7 +70,7 @@ services:
     container_name: service-gateway-container
     build:
       context: ./service-gateway
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-Fast
     environment:
       - spring.application.name=service-gateway
       - server.port=8762

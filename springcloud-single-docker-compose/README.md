@@ -1,5 +1,3 @@
-- Dokerfile fast
-
 DESCRIPTION
 -----------
 
@@ -53,12 +51,16 @@ PRECONDITIONS
 * Open any **Command Line** (for instance "Windonw PowerShell" on Windows OS) tool on **project's folder** (exact localization of project you can check in GIT repositories on page `https://github.com/wisniewskikr/chrisblog-it-cloud`)
 
 
-USAGE
------
+USAGE FAST (LOCALHOST)
+----------------------
+
+This usage can be performed locally on developer's machine. Launching services is divided into separated two stages:
+* Building packages
+* Creating and running Docker Containers
 
 Usage steps:
 1. In Command Line tool build packages with `mvn clean package -Dmaven.test.skip`
-1. In Command Line tool start services with `docker-compose up --scale service-helloworld=2`
+1. In Command Line tool start services with `docker-compose -f docker-compose-fast.yml up --scale service-helloworld=2`
 1. (Optional) In any browser check services list with `http://localhost:8761`
 1. In any REST Client (for instance Postman) connect with Service HelloWorld via Service Gateway with (method GET): `http://localhost:8762/service-helloworld`
 1. (Optional) In any Rest Client run following request many times to check load balancing (application id should be changed every request) (method GET): `http://localhost:8762/service-helloworld`

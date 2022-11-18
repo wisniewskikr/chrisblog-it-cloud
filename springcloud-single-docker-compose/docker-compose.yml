@@ -46,19 +46,17 @@ services:
 
   service-helloworld:
     image: service-helloworld-image
-    container_name: service-helloworld-container
     build:
       context: ./service-helloworld
       dockerfile: Dockerfile
     environment:
       - spring.application.name=service-helloworld
-      - server.port=8080
       - eureka.client.service-url.defaultZone=http://service-discovery:8761/eureka
       - management.endpoints.jmx.exposure.include=health,info,env,beans
       - management.endpoints.web.exposure.include=health,info,env,beans
       - spring.config.import=optional:configserver:http://service-config:8888
     ports:
-      - 8080:8080
+      - 8080
     healthcheck:
       test: "exit 0"
     depends_on:

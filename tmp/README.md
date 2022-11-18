@@ -1,5 +1,4 @@
-mvn clean package -Dmaven.test.skip
-docker-compose up --scale service-helloworld=2
+- Error response from daemon: Ports are not available: exposing port TCP 0.0.0.0:8004 -> 0.0.0.0:0: listen tcp 0.0.0.0:8004: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
 
 - Dwie instancje
 - Readme

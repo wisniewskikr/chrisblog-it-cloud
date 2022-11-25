@@ -2,6 +2,43 @@ version: '3'
 
 services:
 
+  storage:
+    image: openzipkin/zipkin-mysql:1
+    container_name: mysql
+    networks:
+      - helloworld-network
+    ports:
+      - 3306:3306
+
+  zipkin:
+    image: openzipkin/zipkin:1
+    container_name: zipkin
+    networks:
+      - helloworld-network
+    environment:
+      - STORAGE_TYPE=mysql
+      - MYSQL_HOST=mysql
+      - JAVA_OPTS=-Dlogging.level.zipkin=DEBUG -Dlogging.level.zipkin2=DEBUG
+    ports:
+      - 9411:9411
+    depends_on:
+      - storage
+
+  dependencies:
+    image: openzipkin/zipkin-dependencies:1
+    container_name: dependencies
+    entrypoint: crond -f
+    networks:
+      - helloworld-network
+    environment:
+      - STORAGE_TYPE=mysql
+      - MYSQL_HOST=mysql
+      - MYSQL_USER=zipkin
+      - MYSQL_PASS=zipkin
+      - ZIPKIN_LOG_LEVEL=DEBUG
+    depends_on:
+      - storage  
+
   service-discovery:
     image: service-discovery-image
     container_name: service-discovery-container
@@ -17,6 +54,8 @@ services:
       - 8761:8761
     healthcheck:
       test: "exit 0"
+    depends_on:
+      - dependencies 
     networks:
       - helloworld-network
 

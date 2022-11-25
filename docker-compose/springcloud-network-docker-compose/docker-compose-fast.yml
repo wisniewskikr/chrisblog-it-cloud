@@ -100,10 +100,10 @@ services:
       - eureka.client.service-url.defaultZone=http://service-discovery:8761/eureka
       - management.endpoints.jmx.exposure.include=health,info,env,beans
       - management.endpoints.web.exposure.include=health,info,env,beans
-      - spring.cloud.gateway.routes[0].id=service-helloworld
-      - spring.cloud.gateway.routes[0].uri=lb://service-helloworld
-      - spring.cloud.gateway.routes[0].predicates[0]=Path=/service-helloworld**
-      - spring.cloud.gateway.routes[0].filters[0]=RewritePath=/service-helloworld,/
+      - spring.cloud.gateway.routes[0].id=service-helloworld-display
+      - spring.cloud.gateway.routes[0].uri=lb://service-helloworld-display
+      - spring.cloud.gateway.routes[0].predicates[0]=Path=/service-helloworld-display**
+      - spring.cloud.gateway.routes[0].filters[0]=RewritePath=/service-helloworld-display,/
     ports:
       - 8762:8762
     healthcheck:

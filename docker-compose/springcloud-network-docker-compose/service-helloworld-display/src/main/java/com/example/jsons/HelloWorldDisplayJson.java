@@ -5,17 +5,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class HelloWorldDisplayJson {
 	
 	private String message;
-	@JsonProperty(value = "port display")
-	private String portDisplay;
-	@JsonProperty(value = "port storage")
-	private String portStorage;
+	@JsonProperty(value = "uuid display")
+	private String uuidDisplay;
+	@JsonProperty(value = "uuid storage")
+	private String uuidStorage;
 	
 	public HelloWorldDisplayJson() {}
 
-	public HelloWorldDisplayJson(String message, String portDisplay, String portStorage) {
+	public HelloWorldDisplayJson(String message, String uuidDisplay, String uuidStorage) {
 		this.message = message;
-		this.portDisplay = portDisplay;
-		this.portStorage = portStorage;
+		this.uuidDisplay = uuidDisplay;
+		this.uuidStorage = uuidStorage;
 	}
 
 	public String getMessage() {
@@ -26,20 +26,22 @@ public class HelloWorldDisplayJson {
 		this.message = message;
 	}
 
-	public String getPortDisplay() {
-		return portDisplay;
+	public String getUuidDisplay() {
+		return uuidDisplay;
 	}
 
-	public void setPortDisplay(String portDisplay) {
-		this.portDisplay = portDisplay;
+	public void setUuidDisplay(String uuidDisplay) {
+		this.uuidDisplay = uuidDisplay;
 	}
 
-	public String getPortStorage() {
-		return portStorage;
+	public String getUuidStorage() {
+		return uuidStorage;
 	}
 
-	public void setPortStorage(String portStorage) {
-		this.portStorage = portStorage;
-	}	
+	public void setUuidStorage(String uuidStorage) {
+		this.uuidStorage = uuidStorage;
+	}
+
+	
 	
 }

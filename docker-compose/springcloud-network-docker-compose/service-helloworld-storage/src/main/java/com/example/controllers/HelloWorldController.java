@@ -2,13 +2,11 @@ package com.example.controllers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.jsons.HelloWorldJson;
+import com.example.jsons.HelloWorldStorageJson;
 
 @RestController
 public class HelloWorldController {
@@ -17,21 +15,12 @@ public class HelloWorldController {
 	
 	@Value("${service.helloworld.message}")
 	private String message;
-	
-	private Environment environment;	
-	
-	@Autowired
-	public HelloWorldController(Environment environment) {
-		this.environment = environment;
-	}
 
 	@RequestMapping(value="/")
-	public HelloWorldJson helloWorld() {
+	public HelloWorldStorageJson helloWorld() {
 		
-		logger.info("Service Hello World Storage");
-		
-		String port = environment.getProperty("local.server.port");
-		return new HelloWorldJson(message, port);
+		logger.info("Service Hello World Storage");		
+		return new HelloWorldStorageJson(message, System.getProperty("uuidApplication"));
 		
 	}
 	

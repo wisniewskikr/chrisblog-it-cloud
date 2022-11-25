@@ -51,13 +51,12 @@ services:
       dockerfile: Dockerfile-Fast
     environment:
       - spring.application.name=service-helloworld-storage
-      - server.port=8081
       - eureka.client.service-url.defaultZone=http://service-discovery:8761/eureka
       - management.endpoints.jmx.exposure.include=health,info,env,beans
       - management.endpoints.web.exposure.include=health,info,env,beans
       - spring.config.import=optional:configserver:http://service-config:8888
     ports:
-      - 8081:8081
+      - 8081
     healthcheck:
       test: "exit 0"
     depends_on:
@@ -68,6 +67,7 @@ services:
 
   service-helloworld-display:
     image: service-helloworld-display-image
+    container_name: service-helloworld-display-container
     build:
       context: ./service-helloworld-display
       dockerfile: Dockerfile-Fast

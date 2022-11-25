@@ -1,5 +1,5 @@
 1. In Command Line tool build packages with `mvn clean package -Dmaven.test.skip`
-1. In Command Line tool start services with `docker-compose -f docker-compose-fast.yml up --build`
+1. In Command Line tool start services with `docker-compose up --scale service-helloworld-storage=2 --build`
 1. In Command Line tool start services with `docker-compose -f docker-compose-fast.yml up --scale service-helloworld-storage=2 --build`
 
 DESCRIPTION

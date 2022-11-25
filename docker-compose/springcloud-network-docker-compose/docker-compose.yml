@@ -44,23 +44,46 @@ services:
     networks:
       - helloworld-network
 
-  service-helloworld:
-    image: service-helloworld-image
+  service-helloworld-storage:
+    image: service-helloworld-storage-image
     build:
-      context: ./service-helloworld
+      context: ./service-helloworld-storage
       dockerfile: Dockerfile
     environment:
-      - spring.application.name=service-helloworld
+      - spring.application.name=service-helloworld-storage
       - eureka.client.service-url.defaultZone=http://service-discovery:8761/eureka
       - management.endpoints.jmx.exposure.include=health,info,env,beans
       - management.endpoints.web.exposure.include=health,info,env,beans
       - spring.config.import=optional:configserver:http://service-config:8888
     ports:
-      - 8080
+      - 8081
     healthcheck:
       test: "exit 0"
     depends_on:
       service-config:
+        condition: service_healthy
+    networks:
+      - helloworld-network  
+
+  service-helloworld-display:
+    image: service-helloworld-display-image
+    container_name: service-helloworld-display-container
+    build:
+      context: ./service-helloworld-display
+      dockerfile: Dockerfile
+    environment:
+      - spring.application.name=service-helloworld-display
+      - server.port=8080
+      - eureka.client.service-url.defaultZone=http://service-discovery:8761/eureka
+      - management.endpoints.jmx.exposure.include=health,info,env,beans
+      - management.endpoints.web.exposure.include=health,info,env,beans
+      - service.helloworld.storage.name=service-helloworld-storage
+    ports:
+      - 8080:8080
+    healthcheck:
+      test: "exit 0"
+    depends_on:
+      service-discovery:
         condition: service_healthy
     networks:
       - helloworld-network
@@ -77,16 +100,18 @@ services:
       - eureka.client.service-url.defaultZone=http://service-discovery:8761/eureka
       - management.endpoints.jmx.exposure.include=health,info,env,beans
       - management.endpoints.web.exposure.include=health,info,env,beans
-      - spring.cloud.gateway.routes[0].id=service-helloworld
-      - spring.cloud.gateway.routes[0].uri=lb://service-helloworld
-      - spring.cloud.gateway.routes[0].predicates[0]=Path=/service-helloworld**
-      - spring.cloud.gateway.routes[0].filters[0]=RewritePath=/service-helloworld,/
+      - spring.cloud.gateway.routes[0].id=service-helloworld-display
+      - spring.cloud.gateway.routes[0].uri=lb://service-helloworld-display
+      - spring.cloud.gateway.routes[0].predicates[0]=Path=/service-helloworld-display**
+      - spring.cloud.gateway.routes[0].filters[0]=RewritePath=/service-helloworld-display,/
     ports:
       - 8762:8762
     healthcheck:
       test: "exit 0"
     depends_on:
-      service-helloworld:
+      service-helloworld-storage:
+        condition: service_healthy
+      service-helloworld-display:
         condition: service_healthy
     networks:
       - helloworld-network  

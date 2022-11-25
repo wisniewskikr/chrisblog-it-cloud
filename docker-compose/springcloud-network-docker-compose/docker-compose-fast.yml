@@ -44,23 +44,47 @@ services:
     networks:
       - helloworld-network
 
-  service-helloworld:
-    image: service-helloworld-image
+  service-helloworld-storage:
+    image: service-helloworld-storage-image
     build:
-      context: ./service-helloworld
+      context: ./service-helloworld-storage
       dockerfile: Dockerfile-Fast
     environment:
-      - spring.application.name=service-helloworld
+      - spring.application.name=service-helloworld-storage
+      - server.port=8081
       - eureka.client.service-url.defaultZone=http://service-discovery:8761/eureka
       - management.endpoints.jmx.exposure.include=health,info,env,beans
       - management.endpoints.web.exposure.include=health,info,env,beans
       - spring.config.import=optional:configserver:http://service-config:8888
     ports:
-      - 8080
+      - 8081
     healthcheck:
       test: "exit 0"
     depends_on:
       service-config:
+        condition: service_healthy
+    networks:
+      - helloworld-network  
+
+  service-helloworld-display:
+    image: service-helloworld-display-image
+    build:
+      context: ./service-helloworld-display
+      dockerfile: Dockerfile-Fast
+    environment:
+      - spring.application.name=service-helloworld-display
+      - server.port=8080
+      - eureka.client.service-url.defaultZone=http://service-discovery:8761/eureka
+      - management.endpoints.jmx.exposure.include=health,info,env,beans
+      - management.endpoints.web.exposure.include=health,info,env,beans
+      - spring.config.import=optional:configserver:http://service-config:8888
+      - service.helloworld.storage.name: service-helloworld-storage
+    ports:
+      - 8080
+    healthcheck:
+      test: "exit 0"
+    depends_on:
+      service-discovery:
         condition: service_healthy
     networks:
       - helloworld-network
@@ -86,8 +110,10 @@ services:
     healthcheck:
       test: "exit 0"
     depends_on:
-      service-helloworld:
-        condition: service_healthy
+      - service-helloworld-storage:
+          condition: service_healthy
+      - service-helloworld-display:
+          condition: service_healthy
     networks:
       - helloworld-network  
 

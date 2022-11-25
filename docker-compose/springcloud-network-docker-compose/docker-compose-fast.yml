@@ -57,7 +57,7 @@ services:
       - management.endpoints.web.exposure.include=health,info,env,beans
       - spring.config.import=optional:configserver:http://service-config:8888
     ports:
-      - 8081
+      - 8081:8081
     healthcheck:
       test: "exit 0"
     depends_on:
@@ -77,10 +77,9 @@ services:
       - eureka.client.service-url.defaultZone=http://service-discovery:8761/eureka
       - management.endpoints.jmx.exposure.include=health,info,env,beans
       - management.endpoints.web.exposure.include=health,info,env,beans
-      - spring.config.import=optional:configserver:http://service-config:8888
-      - service.helloworld.storage.name: service-helloworld-storage
+      - service.helloworld.storage.name=service-helloworld-storage
     ports:
-      - 8080
+      - 8080:8080
     healthcheck:
       test: "exit 0"
     depends_on:
@@ -110,10 +109,10 @@ services:
     healthcheck:
       test: "exit 0"
     depends_on:
-      - service-helloworld-storage:
-          condition: service_healthy
-      - service-helloworld-display:
-          condition: service_healthy
+      service-helloworld-storage:
+        condition: service_healthy
+      service-helloworld-display:
+        condition: service_healthy
     networks:
       - helloworld-network  
 

@@ -28,7 +28,7 @@ public class HelloWorldController {
 	@RequestMapping(value="/")
 	public HelloWorldJson helloWorld() {
 		
-		logger.info("Service Hello World Storage 1");
+		logger.info("Service Hello World Storage");
 		
 		String port = environment.getProperty("local.server.port");
 		return new HelloWorldJson(message, port);

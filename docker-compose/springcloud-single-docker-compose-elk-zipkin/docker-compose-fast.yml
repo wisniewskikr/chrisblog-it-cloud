@@ -1,43 +1,11 @@
 version: '3'
 
 services:
-
-  storage:
-    image: openzipkin/zipkin-mysql:1
-    container_name: mysql
-    networks:
-      - helloworld-network
-    ports:
-      - 3306:3306
-
+  
   zipkin:
-    image: openzipkin/zipkin:1
-    container_name: zipkin
-    networks:
-      - helloworld-network
-    environment:
-      - STORAGE_TYPE=mysql
-      - MYSQL_HOST=mysql
-      - JAVA_OPTS=-Dlogging.level.zipkin=DEBUG -Dlogging.level.zipkin2=DEBUG
+    image: openzipkin/zipkin:2
     ports:
-      - 9411:9411
-    depends_on:
-      - storage
-
-  dependencies:
-    image: openzipkin/zipkin-dependencies:1
-    container_name: dependencies
-    entrypoint: crond -f
-    networks:
-      - helloworld-network
-    environment:
-      - STORAGE_TYPE=mysql
-      - MYSQL_HOST=mysql
-      - MYSQL_USER=zipkin
-      - MYSQL_PASS=zipkin
-      - ZIPKIN_LOG_LEVEL=DEBUG
-    depends_on:
-      - storage  
+      - '9411:9411'
 
   service-discovery:
     image: service-discovery-image
@@ -55,7 +23,7 @@ services:
     healthcheck:
       test: "exit 0"
     depends_on:
-      - dependencies 
+      - zipkin 
     networks:
       - helloworld-network
 
@@ -94,6 +62,7 @@ services:
       - management.endpoints.jmx.exposure.include=health,info,env,beans
       - management.endpoints.web.exposure.include=health,info,env,beans
       - spring.config.import=optional:configserver:http://service-config:8888
+      - spring.zipkin.baseUrl=http://zipkin:9411
     ports:
       - 8080
     healthcheck:
@@ -120,6 +89,7 @@ services:
       - spring.cloud.gateway.routes[0].uri=lb://service-helloworld
       - spring.cloud.gateway.routes[0].predicates[0]=Path=/service-helloworld**
       - spring.cloud.gateway.routes[0].filters[0]=RewritePath=/service-helloworld,/
+      - spring.zipkin.baseUrl=http://zipkin:9411
     ports:
       - 8762:8762
     healthcheck:

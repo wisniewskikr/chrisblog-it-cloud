@@ -19,7 +19,7 @@ public class HelloWorldController {
 	@RequestMapping(value="/")
 	public HelloWorldStorageJson helloWorld() {
 		
-		logger.info("Service Hello World Storage");		
+		logger.info("Service Hello World Storage with uuid: " + System.getProperty("uuidApplication"));		
 		return new HelloWorldStorageJson(message, System.getProperty("uuidApplication"));
 		
 	}

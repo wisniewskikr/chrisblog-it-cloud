@@ -25,8 +25,7 @@ public class HelloWorldController {
 	@RequestMapping(value="/")
 	public HelloWorldDisplayJson helloWorld() {
 		
-		logger.info("Service Hello World Display");
-		
+		logger.info("Service Hello World Display with uuid: " + System.getProperty("uuidApplication"));		
 		HelloWorldStorageJson storageJson = storageFeignClient.getHelloWorldFromStorage();
 		return new HelloWorldDisplayJson(storageJson.getMessage(), System.getProperty("uuidApplication"), storageJson.getUuid());
 		

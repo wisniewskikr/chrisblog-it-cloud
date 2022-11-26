@@ -1,6 +1,13 @@
 version: '3'
 
 services:
+  
+  zipkin:
+    image: openzipkin/zipkin
+    ports:
+      - 9411:9411
+    networks:
+      - helloworld-network
 
   service-discovery:
     image: service-discovery-image
@@ -17,6 +24,8 @@ services:
       - 8761:8761
     healthcheck:
       test: "exit 0"
+    depends_on:
+      - zipkin 
     networks:
       - helloworld-network
 
@@ -55,6 +64,7 @@ services:
       - management.endpoints.jmx.exposure.include=health,info,env,beans
       - management.endpoints.web.exposure.include=health,info,env,beans
       - spring.config.import=optional:configserver:http://service-config:8888
+      - spring.zipkin.baseUrl=http://zipkin:9411/
     ports:
       - 8080
     healthcheck:
@@ -81,6 +91,7 @@ services:
       - spring.cloud.gateway.routes[0].uri=lb://service-helloworld
       - spring.cloud.gateway.routes[0].predicates[0]=Path=/service-helloworld**
       - spring.cloud.gateway.routes[0].filters[0]=RewritePath=/service-helloworld,/
+      - spring.zipkin.baseUrl=http://zipkin:9411/
     ports:
       - 8762:8762
     healthcheck:

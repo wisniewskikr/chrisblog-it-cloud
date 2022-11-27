@@ -113,6 +113,7 @@ services:
       - management.endpoints.web.exposure.include=health,info,env,beans
       - spring.config.import=optional:configserver:http://service-config:8888
       - spring.zipkin.baseUrl=http://zipkin:9411/
+      - service.helloworld.message=Hello World!
     ports:
       - 8080
     healthcheck:

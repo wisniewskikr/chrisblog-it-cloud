@@ -75,7 +75,7 @@ Usage steps:
 
 
 USAGE SLOW (DOES NOT REQUIRE LOCALLY INSTALLED JAVA AND MAVEN)
-------------------------------------------------------
+--------------------------------------------------------------
 
 Usage steps:
 1. In Command Line tool start services with `docker-compose up --scale service-helloworld=2 --build`
@@ -86,3 +86,25 @@ Usage steps:
 1. (Optional) In any Rest Client run following request many times to check load balancing (application id should be changed every request) (method GET): `http://localhost:8762/service-helloworld`
 1. In Command Line stop services with `ctrl + C`
 1. In Command Line remove containers with `docker-compose down`
+
+
+USAGE ZIPKIN
+------------
+
+![My Image](zipkin-1.png)
+
+![My Image](zipkin-2.png)
+
+![My Image](zipkin-3.png)
+
+
+USAGE ELK
+------------
+
+![My Image](elk-1.png)
+
+![My Image](elk-2.png)
+
+![My Image](elk-3.png)
+
+![My Image](elk-4.png)

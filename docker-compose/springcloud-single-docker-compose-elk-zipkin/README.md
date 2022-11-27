@@ -6,12 +6,20 @@ The goal of this project is to present how to implement **microservices** using 
 
 All services are dockerized and manged by docker orchestration tool **docker compose**. It means that user does not have to start up manually all services one by one. It's done automatically by orchestration tool. 
 
+This project also presents how to configure and use **Zipkin** - tool for distributed tracking. It enables to track every request/response sent in system - which services were involved in this communication and how long takes every service to handle request/response.
+
+This project also presents how to configure and use **EKL** (Elasticsearch, Kibana, Logstash) - tool for centralized logging. It enables to display in one place logs from all services in system.
+
 ##### Service
 This project consists of following services:
 * **Service Discovery**: port **8761**. This service displays list of all active services in system
 * **Service Config**: port **8888**. This service provides flexible configuration variables. These variables can be taken for instance from Github
 * **Service HelloWorld**: port **random**. Two instances of Service HelloWorld which provide JSON with message and application id
 * **Service Gateway**: port **8762**. This service redirects request from outside system to service inside system. It also takes care of load balancing
+* **Elasticsearch**: port **9200**. This service stores logs provided by applications and used by Kibana
+* **Kibana**: port **5601**. This service displays logs.
+* **Logstash**: port **5000**. This service takes logs from applications and provides them to Kibana
+* **Zipkin**: port **9411**. This service provides information about distributed tracking.
 
 ##### Flow
 The following flow takes place in this project:
@@ -54,15 +62,13 @@ PRECONDITIONS
 USAGE FAST (REQUIRES LOCALLY INSTALLED JAVA AND MAVEN)
 ------------------------------------------------------
 
-This usage can be performed locally on developer's machine. Launching services is divided into separated two stages:
-* Building packages
-* Creating and running Docker Containers
-
 Usage steps:
 1. In Command Line tool build packages with `mvn clean package -Dmaven.test.skip`
 1. In Command Line tool start services with `docker-compose -f docker-compose-fast.yml up --scale service-helloworld=2 --build`
 1. (Optional) In any browser check services list with `http://localhost:8761`
 1. In any REST Client (for instance Postman) connect with Service HelloWorld via Service Gateway with (method GET): `http://localhost:8762/service-helloworld`
+1. Check distributed tracking in Zipkin with `http://localhost:9411`
+1. Check centralized logs in Kibana with `http://localhost:5601` 
 1. (Optional) In any Rest Client run following request many times to check load balancing (application id should be changed every request) (method GET): `http://localhost:8762/service-helloworld`
 1. In Command Line stop services with `ctrl + C`
 1. In Command Line remove containers with `docker-compose down`
@@ -75,6 +81,8 @@ Usage steps:
 1. In Command Line tool start services with `docker-compose up --scale service-helloworld=2 --build`
 1. (Optional) In any browser check services list with `http://localhost:8761`
 1. In any REST Client (for instance Postman) connect with Service HelloWorld via Service Gateway with (method GET): `http://localhost:8762/service-helloworld`
+1. Check distributed tracking in Zipkin with `http://localhost:9411`
+1. Check centralized logs in Kibana with `http://localhost:5601` 
 1. (Optional) In any Rest Client run following request many times to check load balancing (application id should be changed every request) (method GET): `http://localhost:8762/service-helloworld`
 1. In Command Line stop services with `ctrl + C`
 1. In Command Line remove containers with `docker-compose down`

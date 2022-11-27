@@ -14,6 +14,8 @@ services:
           - "9200:9200"
       volumes:
           - elasticsearch_data:/usr/share/elasticsearch/data
+      healthcheck:
+        test: "exit 0"
       networks:
           - helloworld-network
 
@@ -25,8 +27,11 @@ services:
       environment:
           ELASTICSEARCH_URL: http://elasticsearch:9200
           ELASTICSEARCH_HOSTS: '["http://elasticsearch:9200"]'
+      healthcheck:
+        test: "exit 0"
       depends_on:
-          - elasticsearch
+        elasticsearch:
+          condition: service_healthy
       networks:
           - helloworld-network
 
@@ -43,17 +48,21 @@ services:
         - "9600:9600"
       environment:
         LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+      healthcheck:
+        test: "exit 0"
       networks:
         - helloworld-network
       depends_on:
-        - elasticsearch  
+        elasticsearch:
+          condition: service_healthy
 
   zipkin:
     image: openzipkin/zipkin
     ports:
       - 9411:9411
     depends_on:
-        - kibana
+      kibana:
+        condition: service_healthy
     networks:
       - helloworld-network
 

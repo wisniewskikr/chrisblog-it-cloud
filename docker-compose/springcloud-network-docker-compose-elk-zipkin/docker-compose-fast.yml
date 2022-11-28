@@ -123,6 +123,7 @@ services:
       - management.endpoints.jmx.exposure.include=health,info,env,beans
       - management.endpoints.web.exposure.include=health,info,env,beans
       - spring.config.import=optional:configserver:http://service-config:8888
+      - spring.zipkin.baseUrl=http://zipkin:9411/
     ports:
       - 8081
     healthcheck:
@@ -146,6 +147,7 @@ services:
       - management.endpoints.jmx.exposure.include=health,info,env,beans
       - management.endpoints.web.exposure.include=health,info,env,beans
       - service.helloworld.storage.name=service-helloworld-storage
+      - spring.zipkin.baseUrl=http://zipkin:9411/
     ports:
       - 8080:8080
     healthcheck:
@@ -172,6 +174,7 @@ services:
       - spring.cloud.gateway.routes[0].uri=lb://service-helloworld-display
       - spring.cloud.gateway.routes[0].predicates[0]=Path=/service-helloworld-display**
       - spring.cloud.gateway.routes[0].filters[0]=RewritePath=/service-helloworld-display,/
+      - spring.zipkin.baseUrl=http://zipkin:9411/
     ports:
       - 8762:8762
     healthcheck:
@@ -187,3 +190,7 @@ services:
 networks:
   helloworld-network:
     name: helloworld-network
+
+volumes:
+    elasticsearch_data:
+        driver: local

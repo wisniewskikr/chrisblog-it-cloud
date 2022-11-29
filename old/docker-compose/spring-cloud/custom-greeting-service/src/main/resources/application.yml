@@ -1,6 +1,0 @@
-spring:
-  application:
-    name: custom-greeting-service
-
-server:
-  port: ${port:8080}

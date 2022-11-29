@@ -1,6 +1,0 @@
-spring:
-  application:
-    name: system-eureke-naming-servier-service
-
-server:
-  port: ${port:8761}

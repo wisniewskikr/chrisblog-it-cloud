@@ -1,3 +1,21 @@
+- docker build -f service-config/Dockerfile-Fast -t service-config-image ./service-config
+- docker tag service-config-image wisniewskikr/springcloud-single-kubernetes-service-config-image
+- docker push wisniewskikr/springcloud-single-kubernetes-service-config-image
+
+- docker build -f service-discovery/Dockerfile-Fast -t service-discovery-image ./service-discovery
+- docker tag service-discovery-image wisniewskikr/springcloud-single-kubernetes-service-discovery-image
+- docker push wisniewskikr/springcloud-single-kubernetes-service-discovery-image
+
+- docker build -f service-gateway/Dockerfile-Fast -t service-gateway-image ./service-gateway
+- docker tag service-gateway-image wisniewskikr/springcloud-single-kubernetes-service-gateway-image
+- docker push wisniewskikr/springcloud-single-kubernetes-service-gateway-image
+
+- docker build -f service-helloworld/Dockerfile-Fast -t service-helloworld-image ./service-helloworld
+- docker tag service-helloworld-image wisniewskikr/springcloud-single-kubernetes-service-helloworld-image
+- docker push wisniewskikr/springcloud-single-kubernetes-service-helloworld-image
+
+
+
 REQUIRES LOCALLY INSTALLED JAVA AND MAVENREQUIRES LOCALLY INSTALLED JAVA AND MAVENDESCRIPTION
 -----------
 

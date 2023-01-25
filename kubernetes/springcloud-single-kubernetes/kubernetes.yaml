@@ -170,13 +170,13 @@ spec:
           value: "health,info,env,beans"
         - name: management.endpoints.web.exposure.include
           value: "health,info,env,beans"
-        - name: spring.cloud.gateway.routes[0].id
+        - name: SPRING_CLOUD_GATEWAY_ROUTES_0__ID
           value: "service-helloworld"
-        - name: spring.cloud.gateway.routes[0].uri
+        - name: SPRING_CLOUD_GATEWAY_ROUTES_0__URI
           value: "lb://service-helloworld"
-        - name: spring.cloud.gateway.routes[0].predicates[0]
+        - name: SPRING_CLOUD_GATEWAY_ROUTES_0__PREDICATES_0
           value: "Path=/service-helloworld**"
-        - name: spring.cloud.gateway.routes[0].filters[0]
+        - name: SPRING_CLOUD_GATEWAY_ROUTES_0__FILTERS_0
           value: "RewritePath=/service-helloworld,/"
         readinessProbe:
             httpGet:

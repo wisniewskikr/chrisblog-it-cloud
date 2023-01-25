@@ -99,7 +99,7 @@ metadata:
   labels:
     app: deployment-helloworld
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: container-helloworld

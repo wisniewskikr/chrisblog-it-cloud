@@ -30,13 +30,13 @@ spec:
           value: "health,info,env,beans"
         - name: management.endpoints.web.exposure.include
           value: "health,info,env,beans"
-        - name: SPRING_CLOUD_GATEWAY_ROUTES_0__ID
+        - name: SPRING_CLOUD_GATEWAY_ROUTES_0_ID
           value: "service-helloworld"
-        - name: SPRING_CLOUD_GATEWAY_ROUTES_0__URI
+        - name: SPRING_CLOUD_GATEWAY_ROUTES_0_URI
           value: "lb://service-helloworld"
-        - name: SPRING_CLOUD_GATEWAY_ROUTES_0__PREDICATES_0
+        - name: SPRING_CLOUD_GATEWAY_ROUTES_0_PREDICATES_0
           value: "Path=/service-helloworld**"
-        - name: SPRING_CLOUD_GATEWAY_ROUTES_0__FILTERS_0
+        - name: SPRING_CLOUD_GATEWAY_ROUTES_0_FILTERS_0
           value: "RewritePath=/service-helloworld,/"
         readinessProbe:
             httpGet:

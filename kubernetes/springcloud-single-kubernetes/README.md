@@ -22,6 +22,8 @@
 
 - minikube service service-discovery-display
 
+- minikube service service-helloworld-display
+
 
 
 REQUIRES LOCALLY INSTALLED JAVA AND MAVENREQUIRES LOCALLY INSTALLED JAVA AND MAVENDESCRIPTION

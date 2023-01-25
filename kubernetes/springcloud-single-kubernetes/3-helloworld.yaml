@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-helloworld
+  labels:
+    app: deployment-helloworld
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: container-helloworld
+  template:
+    metadata:
+      labels:
+        app: container-helloworld
+    spec:
+      containers:
+      - name: container-helloworld
+        image: wisniewskikr/springcloud-single-kubernetes-service-helloworld-image
+        ports:
+        - containerPort: 8080
+        env:
+        - name: spring.application.name
+          value: "service-helloworld"
+        - name: eureka.client.service-url.defaultZone
+          value: "http://service-discovery:8761/eureka"
+        - name: management.endpoints.jmx.exposure.include
+          value: "health,info,env,beans"
+        - name: management.endpoints.web.exposure.include
+          value: "health,info,env,beans"
+        - name: spring.config.import
+          value: "optional:configserver:http://service-config:8888"
+        readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 55
+        livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 55
+      restartPolicy: Always
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-helloworld
+spec:
+  selector:
+    app: container-helloworld
+  ports:
+    - port: 8080
+      targetPort: 8080

@@ -16,6 +16,12 @@
 
 - kubectl apply -f kubernetes.yaml
 
+- minikube service service-gateway
+
+- http://192.168.1.66:31000/service-helloworld
+
+- minikube service service-discovery-display
+
 
 
 REQUIRES LOCALLY INSTALLED JAVA AND MAVENREQUIRES LOCALLY INSTALLED JAVA AND MAVENDESCRIPTION

@@ -24,15 +24,17 @@
 
 - minikube service service-helloworld-display
 
+- https://cloud.google.com/kubernetes-engine/docs/how-to/scaling-apps
 
 
-REQUIRES LOCALLY INSTALLED JAVA AND MAVENREQUIRES LOCALLY INSTALLED JAVA AND MAVENDESCRIPTION
+
+DESCRIPTION
 -----------
 
 ##### Goal
 The goal of this project is to present how to implement **microservices** using **Java** programming language and **Spring Boot Cloud** framework. This project consists of few microservices implemented as independent **Maven modules**. In the system there is only one custom service - Service HelloWorld. This service is run as two instances to present load balancing usage. The rest of services in the system are provided by Spring Boot Cloud and they are used for system management.
 
-All services are dockerized and manged by docker orchestration tool **docker compose**. It means that user does not have to start up manually all services one by one. It's done automatically by orchestration tool. 
+All services are dockerized and manged by docker orchestration tool **kubernetes**. It means that user does not have to start up manually all services one by one. It's done automatically by orchestration tool. 
 
 ##### Service
 This project consists of following services:

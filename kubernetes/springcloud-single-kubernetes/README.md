@@ -14,6 +14,8 @@
 - docker tag service-helloworld-image wisniewskikr/springcloud-single-kubernetes-service-helloworld-image
 - docker push wisniewskikr/springcloud-single-kubernetes-service-helloworld-image
 
+- kubectl apply -f kubernetes.yaml
+
 
 
 REQUIRES LOCALLY INSTALLED JAVA AND MAVENREQUIRES LOCALLY INSTALLED JAVA AND MAVENDESCRIPTION

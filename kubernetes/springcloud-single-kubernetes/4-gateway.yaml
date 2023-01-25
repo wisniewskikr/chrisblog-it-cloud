@@ -33,7 +33,7 @@ spec:
         - name: SPRING_CLOUD_GATEWAY_ROUTES_0_ID
           value: "service-helloworld"
         - name: SPRING_CLOUD_GATEWAY_ROUTES_0_URI
-          value: "lb://service-helloworld"
+          value: "http://service-helloworld:8080"
         - name: SPRING_CLOUD_GATEWAY_ROUTES_0_PREDICATES_0
           value: "Path=/service-helloworld**"
         - name: SPRING_CLOUD_GATEWAY_ROUTES_0_FILTERS_0

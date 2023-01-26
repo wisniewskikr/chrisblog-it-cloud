@@ -3,10 +3,10 @@ TODO
 
 Tasks to do:
 * `kubectl apply -f 0-volumes.yaml`: does not work - implement PersistentVolume and PersistentVolumeClaim
-* `kubectl apply -f 1-elasticsearch.yaml`: does not work - problem with pulling
-* `kubectl apply -f 2-kibana.yaml`:
+* `kubectl apply -f 1-elasticsearch.yaml`: does not work - problem with pulling. Connect minikube with kubernetes? Try on kubernetes?
+* `kubectl apply -f 2-kibana.yaml`: does not work - problem with pulling. Connect minikube with kubernetes? Try on kubernetes?
 * `kubectl apply -f 3-logstash.yaml`: problem with ports tcp/udp
-* `kubectl apply -f 4-zipkin.yaml`:
+* `kubectl apply -f 4-zipkin.yaml`: works ok
 
 
 DESCRIPTION

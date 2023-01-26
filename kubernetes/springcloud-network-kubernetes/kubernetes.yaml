@@ -116,6 +116,8 @@ spec:
         env:
         - name: spring.application.name
           value: "service-helloworld-storage"
+        - name: server.port
+          value: "9090"
         - name: eureka.client.service-url.defaultZone
           value: "http://service-discovery:8761/eureka"
         - name: management.endpoints.jmx.exposure.include
@@ -163,14 +165,14 @@ spec:
         env:
         - name: spring.application.name
           value: "service-helloworld-display"
+        - name: server.port
+          value: "8080"
         - name: eureka.client.service-url.defaultZone
           value: "http://service-discovery:8761/eureka"
         - name: management.endpoints.jmx.exposure.include
           value: "health,info,env,beans"
         - name: management.endpoints.web.exposure.include
           value: "health,info,env,beans"
-        - name: spring.config.import
-          value: "optional:configserver:http://service-config:8888"
         - name: service.helloworld.storage.name
           value: "service-helloworld-storage"
         readinessProbe:

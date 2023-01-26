@@ -68,8 +68,8 @@ Usage steps:
     * In Command Line remove all microservices with `kubectl delete -f kubernetes.yaml`
 
 
-(OPTIONAL) BUILD IMAGE AND PUSH IT TO REMOTE REPOSITORY
--------------------------------------------------------
+(OPTIONAL) BUILD IMAGES AND PUSH THEM TO REMOTE REPOSITORY
+----------------------------------------------------------
 
 **Note!**:
 * Please replace my **hub-docker-id** - **wisniewskikr** - with your unique **hub-docker-id**. In this way images will be pushed to your realm in the repository Hub Docker. 
@@ -94,3 +94,11 @@ Usage steps:
     * Remove Service Gateway image with name **{image-name}** from your **hub-docker-id** remote repository `https://hub.docker.com`. For instance `service-gateway-image`
     * Remove Service HelloWorld image with **docker rmi {hub-docker-id}/{image-name}**. For instance with `docker rmi wisniewskikr/service-helloworld-image`
     * Remove Service HelloWorld image with name **{image-name}** from your **hub-docker-id** remote repository `https://hub.docker.com`. For instance `service-helloworld-image`
+    
+
+(OPTIONAL) TODO
+----
+
+Tasks which should be implemented in the future:
+* Implement Load Balancing - at this moment parameter **SPRING_CLOUD_GATEWAY_ROUTES_0_URI** with value **lb://service-helloworld** does not work. It works only with value **http://service-helloworld:8080**
+* Port of HelloWorld Service is hardcoded as **8080**. Please check if it's possible to do it more flexible. It can be related with Load Balancing problem

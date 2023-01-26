@@ -5,8 +5,10 @@ Tasks to do:
 * `kubectl apply -f 0-volumes.yaml`: does not work - implement PersistentVolume and PersistentVolumeClaim
 * `kubectl apply -f 1-elasticsearch.yaml`: does not work - problem with pulling. Connect minikube with kubernetes? Try on kubernetes?
 * `kubectl apply -f 2-kibana.yaml`: does not work - problem with pulling. Connect minikube with kubernetes? Try on kubernetes?
-* `kubectl apply -f 3-logstash.yaml`: problem with ports tcp/udp
+* `kubectl apply -f 3-logstash.yaml`: does not work - problem with pulling. Connect minikube with kubernetes? Try on kubernetes?
 * `kubectl apply -f 4-zipkin.yaml`: works ok
+* comment logback-spring.xml and check if Zipkin works ok
+* Check container building on Docker Kubernetes, not on Minikube - maybe there won't be any problem with pulling images
 
 
 DESCRIPTION

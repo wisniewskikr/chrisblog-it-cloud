@@ -1,3 +1,14 @@
+TODO
+----
+
+Tasks to do:
+* `kubectl apply -f 0-volumes.yaml`: does not work - implement PersistentVolume and PersistentVolumeClaim
+* `kubectl apply -f 1-elasticsearch.yaml`: does not work - problem with pulling
+* `kubectl apply -f 2-kibana.yaml`:
+* `kubectl apply -f 3-logstash.yaml`: problem with ports tcp/udp
+* `kubectl apply -f 4-zipkin.yaml`:
+
+
 DESCRIPTION
 -----------
 
@@ -94,11 +105,3 @@ Usage steps:
     * Remove Service Gateway image with name **{image-name}** from your **hub-docker-id** remote repository `https://hub.docker.com`. For instance `springcloud-single-kubernetes-elk-zipkin-service-gateway-image`
     * Remove Service HelloWorld image with **docker rmi {hub-docker-id}/{image-name}**. For instance with `docker rmi wisniewskikr/springcloud-single-kubernetes-elk-zipkin-service-helloworld-image`
     * Remove Service HelloWorld image with name **{image-name}** from your **hub-docker-id** remote repository `https://hub.docker.com`. For instance `springcloud-single-kubernetes-elk-zipkin-service-helloworld-image`
-    
-
-(OPTIONAL) TODO
-----
-
-Tasks which should be implemented in the future:
-* Implement Load Balancing - at this moment parameter **SPRING_CLOUD_GATEWAY_ROUTES_0_URI** with value **lb://service-helloworld** does not work. It works only with value **http://service-helloworld:8080**
-* Port of HelloWorld Service is hardcoded as **8080**. Please check if it's possible to do it more flexible. It can be related with Load Balancing problem

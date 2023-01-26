@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: container-discovery
-        image: wisniewskikr/springcloud-single-kubernetes-service-discovery-image
+        image: wisniewskikr/springcloud-single-kubernetes-elk-zipkin-service-discovery-image
         ports:
         - containerPort: 8761
         env:
@@ -60,7 +60,7 @@ spec:
     spec:
       containers:
       - name: container-config
-        image: wisniewskikr/springcloud-single-kubernetes-service-config-image
+        image: wisniewskikr/springcloud-single-kubernetes-elk-zipkin-service-config-image
         ports:
         - containerPort: 8888
         env:
@@ -110,7 +110,7 @@ spec:
     spec:
       containers:
       - name: container-helloworld
-        image: wisniewskikr/springcloud-single-kubernetes-service-helloworld-image
+        image: wisniewskikr/springcloud-single-kubernetes-elk-zipkin-service-helloworld-image
         ports:
         - containerPort: 8080
         env:
@@ -124,6 +124,8 @@ spec:
           value: "health,info,env,beans"
         - name: spring.config.import
           value: "optional:configserver:http://service-config:8888"
+        - name: spring.zipkin.baseUrl
+          value: "http://zipkin:9411/"
         readinessProbe:
             httpGet:
               path: /actuator/health
@@ -156,7 +158,7 @@ spec:
     spec:
       containers:
       - name: container-gateway
-        image: wisniewskikr/springcloud-single-kubernetes-service-gateway-image
+        image: wisniewskikr/springcloud-single-kubernetes-elk-zipkin-service-gateway-image
         ports:
         - containerPort: 8762
         env:
@@ -178,6 +180,8 @@ spec:
           value: "Path=/service-helloworld**"
         - name: SPRING_CLOUD_GATEWAY_ROUTES_0_FILTERS_0
           value: "RewritePath=/service-helloworld,/"
+        - name: spring.zipkin.baseUrl
+          value: "http://zipkin:9411/"
         readinessProbe:
             httpGet:
               path: /actuator/health

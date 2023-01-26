@@ -76,24 +76,24 @@ Usage steps:
 
 Usage steps:
 1. Build package with `mvn clean package -D maven.test.skip`
-1. Build Service Config image with **docker build -f service-config/Dockerfile-Fast -t {hub-docker-id}/service-config-image ./service-config** . For instance with `docker build -f service-config/Dockerfile-Fast -t wisniewskikr/springcloud-single-kubernetes-service-config-image ./service-config`
-1. Push Service Config image with **docker push {hub-docker-id}/springcloud-single-kubernetes-service-config-image** . For instance with `docker push wisniewskikr/springcloud-single-kubernetes-service-config-image`
-1. Build Service Discovery image with **docker build -f service-discovery/Dockerfile-Fast -t {hub-docker-id}/service-discovery-image ./service-discovery** . For instance with `docker build -f service-config/Dockerfile-Fast -t wisniewskikr/springcloud-single-kubernetes-service-discovery-image ./service-discovery`
-1. Push Service Discovery image with **docker push {hub-docker-id}/springcloud-single-kubernetes-service-discovery-image** . For instance with `docker push wisniewskikr/springcloud-single-kubernetes-service-discovery-image`
-1. Build Service Gateway image with **docker build -f service-gateway/Dockerfile-Fast -t {hub-docker-id}/service-gateway-image ./service-gateway** . For instance with `docker build -f service-gateway/Dockerfile-Fast -t wisniewskikr/springcloud-single-kubernetes-service-gateway-image ./service-gateway`
-1. Push Service Gateway image with **docker push {hub-docker-id}/springcloud-single-kubernetes-service-gateway-image** . For instance with `docker push wisniewskikr/springcloud-single-kubernetes-service-gateway-image`
-1. Build Service HelloWorld image with **docker build -f service-helloworld/Dockerfile-Fast -t {hub-docker-id}/service-helloworld-image ./service-helloworld** . For instance with `docker build -f service-helloworld/Dockerfile-Fast -t wisniewskikr/springcloud-single-kubernetes-service-helloworld-image ./service-helloworld`
-1. Push Service HelloWorld image with **docker push {hub-docker-id}/springcloud-single-kubernetes-service-helloworld-image** . For instance with `docker push wisniewskikr/springcloud-single-kubernetes-service-helloworld-image`
+1. Build Service Config image with **docker build -f service-config/Dockerfile-Fast -t {hub-docker-id}/service-config-image ./service-config** . For instance with `docker build -f service-config/Dockerfile-Fast -t wisniewskikr/springcloud-single-kubernetes-elk-zipkin-service-config-image ./service-config`
+1. Push Service Config image with **docker push {hub-docker-id}/springcloud-single-kubernetes-elk-zipkin-service-config-image** . For instance with `docker push wisniewskikr/springcloud-single-kubernetes-elk-zipkin-service-config-image`
+1. Build Service Discovery image with **docker build -f service-discovery/Dockerfile-Fast -t {hub-docker-id}/service-discovery-image ./service-discovery** . For instance with `docker build -f service-config/Dockerfile-Fast -t wisniewskikr/springcloud-single-kubernetes-elk-zipkin-service-discovery-image ./service-discovery`
+1. Push Service Discovery image with **docker push {hub-docker-id}/springcloud-single-kubernetes-elk-zipkin-service-discovery-image** . For instance with `docker push wisniewskikr/springcloud-single-kubernetes-elk-zipkin-service-discovery-image`
+1. Build Service Gateway image with **docker build -f service-gateway/Dockerfile-Fast -t {hub-docker-id}/service-gateway-image ./service-gateway** . For instance with `docker build -f service-gateway/Dockerfile-Fast -t wisniewskikr/springcloud-single-kubernetes-elk-zipkin-service-gateway-image ./service-gateway`
+1. Push Service Gateway image with **docker push {hub-docker-id}/springcloud-single-kubernetes-elk-zipkin-service-gateway-image** . For instance with `docker push wisniewskikr/springcloud-single-kubernetes-elk-zipkin-service-gateway-image`
+1. Build Service HelloWorld image with **docker build -f service-helloworld/Dockerfile-Fast -t {hub-docker-id}/service-helloworld-image ./service-helloworld** . For instance with `docker build -f service-helloworld/Dockerfile-Fast -t wisniewskikr/springcloud-single-kubernetes-elk-zipkin-service-helloworld-image ./service-helloworld`
+1. Push Service HelloWorld image with **docker push {hub-docker-id}/springcloud-single-kubernetes-elk-zipkin-service-helloworld-image** . For instance with `docker push wisniewskikr/springcloud-single-kubernetes-elk-zipkin-service-helloworld-image`
 1. Clean up environment:
 
-    * Remove Service Config image with **docker rmi {hub-docker-id}/{image-name}**. For instance with `docker rmi wisniewskikr/springcloud-single-kubernetes-service-config-image`
-    * Remove Service Config image with name **{image-name}** from your **hub-docker-id** remote repository `https://hub.docker.com`. For instance `springcloud-single-kubernetes-service-config-image`
-    * Remove Service Discovery image with **docker rmi {hub-docker-id}/{image-name}**. For instance with `docker rmi springcloud-single-kubernetes-service-discovery-image`
-    * Remove Service Discovery image with name **{image-name}** from your **hub-docker-id** remote repository `https://hub.docker.com`. For instance `springcloud-single-kubernetes-service-discovery-image`
-    * Remove Service Gateway image with **docker rmi {hub-docker-id}/{image-name}**. For instance with `docker rmi wisniewskikr/springcloud-single-kubernetes-service-gateway-image`
-    * Remove Service Gateway image with name **{image-name}** from your **hub-docker-id** remote repository `https://hub.docker.com`. For instance `springcloud-single-kubernetes-service-gateway-image`
-    * Remove Service HelloWorld image with **docker rmi {hub-docker-id}/{image-name}**. For instance with `docker rmi wisniewskikr/springcloud-single-kubernetes-service-helloworld-image`
-    * Remove Service HelloWorld image with name **{image-name}** from your **hub-docker-id** remote repository `https://hub.docker.com`. For instance `springcloud-single-kubernetes-service-helloworld-image`
+    * Remove Service Config image with **docker rmi {hub-docker-id}/{image-name}**. For instance with `docker rmi wisniewskikr/springcloud-single-kubernetes-elk-zipkin-service-config-image`
+    * Remove Service Config image with name **{image-name}** from your **hub-docker-id** remote repository `https://hub.docker.com`. For instance `springcloud-single-kubernetes-elk-zipkin-service-config-image`
+    * Remove Service Discovery image with **docker rmi {hub-docker-id}/{image-name}**. For instance with `docker rmi springcloud-single-kubernetes-elk-zipkin-service-discovery-image`
+    * Remove Service Discovery image with name **{image-name}** from your **hub-docker-id** remote repository `https://hub.docker.com`. For instance `springcloud-single-kubernetes-elk-zipkin-service-discovery-image`
+    * Remove Service Gateway image with **docker rmi {hub-docker-id}/{image-name}**. For instance with `docker rmi wisniewskikr/springcloud-single-kubernetes-elk-zipkin-service-gateway-image`
+    * Remove Service Gateway image with name **{image-name}** from your **hub-docker-id** remote repository `https://hub.docker.com`. For instance `springcloud-single-kubernetes-elk-zipkin-service-gateway-image`
+    * Remove Service HelloWorld image with **docker rmi {hub-docker-id}/{image-name}**. For instance with `docker rmi wisniewskikr/springcloud-single-kubernetes-elk-zipkin-service-helloworld-image`
+    * Remove Service HelloWorld image with name **{image-name}** from your **hub-docker-id** remote repository `https://hub.docker.com`. For instance `springcloud-single-kubernetes-elk-zipkin-service-helloworld-image`
     
 
 (OPTIONAL) TODO

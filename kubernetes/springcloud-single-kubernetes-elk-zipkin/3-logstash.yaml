@@ -18,10 +18,9 @@ spec:
       - name: container-logstash
         image: docker.elastic.co/logstash/logstash:8.3.3
         ports:
-        - containerPort: "5044:5044"
-        - containerPort: "5000:5000/tcp"
-        - containerPort: "5000:5000/udp"
-        - containerPort: "9600:9600"
+        - containerPort: 5044
+        - containerPort: 5000
+        - containerPort: 9600
         env:
         - name: LS_JAVA_OPTS
           value: "-Xmx256m -Xms256m"
@@ -46,9 +45,17 @@ spec:
   selector:
     app: container-logstash
   ports:
-    - port: 5601
-      targetPort: 5601
-    - port: 5000
+    - name: port1
+      port: 5044
+      targetPort: 5044
+    - name: port2 
+      port: 5000
       targetPort: 5000
-    - port: 9600
+      protocol: TCP
+    - name: port3 
+      port: 5000
+      targetPort: 5000
+      protocol: UDP
+    - name: port4
+      port: 9600
       targetPort: 9600

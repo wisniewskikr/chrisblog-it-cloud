@@ -59,9 +59,10 @@ Usage steps:
 1. In Command Line tool start all microservices (it takes about 5 minutes) with `kubectl apply -f kubernetes.yaml`
 1. (Optional) In Command Line tool monitor if all Kubernetes Pods are ready (it takes about 5 minutes - expected "READY 1/1" for all Pods) with `kubectl get pods`
 1. In Command Line tool start Gateway Service in browser with `minikube service service-gateway`
-1. In browser add suffix **/service-helloworld** to call HelloWorld Service via Gateway Service. It should look like this: `http://192.168.1.66:31000/service-helloworld` 
+1. In browser add suffix **/service-helloworld-display** to call HelloWorld Service via Gateway Service. It should look like this: `http://192.168.1.66:31000/service-helloworld-display` 
 1. (Optional) In Command Line tool start Discovery Service in browser wiht `minikube service service-discovery-display`
-1. (Optional) In Command Line tool start HelloWorld Service in browser wiht `minikube service service-helloworld-display`
+1. (Optional) In Command Line tool start HelloWorld Display Service in browser wiht `minikube service service-helloworld-display-display`
+1. (Optional) In Command Line tool start HelloWorld Storage Service in browser wiht `minikube service service-helloworld-storage-display`
 1. Clean up environment:
 
     * In Command Line remove all microservices with `kubectl delete -f kubernetes.yaml`

@@ -46,8 +46,8 @@ PRECONDITIONS
 
 ##### Preconditions - Tools
 * Installed **Operating System** (tested on Windows 10)
-* (Optional - section "Usage Fast") Installed **Java** (tested on version 11.0.16.1). Tool details: `https://docs.google.com/document/d/119VYxF8JIZIUSk7JjwEPNX1RVjHBGbXHBKuK_1ytJg4/edit?usp=sharing`
-* (Optional - section "Usage Fast") Installed **Maven** (tested on version 3.8.5). Tool details: `https://docs.google.com/document/d/1cfIMcqkWlobUfVfTLQp7ixqEcOtoTR8X6OGo3cU4maw/edit?usp=sharing`
+* Installed **Java** (tested on version 11.0.16.1). Tool details: `https://docs.google.com/document/d/119VYxF8JIZIUSk7JjwEPNX1RVjHBGbXHBKuK_1ytJg4/edit?usp=sharing`
+* Installed **Maven** (tested on version 3.8.5). Tool details: `https://docs.google.com/document/d/1cfIMcqkWlobUfVfTLQp7ixqEcOtoTR8X6OGo3cU4maw/edit?usp=sharing`
 * Installed **Git** (tested on version 2.33.0.windows.2). Tool details: `https://docs.google.com/document/d/1Iyxy5DYfsrEZK5fxZJnYy5a1saARxd5LyMEscJKSHn0/edit?usp=sharing`
 * Installed **Docker** (tested on version 20.10.21). Tool details: `https://docs.google.com/document/d/1tKdfZIrNhTNWjlWcqUkg4lteI91EhBvaj6VDrhpnCnk/edit?usp=sharing`
 
@@ -59,56 +59,6 @@ PRECONDITIONS
 
 USAGE
 -----
-
-This way requires only Docker to build images and start whole system.
-
-Usage steps:
-1. Create network with `docker network create helloworld-network`
-1. Start Elasticsearch container with `docker run -d -p 9200:9200 --network helloworld-network -e bootstrap.memory_lock=true -e ES_JAVA_OPTS="-Xms512m -Xmx512m" -e discovery.type=single-node -e xpack.security.enabled=false -v elasticsearch_data:/usr/share/elasticsearch/data --name elasticsearch docker.elastic.co/elasticsearch/elasticsearch:8.3.3`
-1. Start Kibana container with `docker run -d -p 5601:5601 --network helloworld-network -e ELASTICSEARCH_URL=http://elasticsearch-container:9200 -e ELASTICSEARCH_HOSTS="http://elasticsearch:9200" --name kibana docker.elastic.co/kibana/kibana:8.3.3`
-1. Start Logstash container with `docker run -d -p 5044:5044 -p 5000:5000/tcp -p 5000:5000/udp -p 9600:9600 --network helloworld-network -e LS_JAVA_OPTS="-Xmx256m -Xms256m" -v "$(pwd)/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro" -v "$(pwd)/logstash/pipeline:/usr/share/logstash/pipeline:ro" --name logstash docker.elastic.co/logstash/logstash:8.3.3`
-1. Start Zipkin container with `docker run -d -p 9411:9411 --network helloworld-network --name zipkin openzipkin/zipkin`
-1. Build Service Discovery image with `docker build -f service-discovery/Dockerfile -t service-discovery-image ./service-discovery`
-1. Start Service Discovery container with `docker run -d -p 8761:8761 --network helloworld-network -e spring.application.name=service-discovery -e server.port=8761 -e eureka.client.fetch-registry=false -e eureka.client.register-with-eureka=false --name service-discovery-container service-discovery-image`
-1. Build Service Config image with `docker build -f service-config/Dockerfile -t service-config-image ./service-config`
-1. Start Service Config container with `docker run -d -p 8888:8888 --network helloworld-network -e spring.application.name=service-config -e server.port=8888 -e eureka.client.service-url.defaultZone=http://service-discovery-container:8761/eureka -e management.endpoints.jmx.exposure.include=health,info,env,beans -e management.endpoints.web.exposure.include=health,info,env,beans -e spring.cloud.config.server.git.uri=https://github.com/wisniewskikr/springcloud-config -e spring.cloud.config.server.git.clone-on-start=true --name service-config-container service-config-image`
-1. Build Service HelloWorld image with `docker build -f service-helloworld/Dockerfile -t service-helloworld-image ./service-helloworld`
-1. Start Service HelloWorld 1 container with `docker run -d -p 8080:8080 --network helloworld-network -e spring.application.name=service-helloworld -e server.port=8080 -e eureka.client.service-url.defaultZone=http://service-discovery-container:8761/eureka -e management.endpoints.jmx.exposure.include=health,info,env,beans -e management.endpoints.web.exposure.include=health,info,env,beans -e spring.config.import=optional:configserver:http://service-config-container:8888 -e spring.zipkin.baseUrl=http://zipkin:9411/ --name service-helloworld-container-1 service-helloworld-image`
-1. Start Service HelloWorld 2 container with `docker run -d -p 8081:8081 --network helloworld-network -e spring.application.name=service-helloworld -e server.port=8081 -e eureka.client.service-url.defaultZone=http://service-discovery-container:8761/eureka -e management.endpoints.jmx.exposure.include=health,info,env,beans -e management.endpoints.web.exposure.include=health,info,env,beans -e spring.config.import=optional:configserver:http://service-config-container:8888 -e spring.zipkin.baseUrl=http://zipkin:9411/ --name service-helloworld-container-2 service-helloworld-image`
-1. Build Service Gateway image with `docker build -f service-gateway/Dockerfile -t service-gateway-image ./service-gateway`
-1. Start Service Gateway container with `docker run -d -p 8762:8762 --network helloworld-network -e spring.application.name=service-gateway -e server.port=8762 -e eureka.client.service-url.defaultZone=http://service-discovery-container:8761/eureka -e management.endpoints.jmx.exposure.include=health,info,env,beans -e management.endpoints.web.exposure.include=health,info,env,beans -e SPRING_CLOUD_GATEWAY_ROUTES[0]_ID='service-helloworld' -e SPRING_CLOUD_GATEWAY_ROUTES[0]_URI='lb://service-helloworld' -e SPRING_CLOUD_GATEWAY_ROUTES[0]_PREDICATES[0]='Path=/service-helloworld**' -e SPRING_CLOUD_GATEWAY_ROUTES[0]_FILTERS[0]='RewritePath=/service-helloworld,/' -e spring.zipkin.baseUrl=http://zipkin:9411/ --name service-gateway-container service-gateway-image`
-1. Visit (expected first uuid - feature of load balancer) `http://localhost:8762/service-helloworld`
-1. Visit (expected second uuid - feature of load balancer) `http://localhost:8762/service-helloworld`
-1. Visit (expected again first uuid - feature of load balancer) `http://localhost:8762/service-helloworld`
-1. (Optional) Check services in Service Discovery by visiting `http://localhost:8761`
-1. (Optional) Check first Service HelloWorld without Load Balancer by visiting `http://localhost:8080`  
-1. (Optional) Check second Service HelloWorld without Load Balancer by visiting `http://localhost:8081` 
-1. Clean up environment:
-
-    * Remove Elasticsearch container with `docker rm -f elasticsearch`
-    * Remove Elasticsearch image with `docker rmi docker.elastic.co/elasticsearch/elasticsearch:8.3.3`    
-    * Remove Kibana container with `docker rm -f kibana`
-    * Remove Kibana image with `docker rmi docker.elastic.co/kibana/kibana:8.3.3`    
-    * Remove Logstash container with `docker rm -f logstash`
-    * Remove Logstash image with `docker rmi logstash-container docker.elastic.co/logstash/logstash:8.3.3`    
-    * Remove Zipkin container with `docker rm -f zipkin`
-    * Remove Zipkin image with `docker rmi openzipkin/zipkin`    
-    * Remove Service Discovery container with `docker rm -f service-discovery-container`
-    * Remove Service Discovery image with `docker rmi service-discovery-image`
-    * Remove Service Config container with `docker rm -f service-config-container`
-    * Remove Service Config image with `docker rmi service-config-image`
-    * Remove Service HelloWorld container with `docker rm -f service-helloworld-container-1`
-    * Remove Service HelloWorld container with `docker rm -f service-helloworld-container-2`
-    * Remove Service HelloWorld image with `docker rmi service-helloworld-image`
-    * Remove Service Gateway container with `docker rm -f service-gateway-container`
-    * Remove Service Gateway image with `docker rmi service-gateway-image`
-    * Remove network with `docker network rm helloworld-network`
-    
-
-USAGE FAST (REQUIRES INSTALLED JAVA AND MAVEN)
-----------------------------------------------
-
-In this way images are built faster but it requires installed Java and Maven.
 
 Usage steps:
 1. Build package with `mvn clean package -D maven.test.skip`

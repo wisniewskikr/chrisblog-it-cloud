@@ -10,5 +10,4 @@ CMD ["java", "-jar", "/opt/app/*.jar"]
 FROM eclipse-temurin:11-jre
 WORKDIR /opt/app
 COPY --from=builder /opt/app/target/*.jar  /opt/app/*.jar
-EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "/opt/app/*.jar"]

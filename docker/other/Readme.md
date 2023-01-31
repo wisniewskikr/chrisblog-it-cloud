@@ -1,4 +1,3 @@
-- springcloud-docker-multiple
 - springcolud-docker-multiple-eureka
 - springcloud-docker-single-gateway
 - springcloud-docker-single-gateway-eureka

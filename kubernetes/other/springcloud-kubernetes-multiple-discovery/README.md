@@ -5,7 +5,8 @@ Usage steps:
 1. In Command Line tool start all microservices (it takes about 5 minutes) with `kubectl apply -f kubernetes.yaml`
 1. (Optional) In Command Line tool monitor if all Kubernetes Pods are ready (it takes about 5 minutes - expected "READY 1/1" for all Pods) with `kubectl get pods`
 1. In Command Line tool start Gateway Service in browser with `minikube service service-display-kubernetes-show`
-1. (Optional) In Command Line tool start HelloWorld Storage Service in browser wiht `minikube service service-storage-kubernetes-show`
+1. (Optional) In Command Line tool start Discovery Service in browser with `minikube service service-discovery-show`
+1. (Optional) In Command Line tool start HelloWorld Storage Service in browser with `minikube service service-storage-kubernetes-show`
 1. Clean up environment:
 
     * In Command Line remove all microservices with `kubectl delete -f kubernetes.yaml`

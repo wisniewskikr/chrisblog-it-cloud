@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
       - name: container-helloworld-storage
-        image: wisniewskikr/springcloud-kubernetes-multiple-storage-image
+        image: wisniewskikr/springcloud-kubernetes-multiple-discovery-storage-image
+        imagePullPolicy: Never
         ports:
         - containerPort: 9090
         env:

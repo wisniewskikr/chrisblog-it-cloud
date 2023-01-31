@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
       - name: container-helloworld-display
-        image: wisniewskikr/springcloud-kubernetes-multiple-display-image
+        image: wisniewskikr/springcloud-kubernetes-multiple-discovery-display-image
+        imagePullPolicy: Never
         ports:
         - containerPort: 8080
         env:
@@ -31,9 +32,7 @@ spec:
         - name: management.endpoints.web.exposure.include
           value: "health,info,env,beans"
         - name: service.helloworld.storage.name
-          value: "service-storage-kubernetes"
-        - name: service.helloworld.storage.url
-          value: "http://service-storage-kubernetes:9090"
+          value: "service-helloworld-storage"
         readinessProbe:
             httpGet:
               path: /actuator/health

@@ -17,6 +17,7 @@ spec:
       containers:
       - name: container-discovery
         image: wisniewskikr/springcloud-kubernetes-multiple-discovery-discovery-image
+        imagePullPolicy: Never
         ports:
         - containerPort: 8761
         env:

@@ -2,26 +2,23 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to implement **microservices** using **Java** programming language and **Spring Boot Cloud** framework. This project consists of few microservices implemented as independent **Maven modules**. In the system there is only one custom service - Service HelloWorld. This service is run as two instances to present load balancing usage. The rest of services in the system are provided by Spring Boot Cloud and they are used for system management.
+The goal of this project is to present how to implement application in **Java** programming language with usage **Spring Boot Cloud** framework which will use **Gateway** to contact with other services.
+
+**Gateway** service is entry point to system for users. Users should always use URL to Gateway and then Gateway will redirect them to specific serivce.
 
 All services are dockerized so you can run them using **Docker** tool. 
 
 ##### Service
 This project consists of following services:
-* **Service Discovery**: port **8761**. This service displays list of all active services in system
-* **Service Config**: port **8888**. This service provides flexible configuration variables. These variables can be taken for instance from Github
-* **Service HelloWorld**: ports **8080** and **8081**. Two instances of Service HelloWorld which provide JSON with message and application id
+* **Service HelloWorld**: port **8080**. This service provides JSON with message and application id
 * **Service Gateway**: port **8762**. This service redirects request from outside system to service inside system. It also takes care of load balancing
 
 ##### Flow
 The following flow takes place in this project:
-1. User via any REST Client (for instance Postman) sends request to Service HellWorld for content. This request is not sent directly but through Service Gateway. 
-1. Service Gateway takes location of all services in system from Service Discovery.
-1. This example system consists of two instances of Service HelloWorld. In such situation Service Gateway also performs load balancing - first request is sent to Service HelloWorld 1,
-second to Service HelloWorld 2, third again to Service HelloWorld 1 etc. 
-1. Service HelloWorld which receives request connects with Service Config for text of message. This text is taken from Github project
-1. Service HelloWorld sends response to User via REST Client. This response contains message and application id of this exact instance of Servie HelloWorld. 
-After every request this application id is changed because of Service Gateway and load balancing
+1. User via browser sends request to Service Gateway for content
+1. Service Gateway redirects request to Service HelloWorld for content
+1. Service HelloWorld sends back response to Service Gateway with message and uuid
+1. Service Gateway redirects response to User via browser 
 
 ##### Launch
 To launch this application please make sure that the **Preconditions** are met and then follow instructions from **Usage** section.
@@ -55,29 +52,15 @@ USAGE
 Usage steps:
 1. Build package with `mvn clean package -D maven.test.skip`
 1. Create network with `docker network create helloworld-network`
-1. Build Service Discovery image with `docker build -f service-discovery/Dockerfile-Fast -t service-discovery-image ./service-discovery`
-1. Start Service Discovery container with `docker run -d -p 8761:8761 --network helloworld-network -e spring.application.name=service-discovery -e server.port=8761 -e eureka.client.fetch-registry=false -e eureka.client.register-with-eureka=false --name service-discovery-container service-discovery-image`
-1. Build Service Config image with `docker build -f service-config/Dockerfile-Fast -t service-config-image ./service-config`
-1. Start Service Config container with `docker run -d -p 8888:8888 --network helloworld-network -e spring.application.name=service-config -e server.port=8888 -e eureka.client.service-url.defaultZone=http://service-discovery-container:8761/eureka -e management.endpoints.jmx.exposure.include=health,info,env,beans -e management.endpoints.web.exposure.include=health,info,env,beans -e spring.cloud.config.server.git.uri=https://github.com/wisniewskikr/springcloud-config -e spring.cloud.config.server.git.clone-on-start=true --name service-config-container service-config-image`
 1. Build Service HelloWorld image with `docker build -f service-helloworld/Dockerfile-Fast -t service-helloworld-image ./service-helloworld`
-1. Start Service HelloWorld 1 container with `docker run -d -p 8080:8080 --network helloworld-network -e spring.application.name=service-helloworld -e server.port=8080 -e eureka.client.service-url.defaultZone=http://service-discovery-container:8761/eureka -e management.endpoints.jmx.exposure.include=health,info,env,beans -e management.endpoints.web.exposure.include=health,info,env,beans -e spring.config.import=optional:configserver:http://service-config-container:8888 --name service-helloworld-container-1 service-helloworld-image`
-1. Start Service HelloWorld 2 container with `docker run -d -p 8081:8081 --network helloworld-network -e spring.application.name=service-helloworld -e server.port=8081 -e eureka.client.service-url.defaultZone=http://service-discovery-container:8761/eureka -e management.endpoints.jmx.exposure.include=health,info,env,beans -e management.endpoints.web.exposure.include=health,info,env,beans -e spring.config.import=optional:configserver:http://service-config-container:8888 --name service-helloworld-container-2 service-helloworld-image`
+1. Start Service HelloWorld container with `docker run -d -p 8080:8080 --network helloworld-network -e spring.application.name=service-helloworld -e server.port=8080 -e management.endpoints.jmx.exposure.include=health,info,env,beans -e management.endpoints.web.exposure.include=health,info,env,beans -e service.helloworld.message="Hello World" --name service-helloworld-container service-helloworld-image`
 1. Build Service Gateway image with `docker build -f service-gateway/Dockerfile-Fast -t service-gateway-image ./service-gateway`
-1. Start Service Gateway container with `docker run -d -p 8762:8762 --network helloworld-network -e spring.application.name=service-gateway -e server.port=8762 -e eureka.client.service-url.defaultZone=http://service-discovery-container:8761/eureka -e management.endpoints.jmx.exposure.include=health,info,env,beans -e management.endpoints.web.exposure.include=health,info,env,beans -e SPRING_CLOUD_GATEWAY_ROUTES[0]_ID='service-helloworld' -e SPRING_CLOUD_GATEWAY_ROUTES[0]_URI='lb://service-helloworld' -e SPRING_CLOUD_GATEWAY_ROUTES[0]_PREDICATES[0]='Path=/service-helloworld**' -e SPRING_CLOUD_GATEWAY_ROUTES[0]_FILTERS[0]='RewritePath=/service-helloworld,/' --name service-gateway-container service-gateway-image`
-1. Visit (expected first uuid - feature of load balancer) `http://localhost:8762/service-helloworld`
-1. Visit (expected second uuid - feature of load balancer) `http://localhost:8762/service-helloworld`
-1. Visit (expected again first uuid - feature of load balancer) `http://localhost:8762/service-helloworld`
-1. (Optional) Check services in Service Discovery by visiting `http://localhost:8761`
-1. (Optional) Check first Service HelloWorld without Load Balancer by visiting `http://localhost:8080`  
-1. (Optional) Check second Service HelloWorld without Load Balancer by visiting `http://localhost:8081` 
+1. Start Service Gateway container with `docker run -d -p 8762:8762 --network helloworld-network -e spring.application.name=service-gateway -e server.port=8762 -e management.endpoints.jmx.exposure.include=health,info,env,beans -e management.endpoints.web.exposure.include=health,info,env,beans -e SPRING_CLOUD_GATEWAY_ROUTES[0]_ID='service-helloworld-container' -e SPRING_CLOUD_GATEWAY_ROUTES[0]_URI='http://service-helloworld-container:8080' -e SPRING_CLOUD_GATEWAY_ROUTES[0]_PREDICATES[0]='Path=/service-helloworld**' -e SPRING_CLOUD_GATEWAY_ROUTES[0]_FILTERS[0]='RewritePath=/service-helloworld,/' --name service-gateway-container service-gateway-image`
+1. Visit `http://localhost:8762/service-helloworld`
+1. (Optional) Check Service HelloWorld without Load Balancer by visiting `http://localhost:8080`  
 1. Clean up environment:
 
-    * Remove Service Discovery container with `docker rm -f service-discovery-container`
-    * Remove Service Discovery image with `docker rmi service-discovery-image`
-    * Remove Service Config container with `docker rm -f service-config-container`
-    * Remove Service Config image with `docker rmi service-config-image`
-    * Remove Service HelloWorld container with `docker rm -f service-helloworld-container-1`
-    * Remove Service HelloWorld container with `docker rm -f service-helloworld-container-2`
+    * Remove Service HelloWorld container with `docker rm -f service-helloworld-container`
     * Remove Service HelloWorld image with `docker rmi service-helloworld-image`
     * Remove Service Gateway container with `docker rm -f service-gateway-container`
     * Remove Service Gateway image with `docker rmi service-gateway-image`

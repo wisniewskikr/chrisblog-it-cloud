@@ -50,8 +50,8 @@ PRECONDITIONS
 
 ##### Preconditions - Actions
 * **Launched** Docker on your local machine
-* **Launched** Minikube on your local machine with `minikube start`
-* **Connected** Minikube with Docker with (Windows): `minikube docker-env` and `minikube docker-env | Invoke-Expression` or with (Linux) `eval $(minikube docker-env)` 
+* **Launched** Minikube on your local machine with (as administrator) `minikube start`
+* **Connected** Minikube with Docker with (Windows - as administrator): `minikube docker-env` and `minikube docker-env | Invoke-Expression` or with (Linux) `eval $(minikube docker-env)` 
 * **Download** source code using Git 
 * Open any **Command Line** (for instance "Windonw PowerShell" on Windows OS) tool on **project's folder** (exact localization of project you can check in GIT repositories on page `https://github.com/wisniewskikr/chrisblog-it-cloud`)
 

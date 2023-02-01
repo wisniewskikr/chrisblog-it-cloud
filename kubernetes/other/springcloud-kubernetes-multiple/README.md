@@ -46,7 +46,9 @@ PRECONDITIONS
 * Installed **kubectl** (tested on version v4.5.4)
 
 ##### Preconditions - Actions
-* **Launched** Minikube on local machine
+* **Launched** Docker on your local machine
+* **Launched** Minikube on your local machine with (as administrator) `minikube start`
+* **Connected** Minikube with Docker with (Windows - as administrator): `minikube docker-env` and `minikube docker-env | Invoke-Expression` or with (Linux) `eval $(minikube docker-env)` 
 * **Download** source code using Git 
 * Open any **Command Line** (for instance "Windonw PowerShell" on Windows OS) tool on **project's folder** (exact localization of project you can check in GIT repositories on page `https://github.com/wisniewskikr/chrisblog-it-cloud`)
 
@@ -54,31 +56,19 @@ PRECONDITIONS
 USAGE
 -----
 
-Usage steps:
-1. In Command Line tool start all microservices (it takes about 5 minutes) with `kubectl apply -f kubernetes.yaml`
-1. (Optional) In Command Line tool monitor if all Kubernetes Pods are ready (it takes about 5 minutes - expected "READY 1/1" for all Pods) with `kubectl get pods`
-1. In Command Line tool start Gateway Service in browser with `minikube service service-display-kubernetes-show`
-1. (Optional) In Command Line tool start HelloWorld Storage Service in browser wiht `minikube service service-storage-kubernetes-show`
-1. Clean up environment:
-
-    * In Command Line remove all microservices with `kubectl delete -f kubernetes.yaml`
-
-(OPTIONAL) BUILD IMAGES AND PUSH THEM TO REMOTE REPOSITORY
-----------------------------------------------------------
-
-**Note!**:
-* Please replace my **hub-docker-id** - **wisniewskikr** - with your unique **hub-docker-id**. In this way images will be pushed to your realm in the repository Hub Docker. 
+> **NOTE:**  Please run all commands in the same Command Line tool where you connected Minikube to Docker (check section **Preconditions**). Provided YAML files have properties  **imagePullPolicy: Never** so it means that images have to be stored in Minikube. To do it Minikube has to be connected with Docker before building images.
 
 Usage steps:
 1. Build package with `mvn clean package -D maven.test.skip`
 1. Build Service Display image with `docker build -f service-helloworld-display/Dockerfile-Fast -t wisniewskikr/springcloud-kubernetes-multiple-display-image ./service-helloworld-display`
-1. Push Service Display image with `docker push wisniewskikr/springcloud-kubernetes-multiple-display-image`
 1. Build Service Storage image with `docker build -f service-helloworld-storage/Dockerfile-Fast -t wisniewskikr/springcloud-kubernetes-multiple-storage-image ./service-helloworld-storage`
-1. Push Service Storage image with `docker push wisniewskikr/springcloud-kubernetes-multiple-storage-image`
-
+1. Start Storage service with `kubectl apply -f 1-storage.yaml`
+1. Start Display service with `kubectl apply -f 2-display.yaml`
+1. Launch Display Service in browser with `minikube service service-display-kubernetes-show`
+1. (Optional) Launch Storage Service in browser with `minikube service service-storage-kubernetes-show`
 1. Clean up environment:
- 
+
+    * Remove Display service with `kubectl delete -f 2-display.yaml`
+    * Remove Storage service with `kubectl delete -f 1-storage.yaml`
     * Remove Service Display image with `docker rmi wisniewskikr/springcloud-kubernetes-multiple-display-image`
-    * Remove Service Display image with name **{image-name}** from your **hub-docker-id** remote repository `https://hub.docker.com`. For instance `springcloud-kubernetes-multiple-display-image`    
     * Remove Service Storage image with `docker rmi wisniewskikr/springcloud-kubernetes-multiple-storage-image`
-    * Remove Service Storage image with name **{image-name}** from your **hub-docker-id** remote repository `https://hub.docker.com`. For instance `springcloud-kubernetes-multiple-storage-image`

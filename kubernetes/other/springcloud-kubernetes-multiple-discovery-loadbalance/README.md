@@ -59,7 +59,7 @@ PRECONDITIONS
 USAGE
 -----
 
-> **NOTE:**  Please run all commands in the same Command Line tool where you connected Minikube to Docker (check section **Preconditions**). Provided YAML files have properties  **imagePullPolicy: Never** so it means that images have to be stored in Minikube. To do it Minikube has to be connected with Docker before building images.
+> **NOTE:**  Please open Command Line tool as **administrator** on **main folder of project**. Please make sure that **Docker** and **Minikube** are running. Please make sure that Docker and Minikube are connected with command **minikube docker-env | Invoke-Expression** (Windows) or **eval $(minikube docker-env)** (Linux) - it's required for Kubernetes property **imagePullPolicy: Never**.
 
 
 Usage steps:

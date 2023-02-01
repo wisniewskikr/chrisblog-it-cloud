@@ -29,16 +29,18 @@ spec:
           value: "false"
         - name: eureka.client.register-with-eureka
           value: "false"
+        - name: eureka.instance.prefer-ip-address
+          value: "true"
         readinessProbe:
             httpGet:
               path: /actuator/health
               port: 8761
-            initialDelaySeconds: 60
+            initialDelaySeconds: 15
         livenessProbe:
             httpGet:
               path: /actuator/health
               port: 8761
-            initialDelaySeconds: 60
+            initialDelaySeconds: 15
       restartPolicy: Always
 
 ---

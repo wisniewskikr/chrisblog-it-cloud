@@ -33,16 +33,18 @@ spec:
           value: "health,info,env,beans"
         - name: service.helloworld.storage.name
           value: "service-helloworld-storage"
+        - name: eureka.instance.prefer-ip-address
+          value: "true"
         readinessProbe:
             httpGet:
               path: /actuator/health
               port: 8080
-            initialDelaySeconds: 60
+            initialDelaySeconds: 15
         livenessProbe:
             httpGet:
               path: /actuator/health
               port: 8080
-            initialDelaySeconds: 60
+            initialDelaySeconds: 15
       restartPolicy: Always
 
 ---

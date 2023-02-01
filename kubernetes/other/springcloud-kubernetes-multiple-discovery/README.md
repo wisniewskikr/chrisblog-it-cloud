@@ -1,57 +1,3 @@
-USAGE
------
-
-Usage steps:
-1. In Command Line tool start all microservices (it takes about 5 minutes) with `kubectl apply -f kubernetes.yaml`
-1. (Optional) In Command Line tool monitor if all Kubernetes Pods are ready (it takes about 5 minutes - expected "READY 1/1" for all Pods) with `kubectl get pods`
-1. In Command Line tool start Display Service in browser with `minikube service service-display-kubernetes-show`
-1. (Optional) In Command Line tool start Discovery Service in browser with `minikube service service-discovery-show`
-1. (Optional) In Command Line tool start HelloWorld Storage Service in browser with `minikube service service-storage-kubernetes-show`
-1. Clean up environment:
-
-    * In Command Line remove all microservices with `kubectl delete -f kubernetes.yaml`
-
-(OPTIONAL) BUILD IMAGES AND PUSH THEM TO REMOTE REPOSITORY
-----------------------------------------------------------
-
-**Note!**:
-* Please replace my **hub-docker-id** - **wisniewskikr** - with your unique **hub-docker-id**. In this way images will be pushed to your realm in the repository Hub Docker. 
-
-Usage steps:
-1. Build package with `mvn clean package -D maven.test.skip`
-1. Build Service Discovery image with `docker build -f service-discovery/Dockerfile-Fast -t wisniewskikr/springcloud-kubernetes-multiple-discovery-discovery-image ./service-discovery`
-1. Push Service Discovery image with `docker push wisniewskikr/springcloud-kubernetes-multiple-discovery-discovery-image`
-1. Build Service Display image with `docker build -f service-helloworld-display/Dockerfile-Fast -t wisniewskikr/springcloud-kubernetes-multiple-discovery-display-image ./service-helloworld-display`
-1. Push Service Display image with `docker push wisniewskikr/springcloud-kubernetes-multiple-discovery-display-image`
-1. Build Service Storage image with `docker build -f service-helloworld-storage/Dockerfile-Fast -t wisniewskikr/springcloud-kubernetes-multiple-discovery-storage-image ./service-helloworld-storage`
-1. Push Service Storage image with `docker push wisniewskikr/springcloud-kubernetes-multiple-discovery-storage-image`
-
-1. Clean up environment:
- 
-    * Remove Service Discovery image with `docker rmi wisniewskikr/springcloud-kubernetes-multiple-discovery-discovery-image`
-    * Remove Service Discovery image with name **{image-name}** from your **hub-docker-id** remote repository `https://hub.docker.com`. For instance `springcloud-kubernetes-multiple-discovery-discovery-image`
-    * Remove Service Display image with `docker rmi wisniewskikr/springcloud-kubernetes-multiple-discovery-display-image`
-    * Remove Service Display image with name **{image-name}** from your **hub-docker-id** remote repository `https://hub.docker.com`. For instance `springcloud-kubernetes-multiple-discovery-display-image`    
-    * Remove Service Storage image with `docker rmi wisniewskikr/springcloud-kubernetes-multiple-discovery-storage-image`
-    * Remove Service Storage image with name **{image-name}** from your **hub-docker-id** remote repository `https://hub.docker.com`. For instance `springcloud-kubernetes-multiple-discovery-storage-image`
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 DESCRIPTION
 -----------
 
@@ -60,12 +6,12 @@ The goal of this project is to present how to implement application in **Java** 
 
 **Discovery** service (f.e. Eureka) contains information about all applications and their instances in system. So Load Balancer can use information about instances to redirect traffic between them. 
 
-All services are dockerized so you can run them using **Docker** tool. 
+All services are dockerized so you can run them using **Kubernetes** tool. 
 
 ##### Service
 This project consists of following services:
 * **Service Discovery**: port **8761**. This service displays list of all active services in system
-* **Service HelloWorld Storage**: port **8081** and **8082**: This service provides JSON with message and port
+* **Service HelloWorld Storage**: ports **random**: This service provides JSON with message and uuid
 * **Service HelloWorld Display**: port **8080**. This service displays to the user three information: message from Storage, uuid from Storage and uuid from Display
 
 ##### Flow
@@ -80,9 +26,14 @@ To launch this application please make sure that the **Preconditions** are met a
 
 ##### Technologies
 This project uses following technologies:
-* **Spring Boot** framework: `https://docs.google.com/document/d/1mvrJT5clbkr9yTj-AQ7YOXcqr2eHSEw2J8n9BMZIZKY/edit?usp=sharing`
+* **Java**: `https://docs.google.com/document/d/119VYxF8JIZIUSk7JjwEPNX1RVjHBGbXHBKuK_1ytJg4/edit?usp=sharing`
+* **Maven**: `https://docs.google.com/document/d/1cfIMcqkWlobUfVfTLQp7ixqEcOtoTR8X6OGo3cU4maw/edit?usp=sharing`
+* **Git**: `https://docs.google.com/document/d/1Iyxy5DYfsrEZK5fxZJnYy5a1saARxd5LyMEscJKSHn0/edit?usp=sharing`
+* **Spring Boot**: `https://docs.google.com/document/d/1mvrJT5clbkr9yTj-AQ7YOXcqr2eHSEw2J8n9BMZIZKY/edit?usp=sharing`
 * **Microservices**: `https://docs.google.com/document/d/1j_lwf5L0-yTPew75RIWcA6AGeAnJjx0M4Bk4DrUcLXc/edit?usp=sharing`
 * **Docker**: `https://docs.google.com/document/d/1tKdfZIrNhTNWjlWcqUkg4lteI91EhBvaj6VDrhpnCnk/edit?usp=sharing`
+* **Kubernetes**: `https://docs.google.com/document/d/1jOsK3Lkbkoq-Xx7Ln9o_ozCt6XpcSElOwu1o2AfQnNc/edit?usp=sharing`
+* **Minikube**: `https://docs.google.com/document/d/1GfgN7tJNTIJCaSzexJdR_Lm_S9pF2YykcpgSQzAZWZo/edit?usp=sharing`
 
 
 PRECONDITIONS
@@ -90,13 +41,17 @@ PRECONDITIONS
 
 ##### Preconditions - Tools
 * Installed **Operating System** (tested on Windows 10)
-* Installed **Java** (tested on version 11.0.16.1). Tool details: `https://docs.google.com/document/d/119VYxF8JIZIUSk7JjwEPNX1RVjHBGbXHBKuK_1ytJg4/edit?usp=sharing`
-* Installed **Maven** (tested on version 3.8.5). Tool details: `https://docs.google.com/document/d/1cfIMcqkWlobUfVfTLQp7ixqEcOtoTR8X6OGo3cU4maw/edit?usp=sharing`
-* Installed **Git** (tested on version 2.33.0.windows.2). Tool details: `https://docs.google.com/document/d/1Iyxy5DYfsrEZK5fxZJnYy5a1saARxd5LyMEscJKSHn0/edit?usp=sharing`
-* Installed **Docker** (tested on version 20.10.21). Tool details: `https://docs.google.com/document/d/1tKdfZIrNhTNWjlWcqUkg4lteI91EhBvaj6VDrhpnCnk/edit?usp=sharing`
+* Installed **Java** (tested on version 11.0.16.1)
+* Installed **Maven** (tested on version 3.8.5)
+* Installed **Git** (tested on version 2.33.0.windows.2)
+* Installed **Docker** (tested on version 20.10.21)
+* Installed **Minikube** (tested on version v1.28.0)
+* Installed **kubectl** (tested on version v4.5.4)
 
 ##### Preconditions - Actions
-* **Launched** Docker and Docker Compose tools on your local machine
+* **Launched** Docker on your local machine
+* **Launched** Minikube on your local machine with `minikube start`
+* **Connected** Minikube with Docker with (Windows): `minikube docker-env` and `minikube docker-env | Invoke-Expression` or with (Linux) `eval $(minikube docker-env)` 
 * **Download** source code using Git 
 * Open any **Command Line** (for instance "Windonw PowerShell" on Windows OS) tool on **project's folder** (exact localization of project you can check in GIT repositories on page `https://github.com/wisniewskikr/chrisblog-it-cloud`)
 
@@ -104,30 +59,25 @@ PRECONDITIONS
 USAGE
 -----
 
+> **NOTE:**  Please run all commands in the same Command Line tool where you connected Minikube to Docker (check section **Preconditions**). Provided YAML files have properties  **imagePullPolicy: Never** so it means that images have to be stored in Minikube. To do it Minikube has to be connected with Docker before building images.
+
+
 Usage steps:
 1. Build package with `mvn clean package -D maven.test.skip`
-1. Create network with `docker network create helloworld-network`
-1. Build Service Discovery image with `docker build -f service-discovery/Dockerfile-Fast -t service-discovery-image ./service-discovery`
-1. Start Service Discovery container with `docker run -d -p 8761:8761 --network helloworld-network -e spring.application.name=service-discovery -e server.port=8761 -e eureka.client.fetch-registry=false -e eureka.client.register-with-eureka=false --name service-discovery-container service-discovery-image`
-1. Build Service Storage HelloWorld image with `docker build -f service-helloworld-storage/Dockerfile-Fast -t service-helloworld-storage-image ./service-helloworld-storage`
-1. Start Service Storage HelloWorld 1 container with `docker run -d -p 8081:8081 --network helloworld-network -e spring.application.name=service-helloworld-storage -e server.port=8081 -e eureka.client.service-url.defaultZone=http://service-discovery-container:8761/eureka -e management.endpoints.jmx.exposure.include=health,info,env,beans -e management.endpoints.web.exposure.include=health,info,env,beans -e service.helloworld.message="Hello World" --name service-helloworld-storage-container-1 service-helloworld-storage-image`
-1. Start Service Storage HelloWorld 2 container with `docker run -d -p 8082:8082 --network helloworld-network -e spring.application.name=service-helloworld-storage -e server.port=8082 -e eureka.client.service-url.defaultZone=http://service-discovery-container:8761/eureka -e management.endpoints.jmx.exposure.include=health,info,env,beans -e management.endpoints.web.exposure.include=health,info,env,beans -e service.helloworld.message="Hello World" --name service-helloworld-storage-container-2 service-helloworld-storage-image`
-1. Build Service Display HelloWorld image with `docker build -f service-helloworld-display/Dockerfile-Fast -t service-helloworld-display-image ./service-helloworld-display`
-1. Start Service Display HelloWorld container with `docker run -d -p 8080:8080 --network helloworld-network -e spring.application.name=service-helloworld-display -e server.port=8080 -e eureka.client.service-url.defaultZone=http://service-discovery-container:8761/eureka -e management.endpoints.jmx.exposure.include=health,info,env,beans -e management.endpoints.web.exposure.include=health,info,env,beans -e service.helloworld.storage.name=service-helloworld-storage --name service-helloworld-display-container service-helloworld-display-image`
-
-1. Visit (expected first uuid - feature of load balancer) `http://localhost:8080`
-1. Visit (expected second uuid - feature of load balancer) `http://localhost:8080`
-1. Visit (expected again first uuid - feature of load balancer) `http://localhost:8080`
-1. (Optional) Check services in Service Discovery by visiting `http://localhost:8761`
-1. (Optional) Check first Service HelloWorld Storage by visiting `http://localhost:8081`  
-1. (Optional) Check second Service HelloWorld Storage by visiting `http://localhost:8082`    
+1. Build Service Discovery image with `docker build -f service-discovery/Dockerfile-Fast -t wisniewskikr/springcloud-kubernetes-multiple-discovery-discovery-image ./service-discovery`
+1. Build Service Display image with `docker build -f service-helloworld-display/Dockerfile-Fast -t wisniewskikr/springcloud-kubernetes-multiple-discovery-display-image ./service-helloworld-display`
+1. Build Service Storage image with `docker build -f service-helloworld-storage/Dockerfile-Fast -t wisniewskikr/springcloud-kubernetes-multiple-discovery-storage-image ./service-helloworld-storage`
+1. Start Discovery microservices with `kubectl apply -f 1-discovery.yaml`
+1. Start Storage microservices with `kubectl apply -f 2-storage.yaml`
+1. Start Display microservices with `kubectl apply -f 3-display.yaml`
+1. Launch HelloWorld Display Service in browser with `minikube service service-display-kubernetes-show`
+1. (Optional) Launch Discovery Service in browser with `minikube service service-discovery-show`
+1. (Optional) Launch HelloWorld Storage Service in browser with `minikube service service-storage-kubernetes-show`
 1. Clean up environment:
-
-    * Remove Service Discovery container with `docker rm -f service-discovery-container`
-    * Remove Service Discovery image with `docker rmi service-discovery-image`
-    * Remove Service HelloWorld container with `docker rm -f service-helloworld-storage-container-1`
-    * Remove Service HelloWorld container with `docker rm -f service-helloworld-storage-container-2`
-    * Remove Service HelloWorld container with `docker rm -f service-helloworld-display-container`
-    * Remove Service HelloWorld image with `docker rmi service-helloworld-storage-image`
-    * Remove Service HelloWorld image with `docker rmi service-helloworld-display-image`
-    * Remove network with `docker network rm helloworld-network`
+    
+    * In Command Line remove all microservices with `kubectl delete -f 3-display.yaml`
+    * In Command Line remove all microservices with `kubectl delete -f 2-storage.yaml`
+    * In Command Line remove all microservices with `kubectl delete -f 1-discovery.yaml`
+    * Remove Service Discovery image with `docker rmi wisniewskikr/springcloud-kubernetes-multiple-discovery-discovery-image`
+    * Remove Service Display image with `docker rmi wisniewskikr/springcloud-kubernetes-multiple-discovery-display-image`
+    * Remove Service Storage image with `docker rmi wisniewskikr/springcloud-kubernetes-multiple-discovery-storage-image`

@@ -59,14 +59,21 @@ PRECONDITIONS
 USAGE
 -----
 
-> **NOTE:**  Please open Command Line tool as **administrator** on **main folder of project**. Please make sure that **Docker** and **Minikube** are running. Please make sure that Docker and Minikube are connected with command **minikube docker-env | Invoke-Expression** (Windows) or **eval $(minikube docker-env)** (Linux) - it's required for Kubernetes property **imagePullPolicy: Never**.
+> **NOTE:**  Please open Command Line tool as **administrator** on **main folder of project**.
 
 
 Usage steps:
+1. Connect Minikube and Docker with (Windows) `minikube docker-env | Invoke-Expression`
 1. Build package with `mvn clean package -D maven.test.skip`
 1. Build Service Discovery image with `docker build -f service-discovery/Dockerfile-Fast -t wisniewskikr/springcloud-kubernetes-multiple-discovery-discovery-image ./service-discovery`
 1. Build Service Display image with `docker build -f service-helloworld-display/Dockerfile-Fast -t wisniewskikr/springcloud-kubernetes-multiple-discovery-display-image ./service-helloworld-display`
 1. Build Service Storage image with `docker build -f service-helloworld-storage/Dockerfile-Fast -t wisniewskikr/springcloud-kubernetes-multiple-discovery-storage-image ./service-helloworld-storage`
+1. (Optional) Check images in Minikube:
+
+     * Run Minikube SSH with `minikube ssh`
+     * Display Minikube images (expected new images from this project) with `docker images`
+     * Close Minikube SSH with `exit`
+	 
 1. Start Discovery microservices with `kubectl apply -f 1-discovery.yaml`
 1. Start Storage microservices with `kubectl apply -f 2-storage.yaml`
 1. Start Display microservices with `kubectl apply -f 3-display.yaml`

@@ -73,7 +73,7 @@ Usage steps:
 1. (Optional) Check images in Minikube:
 
      * Run Minikube SSH with `minikube ssh`
-     * Display Minikube images (expected 3 from this project) with `docker images`
+     * Display Minikube images (expected new images from this project) with `docker images`
      * Close Minikube SSH with `exit`
 
 1. Start Discovery microservices with `kubectl apply -f 1-discovery.yaml`

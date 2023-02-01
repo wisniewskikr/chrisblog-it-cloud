@@ -58,12 +58,19 @@ PRECONDITIONS
 USAGE
 -----
 
-> **NOTE:**  Please open Command Line tool as **administrator** on **main folder of project**. Please make sure that **Docker** and **Minikube** are running. Please make sure that Docker and Minikube are connected with command **minikube docker-env | Invoke-Expression** (Windows) or **eval $(minikube docker-env)** (Linux) - it's required for Kubernetes property **imagePullPolicy: Never**.
+> **NOTE:**  Please open Command Line tool as **administrator** on **main folder of project**.
 
 Usage steps:
+1. Connect Minikube and Docker with (Windows) `minikube docker-env | Invoke-Expression`
 1. Build package with `mvn clean package -D maven.test.skip`
 1. Build Service HelloWorld image with `docker build -f service-helloworld/Dockerfile-Fast -t wisniewskikr/springcloud-kubernetes-single-gateway-helloworld-image ./service-helloworld`
 1. Build Service Gateway image with `docker build -f service-gateway/Dockerfile-Fast -t wisniewskikr/springcloud-kubernetes-single-gateway-gateway-image ./service-gateway`
+1. (Optional) Check images in Minikube:
+
+     * Run Minikube SSH with `minikube ssh`
+     * Display Minikube images (expected new images from this project) with `docker images`
+     * Close Minikube SSH with `exit`
+	 
 1. Start Storage service with `kubectl apply -f 1-helloworld.yaml`
 1. Start Display service with `kubectl apply -f 2-gateway.yaml`
 1. (Optional) Check if services are running with (expected READY 1/1) `kubectl get pods` 

@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
       - name: container-config
-        image: wisniewskikr/springcloud-single-kubernetes-service-config-image
+        image: wisniewskikr/config-image
+        imagePullPolicy: Never
         ports:
         - containerPort: 8888
         env:
@@ -26,6 +27,8 @@ spec:
           value: "8888"
         - name: eureka.client.service-url.defaultZone
           value: "http://service-discovery-kubernetes:8761/eureka"
+        - name: eureka.instance.prefer-ip-address
+          value: "true"
         - name: management.endpoints.jmx.exposure.include
           value: "health,info,env,beans"
         - name: management.endpoints.web.exposure.include
@@ -38,12 +41,12 @@ spec:
             httpGet:
               path: /actuator/health
               port: 8888
-            initialDelaySeconds: 60
+            initialDelaySeconds: 15
         livenessProbe:
             httpGet:
               path: /actuator/health
               port: 8888
-            initialDelaySeconds: 60
+            initialDelaySeconds: 15
       restartPolicy: Always
 
 ---

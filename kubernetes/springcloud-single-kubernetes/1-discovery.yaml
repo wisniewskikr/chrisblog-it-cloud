@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
       - name: container-discovery
-        image: wisniewskikr/springcloud-single-kubernetes-service-discovery-image
+        image: wisniewskikr/discovery-image
+        imagePullPolicy: Never
         ports:
         - containerPort: 8761
         env:
@@ -28,16 +29,18 @@ spec:
           value: "false"
         - name: eureka.client.register-with-eureka
           value: "false"
+        - name: eureka.instance.prefer-ip-address
+          value: "true"
         readinessProbe:
             httpGet:
               path: /actuator/health
               port: 8761
-            initialDelaySeconds: 60
+            initialDelaySeconds: 15
         livenessProbe:
             httpGet:
               path: /actuator/health
               port: 8761
-            initialDelaySeconds: 60
+            initialDelaySeconds: 15
       restartPolicy: Always
 
 ---
@@ -60,7 +63,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: service-discovery-display
+  name: service-discovery-show
 spec:
   type: NodePort
   selector:

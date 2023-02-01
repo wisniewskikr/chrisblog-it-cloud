@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
       - name: container-gateway
-        image: wisniewskikr/springcloud-single-kubernetes-service-gateway-image
+        image: wisniewskikr/gateway-image
+        imagePullPolicy: Never
         ports:
         - containerPort: 8762
         env:
@@ -26,6 +27,8 @@ spec:
           value: "8762"
         - name: eureka.client.service-url.defaultZone
           value: "http://service-discovery-kubernetes:8761/eureka"
+        - name: eureka.instance.prefer-ip-address
+          value: "true"
         - name: management.endpoints.jmx.exposure.include
           value: "health,info,env,beans"
         - name: management.endpoints.web.exposure.include
@@ -33,21 +36,21 @@ spec:
         - name: SPRING_CLOUD_GATEWAY_ROUTES_0_ID
           value: "service-helloworld"
         - name: SPRING_CLOUD_GATEWAY_ROUTES_0_URI
-          value: "lb://service-helloworld:8080"
+          value: "lb://service-helloworld"
         - name: SPRING_CLOUD_GATEWAY_ROUTES_0_PREDICATES_0
-          value: "Path=/service-helloworld**"
+          value: "Path=/**"
         - name: SPRING_CLOUD_GATEWAY_ROUTES_0_FILTERS_0
-          value: "RewritePath=/service-helloworld,/"
+          value: "RewritePath=/,/"
         readinessProbe:
             httpGet:
               path: /actuator/health
               port: 8762
-            initialDelaySeconds: 60
+            initialDelaySeconds: 15
         livenessProbe:
             httpGet:
               path: /actuator/health
               port: 8762
-            initialDelaySeconds: 60
+            initialDelaySeconds: 15
       restartPolicy: Always
 
 ---
@@ -55,7 +58,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: service-gateway-kubernetes
+  name: service-gateway-show
 spec:
   type: NodePort
   selector:

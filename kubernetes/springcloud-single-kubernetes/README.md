@@ -4,13 +4,13 @@ DESCRIPTION
 ##### Goal
 The goal of this project is to present how to implement **microservices** using **Java** programming language and **Spring Boot Cloud** framework. This project consists of few microservices implemented as independent **Maven modules**. In the system there is only one custom service - Service HelloWorld. The rest of services in the system are provided by Spring Boot Cloud and they are used for system management.
 
-All services are dockerized and manged by docker orchestration tool **Kubernetes**. It means that user does not have to start up manually all services one by one. It's done automatically by orchestration tool. All Kubernetes configuration is included in file **kubernetes.yaml**.
+All services are dockerized and manged by docker orchestration tool **Kubernetes**. It means that user does not have to start up manually all services one by one. It's done automatically by orchestration tool. All Kubernetes configuration is included in **yaml** files.
 
 ##### Services
 This project consists of following services:
 * **Service Discovery**: port **8761**. This service displays list of all active services in system
 * **Service Config**: port **8888**. This service provides flexible configuration variables. These variables can be taken for instance from Github
-* **Service HelloWorld**: port **8080**. This service provides JSON with message and application id
+* **Service HelloWorld**: port **random**. This service provides JSON with message and application id
 * **Service Gateway**: port **8762**. This service redirects request from outside system to service inside system. It also takes care of load balancing
 
 ##### Flow
@@ -44,11 +44,12 @@ PRECONDITIONS
 * Installed **Git** (tested on version 2.33.0.windows.2)
 * Installed **Docker** (tested on version 20.10.21)
 * Installed **Minikube** (tested on version v1.28.0)
-* Installed **kubectl**
+* Installed **kubectl** (tested on version v4.5.4)
 
 ##### Preconditions - Actions
-* **Launched** Docker
-* **Launched** Minikube
+* **Launched** Docker on your local machine
+* **Launched** Minikube on your local machine with (as administrator) `minikube start`
+* **Connected** Minikube with Docker with (Windows - as administrator): `minikube docker-env` and `minikube docker-env | Invoke-Expression` or with (Linux) `eval $(minikube docker-env)` 
 * **Download** source code using Git 
 * Open any **Command Line** (for instance "Windonw PowerShell" on Windows OS) tool on **project's folder** (exact localization of project you can check in GIT repositories on page `https://github.com/wisniewskikr/chrisblog-it-cloud`)
 
@@ -56,49 +57,36 @@ PRECONDITIONS
 USAGE
 -----
 
-Usage steps:
-1. In Command Line tool start all microservices (it takes about 5 minutes) with `kubectl apply -f kubernetes.yaml`
-1. (Optional) In Command Line tool monitor if all Kubernetes Pods are ready (it takes about 5 minutes - expected "READY 1/1" for all Pods) with `kubectl get pods`
-1. In Command Line tool start Gateway Service in browser with `minikube service service-gateway`
-1. In browser add suffix **/service-helloworld** to call HelloWorld Service via Gateway Service. It should look like this: `http://192.168.1.66:31000/service-helloworld` 
-1. (Optional) In Command Line tool start Discovery Service in browser wiht `minikube service service-discovery-display`
-1. (Optional) In Command Line tool start HelloWorld Service in browser wiht `minikube service service-helloworld-display`
-1. Clean up environment:
-
-    * In Command Line remove all microservices with `kubectl delete -f kubernetes.yaml`
-
-
-(OPTIONAL) BUILD IMAGES AND PUSH THEM TO REMOTE REPOSITORY
-----------------------------------------------------------
-
-**Note!**:
-* Please replace my **hub-docker-id** - **wisniewskikr** - with your unique **hub-docker-id**. In this way images will be pushed to your realm in the repository Hub Docker. 
+> **NOTE:**  Please open Command Line tool as **administrator** on **main folder of project**.
 
 Usage steps:
+1. Connect Minikube and Docker with (Windows) `minikube docker-env | Invoke-Expression`
 1. Build package with `mvn clean package -D maven.test.skip`
-1. Build Service Config image with **docker build -f service-config/Dockerfile-Fast -t {hub-docker-id}/service-config-image ./service-config** . For instance with `docker build -f service-config/Dockerfile-Fast -t wisniewskikr/springcloud-single-kubernetes-service-config-image ./service-config`
-1. Push Service Config image with **docker push {hub-docker-id}/springcloud-single-kubernetes-service-config-image** . For instance with `docker push wisniewskikr/springcloud-single-kubernetes-service-config-image`
-1. Build Service Discovery image with **docker build -f service-discovery/Dockerfile-Fast -t {hub-docker-id}/service-discovery-image ./service-discovery** . For instance with `docker build -f service-config/Dockerfile-Fast -t wisniewskikr/springcloud-single-kubernetes-service-discovery-image ./service-discovery`
-1. Push Service Discovery image with **docker push {hub-docker-id}/springcloud-single-kubernetes-service-discovery-image** . For instance with `docker push wisniewskikr/springcloud-single-kubernetes-service-discovery-image`
-1. Build Service Gateway image with **docker build -f service-gateway/Dockerfile-Fast -t {hub-docker-id}/service-gateway-image ./service-gateway** . For instance with `docker build -f service-gateway/Dockerfile-Fast -t wisniewskikr/springcloud-single-kubernetes-service-gateway-image ./service-gateway`
-1. Push Service Gateway image with **docker push {hub-docker-id}/springcloud-single-kubernetes-service-gateway-image** . For instance with `docker push wisniewskikr/springcloud-single-kubernetes-service-gateway-image`
-1. Build Service HelloWorld image with **docker build -f service-helloworld/Dockerfile-Fast -t {hub-docker-id}/service-helloworld-image ./service-helloworld** . For instance with `docker build -f service-helloworld/Dockerfile-Fast -t wisniewskikr/springcloud-single-kubernetes-service-helloworld-image ./service-helloworld`
-1. Push Service HelloWorld image with **docker push {hub-docker-id}/springcloud-single-kubernetes-service-helloworld-image** . For instance with `docker push wisniewskikr/springcloud-single-kubernetes-service-helloworld-image`
+1. Build Service Discovery image with `docker build -f service-discovery/Dockerfile-Fast -t wisniewskikr/discovery-image ./service-discovery`
+1. Build Service Config image with `docker build -f service-config/Dockerfile-Fast -t wisniewskikr/config-image ./service-config`
+1. Build Service HelloWorld image with `docker build -f service-helloworld/Dockerfile-Fast -t wisniewskikr/helloworld-image ./service-helloworld`
+1. Build Service Gateway image with `docker build -f service-gateway/Dockerfile-Fast -t wisniewskikr/gateway-image ./service-gateway`
+1. (Optional) Check images in Minikube:
+
+     * Run Minikube SSH with `minikube ssh`
+     * Display Minikube images (expected new images from this project) with `docker images`
+     * Close Minikube SSH with `exit`
+
+1. Start Discovery microservices with `kubectl apply -f 1-discovery.yaml`
+1. Start Discovery microservices with `kubectl apply -f 2-config.yaml`
+1. Start Storage microservices with `kubectl apply -f 3-helloworld.yaml`
+1. Start Display microservices with `kubectl apply -f 4-gateway.yaml`
+1. (Optional) Check status of services with `kubectl get pods`
+1. Launch Gateway Service in browser with `minikube service service-gateway-show`
+1. (Optional) Launch Discovery Service in browser with `minikube service service-discovery-show`
+1. (Optional) Launch HelloWorld Service in browser with `minikube service service-helloworld-show`
 1. Clean up environment:
-
-    * Remove Service Config image with **docker rmi {hub-docker-id}/{image-name}**. For instance with `docker rmi wisniewskikr/springcloud-single-kubernetes-service-config-image`
-    * Remove Service Config image with name **{image-name}** from your **hub-docker-id** remote repository `https://hub.docker.com`. For instance `springcloud-single-kubernetes-service-config-image`
-    * Remove Service Discovery image with **docker rmi {hub-docker-id}/{image-name}**. For instance with `docker rmi springcloud-single-kubernetes-service-discovery-image`
-    * Remove Service Discovery image with name **{image-name}** from your **hub-docker-id** remote repository `https://hub.docker.com`. For instance `springcloud-single-kubernetes-service-discovery-image`
-    * Remove Service Gateway image with **docker rmi {hub-docker-id}/{image-name}**. For instance with `docker rmi wisniewskikr/springcloud-single-kubernetes-service-gateway-image`
-    * Remove Service Gateway image with name **{image-name}** from your **hub-docker-id** remote repository `https://hub.docker.com`. For instance `springcloud-single-kubernetes-service-gateway-image`
-    * Remove Service HelloWorld image with **docker rmi {hub-docker-id}/{image-name}**. For instance with `docker rmi wisniewskikr/springcloud-single-kubernetes-service-helloworld-image`
-    * Remove Service HelloWorld image with name **{image-name}** from your **hub-docker-id** remote repository `https://hub.docker.com`. For instance `springcloud-single-kubernetes-service-helloworld-image`
     
-
-(OPTIONAL) TODO
-----
-
-Tasks which should be implemented in the future:
-* Implement Load Balancing - at this moment parameter **SPRING_CLOUD_GATEWAY_ROUTES_0_URI** with value **lb://service-helloworld** does not work. It works only with value **http://service-helloworld:8080**
-* Port of HelloWorld Service is hardcoded as **8080**. Please check if it's possible to do it more flexible. It can be related with Load Balancing problem
+    * Remove Gateway service with `kubectl delete -f 4-gateway.yaml`
+    * Remove HelloWorld service with `kubectl delete -f 3-helloworld.yaml`
+    * Remove Config service with `kubectl delete -f 2-config.yaml`
+    * Remove Discovery service with `kubectl delete -f 1-discovery.yaml`
+    * Remove Service Discovery image with `docker rmi wisniewskikr/discovery-image`
+    * Remove Service HelloWorld image with `docker rmi wisniewskikr/helloworld-image`
+    * Remove Service Gateway image with `docker rmi wisniewskikr/gateway-image`
+    * Remove Service Config image with `docker rmi wisniewskikr/config-image`

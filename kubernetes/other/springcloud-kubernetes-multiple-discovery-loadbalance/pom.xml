@@ -5,14 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>springcloud-docker-single-gateway-discovery</artifactId>
+    <artifactId>springcloud-kubernetes-multiple-discovery-loadbalance</artifactId>
     <version>0.1.0</version>
     <packaging>pom</packaging>
     
     <modules>
 		<module>service-discovery</module>		
-    	<module>service-helloworld</module>
-		<module>service-gateway</module>
-    </modules>    
-
+    	<module>service-helloworld-display</module>
+		<module>service-helloworld-storage</module>
+    </modules>
+    
 </project>

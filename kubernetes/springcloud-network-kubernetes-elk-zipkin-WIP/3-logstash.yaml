@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-logstash
+  labels:
+    app: deployment-logstash
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: container-logstash
+  template:
+    metadata:
+      labels:
+        app: container-logstash
+    spec:
+      containers:
+      - name: container-logstash
+        image: docker.elastic.co/logstash/logstash:8.3.3
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 5044
+        - containerPort: 5000
+        - containerPort: 9600
+        env:
+        - name: LS_JAVA_OPTS
+          value: "-Xmx256m -Xms256m"
+        volumeMounts:
+        - mountPath: ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+          name: logstash-data-1
+        - mountPath: ./logstash/pipeline:/usr/share/logstash/pipeline:ro
+          name: logstash-data-2
+      volumes:
+      - name: logstash-data-1
+        emptyDir: {}
+      - name: logstash-data-2
+        emptyDir: {}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: logstash
+spec:
+  selector:
+    app: container-logstash
+  ports:
+    - name: port1
+      port: 5044
+      targetPort: 5044
+    - name: port2 
+      port: 5000
+      targetPort: 5000
+      protocol: TCP
+    - name: port3 
+      port: 5000
+      targetPort: 5000
+      protocol: UDP
+    - name: port4
+      port: 9600
+      targetPort: 9600

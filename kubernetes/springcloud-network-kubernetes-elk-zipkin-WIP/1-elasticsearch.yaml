@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-elasticsearch
+  labels:
+    app: deployment-elasticsearch
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: container-elasticsearch
+  template:
+    metadata:
+      labels:
+        app: container-elasticsearch
+    spec:
+      containers:
+      - name: container-elasticsearch
+        image: docker.elastic.co/elasticsearch/elasticsearch:8.3.3
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 9200
+        env:
+        - name: bootstrap.memory_lock
+          value: "true"
+        - name: ES_JAVA_OPTS
+          value: "-Xms512m -Xmx512m"
+        - name: discovery.type
+          value: "single-node"
+        - name: xpack.security.enabled
+          value: "false"
+        volumeMounts:
+        - mountPath: /usr/share/elasticsearch/data
+          name: elasticsearch-data
+      volumes:
+      - name: elasticsearch-data
+        emptyDir: {}
+        
+#      volumes:
+#      - name: elasticsearch-data
+#        persistentVolumeClaim:
+#          claimName: elasticsearch-data
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: eleasticsearch
+spec:
+  selector:
+    app: container-elasticsearch
+  ports:
+    - port: 9200
+      targetPort: 9200

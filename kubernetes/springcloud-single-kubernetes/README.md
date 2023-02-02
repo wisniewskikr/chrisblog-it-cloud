@@ -72,10 +72,10 @@ Usage steps:
      * Display Minikube images (expected new images from this project) with `docker images`
      * Close Minikube SSH with `exit`
 
-1. Start Discovery microservices with `kubectl apply -f 1-discovery.yaml`
-1. Start Discovery microservices with `kubectl apply -f 2-config.yaml`
-1. Start Storage microservices with `kubectl apply -f 3-helloworld.yaml`
-1. Start Display microservices with `kubectl apply -f 4-gateway.yaml`
+1. Start Discovery service with `kubectl apply -f 1-discovery.yaml`
+1. Start Config service with `kubectl apply -f 2-config.yaml`
+1. Start Storage service with `kubectl apply -f 3-helloworld.yaml`
+1. Start Gateway service with `kubectl apply -f 4-gateway.yaml`
 1. (Optional) Check status of services with `kubectl get pods`
 1. Launch Gateway Service in browser with `minikube service service-gateway-show`
 1. (Optional) Launch Discovery Service in browser with `minikube service service-discovery-show`

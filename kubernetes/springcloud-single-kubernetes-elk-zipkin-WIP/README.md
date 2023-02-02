@@ -1,3 +1,58 @@
+USAGE
+-----
+
+> **NOTE:**  Please open Command Line tool as **administrator** on **main folder of project**.
+
+Usage steps:
+1. Connect Minikube and Docker with (Windows) `minikube docker-env | Invoke-Expression`
+1. Pull Elasticsearch image with `docker pull docker.elastic.co/elasticsearch/elasticsearch:8.3.3`
+1. Pull Kibana image with `docker pull docker.elastic.co/kibana/kibana:8.3.3`
+1. Pull Logstash image with `docker pull docker.elastic.co/logstash/logstash:8.3.3`
+1. Pull Zipkin image with `docker pull openzipkin/zipkin`
+1. Build package with `mvn clean package -D maven.test.skip`
+1. Build Service Discovery image with `docker build -f service-discovery/Dockerfile-Fast -t wisniewskikr/discovery-image ./service-discovery`
+1. Build Service Config image with `docker build -f service-config/Dockerfile-Fast -t wisniewskikr/config-image ./service-config`
+1. Build Service HelloWorld image with `docker build -f service-helloworld/Dockerfile-Fast -t wisniewskikr/helloworld-image ./service-helloworld`
+1. Build Service Gateway image with `docker build -f service-gateway/Dockerfile-Fast -t wisniewskikr/gateway-image ./service-gateway`
+1. (Optional) Check images in Minikube:
+
+     * Run Minikube SSH with `minikube ssh`
+     * Display Minikube images (expected new images from this project) with `docker images`
+     * Close Minikube SSH with `exit`
+
+1. Start Elasticsearch service with `kubectl apply -f 1-elasticsearch.yaml`
+1. Start Kibana service with `kubectl apply -f 2-kibana.yaml`
+1. Start Logstash service with `kubectl apply -f 3-logstash.yaml`
+1. Start Zipkin service with `kubectl apply -f 4-zipkin.yaml`
+1. Start Discovery service with `kubectl apply -f 5-discovery.yaml`
+1. Start Config service with `kubectl apply -f 6-config.yaml`
+1. Start Storage service with `kubectl apply -f 7-helloworld.yaml`
+1. Start Gateway service with `kubectl apply -f 8-gateway.yaml`
+1. (Optional) Check status of services with `kubectl get pods`
+1. Launch Gateway Service in browser with `minikube service service-gateway-show`
+1. Launch Zipkin Service in browser with `minikube service service-zipkin-show`
+1. (Optional) Launch Discovery Service in browser with `minikube service service-discovery-show`
+1. (Optional) Launch HelloWorld Service in browser with `minikube service service-helloworld-show`
+1. Clean up environment:
+    
+    * Remove Gateway service with `kubectl delete -f 8-gateway.yaml`
+    * Remove HelloWorld service with `kubectl delete -f 7-helloworld.yaml`
+    * Remove Config service with `kubectl delete -f 6-config.yaml`
+    * Remove Discovery service with `kubectl delete -f 5-discovery.yaml`
+    * Remove Zipkin service with `kubectl delete -f 4-zipkin.yaml`
+    * Remove Logstash service with `kubectl delete -f 3-logstash.yaml`
+    * Remove Kibana service with `kubectl delete -f 2-kibana.yaml`
+    * Remove Elasticsearch service with `kubectl delete -f 1-elasticsearch.yaml`
+    * Remove Service Discovery image with `docker rmi wisniewskikr/discovery-image`
+    * Remove Service HelloWorld image with `docker rmi wisniewskikr/helloworld-image`
+    * Remove Service Gateway image with `docker rmi wisniewskikr/gateway-image`
+    * Remove Service Config image with `docker rmi wisniewskikr/config-image`
+    * Remove Service Elasticsearch image with `docker rmi docker.elastic.co/elasticsearch/elasticsearch:8.3.3`
+    * Remove Service Kibana image with `docker rmi docker.elastic.co/kibana/kibana:8.3.3`
+    * Remove Service Logstash image with `docker rmi docker.elastic.co/logstash/logstash:8.3.3`
+    * Remove Service Zipkin image with `docker rmi openzipkin/zipkin`
+
+
 TODO
 ----
 

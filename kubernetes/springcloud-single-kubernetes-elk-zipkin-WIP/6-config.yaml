@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-config
+  labels:
+    app: deployment-config
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: container-config
+  template:
+    metadata:
+      labels:
+        app: container-config
+    spec:
+      containers:
+      - name: container-config
+        image: wisniewskikr/config-image
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8888
+        env:
+        - name: spring.application.name
+          value: "service-config"
+        - name: server.port
+          value: "8888"
+        - name: eureka.client.service-url.defaultZone
+          value: "http://service-discovery-kubernetes:8761/eureka"
+        - name: eureka.instance.prefer-ip-address
+          value: "true"
+        - name: management.endpoints.jmx.exposure.include
+          value: "health,info,env,beans"
+        - name: management.endpoints.web.exposure.include
+          value: "health,info,env,beans"
+        - name: spring.cloud.config.server.git.uri
+          value: "https://github.com/wisniewskikr/springcloud-config"
+        - name: spring.cloud.config.server.git.clone-on-start
+          value: "true"
+        readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8888
+            initialDelaySeconds: 15
+        livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8888
+            initialDelaySeconds: 15
+      restartPolicy: Always
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-config-kubernetes
+spec:
+  selector:
+    app: container-config
+  ports:
+    - port: 8888
+      targetPort: 8888

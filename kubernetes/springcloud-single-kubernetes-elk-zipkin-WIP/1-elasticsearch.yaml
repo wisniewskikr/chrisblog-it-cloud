@@ -29,13 +29,6 @@ spec:
           value: "single-node"
         - name: xpack.security.enabled
           value: "false"
-        volumeMounts:
-        - mountPath: /usr/share/elasticsearch/data
-          name: elasticsearch-data
-      volumes:
-        - name: elasticsearch-data
-          persistentVolumeClaim:
-            claimName: elasticsearch-pvc
 
 ---
 
@@ -49,35 +42,3 @@ spec:
   ports:
     - port: 9200
       targetPort: 9200
-
----
-
-apiVersion: v1 
-kind: PersistentVolume
-metadata:
-  name: elasticsearch-pv
-spec: 
-  capacity: 
-    storage: 50M
-  volumeMode: Filesystem
-  storageClassName: standard
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: /usr/share/elasticsearch/data
-    type: DirectoryOrCreate
-
----
-
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: elasticsearch-pvc
-spec: 
-  volumeName: elasticsearch-pv 
-  accessModes: 
-    - ReadWriteOnce
-  storageClassName: standard
-  resources: 
-    requests: 
-      storage: 50M

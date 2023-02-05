@@ -18,4 +18,5 @@ services:
 
 networks:
   helloworld-network:
-    name: helloworld-network-vault
+    name: helloworld-network
+    external: true

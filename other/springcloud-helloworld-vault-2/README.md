@@ -1,10 +1,10 @@
+- docker run -d --cap-add=IPC_LOCK -e 'VAULT_LOCAL_CONFIG={"storage": {"file": {"path": "/vault/file"}}, "listener": [{"tcp": { "address": "0.0.0.0:8200", "tls_disable": true}}], "default_lease_ttl": "168h", "max_lease_ttl": "720h", "ui": true}' -p 8200:8200 vault server
+
 DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to create an application in **Java** programming language with usage **Spring Boot Cloud** framework which displays **Hello World** message stored in **bootstrap** file.
-
-**Bootstrap** means that this file is loaded on the very beginning of running application - before every other actions.
+The goal of this project is to present how to create an application in **Java** programming language with usage **Spring Boot Cloud** framework which displays **Hello World** message in **JSON** format.
 
 ##### Flow
 The following flow takes place in this project:

@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  vault:
+    image: vault:1.12.2
+    container_name: vault-container
+    command: 'server'
+    ports:
+      - '8200:8200'
+    environment:
+      - 'VAULT_LOCAL_CONFIG={"storage": {"file": {"path": "/vault/file"}}, "listener": [{"tcp": { "address": "0.0.0.0:8200", "tls_disable": true}}], "default_lease_ttl": "168h", "max_lease_ttl": "720h", "ui": true}'
+    cap_add:
+      - IPC_LOCK
+    healthcheck:
+      test: "exit 0"
+    networks:
+      - helloworld-network
+
+networks:
+  helloworld-network:
+    name: helloworld-network-vault

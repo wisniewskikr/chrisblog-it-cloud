@@ -4,21 +4,20 @@ services:
 
   service-helloworld-storage:
     image: service-helloworld-storage-image
+    container_name: service-helloworld-storage-container
     build:
       context: ./service-helloworld-storage
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-Fast
     environment:
       - spring.application.name=service-helloworld-storage
+      - server.port=8081
       - management.endpoints.jmx.exposure.include=health,info,env,beans
       - management.endpoints.web.exposure.include=health,info,env,beans
       - service.helloworld.message=Hello World
     ports:
-      - 8081
+      - 8081:8081
     healthcheck:
       test: "exit 0"
-    depends_on:
-      service-config:
-        condition: service_healthy
     networks:
       - helloworld-network  
 
@@ -27,24 +26,20 @@ services:
     container_name: service-helloworld-display-container
     build:
       context: ./service-helloworld-display
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-Fast
     environment:
       - spring.application.name=service-helloworld-display
       - server.port=8080
       - management.endpoints.jmx.exposure.include=health,info,env,beans
       - management.endpoints.web.exposure.include=health,info,env,beans
       - service.helloworld.storage.name=service-helloworld-storage
-      - service.helloworld.storage.url=service-helloworld-storage:8081
+      - service.helloworld.storage.url=http://service-helloworld-storage:8081
     ports:
       - 8080:8080
     healthcheck:
       test: "exit 0"
-    depends_on:
-      service-discovery:
-        condition: service_healthy
     networks:
       - helloworld-network
 
 networks:
   helloworld-network:
-    name: helloworld-network

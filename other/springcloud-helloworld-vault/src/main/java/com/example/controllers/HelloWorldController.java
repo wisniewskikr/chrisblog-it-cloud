@@ -13,7 +13,7 @@ public class HelloWorldController {
 	
 	Logger logger = LoggerFactory.getLogger(HelloWorldController.class);
 	
-	@Value("${service.helloworld.message}")
+	@Value("${message}")
 	private String message;
 
 	@RequestMapping(value="/")

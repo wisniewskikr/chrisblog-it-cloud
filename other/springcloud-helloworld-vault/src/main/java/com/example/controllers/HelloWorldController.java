@@ -19,7 +19,7 @@ public class HelloWorldController {
 	@RequestMapping(value="/")
 	public HelloWorldJson helloWorld() {
 				
-		logger.info("Message: {}" + message);
+		logger.info("Message: {}", message);
 		return new HelloWorldJson(message);
 		
 	}

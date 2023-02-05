@@ -1,0 +1,13 @@
+#spring:
+#  application:
+#    name: hello-world
+#  cloud:
+#    vault:
+#      host: localhost
+#      port: 8200
+#      scheme: http
+#      authentication: TOKEN
+#      token: 086b4832-2485-d795-7653-f31e148d7831
+
+app:
+  message: Hello World Bootstrap

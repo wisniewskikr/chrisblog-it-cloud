@@ -1,3 +1,16 @@
+USAGE
+-----
+
+Usage steps:
+1. Build packages with `mvn clean package -D maven.test.skip`
+1. Start services with `docker-compose up -d --build`
+1. Visit service HelloWorld via service Gateway with `http://localhost:8762`
+1. (Optional) Visit service HelloWorld directly with `http://localhost:8080`
+1. (Optional) Visit service Discovery with `http://localhost:8761`
+1. Clear local environment
+     * Remove services with `docker-compose down -rmi`
+
+
 DESCRIPTION
 -----------
 
@@ -42,7 +55,7 @@ PRECONDITIONS
 
 ##### Preconditions - Tools
 * Installed **Operating System** (tested on Windows 10)
-* Installed **Java** (tested on version 11.0.16.1)
+* Installed **Java** (tested on version 17.0.5)
 * Installed **Maven** (tested on version 3.8.5)
 * Installed **Git** (tested on version 2.33.0.windows.2)
 * Installed **Docker** (tested on version 20.10.21)
@@ -52,16 +65,3 @@ PRECONDITIONS
 * **Launched** Docker on your local machine
 * **Download** source code using Git command `git clone https://github.com/wisniewskikr/chrisblog-it-cloud.git`
 * Open any **Command Line** tool (for instance "Windonw PowerShell" on Windows OS) on **project's main folder**
-
-
-USAGE
------
-
-Usage steps:
-1. Build packages with `mvn clean package -D maven.test.skip`
-1. Start services with `docker-compose up -d --build`
-1. Visit service HelloWorld via service Gateway with `http://localhost:8762`
-1. (Optional) Visit service HelloWorld directly with `http://localhost:8080`
-1. (Optional) Visit service Discovery with `http://localhost:8761`
-1. Clear local environment
-     * Remove service with `docker-compose down -rmi`

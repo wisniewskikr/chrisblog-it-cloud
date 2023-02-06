@@ -62,6 +62,26 @@ Usage steps:
 1. Build packages with `mvn clean package -D maven.test.skip`
 1. Start services with `docker-compose up -d --build`
 1. Visit Gateway `http://localhost:8762`
-1. Visit Kibana `http://localhost:5601`
+1. Check logs in Kibana - follow instructions from section **Usage Kibana**
 1. Clean local environment:
-     * Remove containers with `docker-compose down`
+     * Remove containers with `docker-compose down -rmi`
+   
+     
+USAGE KIBANA
+------------
+
+Visit Kibana `http://localhost:5601`
+
+![My Image](filebeat-1.png)
+
+![My Image](filebeat-2.png)
+
+![My Image](filebeat-3.png)
+
+![My Image](filebeat-4.png)
+
+![My Image](filebeat-5.png)
+
+![My Image](filebeat-6.png)
+
+![My Image](filebeat-7.png)

@@ -3,17 +3,18 @@ version: '3'
 services:
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.12.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.6.1
     container_name: elasticsearch-container
     ports:
         - 9200:9200
     environment:
         discovery.type: single-node
+        xpack.security.enabled: false
     networks:
       - helloworld-network
 
   kibana:
-    image: docker.elastic.co/kibana/kibana:7.12.1
+    image: docker.elastic.co/kibana/kibana:8.6.1
     container_name: kibana-container
     ports:
         - 5601:5601
@@ -24,7 +25,7 @@ services:
       - helloworld-network
 
   filebeat:
-    image: docker.elastic.co/beats/filebeat:7.12.1
+    image: docker.elastic.co/beats/filebeat:8.6.1
     container_name: filebeat-container
     entrypoint: "filebeat -e -strict.perms=false"
     volumes:

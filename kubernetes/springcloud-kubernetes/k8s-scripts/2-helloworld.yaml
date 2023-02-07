@@ -5,7 +5,7 @@ metadata:
   labels:
     app: deployment-helloworld
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: container-helloworld
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: container-helloworld
-        image: wisniewskikr/helloworld-image
+        image: helloworld-image
         imagePullPolicy: Never
         ports:
         - containerPort: 8080

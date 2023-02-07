@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: container-discovery
-        image: wisniewskikr/discovery-image
+        image: discovery-image
         imagePullPolicy: Never
         ports:
         - containerPort: 8761

@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: container-gateway
-        image: wisniewskikr/gateway-image
+        image: gateway-image
         imagePullPolicy: Never
         ports:
         - containerPort: 8762

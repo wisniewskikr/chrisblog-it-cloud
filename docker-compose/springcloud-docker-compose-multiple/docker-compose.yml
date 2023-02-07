@@ -20,25 +20,48 @@ services:
     networks:
       - helloworld-network
 
-  service-helloworld:
-    image: service-helloworld-image
-    container_name: service-helloworld-container
+  service-helloworld-be:
+    image: service-helloworld-be-image
+    container_name: service-helloworld-be-container
     build:
-      context: ./service-helloworld
+      context: ./service-helloworld-be
       dockerfile: Dockerfile-Fast
     environment:
-      - spring.application.name=service-helloworld
-      - server.port=8080
+      - spring.application.name=service-helloworld-be
+      - server.port=9090
       - eureka.client.service-url.defaultZone=http://service-discovery:8761/eureka
       - management.endpoints.jmx.exposure.include=health,info,env,beans
       - management.endpoints.web.exposure.include=health,info,env,beans
       - service.helloworld.message=Hello World
     ports:
-      - 8080:8080
+      - 9090:9090
     healthcheck:
       test: "exit 0"
     depends_on:
       service-discovery:
+        condition: service_healthy
+    networks:
+      - helloworld-network
+
+  service-helloworld-fe:
+    image: service-helloworld-fe-image
+    container_name: service-helloworld-fe-container
+    build:
+      context: ./service-helloworld-fe
+      dockerfile: Dockerfile-Fast
+    environment:
+      - spring.application.name=service-helloworld-fe
+      - server.port=8080
+      - eureka.client.service-url.defaultZone=http://service-discovery:8761/eureka
+      - management.endpoints.jmx.exposure.include=health,info,env,beans
+      - management.endpoints.web.exposure.include=health,info,env,beans
+      - service.helloworld.be.name=service-helloworld-be
+    ports:
+      - 8080:8080
+    healthcheck:
+      test: "exit 0"
+    depends_on:
+      service-helloworld-be:
         condition: service_healthy
     networks:
       - helloworld-network
@@ -55,8 +78,8 @@ services:
       - eureka.client.service-url.defaultZone=http://service-discovery:8761/eureka
       - management.endpoints.jmx.exposure.include=health,info,env,beans
       - management.endpoints.web.exposure.include=health,info,env,beans
-      - spring.cloud.gateway.routes[0].id=service-helloworld
-      - spring.cloud.gateway.routes[0].uri=lb://service-helloworld
+      - spring.cloud.gateway.routes[0].id=service-helloworld-fe
+      - spring.cloud.gateway.routes[0].uri=lb://service-helloworld-fe
       - spring.cloud.gateway.routes[0].predicates[0]=Path=/**
       - spring.cloud.gateway.routes[0].filters[0]=RewritePath=/,/
     ports:
@@ -64,7 +87,7 @@ services:
     healthcheck:
       test: "exit 0"
     depends_on:
-      service-helloworld:
+      service-helloworld-fe:
         condition: service_healthy
     networks:
       - helloworld-network  

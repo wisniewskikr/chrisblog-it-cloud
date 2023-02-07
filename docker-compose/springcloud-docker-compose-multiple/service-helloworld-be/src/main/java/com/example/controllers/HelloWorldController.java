@@ -7,7 +7,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.jsons.HelloWorldJson;
+import com.example.dtos.HelloWorldBeDto;
 
 @RestController
 public class HelloWorldController {
@@ -24,13 +24,13 @@ public class HelloWorldController {
 	}
 
 	@RequestMapping(value="/")
-	public HelloWorldJson helloWorld() {
+	public HelloWorldBeDto helloWorld() {
 				
 		String port = environment.getProperty("local.server.port");
 		String uuid = System.getProperty("uuid");
 		
 		logger.info("Called servie HelloWorld with message {}, port {} and uuid {}", message, port, uuid);		
-		return new HelloWorldJson(message, port, uuid);
+		return new HelloWorldBeDto(message, port, uuid);
 		
 	}
 	

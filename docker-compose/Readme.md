@@ -9,8 +9,8 @@ List:
 - springcloud-docker-compose-distributed-logging-elastic-logstash
 - springcloud-docker-compose-distributed-logging-elastic-filebeat
 - springcloud-docker-compose-distributed-tracking-zipkin
-- springcloud-docker-compose-circkuit-break-1
-- springcloud-docker-compose-circkuit-break-2
+- springcloud-docker-compose-circuit-breaker-hystrix
+- springcloud-docker-compose-circuit-breaker-resilience4j
 - springcloud-docker-compose-db-sql-mysql
 - springcloud-docker-compose-db-nosql-mongo
 - springcloud-docker-compose-messaging-rabbitmq

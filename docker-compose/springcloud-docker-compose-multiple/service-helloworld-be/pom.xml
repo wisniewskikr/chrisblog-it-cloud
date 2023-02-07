@@ -10,7 +10,7 @@
 		<relativePath/>
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>service-helloworld</artifactId>	
+	<artifactId>service-helloworld-be</artifactId>	
 	<version>0.1.0</version>
 	
 	<properties>
@@ -31,22 +31,15 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>		
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>		
+		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency>
-		<dependency>
-            <groupId>io.micrometer</groupId>
-            <artifactId>micrometer-tracing-bridge-brave</artifactId>
-        </dependency>
-		<dependency>
-			<groupId>net.logstash.logback</groupId>
-			<artifactId>logstash-logback-encoder</artifactId>
-			<version>7.2</version>
 		</dependency>    	
 	</dependencies>
 	<dependencyManagement>

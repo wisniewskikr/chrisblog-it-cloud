@@ -1,10 +1,14 @@
 USAGE
 -----
 
-> **NOTE:** Tools **Java**, **Maven** and **Git** have to be installed. Tools **Docker** and **Minikube** have to be up and running. Please open Command Line tool as **administrator** on **main folder of project**.
+> **NOTE:** Tools **Java**, **Maven**, **Git**, **Docker** and **Minikube** have to be installed. Tool **Docker** has to be up and running. Please open Command Line tool as **administrator** on **main folder of project**.
 
 Usage steps:
+1. Start Minikube with increased resources `minikube start --cpus 4 --memory 7000`
 1. Connect Minikube and Docker with (Windows) `minikube docker-env | Invoke-Expression`
+1. Pull Elasticsearch image with `docker pull docker.elastic.co/elasticsearch/elasticsearch:7.12.1`
+1. Pull Kibana image with `docker pull docker.elastic.co/kibana/kibana:7.12.1`
+1. Pull Filebeat image with `docker pull docker.elastic.co/beats/filebeat:7.12.0`
 1. Build package with `mvn clean package -D maven.test.skip`
 1. Build Service Discovery image with `docker build -f service-discovery/Dockerfile-Fast -t discovery-image ./service-discovery`
 1. Build Service HelloWorld image with `docker build -f service-helloworld/Dockerfile-Fast -t helloworld-image ./service-helloworld`
@@ -15,28 +19,39 @@ Usage steps:
      * Display Minikube images (expected new images from this project) with `docker images`
      * Close Minikube SSH with `exit`
 
-1. Start Discovery service with `kubectl apply -f k8s-scripts/1-discovery.yaml`
-1. Start HelloWorld service with `kubectl apply -f k8s-scripts/2-helloworld.yaml`
-1. Start Gateway service with `kubectl apply -f k8s-scripts/3-gateway.yaml`
+1. Start Elasticsearch service with `kubectl apply -f k8s-scripts/1-elasticsearch.yaml`
+1. Start Kibana service with `kubectl apply -f k8s-scripts/2-kibana.yaml`
+1. Start Filebeat service with `kubectl apply -f k8s-scripts/3-filebeat.yaml`
+1. Start Discovery service with `kubectl apply -f k8s-scripts/4-discovery.yaml`
+1. Start HelloWorld service with `kubectl apply -f k8s-scripts/5-helloworld.yaml`
+1. Start Gateway service with `kubectl apply -f k8s-scripts/6-gateway.yaml`
 1. (Optional) Check status of services with `kubectl get pods`
 1. Visit in browser Gateway Service with `minikube service service-gateway-show`
+1. Visit in browser Kibana Service with `minikube service kibana-show`
+1. Configure Kibana dashboard to see logs (check section "Usage Kibana")
 1. (Optional) Visit in browser Discovery Service with `minikube service service-discovery-show`
 1. (Optional) Visit in browser HelloWorld Service directly with `minikube service service-helloworld-show`
 1. Clean up environment:
     
-    * Remove Gateway service with `kubectl delete -f k8s-scripts/3-gateway.yaml`
-    * Remove HelloWorld service with `kubectl delete -f k8s-scripts/2-helloworld.yaml`
-    * Remove Discovery service with `kubectl delete -f k8s-scripts/1-discovery.yaml`
+    * Remove Gateway service with `kubectl delete -f k8s-scripts/6-gateway.yaml`
+    * Remove HelloWorld service with `kubectl delete -f k8s-scripts/5-helloworld.yaml`
+    * Remove Discovery service with `kubectl delete -f k8s-scripts/4-discovery.yaml`
+    * Remove Filebeat service with `kubectl delete -f k8s-scripts/3-filebeat.yaml`
+    * Remove Kibana service with `kubectl delete -f k8s-scripts/2-kibana.yaml`
+    * Remove Elasticsearch service with `kubectl delete -f k8s-scripts/1-elasticsearch.yaml`
     * Remove Service Gateway image with `docker rmi gateway-image`
     * Remove Service HelloWorld image with `docker rmi helloworld-image`
-    * Remove Service Discovery image with `docker rmi discovery-image`    
+    * Remove Service Discovery image with `docker rmi discovery-image`   
+    * Remove Service Filebeat image with `docker rmi docker.elastic.co/beats/filebeat:7.12.0`
+    * Remove Service Kibana image with `docker rmi docker.elastic.co/kibana/kibana:7.12.1`
+    * Remove Service Elasticsearch image with `docker rmi docker.elastic.co/elasticsearch/elasticsearch:7.12.1` 
 
 
 DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to implement **microservices** in **Java** programming language with usage **Spring Boot Cloud** framework.
+The goal of this project is to present how to implement **microservices** in **Java** programming language with usage **Spring Boot Cloud** framework which will provide logs to **distributed logging** services called **elastic stack**. This solution will enable user to have access to all logs from services in the system from one place.
 
 Project will be configured and run by orchestration tool called **Kubernetes**.
 
@@ -49,12 +64,15 @@ This project consists of following services:
      * **Redirecting**: this service can redirect requests from outside system to some services inside system
      * **Load balancing**: this service can take care of load balancing requests from outside system to services inside system basing on information from service Discovery
 * **Service HelloWorld**: port **8080**. This service provides message, port and uuid
+* **Service Elasticsearch**: port **9200**. This service stores logs from the system
+* **Service Kibana**: port **9200**. This service provides dashboard to work with logs
+* **Service Filebeat**: no port: This service listening for logs in services and moves them to database
 
 ##### Flow
 The following flow takes place in this project:
 1. User via Browser sends request to Service Gateway for content
 1. Service Gateway sends request to Service HelloWorld for content
-1. Service HelloWorld sends back response to Service Gateway with message, port and uuid
+1. Service HelloWorld sends back response to Service Gateway with message, port and uuid. In the meantime logs are sent to elastic stack
 1. Service Gateway sends back response to User via Browser with message, port and uuid
 
 ##### Launch
@@ -90,3 +108,23 @@ PRECONDITIONS
 * **Connected** Minikube with Docker with (Windows - as administrator): `minikube docker-env` and `minikube docker-env | Invoke-Expression` or with (Linux) `eval $(minikube docker-env)` 
 * **Download** source code using Git command `git clone https://github.com/wisniewskikr/chrisblog-it-cloud.git`
 * Open any **Command Line** tool (for instance "Windonw PowerShell" on Windows OS) on **project's main folder**
+
+
+USAGE KIBANA
+------------
+
+Visit Kibana `http://localhost:5601`
+
+![My Image](filebeat-1.png)
+
+![My Image](filebeat-2.png)
+
+![My Image](filebeat-3.png)
+
+![My Image](filebeat-4.png)
+
+![My Image](filebeat-5.png)
+
+![My Image](filebeat-6.png)
+
+![My Image](filebeat-7.png)

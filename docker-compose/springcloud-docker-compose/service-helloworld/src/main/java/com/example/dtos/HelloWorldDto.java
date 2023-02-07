@@ -1,14 +1,14 @@
-package com.example.jsons;
+package com.example.dtos;
 
-public class HelloWorldJson {
+public class HelloWorldDto {
 	
 	private String message;
 	private String port;
 	private String uuid;
 	
-	public HelloWorldJson() {}
+	public HelloWorldDto() {}
 	
-	public HelloWorldJson(String message, String port, String uuid) {
+	public HelloWorldDto(String message, String port, String uuid) {
 		this.message = message;
 		this.port = port;
 		this.uuid = uuid;

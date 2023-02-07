@@ -18,7 +18,7 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to implement **microservices** in **Java** programming language with usage **Spring Boot Cloud** framework which resolve service`s chain problem by **circuit breaker** pattern provided by **hystrix**. This pattern sends some predefined response when there is an error in service's chain. It this way all services don't wait for one of them with problem.
+The goal of this project is to present how to implement **microservices** in **Java** programming language with usage **Spring Boot Cloud** framework which resolve service`s chain problem by **circuit breaker** pattern provided by **resilience4j**. This pattern sends some predefined response when there is an error in service's chain. It this way all services don't wait for one of them with problem.
 
 Project will be configured and run by orchestration tool called **Docker Compose**.
 

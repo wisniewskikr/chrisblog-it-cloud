@@ -23,9 +23,9 @@ public class HelloWorldService {
 	
 	@HystrixCommand(fallbackMethod = "noHelloWorldBe",
 		commandProperties = {
-			@HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "1"),
-			@HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "10"),
-			@HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "1")
+			@HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "5"),
+			@HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "10000"),
+			@HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "25")
 		}
 	)
 	public HelloWorldFeDto getHelloWorldFeDto() {

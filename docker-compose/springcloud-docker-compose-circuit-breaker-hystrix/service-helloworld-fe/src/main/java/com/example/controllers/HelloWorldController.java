@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.dtos.HelloWorldFeDto;
 import com.example.services.HelloWorldService;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 
 @RestController
 public class HelloWorldController {
@@ -24,13 +22,6 @@ public class HelloWorldController {
 	}
 
 	@RequestMapping(value="/")
-	@HystrixCommand(fallbackMethod = "noHelloWorldBe",
-		commandProperties = {
-			@HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "5"),
-			@HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "10000"),
-			@HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "25")
-		}
-	)
 	public HelloWorldFeDto helloWorld() {
 				
 		HelloWorldFeDto helloWorldFeDto = helloWorldService.getHelloWorldFeDto();		

@@ -6,9 +6,9 @@ USAGE
 Usage steps:
 1. Build packages with `mvn clean package -D maven.test.skip`
 1. Start services with `docker-compose up -d --build`
+1. Stop service HelloWorld Be with `docker stop service-helloworld-be-container`
 1. Visit service HelloWorld Fe via service Gateway with `http://localhost:8762`
 1. (Optional) Visit service HelloWorld Fe directly with `http://localhost:8080`
-1. (Optional) Visit service HelloWorld Be directly with `http://localhost:9090`
 1. (Optional) Visit service Discovery with `http://localhost:8761`
 1. Clear local environment
      * Remove services with `docker-compose down --rmi local`
@@ -18,7 +18,7 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to implement **microservices** in **Java** programming language with usage **Spring Boot Cloud** framework. This project contains **multiple** Hello World custom services which communicate each other. 
+The goal of this project is to present how to implement **microservices** in **Java** programming language with usage **Spring Boot Cloud** framework which resolve service`s chain problem by **circuit breaker** pattern provided by **hystrix**. This pattern sends some predefined response when there is an error in service's chain. It this way all services don't wait for one of them with problem.
 
 Project will be configured and run by orchestration tool called **Docker Compose**.
 
@@ -38,8 +38,8 @@ The following flow takes place in this project:
 1. User via Browser sends request to Service Gateway for content
 1. Service Gateway sends request to Service HelloWorld FE for content
 1. Service HelloWorld FE sends request to service HelloWorld BE for content
-1. Service HelloWorld BE sends back response to service HelloWorld FE with message, port and uuid
-1. Service HelloWorld FE sends back response to Service Gateway with message, port of BE, uuid of BE, port of FE and uuid of FE
+1. Service HelloWorld BE is not available
+1. Service HelloWorld FE sends back predefined response to Service Gateway with message, port of BE, uuid of BE, port of FE and uuid of FE
 1. Service Gateway sends back response to User via Browser with message, port of BE, uuid of BE, port of FE and uuid of FE
 
 ##### Launch

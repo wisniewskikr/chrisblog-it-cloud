@@ -1,7 +1,7 @@
 USAGE
 -----
 
-> **NOTE:** Tools **Java**, **Maven** and **Git** have to be installed. Tools **Docker** and **Minikube** have to be up and running. Please open Command Line tool as **administrator** on **main folder of project**.
+> **NOTE:** Tools **Java**, **Maven**, **Docker** and **Minikube** have to be installed. Tools **Docker** and **Minikube** have to be up and running. Please open Command Line tool as **administrator** on **main folder of project**.
 
 Usage steps:
 1. Connect Minikube and Docker with (Windows) `minikube docker-env | Invoke-Expression`

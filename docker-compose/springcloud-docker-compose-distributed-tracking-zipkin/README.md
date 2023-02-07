@@ -16,7 +16,7 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to implement **microservices** in **Java** programming language with usage **Spring Boot Cloud** framework.
+The goal of this project is to present how to implement **microservices** in **Java** programming language with usage **Spring Boot Cloud** framework which will provide information about their tracing to one **distributed tracking** service called **Zipkin**. This feature will enable to find problems and bottlenecks during extended traffic in the system - when request is redirected from one service to another many times. 
 
 Project will be configured and run by orchestration tool called **Docker Compose**.
 
@@ -29,13 +29,14 @@ This project consists of following services:
      * **Redirecting**: this service can redirect requests from outside system to some services inside system
      * **Load balancing**: this service can take care of load balancing requests from outside system to services inside system basing on information from service Discovery
 * **Service HelloWorld**: port **8080**. This service provides message, port and uuid
+* **Service Zipkin**: port **9411**. This service enables to trace distributed traffic in the service
 
 ##### Flow
 The following flow takes place in this project:
 1. User via Browser sends request to Service Gateway for content
 1. Service Gateway sends request to Service HelloWorld for content
-1. Service HelloWorld sends back response to Service Gateway with message, port and uuid
-1. Service Gateway sends back response to User via Browser with message, port and uuid
+1. Service HelloWorld sends back response to Service Gateway with message, port and uuid. It sends also information about traffic to service Zipkin
+1. Service Gateway sends back response to User via Browser with message, port and uuid. It sends also information abotu traffic to service Zipkin
 
 ##### Launch
 To launch this application please make sure that the **Preconditions** are met and then follow instructions from **Usage** section.

@@ -14,7 +14,6 @@
 	<version>0.1.0</version>
 	
 	<properties>
-		<!-- spring-cloud.version>2021.0.4</spring-cloud.version -->
 		<spring-cloud.version>2022.0.1</spring-cloud.version>		
 	</properties>
 	
@@ -40,10 +39,6 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
-		<dependency>
-            <groupId>io.micrometer</groupId>
-            <artifactId>micrometer-observation</artifactId>
-        </dependency>
         <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-tracing-bridge-brave</artifactId>

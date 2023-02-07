@@ -1,6 +1,8 @@
 USAGE
 -----
 
+> **NOTE:** Tools **Java**, **Maven** and **Docker** have to be installed. Tool **Docker** has to be up and running. Please open Command Line tool on **main folder of project**.
+
 Usage steps:
 1. Build packages with `mvn clean package -D maven.test.skip`
 1. Start services with `docker-compose up -d --build`
@@ -9,7 +11,7 @@ Usage steps:
 1. (Optional) Visit service HelloWorld directly with `http://localhost:8080`
 1. (Optional) Visit service Discovery with `http://localhost:8761`
 1. Clear local environment
-     * Remove services with `docker-compose down -rmi`
+     * Remove services with `docker-compose down --rmi local`
 
 
 DESCRIPTION

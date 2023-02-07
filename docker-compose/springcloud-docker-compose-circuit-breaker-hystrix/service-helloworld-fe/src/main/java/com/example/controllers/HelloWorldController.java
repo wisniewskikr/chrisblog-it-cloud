@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.dtos.HelloWorldFeDto;
 import com.example.feigns.HelloWorldBeClient;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 
 @RestController
 public class HelloWorldController {
@@ -25,6 +27,13 @@ public class HelloWorldController {
 	}
 
 	@RequestMapping(value="/")
+	@HystrixCommand(fallbackMethod = "noHelloWorldBe",
+		commandProperties = {
+			@HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "5"),
+			@HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "10000"),
+			@HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "25")
+		}
+	)
 	public HelloWorldFeDto helloWorld() {
 				
 		String message = helloWorldBeClient.getHelloWorldBeDto().getMessage();
@@ -36,6 +45,16 @@ public class HelloWorldController {
 		logger.info("Called servie HelloWorld FE with message {}, port of BE {}, uuid of BE {}, port of FE {} and uuid of FE", 
 				message, portBe, uuidBe, portFe, uuidFe);		
 		return new HelloWorldFeDto(message, portBe, uuidBe, portFe, uuidFe);
+		
+	}
+	
+	@SuppressWarnings("unused")
+	private HelloWorldFeDto noHelloWorldBe() {
+		
+		String portFe = environment.getProperty("local.server.port");
+		String uuidFe = System.getProperty("uuid");
+		
+		return new HelloWorldFeDto("no message", "no port BE", "no uuid BE", portFe, uuidFe);
 		
 	}
 	

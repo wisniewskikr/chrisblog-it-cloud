@@ -6,8 +6,10 @@ USAGE
 Usage steps:
 1. Build packages with `mvn clean package -D maven.test.skip`
 1. Start services with `docker-compose up -d --build`
-1. Visit service HelloWorld via service Gateway with `http://localhost:8762`
-1. (Optional) Visit service HelloWorld directly with `http://localhost:8080`
+1. Visit via "curl" service HelloWorld via service Gateway with `curl http://localhost:8762`
+     * Expected message "Hello World from Filter" and following headers: [response-header: Hello World from Service], [new-response-header: New Hello World from Service]
+1. Visit via "curl" service HelloWorld directly with `curl http://localhost:8080`
+     * Expected message "null" and header: [response-header: Hello World from Service]  
 1. (Optional) Visit service Discovery with `http://localhost:8761`
 1. Clear local environment
      * Remove services with `docker-compose down --rmi local`
@@ -17,7 +19,7 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to implement **microservices** in **Java** programming language with usage **Spring Boot Cloud** framework.
+The goal of this project is to present how to implement **microservices** in **Java** programming language with usage **Spring Boot Cloud** framework where service **Gateway** filters requests and responses. Filters in Gateway service enable to add, remove or modify requests and responses which go through this service.
 
 Project will be configured and run by orchestration tool called **Docker Compose**.
 
@@ -34,9 +36,9 @@ This project consists of following services:
 ##### Flow
 The following flow takes place in this project:
 1. User via Browser sends request to Service Gateway for content
-1. Service Gateway sends request to Service HelloWorld for content
-1. Service HelloWorld sends back response to Service Gateway with message, port and uuid
-1. Service Gateway sends back response to User via Browser with message, port and uuid
+1. Service Gateway sends request to Service HelloWorld for content. New header with message from Filter is added
+1. Service HelloWorld sends back response to Service Gateway with message from filter, port and uuid. Also new header is added. 
+1. Service Gateway sends back response to User via Browser with message filter, port and uuid. New headers are added
 
 ##### Launch
 To launch this application please make sure that the **Preconditions** are met and then follow instructions from **Usage** section.

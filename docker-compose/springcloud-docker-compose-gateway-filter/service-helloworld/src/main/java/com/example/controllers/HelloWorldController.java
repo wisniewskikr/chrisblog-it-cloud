@@ -10,11 +10,12 @@ import com.example.dtos.HelloWorldDto;
 import com.example.services.HelloWorldService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
 public class HelloWorldController {
 	
-	Logger logger = LoggerFactory.getLogger(HelloWorldController.class);
+	Logger logger = LoggerFactory.getLogger(HelloWorldController.class);	
 	
 	private HelloWorldService helloWorldService;
 
@@ -24,14 +25,10 @@ public class HelloWorldController {
 	}
 
 	@RequestMapping(value="/")
-	public HelloWorldDto helloWorld(HttpServletRequest request) {
+	public HelloWorldDto helloWorld(HttpServletRequest request, HttpServletResponse response) {
 		
-		String header = request.getHeader("FILTER_TYPE");
-		if (!"GATEWAY_REQUEST".equals(header)) {
-			throw new RuntimeException("There was no header FILTER_TYPE in service HelloWorld");
-		}
-				
-		HelloWorldDto helloWorldDto = helloWorldService.getHelloWorldDto();		
+		helloWorldService.handleResponse(response);		
+		HelloWorldDto helloWorldDto = helloWorldService.getHelloWorldDto(request);		
 		logger.info("Called servie HelloWorld with message {}, port {} and uuid {}", 
 				helloWorldDto.getMessage(), helloWorldDto.getPort(), helloWorldDto.getUuid());		
 		return helloWorldDto;

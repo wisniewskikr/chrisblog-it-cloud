@@ -2,35 +2,32 @@ package com.example.controllers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.dtos.HelloWorldDto;
+import com.example.services.HelloWorldService;
 
 @RestController
 public class HelloWorldController {
 	
 	Logger logger = LoggerFactory.getLogger(HelloWorldController.class);
 	
-	private Environment environment;
-	
-	@Value("${service.helloworld.message}")
-	private String message;
+	private HelloWorldService helloWorldService;
 
-	public HelloWorldController(Environment environment) {
-		this.environment = environment;
+	@Autowired
+	public HelloWorldController(HelloWorldService helloWorldService) {
+		this.helloWorldService = helloWorldService;
 	}
 
 	@RequestMapping(value="/")
 	public HelloWorldDto helloWorld() {
 				
-		String port = environment.getProperty("local.server.port");
-		String uuid = System.getProperty("uuid");
-		
-		logger.info("Called servie HelloWorld with message {}, port {} and uuid {}", message, port, uuid);		
-		return new HelloWorldDto(message, port, uuid);
+		HelloWorldDto helloWorldDto = helloWorldService.getHelloWorldDto();		
+		logger.info("Called servie HelloWorld with message {}, port {} and uuid {}", 
+				helloWorldDto.getMessage(), helloWorldDto.getPort(), helloWorldDto.getUuid());		
+		return helloWorldDto;
 		
 	}
 	

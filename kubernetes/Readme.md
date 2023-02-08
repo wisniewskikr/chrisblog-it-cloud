@@ -6,7 +6,7 @@ DESCRIPTION
 1. springcloud-kubernetes-loadbalancing
 1. springcloud-kubernetes-communication-feign
 1. springcloud-kubernetes-communication-feign-loadbalancing
-1. springcloud-kubernetes-gateway-authentication
+1. springcloud-kubernetes-gateway-filter
 1. springcloud-kubernetes-config
 1. springcloud-kubernetes-config-vault
 1. springcloud-kubernetes-logging-elastic-stack-filebeat

@@ -6,7 +6,7 @@ DESCRIPTION
 1. springcloud-docker-compose-loadbalancing
 1. springcloud-docker-compose-communication-feign
 1. springcloud-docker-compose-communication-feign-loadbalancing
-1. springcloud-docker-compose-gateway-authentication
+1. springcloud-docker-compose-gateway-filter
 1. springcloud-docker-compose-config
 1. springcloud-docker-compose-config-vault
 1. springcloud-docker-compose-logging-elastic-stack-filebeat

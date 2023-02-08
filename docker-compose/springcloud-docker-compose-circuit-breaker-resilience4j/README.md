@@ -39,8 +39,8 @@ The following flow takes place in this project:
 1. Service Gateway sends request to Service HelloWorld FE for content
 1. Service HelloWorld FE sends request to service HelloWorld BE for content
 1. Service HelloWorld BE is not available
-1. Service HelloWorld FE sends back predefined response to Service Gateway with message, port of BE, uuid of BE, port of FE and uuid of FE
-1. Service Gateway sends back response to User via Browser with message, port of BE, uuid of BE, port of FE and uuid of FE
+1. Service HelloWorld FE sends back predefined response to Service Gateway with message (no message), port of BE (no port BE), uuid of BE (no uuid BE), port of FE and uuid of FE
+1. Service Gateway sends back response to User via Browser with message (no message), port of BE (no port BE), port of FE and uuid of FE
 
 ##### Launch
 To launch this application please make sure that the **Preconditions** are met and then follow instructions from **Usage** section.

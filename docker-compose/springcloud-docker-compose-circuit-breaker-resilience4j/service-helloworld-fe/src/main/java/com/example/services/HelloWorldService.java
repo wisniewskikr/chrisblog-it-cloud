@@ -7,26 +7,26 @@ import org.springframework.stereotype.Service;
 
 import com.example.dtos.HelloWorldBeDto;
 import com.example.dtos.HelloWorldFeDto;
-import com.example.feigns.HelloWorldBeClient;
+import com.example.feigns.HelloWorldBeService;
 
 @Service
 public class HelloWorldService {
 	
 	private Environment environment;
-	private HelloWorldBeClient helloWorldBeClient;
+	private HelloWorldBeService helloWorldBeService;
 	private CircuitBreakerFactory circuitBreakerFactory;
 	
 	@Autowired
-	public HelloWorldService(Environment environment, HelloWorldBeClient helloWorldBeClient,
+	public HelloWorldService(Environment environment, HelloWorldBeService helloWorldBeService,
 			CircuitBreakerFactory circuitBreakerFactory) {
 		this.environment = environment;
-		this.helloWorldBeClient = helloWorldBeClient;
+		this.helloWorldBeService = helloWorldBeService;
 		this.circuitBreakerFactory = circuitBreakerFactory;
 	}	
 	
 	public HelloWorldFeDto getHelloWorldFeDto() {
 		
-		HelloWorldBeDto helloWorldBeDto = circuitBreakerFactory.create("getHelloWorldBeDto").run(() -> helloWorldBeClient.getHelloWorldBeDto(),
+		HelloWorldBeDto helloWorldBeDto = circuitBreakerFactory.create("getHelloWorldBeDto").run(() -> helloWorldBeService.getHelloWorldBeDto(),
                 t -> new HelloWorldBeDto("no message", "no port BE", "no uuid BE"));
 		
 		String message = helloWorldBeDto.getMessage();

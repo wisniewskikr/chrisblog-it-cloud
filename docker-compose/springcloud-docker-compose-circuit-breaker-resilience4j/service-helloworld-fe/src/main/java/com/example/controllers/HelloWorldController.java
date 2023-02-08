@@ -27,7 +27,7 @@ public class HelloWorldController {
 		HelloWorldFeDto helloWorldFeDto = helloWorldService.getHelloWorldFeDto();		
 		logger.info("Called servie HelloWorld FE with message {}, port of BE {}, uuid of BE {}, port of FE {} and uuid of FE", 
 				helloWorldFeDto.getMessage(), helloWorldFeDto.getPortBe(), helloWorldFeDto.getUuidBe(), helloWorldFeDto.getPortFe(), helloWorldFeDto.getUuidFe());		
-		return new HelloWorldFeDto(helloWorldFeDto.getMessage(), helloWorldFeDto.getPortBe(), helloWorldFeDto.getUuidBe(), helloWorldFeDto.getPortFe(), helloWorldFeDto.getUuidFe());
+		return helloWorldFeDto;
 		
 	}	
 	

@@ -1,7 +1,7 @@
 DESCRIPTION
 -----------
 
-**Spring Cloud** projects built and deployed with usage of **Kubernetes** tool:
+**Spring Cloud** projects built and deployed with usage of **Docker Compose** tool:
 1. springcloud-docker-compose
 1. springcloud-docker-compose-loadbalancing
 1. springcloud-docker-compose-communication-feign

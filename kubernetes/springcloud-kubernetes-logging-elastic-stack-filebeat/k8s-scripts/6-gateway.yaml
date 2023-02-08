@@ -29,10 +29,10 @@ spec:
           value: "http://service-discovery-kubernetes:8761/eureka"
         - name: eureka.instance.prefer-ip-address
           value: "true"
-        - name: management.endpoints.jmx.exposure.include
-          value: "health,info,env,beans"
+        - name: management.endpoint.gateway.enabled
+          value: "true"
         - name: management.endpoints.web.exposure.include
-          value: "health,info,env,beans"
+          value: "gateway"
         - name: SPRING_CLOUD_GATEWAY_ROUTES_0_ID
           value: "service-helloworld"
         - name: SPRING_CLOUD_GATEWAY_ROUTES_0_URI

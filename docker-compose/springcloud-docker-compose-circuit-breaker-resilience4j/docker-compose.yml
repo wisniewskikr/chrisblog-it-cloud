@@ -56,6 +56,9 @@ services:
       - management.endpoints.jmx.exposure.include=health,info,env,beans
       - management.endpoints.web.exposure.include=health,info,env,beans
       - service.helloworld.be.name=service-helloworld-be
+      - circuitbreaker.sliding.window.size=10
+      - circuitbreaker.minimum.number.calls=5
+      - circuitbreaker.failure.rate.threshold=25
     ports:
       - 8080:8080
     healthcheck:

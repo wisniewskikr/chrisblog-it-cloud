@@ -39,8 +39,6 @@ spec:
           value: "lb://service-helloworld"
         - name: SPRING_CLOUD_GATEWAY_ROUTES_0_PREDICATES_0
           value: "Path=/**"
-        - name: SPRING_CLOUD_GATEWAY_ROUTES_0_FILTERS_0
-          value: "RewritePath=/,/"
         readinessProbe:
             httpGet:
               path: /actuator/health

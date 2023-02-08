@@ -84,7 +84,6 @@ services:
       - spring.cloud.gateway.routes[0].id=service-helloworld-fe
       - spring.cloud.gateway.routes[0].uri=lb://service-helloworld-fe
       - spring.cloud.gateway.routes[0].predicates[0]=Path=/**
-      - spring.cloud.gateway.routes[0].filters[0]=RewritePath=/,/
     ports:
       - 8762:8762
     healthcheck:

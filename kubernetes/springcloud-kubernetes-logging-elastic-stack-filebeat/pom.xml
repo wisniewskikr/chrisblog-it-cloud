@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>springcloud-kubernetes-distributed-logging-elastic-filebeat</artifactId>
+    <artifactId>springcloud-kubernetes-logging-elastic-stack-filebeat</artifactId>
     <version>0.1.0</version>
     <packaging>pom</packaging>
     

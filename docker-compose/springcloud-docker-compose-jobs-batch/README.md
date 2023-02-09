@@ -7,6 +7,7 @@ Usage steps:
 1. Build packages with `mvn clean package -D maven.test.skip`
 1. Start services with `docker-compose up -d --build`
 1. Visit service HelloWorld via service Gateway with `http://localhost:8762`
+1. (Optional) Check service Batch database (url: jdbc:h2:mem:db-embedded;DB_CLOSE_DELAY=-1, user: admin, password: admin123) with `http://localhost:9090/console`
 1. (Optional) Visit service HelloWorld directly with `http://localhost:8080`
 1. (Optional) Visit service Discovery with `http://localhost:8761`
 1. Clear local environment
@@ -17,7 +18,7 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to implement **microservices** in **Java** programming language with usage **Spring Boot Cloud** framework. These microservices use **jobs** type **batch**. Jobs are tasks which can be run in asynchronous way in the background. Results are not presented to the user and user does not wait for them.
+The goal of this project is to present how to implement **microservices** in **Java** programming language with usage **Spring Boot Cloud** framework. These microservices use **jobs** type **batch**. Jobs are log and time consuming tasks which can be run in asynchronous way in the background. User does not wait for results.
 
 Project will be configured and run by orchestration tool called **Docker Compose**.
 
@@ -30,11 +31,16 @@ This project consists of following services:
      * **Redirecting**: this service can redirect requests from outside system to some services inside system
      * **Load balancing**: this service can take care of load balancing requests from outside system to services inside system basing on information from service Discovery
 * **Service HelloWorld**: port **8080**. This service provides message, port and uuid
+* **Service Batch**: port **9090**. This service contains jobs to run
 
 ##### Flow
 The following flow takes place in this project:
+1. Service Batch runs job on start. It takes message from CSV file and store it in database
 1. User via Browser sends request to Service Gateway for content
 1. Service Gateway sends request to Service HelloWorld for content
+1. Service HelloWorld sends request to Service Batch for content
+1. Service Batch reads data from database. These data were created from CSV file on start by predefined job
+1. Service Batch sends back response to Service HelloWorld with message
 1. Service HelloWorld sends back response to Service Gateway with message, port and uuid
 1. Service Gateway sends back response to User via Browser with message, port and uuid
 

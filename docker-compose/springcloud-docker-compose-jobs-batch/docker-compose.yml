@@ -38,6 +38,8 @@ services:
       - spring.datasource.password=admin123
       - spring.h2.console.enabled=true
       - spring.h2.console.path=/console/
+      - batch.initialize-schema=always
+      - batch.schema=classpath:/org/springframework/batch/core/schema-h2.sql
     ports:
       - 9090:9090
     healthcheck:

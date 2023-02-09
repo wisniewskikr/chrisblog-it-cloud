@@ -20,7 +20,7 @@ public class HelloWorldController {
 	@RequestMapping(value="/")
 	public BatchDto helloWorld() {
 		
-		Long idText = helloWorldService.saveText("Hello World!").getId();
+		Long idText = Long.valueOf(1);
 		String text = helloWorldService.readText(idText);
 		
 		return new BatchDto(text);		

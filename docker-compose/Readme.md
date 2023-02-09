@@ -12,9 +12,9 @@ DESCRIPTION
 1. springcloud-docker-compose-logging-elastic-stack-filebeat
 1. springcloud-docker-compose-tracking-zipkin
 1. springcloud-docker-compose-circuit-breaker-resilience4j
-1. springcloud-docker-compose-jobs-batch
-1. springcloud-docker-compose-jobs-tasklet
+1. springcloud-docker-compose-jobs-batch-rpw
 1. springcloud-docker-compose-jobs-batch-tasklet
+1. springcloud-docker-compose-jobs-batch-rpw-tasklet
 1. springcloud-docker-compose-db-sql-mysql
 1. springcloud-docker-compose-db-nosql-mongo
 1. springcloud-docker-compose-messaging-rabbitmq

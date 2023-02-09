@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.dtos.HelloWorldBatchDto;
 import com.example.services.HelloWorldService;
 
 @RestController
@@ -17,12 +18,12 @@ public class HelloWorldController {
 	}
 
 	@RequestMapping(value="/")
-	public String helloWorld() {
+	public HelloWorldBatchDto helloWorld() {
 		
 		Long idText = helloWorldService.saveText("Hello World!").getId();
 		String text = helloWorldService.readText(idText);
 		
-		return text;		
+		return new HelloWorldBatchDto(text);		
 	}
 	
 }

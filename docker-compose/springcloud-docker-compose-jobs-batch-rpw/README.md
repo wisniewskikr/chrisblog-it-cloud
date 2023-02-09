@@ -7,6 +7,9 @@ Usage steps:
 1. Build packages with `mvn clean package -D maven.test.skip`
 1. Start services with `docker-compose up -d --build`
 1. Visit service HelloWorld via service Gateway with `http://localhost:8762`
+     * Expected Result: JSON with message "Hello World 1", port "8080" and uuid - data from job started automatically on load
+1. Visit again service HelloWorld via service Gateway with `http://localhost:8762/job`
+      * Expected Result: JSON with message "Hello World 1,Hello World 2", port "8080" and uuid - data from job started manually
 1. (Optional) Check service Batch database (url: jdbc:h2:mem:db-embedded;DB_CLOSE_DELAY=-1, user: admin, password: admin123) with `http://localhost:9090/console`
 1. (Optional) Visit service HelloWorld directly with `http://localhost:8080`
 1. (Optional) Visit service Discovery with `http://localhost:8761`

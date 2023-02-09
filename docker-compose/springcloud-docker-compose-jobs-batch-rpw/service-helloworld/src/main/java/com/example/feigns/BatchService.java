@@ -10,5 +10,8 @@ public interface BatchService {
 	
 	@GetMapping(value="/")
 	public BatchDto getBatchDto();
+	
+	@GetMapping(value="/job")
+	public BatchDto runBatchJob();
 
 }

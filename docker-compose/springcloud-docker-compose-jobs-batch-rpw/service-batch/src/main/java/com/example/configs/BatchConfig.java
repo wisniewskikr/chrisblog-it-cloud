@@ -70,10 +70,7 @@ public class BatchConfig {
     public ItemProcessor<BatchFileMessageDto, HelloWorldEntity> processor() {
         return item -> {            
 
-            return new HelloWorldEntity(
-            		Long.valueOf(item.getId()),
-                    item.getMessage()
-                    );
+            return new HelloWorldEntity(item.getMessage());
             
         };
     }

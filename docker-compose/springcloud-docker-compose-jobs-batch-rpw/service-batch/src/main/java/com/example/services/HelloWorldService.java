@@ -27,5 +27,17 @@ public class HelloWorldService {
 	public String readText(Long id) {
 		return helloWorldRepository.findById(id).get().getText();
 	}
+	
+	public String readAllMessages() {
+		
+		StringBuilder sb = new StringBuilder();
+		Iterable<HelloWorldEntity> it = helloWorldRepository.findAll();
+		it.forEach(helloWorldEntity -> {
+			sb.append(",");
+			sb.append(helloWorldEntity.getText() + " " + helloWorldEntity.getId());
+		});
+		return sb.toString().replaceFirst(",", "");
+		
+	}
 
 }

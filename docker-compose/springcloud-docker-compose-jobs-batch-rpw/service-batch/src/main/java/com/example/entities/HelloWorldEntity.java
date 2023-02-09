@@ -7,6 +7,8 @@ package com.example.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -15,6 +17,7 @@ import javax.persistence.Table;
 public class HelloWorldEntity {
 			
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
  
     @Column(nullable = false)
@@ -22,8 +25,7 @@ public class HelloWorldEntity {
 
 	public HelloWorldEntity() {}
 	
-	public HelloWorldEntity(Long id, String text) {
-		this.id = id;
+	public HelloWorldEntity(String text) {
 		this.text = text;
 	}
 	

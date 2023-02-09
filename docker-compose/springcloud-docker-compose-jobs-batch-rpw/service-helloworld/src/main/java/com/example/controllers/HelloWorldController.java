@@ -25,7 +25,17 @@ public class HelloWorldController {
 	public HelloWorldDto helloWorld() {
 				
 		HelloWorldDto helloWorldDto = helloWorldService.getHelloWorldDto();		
-		logger.info("Called servie HelloWorld with message {}, port {} and uuid {}", 
+		logger.info("Called servie HelloWorld method helloWorld() with message {}, port {} and uuid {}", 
+				helloWorldDto.getMessage(), helloWorldDto.getPort(), helloWorldDto.getUuid());		
+		return helloWorldDto;
+		
+	}
+	
+	@RequestMapping(value="/job")
+	public HelloWorldDto runJob() {
+				
+		HelloWorldDto helloWorldDto = helloWorldService.runBatchJob();		
+		logger.info("Called servie HelloWorld method runJob() with message {}, port {} and uuid {}", 
 				helloWorldDto.getMessage(), helloWorldDto.getPort(), helloWorldDto.getUuid());		
 		return helloWorldDto;
 		

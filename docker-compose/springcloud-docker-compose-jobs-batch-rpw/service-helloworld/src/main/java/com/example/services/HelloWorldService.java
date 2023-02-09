@@ -28,5 +28,14 @@ public class HelloWorldService {
 		return new HelloWorldDto(message, port, uuid);
 		
 	}
+	
+	public HelloWorldDto runBatchJob() {
+		
+		String port = environment.getProperty("local.server.port");
+		String uuid = System.getProperty("uuid");	
+		String message = batchService.runBatchJob().getMessage();
+		return new HelloWorldDto(message, port, uuid);
+		
+	}
 
 }

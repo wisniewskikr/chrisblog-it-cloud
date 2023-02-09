@@ -1,12 +1,12 @@
 package com.example.dtos;
 
-public class HelloWorldBatchDto {
+public class BatchDto {
 	
 	private String message;
 	
-	public HelloWorldBatchDto() {}
+	public BatchDto() {}
 
-	public HelloWorldBatchDto(String message) {
+	public BatchDto(String message) {
 		this.message = message;
 	}
 

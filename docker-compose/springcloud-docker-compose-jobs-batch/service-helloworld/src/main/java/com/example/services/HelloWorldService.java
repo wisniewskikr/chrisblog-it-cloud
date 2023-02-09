@@ -5,18 +5,18 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import com.example.dtos.HelloWorldDto;
-import com.example.feigns.HelloWorldBatchService;
+import com.example.feigns.BatchService;
 
 @Service
 public class HelloWorldService {
 	
-	private HelloWorldBatchService helloWorldBatchService;
+	private BatchService batchService;
 	
 	private Environment environment;
 	
 	@Autowired
-	public HelloWorldService(HelloWorldBatchService helloWorldBatchService, Environment environment) {
-		this.helloWorldBatchService = helloWorldBatchService;
+	public HelloWorldService(BatchService batchService, Environment environment) {
+		this.batchService = batchService;
 		this.environment = environment;
 	}
 
@@ -24,7 +24,7 @@ public class HelloWorldService {
 		
 		String port = environment.getProperty("local.server.port");
 		String uuid = System.getProperty("uuid");	
-		String message = helloWorldBatchService.getHelloWorldBatchDto().getMessage();
+		String message = batchService.getBatchDto().getMessage();
 		return new HelloWorldDto(message, port, uuid);
 		
 	}

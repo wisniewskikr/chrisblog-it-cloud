@@ -60,7 +60,7 @@ services:
       - eureka.client.service-url.defaultZone=http://service-discovery:8761/eureka
       - management.endpoints.jmx.exposure.include=health,info,env,beans
       - management.endpoints.web.exposure.include=health,info,env,beans
-      - service.helloworld.batch.name=service-batch
+      - service.batch.name=service-batch
     ports:
       - 8080:8080
     healthcheck:

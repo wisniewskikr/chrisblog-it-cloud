@@ -19,6 +19,7 @@ public class HelloWorldService {
 	
 	public HelloWorldDto saveText(String text) {
 		HelloWorldEntity entity = new HelloWorldEntity();
+		entity.setId(Long.valueOf(1));
 		entity.setText(text);
 		return new HelloWorldDto(helloWorldRepository.save(entity));
 	}

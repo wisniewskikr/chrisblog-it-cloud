@@ -17,7 +17,7 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to implement **microservices** in **Java** programming language with usage **Spring Boot Cloud** framework.
+The goal of this project is to present how to implement **microservices** in **Java** programming language with usage **Spring Boot Cloud** framework. These microservices use **jobs** type **batch**. Jobs are tasks which can be run in asynchronous way in the background. Results are not presented to the user and user does not wait for them.
 
 Project will be configured and run by orchestration tool called **Docker Compose**.
 

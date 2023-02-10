@@ -35,7 +35,6 @@ public class HelloWorldService {
 		it.forEach(helloWorldEntity -> {
 			sb.append(",");
 			sb.append(helloWorldEntity.getText());
-			sb.append(" ");
 		});
 		return sb.toString().replaceFirst(",", "");
 		

@@ -95,18 +95,26 @@ public class BatchConfig {
     }
 	
 	public Tasklet updateMessages() {
-	       return new Tasklet() {
-			
-	    	   @Override
-	    	   public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-	    		   
-	    		   Iterable<HelloWorldEntity> it = helloWorldRepository.findAll();
-	    		   it.forEach(helloWorld -> helloWorld.setText(helloWorld.getText() + " " + helloWorld.getId()));
-		           return RepeatStatus.FINISHED;
-		           
-	    	   }
-	    	   
-	       };	
-	    }
+       return new Tasklet() {
+		
+    	   @Override
+    	   public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+    		   
+    		   Iterable<HelloWorldEntity> it = helloWorldRepository.findAll();
+    		   it.forEach(helloWorld -> {
+    			   
+    			   String messageOrigin = helloWorld.getText();
+    			   String messageRequired = "Hello World " + helloWorld.getId();
+    			   if (!messageOrigin.equals(messageRequired)) {
+    				   helloWorld.setText(messageRequired);
+    			   }
+    			   
+    		   });
+	           return RepeatStatus.FINISHED;
+	           
+    	   }
+    	   
+       };	
+	}
 
 }

@@ -21,11 +21,18 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to implement **microservices** in **Java** programming language with usage **Spring Boot Cloud** framework. These microservices use **jobs** from library **batch**. This example uses batch type **RPW (Read-Process-Write)**. Jobs are log and time consuming tasks which can be run in asynchronous way in the background - user does not wait for results. One job consists of one or more steps.
+The goal of this project is to present how to implement **microservices** in **Java** programming language with usage **Spring Boot Cloud** framework. These microservices use **jobs** from library **batch**. Jobs are log and time consuming tasks which can be run in asynchronous way in the background - user does not wait for results. One job consists of one or more steps.
 
 Types of batch:
 * **RPW (Read-Process-Write)**: in this type steps use: reader, processor and writer. It's good for large amount of data because they divide them into "chunks" 
 * **Tasklet**: in this type step is one action. It's good for simple tasks
+
+Batch can be executed in following ways:
+* **On load**: jobs are executed when application sets up
+* **Manually**: jobs are executed on calling some endpoint by user
+* **By scheduler**: jobs are executed by scheduler on some specific time
+
+This example shows how to use batch in types RPW and Tasklet. RPW reads message "Hello World" from CSV file and stores it in database. Tasklet reads messages from database and adds them id. These steps will be run "on load" and "manually". 
 
 Project will be configured and run by orchestration tool called **Docker Compose**.
 

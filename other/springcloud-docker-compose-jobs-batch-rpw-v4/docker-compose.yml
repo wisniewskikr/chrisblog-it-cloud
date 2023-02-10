@@ -39,8 +39,8 @@ services:
       - spring.h2.console.enabled=true
       - spring.h2.console.path=/console/
       - spring.h2.console.settings.web-allow-others=true
-      - spring.batch.jdbc.initialize-schema=always
-      - spring.batch.jdbc.schema=classpath:/org/springframework/batch/core/schema-h2.sql
+      - batch.initialize-schema=always
+      - batch.schema=classpath:/org/springframework/batch/core/schema-h2.sql
     ports:
       - 9090:9090
     healthcheck:

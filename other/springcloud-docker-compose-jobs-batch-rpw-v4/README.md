@@ -1,3 +1,9 @@
+DEPRECATED
+----------
+
+This is example of Spring Batch in **version 4.0**. Currently is used **version 5.0**.
+
+
 USAGE
 -----
 

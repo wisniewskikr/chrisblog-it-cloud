@@ -34,7 +34,8 @@ public class HelloWorldService {
 		Iterable<HelloWorldEntity> it = helloWorldRepository.findAll();
 		it.forEach(helloWorldEntity -> {
 			sb.append(",");
-			sb.append(helloWorldEntity.getText() + " " + helloWorldEntity.getId());
+			sb.append(helloWorldEntity.getText());
+			sb.append(" ");
 		});
 		return sb.toString().replaceFirst(",", "");
 		

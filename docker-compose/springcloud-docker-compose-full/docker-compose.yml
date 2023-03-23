@@ -43,6 +43,14 @@ services:
         condition: service_healthy
     networks:
       - helloworld-network
+      
+  zipkin:
+    image: openzipkin/zipkin:2
+    container_name: zipkin-container
+    ports:
+      - 9411:9411    
+    networks:
+      - helloworld-network 
   
   service-gateway:
     image: service-gateway-image
@@ -59,6 +67,8 @@ services:
       - spring.cloud.gateway.routes[0].id=service-helloworld-fe
       - spring.cloud.gateway.routes[0].uri=lb://service-helloworld-fe
       - spring.cloud.gateway.routes[0].predicates[0]=Path=/**
+      - management.tracing.sampling.probability=1.0
+      - management.zipkin.tracing.endpoint=http://zipkin:9411/api/v2/spans
     ports:
       - 8762:8762
     healthcheck:
@@ -66,8 +76,10 @@ services:
     depends_on:
       service-discovery:
         condition: service_healthy
+      zipkin:
+        condition: service_healthy
     networks:
-      - helloworld-network 
+      - helloworld-network   
 
   service-helloworld-be:
     image: service-helloworld-be-image
@@ -81,12 +93,16 @@ services:
       - management.endpoints.jmx.exposure.include=health,info,env,beans
       - management.endpoints.web.exposure.include=health,info,env,beans
       - spring.config.import=optional:configserver:http://service-config:8888
+      - management.tracing.sampling.probability=1.0
+      - management.zipkin.tracing.endpoint=http://zipkin:9411/api/v2/spans
     ports:
       - 9090
     healthcheck:
       test: "exit 0"
     depends_on:
       service-config:
+        condition: service_healthy
+      zipkin:
         condition: service_healthy
     networks:
       - helloworld-network
@@ -104,12 +120,16 @@ services:
       - management.endpoints.jmx.exposure.include=health,info,env,beans
       - management.endpoints.web.exposure.include=health,info,env,beans
       - service.helloworld.be.name=service-helloworld-be
+      - management.tracing.sampling.probability=1.0
+      - management.zipkin.tracing.endpoint=http://zipkin:9411/api/v2/spans
     ports:
       - 8080:8080
     healthcheck:
       test: "exit 0"
     depends_on:
       service-discovery:
+        condition: service_healthy
+      zipkin:
         condition: service_healthy
     networks:
       - helloworld-network   

@@ -8,6 +8,7 @@ Usage steps:
 1. Start services with `docker-compose up -d --scale service-helloworld-be=2 --build`
 1. Visit many times service HelloWorld Fe via service Gateway with `http://localhost:8762`
      * *Expected result: JSON with message 'Hello World', BE port, BE uuid, FE port and FE uuid. Attribute BE uuid will be changed after every request because of load balancer*
+1. Check tracking with `http://localhost:9411/`
 1. (Optional) Visit service HelloWorld Fe directly with `http://localhost:8080`
 1. (Optional) Visit service HelloWorld Be directly with `http://localhost:9090`
 1. (Optional) Visit service Discovery with `http://localhost:8761`
@@ -34,6 +35,7 @@ This project consists of following services:
 * **Service HelloWorld BE**: port **9090**. This service provides message, port and uuid
 * **Service HelloWorld FE**: port **8080**. This service provides message, port of BE, uuid of BE, port of FE and uuid of FE. It contacts with Hello World BE service
 * **Service Config**: port **8888**. This service provides configuration properties stored in Github
+* **Zipkin**: port **9411**. This tool enables tracking request through microservices
 
 ##### Flow
 The following flow takes place in this project:

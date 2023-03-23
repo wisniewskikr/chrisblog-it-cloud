@@ -33,6 +33,7 @@ This project consists of following services:
      * **Load balancing**: this service can take care of load balancing requests from outside system to services inside system basing on information from service Discovery
 * **Service HelloWorld BE**: port **9090**. This service provides message, port and uuid
 * **Service HelloWorld FE**: port **8080**. This service provides message, port of BE, uuid of BE, port of FE and uuid of FE. It contacts with Hello World BE service
+* **Service Config**: port **8888**. This service provides configuration properties stored in Github
 
 ##### Flow
 The following flow takes place in this project:

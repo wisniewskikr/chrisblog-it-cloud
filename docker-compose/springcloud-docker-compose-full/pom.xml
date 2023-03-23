@@ -11,9 +11,11 @@
     
     <modules>
 		<module>service-discovery</module>
+		<module>service-config</module>
+		<module>service-gateway</module>
     	<module>service-helloworld-be</module>
 		<module>service-helloworld-fe</module>
-		<module>service-gateway</module>
+		
     </modules>    
 
 </project>

@@ -6,12 +6,13 @@ USAGE
 Usage steps:
 1. Build packages with `mvn clean package -D maven.test.skip`
 1. Start services with `docker-compose up -d --scale service-helloworld-be=2 --build`
-1. Visit many times service HelloWorld Fe via service Gateway with `http://localhost:8762`
-     * *Expected result: JSON with message 'Hello World', BE port, BE uuid, FE port and FE uuid. Attribute BE uuid will be changed after every request because of load balancer*
-1. Check tracking with `http://localhost:9411/`
-1. (Optional) Visit service HelloWorld Fe directly with `http://localhost:8080`
-1. (Optional) Visit service HelloWorld Be directly with `http://localhost:9090`
-1. (Optional) Visit service Discovery with `http://localhost:8761`
+     * (Optional) Check if containers are running (expected result "HEALTHY") with `docker ps -a`
+1. Visit many times system via service Gateway with `http://localhost:8762`
+     * (Optional) Visit service HelloWorld Fe directly with `http://localhost:8080`
+     * (Optional) Visit service HelloWorld Be directly with `http://localhost:9090`
+     * (Optional) Visit service Discovery with `http://localhost:8761`
+1. Check tracking in Zipkin with `http://localhost:9411/`
+1. Check logs in Kibana with `http://localhost:5601/`
 1. Clear local environment
      * Remove services with `docker-compose down --rmi local`
 

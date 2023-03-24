@@ -12,7 +12,9 @@ Usage steps:
      * (Optional) Visit service HelloWorld Be directly with `http://localhost:9090`
      * (Optional) Visit service Discovery with `http://localhost:8761`
 1. Check tracking in Zipkin with `http://localhost:9411/`
-1. Check logs in Kibana with `http://localhost:5601/`
+1. Check logs in Kibana 
+     * Configure Kibana. Please check section **KIBANA CONFIGURATION**
+     * Visit Kibana with `http://localhost:5601/`
 1. Clear local environment
      * Remove services with `docker-compose down --rmi local`
 
@@ -78,3 +80,24 @@ PRECONDITIONS
 * **Launched** Docker on your local machine
 * **Download** source code using Git command `git clone https://github.com/wisniewskikr/chrisblog-it-cloud.git`
 * Open any **Command Line** tool (for instance "Windonw PowerShell" on Windows OS) on **project's main folder**
+
+
+KIBANA CONFIGURATION
+--------------------S
+
+Link:
+* http://localhost:5601/
+
+![My Image](readme-images/filebeat-1.png)
+
+![My Image](readme-images/filebeat-2.png)
+
+![My Image](readme-images/filebeat-3.png)
+
+![My Image](readme-images/filebeat-4.png)
+
+![My Image](readme-images/filebeat-5.png)
+
+![My Image](readme-images/filebeat-6.png)
+
+![My Image](readme-images/filebeat-7.png)

@@ -142,6 +142,9 @@ services:
       - 9090
     healthcheck:
       test: "exit 0"
+    labels:
+      collect_logs_with_filebeat: "true"
+      decode_log_event_to_json_object: "true"
     depends_on:
       service-config:
         condition: service_healthy
@@ -168,6 +171,9 @@ services:
       - 8080:8080
     healthcheck:
       test: "exit 0"
+    labels:
+      collect_logs_with_filebeat: "true"
+      decode_log_event_to_json_object: "true"
     depends_on:
       service-config:
         condition: service_healthy

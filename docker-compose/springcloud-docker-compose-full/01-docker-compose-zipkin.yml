@@ -13,4 +13,3 @@ services:
 networks:
   helloworld-network:
     name: helloworld-network
-    external: true

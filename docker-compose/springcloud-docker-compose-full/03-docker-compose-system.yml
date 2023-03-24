@@ -26,6 +26,12 @@ services:
     build:
       context: ./service-config
       dockerfile: Dockerfile-Fast
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
     environment:
       - spring.application.name=service-config
       - server.port=8888

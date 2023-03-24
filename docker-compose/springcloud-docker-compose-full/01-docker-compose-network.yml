@@ -1,5 +1,0 @@
-version: '3'
-
-networks:
-  helloworld-network:
-    name: helloworld-network

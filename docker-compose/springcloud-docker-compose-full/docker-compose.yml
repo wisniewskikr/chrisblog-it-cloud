@@ -2,82 +2,11 @@ version: '3'
 
 services:
 
-  service-discovery:
-    image: service-discovery-image
-    container_name: service-discovery-container
-    build:
-      context: ./service-discovery
-      dockerfile: Dockerfile-Fast
-    environment:
-      - spring.application.name=service-discovery
-      - server.port=8761
-      - eureka.client.fetch-registry=false
-      - eureka.client.register-with-eureka=false
-    ports:
-      - 8761:8761
-    healthcheck:
-      test: "exit 0"
-    networks:
-      - helloworld-network
-  
-  service-config:
-    image: service-config-image
-    container_name: service-config-container
-    build:
-      context: ./service-config
-      dockerfile: Dockerfile-Fast
-    environment:
-      - spring.application.name=service-config
-      - server.port=8888
-      - eureka.client.service-url.defaultZone=http://service-discovery:8761/eureka
-      - management.endpoints.jmx.exposure.include=health,info,env,beans
-      - management.endpoints.web.exposure.include=health,info,env,beans
-      - spring.cloud.config.server.git.uri=https://github.com/wisniewskikr/springcloud-config
-      - spring.cloud.config.server.git.clone-on-start=true     
-    ports:
-      - 8888:8888
-    healthcheck:
-      test: "exit 0"
-    depends_on:
-      service-discovery:
-        condition: service_healthy
-    networks:
-      - helloworld-network
-      
   zipkin:
     image: openzipkin/zipkin:2
     container_name: zipkin-container
     ports:
       - 9411:9411    
-    networks:
-      - helloworld-network 
-  
-  service-gateway:
-    image: service-gateway-image
-    container_name: service-gateway-container
-    build:
-      context: ./service-gateway
-      dockerfile: Dockerfile-Fast
-    environment:
-      - spring.application.name=service-gateway
-      - server.port=8762
-      - eureka.client.service-url.defaultZone=http://service-discovery:8761/eureka
-      - management.endpoint.gateway.enabled=true
-      - management.endpoints.web.exposure.include=gateway
-      - spring.cloud.gateway.routes[0].id=service-helloworld-fe
-      - spring.cloud.gateway.routes[0].uri=lb://service-helloworld-fe
-      - spring.cloud.gateway.routes[0].predicates[0]=Path=/**
-      - management.tracing.sampling.probability=1.0
-      - management.zipkin.tracing.endpoint=http://zipkin:9411/api/v2/spans
-    ports:
-      - 8762:8762
-    healthcheck:
-      test: "exit 0"
-    depends_on:
-      service-discovery:
-        condition: service_healthy
-      zipkin:
-        condition: service_healthy
     networks:
       - helloworld-network 
       
@@ -89,6 +18,8 @@ services:
     environment:
         discovery.type: single-node
         xpack.security.enabled: false
+    depends_on:
+        - zipkin
     networks:
       - helloworld-network
 
@@ -116,13 +47,88 @@ services:
     depends_on:
         - kibana
     networks:
+      - helloworld-network
+  
+  service-discovery:
+    image: service-discovery-image
+    container_name: service-discovery-container
+    build:
+      context: ./service-discovery
+      dockerfile: Dockerfile-Fast
+    environment:
+      - spring.application.name=service-discovery
+      - server.port=8761
+      - eureka.client.fetch-registry=false
+      - eureka.client.register-with-eureka=false
+    restart: on-failure
+    ports:
+      - 8761:8761
+    healthcheck:
+      test: "exit 0"
+    depends_on:
+        - filebeat
+    networks:
+      - helloworld-network
+  
+  service-config:
+    image: service-config-image
+    container_name: service-config-container
+    build:
+      context: ./service-config
+      dockerfile: Dockerfile-Fast
+    restart: on-failure
+    environment:
+      - spring.application.name=service-config
+      - server.port=8888
+      - eureka.client.service-url.defaultZone=http://service-discovery:8761/eureka
+      - management.endpoints.jmx.exposure.include=health,info,env,beans
+      - management.endpoints.web.exposure.include=health,info,env,beans
+      - spring.cloud.config.server.git.uri=https://github.com/wisniewskikr/springcloud-config
+      - spring.cloud.config.server.git.clone-on-start=true     
+    ports:
+      - 8888:8888
+    healthcheck:
+      test: "exit 0"
+    depends_on:
+      service-discovery:
+        condition: service_healthy
+    networks:
       - helloworld-network  
+  
+  service-gateway:
+    image: service-gateway-image
+    container_name: service-gateway-container
+    build:
+      context: ./service-gateway
+      dockerfile: Dockerfile-Fast
+    restart: on-failure
+    environment:
+      - spring.application.name=service-gateway
+      - server.port=8762
+      - eureka.client.service-url.defaultZone=http://service-discovery:8761/eureka
+      - management.endpoint.gateway.enabled=true
+      - management.endpoints.web.exposure.include=gateway
+      - spring.cloud.gateway.routes[0].id=service-helloworld-fe
+      - spring.cloud.gateway.routes[0].uri=lb://service-helloworld-fe
+      - spring.cloud.gateway.routes[0].predicates[0]=Path=/**
+      - management.tracing.sampling.probability=1.0
+      - management.zipkin.tracing.endpoint=http://zipkin:9411/api/v2/spans
+    ports:
+      - 8762:8762
+    healthcheck:
+      test: "exit 0"
+    depends_on:
+      service-discovery:
+        condition: service_healthy
+    networks:
+      - helloworld-network     
 
   service-helloworld-be:
     image: service-helloworld-be-image
     build:
       context: ./service-helloworld-be
       dockerfile: Dockerfile-Fast
+    restart: on-failure
     environment:
       - spring.application.name=service-helloworld-be
       - server.port=9090
@@ -137,9 +143,8 @@ services:
     healthcheck:
       test: "exit 0"
     depends_on:
-      - filebeat
-      - service-config
-      - zipkin
+      service-config:
+        condition: service_healthy
     networks:
       - helloworld-network
 
@@ -149,6 +154,7 @@ services:
     build:
       context: ./service-helloworld-fe
       dockerfile: Dockerfile-Fast
+    restart: on-failure
     environment:
       - spring.application.name=service-helloworld-fe
       - server.port=8080
@@ -163,9 +169,8 @@ services:
     healthcheck:
       test: "exit 0"
     depends_on:
-      - filebeat
-      - service-config
-      - zipkin
+      service-config:
+        condition: service_healthy
     networks:
       - helloworld-network   
 

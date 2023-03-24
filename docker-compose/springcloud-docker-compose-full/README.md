@@ -5,12 +5,9 @@ USAGE
 
 Usage steps:
 1. Build packages with `mvn clean package -D maven.test.skip`
-1. Start tracking by Zipkin with `docker-compose -f 01-docker-compose-zipkin.yml up -d --build`
-1. Start logs by Elk with `docker-compose -f 02-docker-compose-elk.yml up -d --build`
-1. Start system services with `docker-compose -f 03-docker-compose-system.yml up -d --build`
-1. Start custom services with `docker-compose -f 04-docker-compose-custom.yml up -d --scale service-helloworld-be=2 --build`
+1. Start custom services with `docker-compose up -d --scale service-helloworld-be=2 --build`
      * (Optional) Check if containers are running (expected result "HEALTHY") with `docker ps -a`
-1. Visit many times system via service Gateway with `http://localhost:8762`
+1. Visit many times system via service Gateway (value "uuid of service BE" should be changed) with `http://localhost:8762`
      * (Optional) Visit service HelloWorld Fe directly with `http://localhost:8080`
      * (Optional) Visit service HelloWorld Be directly with `http://localhost:9090`
      * (Optional) Visit service Discovery with `http://localhost:8761`

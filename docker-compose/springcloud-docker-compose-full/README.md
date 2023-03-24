@@ -37,6 +37,8 @@ This project consists of following services:
 * **Service HelloWorld FE**: port **8080**. This service provides message, port of BE, uuid of BE, port of FE and uuid of FE. It contacts with Hello World BE service
 * **Service Config**: port **8888**. This service provides configuration properties stored in Github
 * **Zipkin**: port **9411**. This tool enables tracking request through microservices
+* **Elasticsearch**: port **9200**. This is noSql database for logs
+* **Kibana**: port **5601**. This is GUI for logs
 
 ##### Flow
 The following flow takes place in this project:

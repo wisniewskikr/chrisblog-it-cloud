@@ -137,12 +137,9 @@ services:
     healthcheck:
       test: "exit 0"
     depends_on:
-      service-config:
-        condition: service_healthy
-      zipkin:
-        condition: service_healthy
-      filebeat:
-        condition: service_healthy
+      - filebeat
+      - service-config
+      - zipkin
     networks:
       - helloworld-network
 
@@ -166,12 +163,9 @@ services:
     healthcheck:
       test: "exit 0"
     depends_on:
-      service-discovery:
-        condition: service_healthy
-      zipkin:
-        condition: service_healthy
-      filebeat:
-        condition: service_healthy
+      - filebeat
+      - service-config
+      - zipkin
     networks:
       - helloworld-network   
 

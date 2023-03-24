@@ -1,3 +1,17 @@
+USAGE
+-----
+
+> **NOTE:** Tools **Java**, **Maven** and **Docker** have to be installed. Tool **Docker** has to be up and running. Please open Command Line tool on **main folder of project**.
+
+Usage steps:
+1. Build packages with `mvn clean package -D maven.test.skip`
+1. Start services with `docker-compose up -d --build`
+1. Visit Gateway `http://localhost:8762`
+1. Check logs in Kibana - follow instructions from section **Usage Kibana**
+1. Clean local environment:
+     * Remove containers with `docker-compose down --rmi local`
+
+
 DESCRIPTION
 -----------
 
@@ -53,18 +67,6 @@ PRECONDITIONS
 * **Launched** Docker on your local machine
 * **Download** source code using Git command `git clone https://github.com/wisniewskikr/chrisblog-it-cloud.git`
 * Open any **Command Line** (for instance "Windonw PowerShell" on Windows OS) tool on **project's folder**
-
-
-USAGE
------
-
-Usage steps:
-1. Build packages with `mvn clean package -D maven.test.skip`
-1. Start services with `docker-compose up -d --build`
-1. Visit Gateway `http://localhost:8762`
-1. Check logs in Kibana - follow instructions from section **Usage Kibana**
-1. Clean local environment:
-     * Remove containers with `docker-compose down -rmi`
    
      
 USAGE KIBANA

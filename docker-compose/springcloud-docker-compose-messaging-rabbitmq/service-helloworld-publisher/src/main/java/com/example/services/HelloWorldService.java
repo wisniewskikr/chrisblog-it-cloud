@@ -6,6 +6,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import com.example.dtos.HelloWorldPublisherDto;
+import com.google.gson.Gson;
 
 @Service
 public class HelloWorldService {
@@ -33,7 +34,7 @@ public class HelloWorldService {
 	}
 	
 	public void sendHelloWorld(HelloWorldPublisherDto helloWorld) {
-		rabbitTemplate.convertAndSend(queueName, helloWorld);
+		rabbitTemplate.convertAndSend(queueName, new Gson().toJson(helloWorld));
 	}
 
 }

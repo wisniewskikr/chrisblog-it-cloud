@@ -21,7 +21,7 @@ public class HelloWorldController {
 		this.helloWorldService = helloWorldService;
 	}
 
-	@RequestMapping(value="/")
+	@RequestMapping(value="/subscribe")
 	public HelloWorldSubscriberDto helloWorld() {
 				
 		HelloWorldSubscriberDto helloWorldSubscriberDto = helloWorldService.getHelloWorldFeDto();		

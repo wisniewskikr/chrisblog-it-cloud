@@ -99,13 +99,10 @@ services:
       - management.endpoints.web.exposure.include=gateway
       - spring.cloud.gateway.routes[0].id=service-helloworld-publisher
       - spring.cloud.gateway.routes[0].uri=lb://service-helloworld-publisher
-      - spring.cloud.gateway.routes[0].predicates[0]=Path=/**
-      - spring.cloud.gateway.routes[1].id=service-helloworld-publisher
-      - spring.cloud.gateway.routes[1].uri=lb://service-helloworld-publisher
-      - spring.cloud.gateway.routes[1].predicates[0]=Path=/publisher/**
-      - spring.cloud.gateway.routes[2].id=service-helloworld-subscriber
-      - spring.cloud.gateway.routes[2].uri=lb://service-helloworld-subscriber
-      - spring.cloud.gateway.routes[2].predicates[0]=Path=/subscriber/**
+      - spring.cloud.gateway.routes[0].predicates[0]=Path=/publish/**
+      - spring.cloud.gateway.routes[1].id=service-helloworld-subscriber
+      - spring.cloud.gateway.routes[1].uri=lb://service-helloworld-subscriber
+      - spring.cloud.gateway.routes[1].predicates[0]=Path=/subscribe/**
     ports:
       - 8762:8762
     healthcheck:

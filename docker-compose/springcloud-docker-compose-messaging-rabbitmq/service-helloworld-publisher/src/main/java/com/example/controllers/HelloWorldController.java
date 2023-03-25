@@ -21,7 +21,7 @@ public class HelloWorldController {
 		this.helloWorldService = helloWorldService;
 	}
 
-	@RequestMapping(value="/")
+	@RequestMapping(value="/publish")
 	public String helloWorld() {
 				
 		HelloWorldPublisherDto helloWorldPublisherDto = helloWorldService.getHelloWorldBeDto();		

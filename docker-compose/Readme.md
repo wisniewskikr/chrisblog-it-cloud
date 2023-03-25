@@ -10,8 +10,8 @@ Example systems:
 Example signle services: 
 1. springcloud-docker-compose-discovery
 1. springcloud-docker-compose-gateway
+1. springcloud-docker-compose-gateway-loadbalancing
 1. springcloud-docker-compose-gateway-filter
-1. springcloud-docker-compose-loadbalancing
 1. springcloud-docker-compose-communication-feign
 1. springcloud-docker-compose-communication-feign-loadbalancing
 1. springcloud-docker-compose-config

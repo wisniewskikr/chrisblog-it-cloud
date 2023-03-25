@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+
+  service-discovery:
+    image: service-discovery-image
+    container_name: service-discovery-container
+    build:
+      context: ./service-discovery
+      dockerfile: Dockerfile-Fast
+    environment:
+      - spring.application.name=service-discovery
+      - server.port=8761
+      - eureka.client.fetch-registry=false
+      - eureka.client.register-with-eureka=false
+    ports:
+      - 8761:8761
+    healthcheck:
+      test: "exit 0"
+    networks:
+      - helloworld-network
+
+  service-helloworld:
+    image: service-helloworld-image
+    container_name: service-helloworld-container
+    build:
+      context: ./service-helloworld
+      dockerfile: Dockerfile-Fast
+    environment:
+      - spring.application.name=service-helloworld
+      - server.port=8080
+      - eureka.client.service-url.defaultZone=http://service-discovery:8761/eureka
+      - management.endpoints.jmx.exposure.include=health,info,env,beans
+      - management.endpoints.web.exposure.include=health,info,env,beans
+      - service.helloworld.message=Hello World
+    ports:
+      - 8080:8080
+    healthcheck:
+      test: "exit 0"
+    depends_on:
+      service-discovery:
+        condition: service_healthy
+    networks:
+      - helloworld-network 
+
+networks:
+  helloworld-network:
+    name: helloworld-network

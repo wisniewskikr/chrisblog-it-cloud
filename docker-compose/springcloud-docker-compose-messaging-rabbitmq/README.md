@@ -3,13 +3,17 @@ USAGE
 
 > **NOTE:** Tools **Java**, **Maven** and **Docker** have to be installed. Tool **Docker** has to be up and running. Please open Command Line tool on **main folder of project**.
 
+> **NOTE::** All configuration is set up in **service-rabbitmq** in files **etc/definictions.json** and **etc/rabbitmq.conf**.
+
 Usage steps:
 1. Build packages with `mvn clean package -D maven.test.skip`
 1. Start services with `docker-compose up -d --build`
-1. Visit service HelloWorld Fe via service Gateway with `http://localhost:8762`
-1. (Optional) Visit service HelloWorld Fe directly with `http://localhost:8080`
-1. (Optional) Visit service HelloWorld Be directly with `http://localhost:9090`
-1. (Optional) Visit service Discovery with `http://localhost:8761`
+1. Publish message via service Gateway with `http://localhost:8762/publish`
+1. Subscribe message via service Gateway with `http://localhost:8762/subscribe`
+1. (Optional) Without service Gateway:
+    * (Optional) Publish message directly with `http://localhost:9090/publish`
+    * (Optional) Subscribe message directly with `http://localhost:8080/subscribe`
+    * (Optional) Check services in service Discovery with `http://localhost:8761`
 1. Clear local environment
      * Remove services with `docker-compose down --rmi local`
 
@@ -18,7 +22,7 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to implement **microservices** in **Java** programming language with usage **Spring Boot Cloud** framework. This project contains **multiple** Hello World custom services which communicate each other. 
+The goal of this project is to present how to implement **message archirecture** with **RabbitMQ broker** in **Java microservice system**. Publisher and Subscriber are applications in **Java** programming language with usage **Spring Boot Cloud** framework.
 
 Project will be configured and run by orchestration tool called **Docker Compose**.
 
@@ -30,16 +34,16 @@ This project consists of following services:
 * **Service Gateway**: port **8762**. This service redirects traffic from outside system to inside system. Main tasks:
      * **Redirecting**: this service can redirect requests from outside system to some services inside system
      * **Load balancing**: this service can take care of load balancing requests from outside system to services inside system basing on information from service Discovery
-* **Service HelloWorld BE**: port **9090**. This service provides message, port and uuid
-* **Service HelloWorld FE**: port **8080**. This service provides message, port of BE, uuid of BE, port of FE and uuid of FE. It contacts with Hello World BE service
+* **Service Publisher**: port **9090**. This service publishes message, port and uuid
+* **Service Subscriber**: port **8080**. This service subscribes message and displays message, port of BE, uuid of BE, port of FE and uuid of FE.
 
 ##### Flow
 The following flow takes place in this project:
 1. User via Browser sends request to Service Gateway for content
-1. Service Gateway sends request to Service HelloWorld FE for content
-1. Service HelloWorld FE sends request to service HelloWorld BE for content
-1. Service HelloWorld BE sends back response to service HelloWorld FE with message, port and uuid
-1. Service HelloWorld FE sends back response to Service Gateway with message, port of BE, uuid of BE, port of FE and uuid of FE
+1. Service Gateway sends request to Service Publisher for publishing message
+1. Service Publisher publishes message
+1. Service Subscriber subscribes message
+1. Service Subscriber sends back response to Service Gateway with message, port of BE, uuid of BE, port of FE and uuid of FE
 1. Service Gateway sends back response to User via Browser with message, port of BE, uuid of BE, port of FE and uuid of FE
 
 ##### Launch

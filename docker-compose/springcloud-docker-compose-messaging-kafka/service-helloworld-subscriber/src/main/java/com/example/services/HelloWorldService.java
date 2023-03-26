@@ -1,9 +1,12 @@
 package com.example.services;
 
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 import com.example.dtos.HelloWorldPublisherDto;
@@ -14,24 +17,26 @@ import com.google.gson.Gson;
 public class HelloWorldService {
 	
 	private Environment environment;
-	private RabbitTemplate rabbitTemplate;
-	
-	@Value("${queue.name}")
-	private String queueName;
+	private List<String> messages;
 	
 	@Value("${default.message}")
 	private String defaultMessage;
 	
 	@Autowired
-	public HelloWorldService(Environment environment, RabbitTemplate rabbitTemplate) {
+	public HelloWorldService(Environment environment) {
 		this.environment = environment;
-		this.rabbitTemplate = rabbitTemplate;
-	}	
+		this.messages = new ArrayList<String>();
+	}
+	
+	@KafkaListener(topics = "#{'${topic.name}'}")
+	public void helloWorldListener(String message) {
+		System.out.println("Message: " + message);
+		messages.add(message);		
+	}
 	
 	public HelloWorldSubscriberDto getHelloWorldFeDto() {		
 		
-		Object queue = rabbitTemplate.receiveAndConvert(queueName);
-		String jsonString = (queue != null) ? queue.toString() : null;			
+		String jsonString = (messages.isEmpty()) ? null : messages.remove(0);			
 		if (jsonString == null) {
 			return new HelloWorldSubscriberDto(defaultMessage, null, null, null, null);
 		}

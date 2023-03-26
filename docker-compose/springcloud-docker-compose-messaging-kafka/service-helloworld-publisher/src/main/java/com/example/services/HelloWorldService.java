@@ -1,5 +1,6 @@
 package com.example.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -20,6 +21,7 @@ public class HelloWorldService {
 	@Value("${service.helloworld.message}")
 	private String message;
 
+	@Autowired
 	public HelloWorldService(Environment environment, KafkaTemplate<String, String> kafkaTemplate) {
 		this.kafkaTemplate = kafkaTemplate;
 		this.environment = environment;

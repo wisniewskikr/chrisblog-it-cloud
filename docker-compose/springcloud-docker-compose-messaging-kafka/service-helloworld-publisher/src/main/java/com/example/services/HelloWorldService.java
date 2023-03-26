@@ -1,8 +1,8 @@
 package com.example.services;
 
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import com.example.dtos.HelloWorldPublisherDto;
@@ -12,16 +12,16 @@ import com.google.gson.Gson;
 public class HelloWorldService {
 	
 	private Environment environment;
-	private RabbitTemplate rabbitTemplate;
+	private KafkaTemplate<String, String> kafkaTemplate;
+	
+	@Value("${topic.name}")
+	private String topicName;
 	
 	@Value("${service.helloworld.message}")
 	private String message;
-	
-	@Value("${queue.name}")
-	private String queueName;
 
-	public HelloWorldService(Environment environment, RabbitTemplate rabbitTemplate) {
-		this.rabbitTemplate = rabbitTemplate;
+	public HelloWorldService(Environment environment, KafkaTemplate<String, String> kafkaTemplate) {
+		this.kafkaTemplate = kafkaTemplate;
 		this.environment = environment;
 	}
 	
@@ -34,7 +34,7 @@ public class HelloWorldService {
 	}
 	
 	public void sendHelloWorld(HelloWorldPublisherDto helloWorld) {
-		rabbitTemplate.convertAndSend(queueName, new Gson().toJson(helloWorld));
+		kafkaTemplate.send(topicName, new Gson().toJson(helloWorld));
 	}
 
 }

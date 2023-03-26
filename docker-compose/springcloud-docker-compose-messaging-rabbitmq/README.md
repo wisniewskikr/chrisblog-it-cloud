@@ -3,11 +3,15 @@ USAGE
 
 > **NOTE:** Tools **Java**, **Maven** and **Docker** have to be installed. Tool **Docker** has to be up and running. Please open Command Line tool on **main folder of project**.
 
-> **NOTE::** All configuration is set up in **service-rabbitmq** in files **etc/definictions.json** and **etc/rabbitmq.conf**.
+> **NOTE::** All RabbitMQ configuration is set up in folder **service-rabbitmq** in files **etc/definictions.json** and **etc/rabbitmq.conf**.
 
 Usage steps:
 1. Build packages with `mvn clean package -D maven.test.skip`
-1. Start services with `docker-compose up -d --build`
+1. Start elements using Docker Compose with `docker-compose up --build -d`
+     * (Optional) Check if all Containers are up and ready with `docker ps -a` 
+1. (Optional) Check queues in RabbitMQ Console
+     * (Optional) Log in to RabbitMQ Console (guest/guest) with `http://localhost:15672`
+     * (Optional) Check queue ("helloworld-queue") with `http://localhost:15672/#/queues`
 1. Publish message via service Gateway with `http://localhost:8762/publish`
 1. Subscribe message via service Gateway with `http://localhost:8762/subscribe`
 1. (Optional) Without service Gateway:

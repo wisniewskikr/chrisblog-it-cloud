@@ -75,6 +75,7 @@ services:
       - management.endpoints.web.exposure.include=health,info,env,beans
       - SPRING_RABBITMQ_HOST=rabbitmq
       - queue.name=helloworld-queue
+      - default.message=There is no message in queue
     ports:
       - 8080:8080
     healthcheck:

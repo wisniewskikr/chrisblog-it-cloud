@@ -19,18 +19,25 @@ public class HelloWorldService {
 	@Value("${queue.name}")
 	private String queueName;
 	
+	@Value("${default.message}")
+	private String defaultMessage;
+	
 	@Autowired
 	public HelloWorldService(Environment environment, RabbitTemplate rabbitTemplate) {
 		this.environment = environment;
 		this.rabbitTemplate = rabbitTemplate;
 	}	
 	
-	public HelloWorldSubscriberDto getHelloWorldFeDto() {
+	public HelloWorldSubscriberDto getHelloWorldFeDto() {		
+		
+		Object queue = rabbitTemplate.receiveAndConvert(queueName);
+		String jsonString = (queue != null) ? queue.toString() : null;			
+		if (jsonString == null) {
+			return new HelloWorldSubscriberDto(defaultMessage, null, null, null, null);
+		}
 		
 		Gson gson = new Gson();
-		String jsonString = rabbitTemplate.receiveAndConvert(queueName).toString();
-		HelloWorldPublisherDto helloWorldBeDto = gson.fromJson(jsonString, HelloWorldPublisherDto.class);
-		
+		HelloWorldPublisherDto helloWorldBeDto = gson.fromJson(jsonString, HelloWorldPublisherDto.class);		
 		String message = helloWorldBeDto.getMessage();
 		String portBe = helloWorldBeDto.getPort();
 		String uuidBe = helloWorldBeDto.getUuid();

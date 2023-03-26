@@ -3,15 +3,10 @@ USAGE
 
 > **NOTE:** Tools **Java**, **Maven** and **Docker** have to be installed. Tool **Docker** has to be up and running. Please open Command Line tool on **main folder of project**.
 
-> **NOTE::** All RabbitMQ configuration is set up in folder **service-rabbitmq** in files **etc/definictions.json** and **etc/rabbitmq.conf**.
-
 Usage steps:
 1. Build packages with `mvn clean package -D maven.test.skip`
 1. Start elements using Docker Compose with `docker-compose up --build -d`
      * (Optional) Check if all Containers are up and ready with `docker ps -a` 
-1. (Optional) Check queues in RabbitMQ Console
-     * (Optional) Log in to RabbitMQ Console (guest/guest) with `http://localhost:15672`
-     * (Optional) Check queue ("helloworld-queue") with `http://localhost:15672/#/queues`
 1. Publish message via service Gateway with `http://localhost:8762/publish`
 1. Subscribe message via service Gateway with `http://localhost:8762/subscribe`
 1. (Optional) Without service Gateway:
@@ -26,7 +21,7 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to implement **message archirecture** with **RabbitMQ broker** in **Java microservice system**. Publisher and Subscriber are applications in **Java** programming language with usage **Spring Boot Cloud** framework.
+The goal of this project is to present how to implement **message archirecture** with **Kafka broker** in **Java microservice system**. Publisher and Subscriber are applications in **Java** programming language with usage **Spring Boot Cloud** framework.
 
 Project will be configured and run by orchestration tool called **Docker Compose**.
 
@@ -39,14 +34,16 @@ This project consists of following services:
      * **Redirecting**: this service can redirect requests from outside system to some services inside system
      * **Load balancing**: this service can take care of load balancing requests from outside system to services inside system basing on information from service Discovery
 * **Service Publisher**: port **9090**. This service publishes message, port and uuid
-* **Service Subscriber**: port **8080**. This service subscribes message and displays message, port of BE, uuid of BE, port of FE and uuid of FE.
+* **Service Subscriber**: port **8080**. This service subscribes message and displays message, port of BE, uuid of BE, port of FE and uuid of FE
+* **Kafka**: port **9092**. This is Event Broker which provides messages from Publisher to Subscriber
+* **Zookeeper**: port **2181**. This is discovery service for Kafka. All Kafka elements are registered here
 
 ##### Flow
 The following flow takes place in this project:
 1. User via Browser sends request to Service Gateway for content
 1. Service Gateway sends request to Service Publisher for publishing message
-1. Service Publisher publishes message
-1. Service Subscriber subscribes message
+1. Service Publisher publishes message. Service Subscriber contains listener which stored message in List
+1. Service Subscriber subscribes message. Message is read from List
 1. Service Subscriber sends back response to Service Gateway with message, port of BE, uuid of BE, port of FE and uuid of FE
 1. Service Gateway sends back response to User via Browser with message, port of BE, uuid of BE, port of FE and uuid of FE
 
@@ -62,6 +59,7 @@ This project uses following technologies:
 * **Microservices**: `https://docs.google.com/document/d/1j_lwf5L0-yTPew75RIWcA6AGeAnJjx0M4Bk4DrUcLXc/edit?usp=sharing`
 * **Docker**: `https://docs.google.com/document/d/1tKdfZIrNhTNWjlWcqUkg4lteI91EhBvaj6VDrhpnCnk/edit?usp=sharing`
 * **Docker Compose**: `https://docs.google.com/document/d/1SPrCS5OS_G0je_wmcLGrX8cFv7ZkQbb5uztNc9kElS4/edit?usp=sharing`
+* **Kafka**: `https://docs.google.com/document/d/1pDBnFbpvo0mNaIgxLCV--3qUn-wf0vHZiTYRQL05Wes/edit?usp=sharing`
 
 
 PRECONDITIONS

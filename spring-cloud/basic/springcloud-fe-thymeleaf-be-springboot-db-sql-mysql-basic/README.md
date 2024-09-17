@@ -2,15 +2,17 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to create **chain of applications (services)** which communicate each other and provide single ouput as an HTML page. This output consists of following elements:
-* **Database Message**: the HTML displays the message stored in database. It's the simple text "Hello World!".
-* **Back-End Port**: the HTML page displays the port of Back-End application.
-* **Front-End Port**: the HTML page displays port of Front-End application.
+The goal of this project is to present how to create **chain of applications (services)** with a **basic** configuration of **Spring Cloud** framework which in effect creates a **chain of microservices**. 
 
 This chain of services consists of following applications:
 * **Database**: SQL database - in this case type **MySql**
 * **Back-End**: an application created in **Java** programming language with usage **Spring Boot** framework
 * **Front-End**: an application created in **Java** programming language with usage **Spring Boot** framework. **Thymeleaf** engine is used to display data
+
+This output consists of following elements:
+* **Database Message**: the HTML displays the message stored in database. It's the simple text "Hello World!".
+* **Back-End Port**: the HTML page displays the port of Back-End application.
+* **Front-End Port**: the HTML page displays port of Front-End application.
 
 ##### Terminology
 Terminology explanation:
@@ -23,6 +25,8 @@ Terminology explanation:
 * **Back-End**: The back-end refers to the server-side part of a software application, responsible for managing the database, server logic, and application programming interface (API). It processes requests from the front-end (user interface), handles data storage, retrieval, and business logic, and sends the appropriate responses back to the front-end.
 * **Front-End**: Front-end refers to the part of a website or application that users interact with directly. It includes the visual elements, layout, and design, typically built using HTML, CSS, and JavaScript. The front-end is responsible for the user experience (UX) and interface (UI) that allows users to navigate and interact with the system.
 * **Thymeleaf**: Thymeleaf is a modern server-side Java template engine for Java-based web applications. It processes HTML, XML, JavaScript, CSS, and plain text, integrating with the Spring framework. It allows dynamic content rendering on the server while ensuring templates are HTML-compliant. Thymeleaf's key features include natural templates (which work as valid HTML even before rendering), easy integration with Spring MVC, and powerful expressions for iterating, conditional display, and data binding. It's often used to create dynamic web pages that combine static HTML with server-side logic in a clean and intuitive way.
+* **Spring Cloud**: Spring Cloud is a framework within the Spring ecosystem that provides tools for building distributed systems and microservices. It simplifies tasks like service discovery, configuration management, load balancing, circuit breakers, and distributed tracing, allowing developers to build scalable and resilient cloud-native applications.
+* **Microservices**: Microservices are a software architecture style where an application is built as a collection of small, independent services that communicate through APIs. Each service focuses on a specific business function, allowing for easier scaling, deployment, and maintenance.
 
 
 EXAMPLE

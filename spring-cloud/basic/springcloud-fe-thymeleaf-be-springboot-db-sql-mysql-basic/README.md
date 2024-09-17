@@ -47,7 +47,7 @@ USAGE MANUAL
 * **Java** (tested on version 17.0.5)
 * **Maven** (tested on version 3.8.5)
 * **Git** (tested on version 2.33.0.windows.2)
-* **Docker** (texted on version 4.33.1 - it has to be up and running)
+* **Docker** (tested on version 4.33.1 - it has to be up and running)
 
 ##### Required steps:
 1. In the first command line tool **start Docker MySql container** with `docker run -d --name mysql-container -e MYSQL_ROOT_PASSWORD=my_secret_password -e MYSQL_DATABASE=database -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin123 -p 3306:3306 mysql:5.7`
@@ -80,7 +80,7 @@ USAGE DOCKER
 > Please be aware that following tools should be installed on your local PC:  
 * **Operating System** (tested on Windows 11)
 * **Git** (tested on version 2.33.0.windows.2)
-* **Docker** (texted on version 4.33.1 - it has to be up and running)
+* **Docker** (tested on version 4.33.1 - it has to be up and running)
 
 ##### Required steps:
 1. In a command line tool create **Docker Network** with `docker network create helloworld-network`
@@ -122,7 +122,7 @@ USAGE DOCKER COMPOSE
 > Please be aware that following tools should be installed on your local PC:  
 * **Operating System** (tested on Windows 11)
 * **Git** (tested on version 2.33.0.windows.2)
-* **Docker** (texted on version 4.33.1 - it has to be up and running)
+* **Docker** (tested on version 4.33.1 - it has to be up and running)
 
 ##### Required steps:
 1. In a command line tool **start Docker containers** with `docker-compose up -d --build`

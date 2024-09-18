@@ -28,11 +28,18 @@ Terminology explanation:
 * **Spring Cloud**: Spring Cloud is a framework within the Spring ecosystem that provides tools for building distributed systems and microservices. It simplifies tasks like service discovery, configuration management, load balancing, circuit breakers, and distributed tracing, allowing developers to build scalable and resilient cloud-native applications.
 * **Microservices**: Microservices are a software architecture style where an application is built as a collection of small, independent services that communicate through APIs. Each service focuses on a specific business function, allowing for easier scaling, deployment, and maintenance.
 
+##### Implementation
+Implementation details:
+* **Eureka Service**: update pom.xml file with dependency **spring-cloud-starter-netflix-eureka-server**. Update Spring Boot starter class with annotation **@EnableEurekaServer** in starter class. Update file **application.properties** with service name and eureka properties.
+* **Other Services**: update pom.xml file with dependency **spring-cloud-starter-netflix-eureka-client**. Update Spring Boot starter class with annotation **@EnableEurekaClient** in starter class. Update file **application.properties** with services names, ports and eureka properties.
+
 
 EXAMPLE
 -------
 
 ![My Image](readme-images/image-01.png)
+
+![My Image](readme-images/image-02.png)
 
 
 USAGE MANUAL
@@ -51,13 +58,17 @@ USAGE MANUAL
 
 ##### Required steps:
 1. In the first command line tool **start Docker MySql container** with `docker run -d --name mysql-container -e MYSQL_ROOT_PASSWORD=my_secret_password -e MYSQL_DATABASE=database -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin123 -p 3306:3306 mysql:5.7`
-1. In the second command line tool **start Back-End application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-eureka_BE spring-boot:run`
-1. In the third command line tool **start Front-End application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-eureka_FE spring-boot:run`
+1. In the second command line tool **start Discovery application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-eureka_DISCOVERY spring-boot:run`
+1. In the third command line tool **start Back-End application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-eureka_BE spring-boot:run`
+1. In the fourth command line tool **start Front-End application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-eureka_FE spring-boot:run`
 1. In a browser visit `http://localhost:8080`
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
+1. In a browser visit `http://localhost:8761`
+   * Expected HTML page with **be** and **fe** details
 1. Clean up environment 
-     * In the third command line tool **stop Front-End application** with `ctrl + C`
-     * In the second command line tool **stop Back-End application** with `ctrl + C`
+     * In the fourth command line tool **stop Front-End application** with `ctrl + C`
+     * In the third command line tool **stop Back-End application** with `ctrl + C`
+     * In the second command line tool **stop Discovery application** with `ctrl + C`
      * In the first command line tool **stop and remove Docker MySql container** with `docker rm -f mysql-container`
      * In the first command line tool **remove Docker MySql image** with `docker rmi mysql:5.7`
 

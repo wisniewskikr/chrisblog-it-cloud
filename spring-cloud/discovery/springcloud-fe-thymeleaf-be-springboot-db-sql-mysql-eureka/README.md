@@ -52,7 +52,7 @@ EXAMPLE
 USAGE MANUAL
 ------------
 
-> **Usage Manual** means that Back-End and Front-End services are provided as **Java and Maven applications** and started **manually**. Database is provided as **Docker container**.
+> **Usage Manual** means that microservices are provided as **Java and Maven applications** and started **manually**. Database is provided as **Docker container**.
 
 > Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and then **proceed with steps below**. 
 
@@ -91,7 +91,7 @@ USAGE MANUAL
 USAGE DOCKER
 ------------
 
-> **Usage Docker** means that Back-End, Front-End services and Database are provided as **Docker containers**. 
+> **Usage Docker** means that microservices and Database are provided as **Docker containers**. 
 
 > Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and then **proceed with steps below**.
 
@@ -139,7 +139,7 @@ USAGE DOCKER
 USAGE DOCKER COMPOSE
 --------------------
 
-> **Usage Docker Compse** means that Back-End, Front-End services and Database are provided as **Docker containers** definied in **Docker Compose** file. 
+> **Usage Docker Compse** means that microservices and Database are provided as **Docker containers** definied in **Docker Compose** file. 
 
 > Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and then **proceed with steps below**.
 
@@ -173,7 +173,7 @@ USAGE DOCKER COMPOSE
 USAGE KUBERNETES (MINIKUBE)
 ---------------------------
 
-> **Usage Kubernetes** means that Back-End, Front-End services and Database are provided as **Docker containers** managed by **Kubernetes** type **Minikube**. 
+> **Usage Kubernetes** means that microservices and Database are provided as **Docker containers** managed by **Kubernetes** type **Minikube**. 
 
 > Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and then **proceed with steps below**.
 

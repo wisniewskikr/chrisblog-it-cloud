@@ -2,7 +2,7 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to create **chain of applications (services)** with a **basic** configuration of **Spring Cloud** framework which in effect creates a **chain of microservices**. 
+The goal of this project is to present how to create **chain of applications (services)** with a **discovery service** type **Eureka** with usage **Spring Cloud** framework. Discovery service enables diaplay basic information - like status, port etc. - of microservices.
 
 This chain of services consists of following applications:
 * **Database**: SQL database - in this case type **MySql**
@@ -182,11 +182,15 @@ USAGE KUBERNETES (MINIKUBE)
    * Expected mysql, be and fe as **READY 1/1** (it can take few minutes)
 1. In the first command line tool **with administrator privileges** display FE service in a Browser with `minikube service fe-service`
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
+1. In the first command line tool **with administrator privileges** display DISCOVERY service in a Browser with `minikube service discovery-service-display`
+   * Expected Discovery page with services **be** and **fe** details
 1. Clean up environment 
      * In the second command line tool **remove Kubernetes Pods** with `kubectl delete -f kubernetes.yaml`
      * In the first command line tool **with administrator privileges** stop **Minikube** with `minikube stop`
 
 ##### Optional steps:
+1. In a command line tool build Docker DISCOVERY image with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-eureka_DISCOVERY/Dockerfile -t wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-eureka_discovery:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-eureka_DISCOVERY`
+1. In a command line tool push Docker DISCOVERY image to Docker Repository with `docker push wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-eureka_discovery:0.0.1`
 1. In a command line tool build Docker BE image with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-eureka_BE/Dockerfile -t wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-eureka_be:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-eureka_BE`
 1. In a command line tool push Docker BE image to Docker Repository with `docker push wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-eureka_be:0.0.1` 
 1. In a command line tool build Docker FE image with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-eureka_FE/Dockerfile -t wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-eureka_fe:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-eureka_FE`

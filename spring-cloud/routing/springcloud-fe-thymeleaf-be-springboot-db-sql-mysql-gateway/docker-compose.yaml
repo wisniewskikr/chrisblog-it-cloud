@@ -27,7 +27,7 @@ services:
     image: discovery-image
     container_name: discovery-container
     build:
-      context: ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_DISCOVERY
+      context: ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_ROUTING
       dockerfile: Dockerfile
     depends_on:
       mysql:

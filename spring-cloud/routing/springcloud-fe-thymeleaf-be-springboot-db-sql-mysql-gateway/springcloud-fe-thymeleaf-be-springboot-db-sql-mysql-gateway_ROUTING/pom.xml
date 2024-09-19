@@ -11,7 +11,7 @@
 	</parent>
 
 	<groupId>com.example</groupId>
-	<artifactId>springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_DISCOVERY</artifactId>
+	<artifactId>springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_ROUTING</artifactId>
 	<version>0.0.1</version>
 
 	<properties>

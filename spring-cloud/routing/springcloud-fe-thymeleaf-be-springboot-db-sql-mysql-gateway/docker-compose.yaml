@@ -24,8 +24,8 @@ services:
 #      - dbdata:/var/lib/mysql
 
   discovery:
-    image: discovery-image
-    container_name: discovery-container
+    image: gateway-image
+    container_name: gateway-container
     build:
       context: ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_ROUTING
       dockerfile: Dockerfile

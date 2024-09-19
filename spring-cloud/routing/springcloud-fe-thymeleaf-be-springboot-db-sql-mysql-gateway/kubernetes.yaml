@@ -85,7 +85,7 @@ spec:
     spec:
       containers:
       - name: discovery
-        image: wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_discovery:0.0.1
+        image: wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_routing:0.0.1
         ports:
         - containerPort: 8761
         readinessProbe:

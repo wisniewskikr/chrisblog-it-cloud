@@ -181,21 +181,19 @@ USAGE KUBERNETES (MINIKUBE)
 1. In the second command line tool **start Kubernetes Pods** with `kubectl apply -f kubernetes.yaml`
 1. In the second command line tool **check status of Kubernetes Pods** with `kubectl get pods`
    * Expected mysql, be and fe as **READY 1/1** (it can take few minutes)
-1. In the first command line tool **with administrator privileges** display FE service in a Browser with `minikube service fe-service`
+1. In the first command line tool **with administrator privileges** display FE service in a Browser with `minikube service gateway-service`
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
-1. In the first command line tool **with administrator privileges** display DISCOVERY service in a Browser with `minikube service discovery-service-display`
-   * Expected Discovery page with services **be** and **fe** details
 1. Clean up environment 
      * In the second command line tool **remove Kubernetes Pods** with `kubectl delete -f kubernetes.yaml`
      * In the first command line tool **with administrator privileges** stop **Minikube** with `minikube stop`
 
 ##### Optional steps:
-1. In a command line tool build Docker DISCOVERY image with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_ROUTING/Dockerfile -t wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_routing:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_ROUTING`
-1. In a command line tool push Docker DISCOVERY image to Docker Repository with `docker push wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_routing:0.0.1`
 1. In a command line tool build Docker BE image with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_BE/Dockerfile -t wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_be:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_BE`
 1. In a command line tool push Docker BE image to Docker Repository with `docker push wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_be:0.0.1` 
 1. In a command line tool build Docker FE image with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_FE/Dockerfile -t wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_fe:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_FE`
-1. In a command line tool push Docker FE image to Docker Repository with `docker push wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_fe:0.0.1` 
+1. In a command line tool push Docker FE image to Docker Repository with `docker push wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_fe:0.0.1`
+1. In a command line tool build Docker GATEWAY image with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_ROUTING/Dockerfile -t wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_routing:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_ROUTING`
+1. In a command line tool push Docker GATEWAY image to Docker Repository with `docker push wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_routing:0.0.1` 
 1. In the first command line tool with administrator privileges check status of Minikube with `minikube status`
 1. In the first command line tool with administrator privileges check Docker images in Minikube with `minikube ssh docker images`
 1. In the first command line tool with administrator privileges check Docker containers in Minikube with `minikube ssh docker ps`

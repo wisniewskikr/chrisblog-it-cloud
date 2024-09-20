@@ -106,7 +106,7 @@ USAGE DOCKER
 1. In a command line tool build **Docker image FE** with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_FE/Dockerfile -t fe-image:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_FE`
 1. In a command line tool build and start **Docker container FE** with `docker run -p 8080:8080 --name fe-container --network helloworld-network -e baseurl.be=http://be-container:8081 -d fe-image:0.0.1`
 1. In a command line tool build **Docker image GATEWAY** with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_ROUTING/Dockerfile -t gateway-image:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_ROUTING`
-1. In a command line tool build and start **Docker container GATEWAY** with `docker run -p 8762:8762 --name gateway-container --network helloworld-network -e spring.cloud.gateway.routes[0].uri=http://fe-container:8080 -d gateway-image:0.0.1`
+1. In a command line tool build and start **Docker container GATEWAY** with `docker run -p 8762:8762 --name gateway-container --network helloworld-network -e spring_cloud_gateway_routes_0_id=forward_route_to_fe -e spring_cloud_gateway_routes_0_uri=http://fe-container:8080 -e spring_cloud_gateway_routes_0_predicates_0=Path=/** -d gateway-image:0.0.1`
 1. In a browser visit `http://localhost:8762`
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
 1. Clean up environment:

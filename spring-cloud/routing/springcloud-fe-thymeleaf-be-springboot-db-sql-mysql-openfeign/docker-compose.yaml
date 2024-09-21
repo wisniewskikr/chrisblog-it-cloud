@@ -27,7 +27,7 @@ services:
     image: be-image:0.0.1
     container_name: be-container
     build:
-      context: ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-basic_BE
+      context: ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-openfeign_BE
       dockerfile: Dockerfile
     environment:
       spring.datasource.url: jdbc:mysql://mysql:3306/database
@@ -49,7 +49,7 @@ services:
     image: fe-image:0.0.1
     container_name: fe-container
     build:
-      context: ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-basic_FE
+      context: ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-openfeign_FE
       dockerfile: Dockerfile
     environment:
       baseurl.be: http://be:8081

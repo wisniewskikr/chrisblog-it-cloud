@@ -52,7 +52,7 @@ services:
       context: ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-openfeign_FE
       dockerfile: Dockerfile
     environment:
-      baseurl.be: http://be:8081
+      openfeing.api.url: http://be:8081
     depends_on:
       - be
     ports:

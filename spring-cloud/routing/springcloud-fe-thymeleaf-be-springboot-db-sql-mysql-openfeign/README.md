@@ -28,6 +28,13 @@ Terminology explanation:
 * **Spring Cloud**: Spring Cloud is a framework within the Spring ecosystem that provides tools for building distributed systems and microservices. It simplifies tasks like service discovery, configuration management, load balancing, circuit breakers, and distributed tracing, allowing developers to build scalable and resilient cloud-native applications.
 * **Microservices**: Microservices are a software architecture style where an application is built as a collection of small, independent services that communicate through APIs. Each service focuses on a specific business function, allowing for easier scaling, deployment, and maintenance.
 
+##### Implementation
+Service with FeignClient:
+* Update file pom.xml with **spring-cloud-starter-openfeign**
+* Update Spring Boot start class with annotation **@EnableFeignClients**
+* Implement interface with annotation **@FeignClient**
+* Use above information in service to get data from API
+
 
 EXAMPLE
 -------

@@ -85,7 +85,7 @@ spec:
     spec:
       containers:
       - name: discovery
-        image: wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-eureka_discovery:0.0.1
+        image: wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_discovery:0.0.1
         ports:
         - containerPort: 8761
         readinessProbe:
@@ -156,7 +156,7 @@ spec:
     spec:
       containers:
       - name: be
-        image: wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-eureka_be:0.0.1
+        image: wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_be:0.0.1
         ports:
         - containerPort: 8081
         env:
@@ -217,7 +217,7 @@ spec:
     spec:
       containers:
       - name: fe
-        image: wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-eureka_fe:0.0.1
+        image: wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_fe:0.0.1
         ports:
         - containerPort: 8080
         env:

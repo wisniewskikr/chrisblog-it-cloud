@@ -39,7 +39,7 @@ Terminology explanation:
 Implementation details for **Config Server**:
 * Update file **pom.xml** with **spring-boot-starter-web** and **spring-cloud-config-server** dependencies
 * Update start class with annotation **@EnableConfigServer**
-* Update file **application.properties** with property **spring.cloud.config.server.git.uri**
+* Update file **application.properties** with property **spring.cloud.config.server.git.uri** and **spring.cloud.config.server.git.default-label**
 
 Implementation details for **Config Client**:
 * Update file **pom.xml** with **spring-boot-starter-web** and **spring-cloud-starter-config** dependencies

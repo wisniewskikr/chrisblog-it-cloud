@@ -65,7 +65,7 @@ USAGE MANUAL
 
 ##### Required steps:
 1. In the first command line tool **start Docker MySql container** with `docker run -d --name mysql-container -e MYSQL_ROOT_PASSWORD=my_secret_password -e MYSQL_DATABASE=database -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin123 -p 3306:3306 mysql:5.7`
-1. In the second command line tool **start Discovery application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_DISCOVERY spring-boot:run`
+1. In the second command line tool **start Discovery application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_SERVER spring-boot:run`
 1. In the third command line tool **start Back-End application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_BE spring-boot:run`
 1. In the fourth command line tool **start Front-End application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_FE spring-boot:run`
 1. In a browser visit `http://localhost:8080`
@@ -103,7 +103,7 @@ USAGE DOCKER
 ##### Required steps:
 1. In a command line tool create **Docker Network** with `docker network create helloworld-network`
 1. In a command line tool build and start **Docker container MySql** database with `docker run -d --name mysql-container -e MYSQL_ROOT_PASSWORD=my_secret_password -e MYSQL_DATABASE=database -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin123 -p 3306:3306 --network helloworld-network mysql:5.7`
-1. In a command line tool build **Docker image DISCOVERY** with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_DISCOVERY/Dockerfile -t discovery-image:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_DISCOVERY`
+1. In a command line tool build **Docker image DISCOVERY** with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_SERVER/Dockerfile -t discovery-image:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_SERVER`
 1. In a command line tool build and start **Docker container DISCOVERY** with `docker run -p 8761:8761 --name discovery-container --network helloworld-network -d discovery-image:0.0.1`
 1. In a command line tool build **Docker image BE** with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_BE/Dockerfile -t be-image:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_BE`
 1. In a command line tool build and start **Docker container BE** with `docker run -p 8081:8081 --name be-container --network helloworld-network -e spring.datasource.url=jdbc:mysql://mysql-container:3306/database -e eureka.client.service-url.defaultZone=http://discovery-container:8761/eureka -d be-image:0.0.1`
@@ -196,7 +196,7 @@ USAGE KUBERNETES (MINIKUBE)
      * In the first command line tool **with administrator privileges** stop **Minikube** with `minikube stop`
 
 ##### Optional steps:
-1. In a command line tool build Docker DISCOVERY image with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_DISCOVERY/Dockerfile -t wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_discovery:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_DISCOVERY`
+1. In a command line tool build Docker DISCOVERY image with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_SERVER/Dockerfile -t wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_discovery:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_SERVER`
 1. In a command line tool push Docker DISCOVERY image to Docker Repository with `docker push wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_discovery:0.0.1`
 1. In a command line tool build Docker BE image with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_BE/Dockerfile -t wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_be:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_BE`
 1. In a command line tool push Docker BE image to Docker Repository with `docker push wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_be:0.0.1` 

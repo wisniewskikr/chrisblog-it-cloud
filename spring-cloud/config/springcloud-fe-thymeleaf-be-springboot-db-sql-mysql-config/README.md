@@ -45,6 +45,9 @@ Implementation details for **Config Client**:
 * Update file **pom.xml** with **spring-boot-starter-web** and **spring-cloud-starter-config** dependencies
 * Update file **application.properties** with property **spring.config.import**
 
+Implementation details for **Git Repository**:
+* In Git repository create properties per client **<client-name>.properties** (for instance "be.properties", "fe.properties" etc.)
+
 
 EXAMPLE
 -------

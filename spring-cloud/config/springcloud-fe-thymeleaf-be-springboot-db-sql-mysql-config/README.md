@@ -36,9 +36,14 @@ Terminology explanation:
 
 
 ##### Implementation
-Implementation details:
-* **Eureka Service Discovery**: update pom.xml file with dependency **spring-cloud-starter-netflix-eureka-server**. Update Spring Boot starter class with annotation **@EnableEurekaServer** in starter class. Update file **application.properties** with service name, port and eureka properties.
-* **Other Services**: update pom.xml file with dependency **spring-cloud-starter-netflix-eureka-client**. Update Spring Boot starter class with annotation **@EnableEurekaClient** in starter class. Update file **application.properties** with services names, ports and eureka properties.
+Implementation details for **Config Server**:
+* Update file **pom.xml** with **spring-boot-starter-web** and **spring-cloud-config-server** dependencies
+* Update start class with annotation **@EnableConfigServer**
+* Update file **application.properties** with property **spring.cloud.config.server.git.uri**
+
+Implementation details for **Config Client**:
+* Update file **pom.xml** with **spring-boot-starter-web** and **spring-cloud-starter-config** dependencies
+* Update file **application.properties** with property **spring.config.import**
 
 
 EXAMPLE
@@ -65,17 +70,15 @@ USAGE MANUAL
 
 ##### Required steps:
 1. In the first command line tool **start Docker MySql container** with `docker run -d --name mysql-container -e MYSQL_ROOT_PASSWORD=my_secret_password -e MYSQL_DATABASE=database -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin123 -p 3306:3306 mysql:5.7`
-1. In the second command line tool **start Discovery application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_SERVER spring-boot:run`
+1. In the second command line tool **start Config application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_SERVER spring-boot:run`
 1. In the third command line tool **start Back-End application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_BE spring-boot:run`
 1. In the fourth command line tool **start Front-End application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_FE spring-boot:run`
 1. In a browser visit `http://localhost:8080`
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
-1. In a browser visit `http://localhost:8761`
-   * Expected Discovery page with services **be** and **fe** details
 1. Clean up environment 
      * In the fourth command line tool **stop Front-End application** with `ctrl + C`
      * In the third command line tool **stop Back-End application** with `ctrl + C`
-     * In the second command line tool **stop Discovery application** with `ctrl + C`
+     * In the second command line tool **stop Config application** with `ctrl + C`
      * In the first command line tool **stop and remove Docker MySql container** with `docker rm -f mysql-container`
      * In the first command line tool **remove Docker MySql image** with `docker rmi mysql:5.7`
 

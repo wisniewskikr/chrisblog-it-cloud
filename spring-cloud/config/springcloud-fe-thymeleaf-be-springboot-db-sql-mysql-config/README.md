@@ -196,8 +196,8 @@ USAGE KUBERNETES (MINIKUBE)
      * In the first command line tool **with administrator privileges** stop **Minikube** with `minikube stop`
 
 ##### Optional steps:
-1. In a command line tool build Docker DISCOVERY image with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_SERVER/Dockerfile -t wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_discovery:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_SERVER`
-1. In a command line tool push Docker DISCOVERY image to Docker Repository with `docker push wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_discovery:0.0.1`
+1. In a command line tool build Docker DISCOVERY image with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_SERVER/Dockerfile -t wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_server:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_SERVER`
+1. In a command line tool push Docker DISCOVERY image to Docker Repository with `docker push wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_server:0.0.1`
 1. In a command line tool build Docker BE image with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_BE/Dockerfile -t wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_be:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_BE`
 1. In a command line tool push Docker BE image to Docker Repository with `docker push wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_be:0.0.1` 
 1. In a command line tool build Docker FE image with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_FE/Dockerfile -t wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_fe:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_FE`

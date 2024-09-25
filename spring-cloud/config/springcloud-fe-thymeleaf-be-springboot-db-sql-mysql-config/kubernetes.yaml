@@ -65,7 +65,7 @@ spec:
 
 ---
 
-# DISCOVERY CONFIGURATION
+# CONFIG CONFIGURATION
 
 apiVersion: apps/v1
 kind: Deployment
@@ -111,7 +111,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: discovery-service
+  name: config-service
 spec:
   selector:
     app: discovery
@@ -124,7 +124,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: discovery-service-display
+  name: config-service-display
 spec:
   type: NodePort
   selector:
@@ -163,7 +163,7 @@ spec:
         - name: spring.datasource.url
           value: jdbc:mysql://mysql:3306/database
         - name: eureka.client.service-url.defaultZone
-          value: http://discovery-service:8761/eureka
+          value: http://config-service:8761/eureka
         readinessProbe:
           httpGet:
             path: /actuator/health
@@ -224,7 +224,7 @@ spec:
         - name: baseurl.be
           value: http://be-service:8081
         - name: eureka.client.service-url.defaultZone
-          value: http://discovery-service:8761/eureka
+          value: http://config-service:8761/eureka
         readinessProbe:
           httpGet:
             path: /actuator/health

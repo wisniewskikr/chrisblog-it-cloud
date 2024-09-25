@@ -24,8 +24,8 @@ services:
 #      - dbdata:/var/lib/mysql
 
   discovery:
-    image: discovery-image
-    container_name: discovery-container
+    image: config-image
+    container_name: config-container
     build:
       context: ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_SERVER
       dockerfile: Dockerfile

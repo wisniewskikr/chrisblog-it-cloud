@@ -195,8 +195,6 @@ USAGE KUBERNETES (MINIKUBE)
    * Expected mysql, be and fe as **READY 1/1** (it can take few minutes)
 1. In the first command line tool **with administrator privileges** display FE service in a Browser with `minikube service fe-service`
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
-1. In the first command line tool **with administrator privileges** display CONFIG service in a Browser with `minikube service config-service-display`
-   * Expected Discovery page with services **be** and **fe** details
 1. Clean up environment 
      * In the second command line tool **remove Kubernetes Pods** with `kubectl delete -f kubernetes.yaml`
      * In the first command line tool **with administrator privileges** stop **Minikube** with `minikube stop`

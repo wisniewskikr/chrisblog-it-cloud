@@ -70,28 +70,28 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: discovery
+  name: config
   labels:
-    app: discovery
+    app: config
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: discovery
+      app: config
   template:
     metadata:
       labels:
-        app: discovery
+        app: config
     spec:
       containers:
-      - name: discovery
+      - name: config
         image: wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_server:0.0.1
         ports:
-        - containerPort: 8761
+        - containerPort: 8888
         readinessProbe:
           httpGet:
             path: /actuator/health
-            port: 8761
+            port: 8888
           initialDelaySeconds: 30
           periodSeconds: 10
           timeoutSeconds: 5
@@ -99,7 +99,7 @@ spec:
         livenessProbe:
           httpGet:
             path: /actuator/health
-            port: 8761
+            port: 8888
           initialDelaySeconds: 30
           periodSeconds: 10
           timeoutSeconds: 5
@@ -114,10 +114,10 @@ metadata:
   name: config-service
 spec:
   selector:
-    app: discovery
+    app: config
   ports:
-    - port: 8761
-      targetPort: 8761
+    - port: 8888
+      targetPort: 8888
 
 ---
 
@@ -162,8 +162,6 @@ spec:
         env:
         - name: spring.datasource.url
           value: jdbc:mysql://mysql:3306/database
-        - name: eureka.client.service-url.defaultZone
-          value: http://config-service:8761/eureka
         readinessProbe:
           httpGet:
             path: /actuator/health
@@ -223,8 +221,6 @@ spec:
         env:
         - name: baseurl.be
           value: http://be-service:8081
-        - name: eureka.client.service-url.defaultZone
-          value: http://config-service:8761/eureka
         readinessProbe:
           httpGet:
             path: /actuator/health

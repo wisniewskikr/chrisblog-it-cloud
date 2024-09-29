@@ -110,15 +110,13 @@ USAGE DOCKER
 1. In a command line tool create **Docker Network** with `docker network create helloworld-network`
 1. In a command line tool build and start **Docker container MySql** database with `docker run -d --name mysql-container -e MYSQL_ROOT_PASSWORD=my_secret_password -e MYSQL_DATABASE=database -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin123 -p 3306:3306 --network helloworld-network mysql:5.7`
 1. In a command line tool build **Docker image CONFIG** with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_SERVER/Dockerfile -t config-image:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_SERVER`
-1. In a command line tool build and start **Docker container CONFIG** with `docker run -p 8761:8761 --name config-container --network helloworld-network -d config-image:0.0.1`
+1. In a command line tool build and start **Docker container CONFIG** with `docker run -p 8888:8888 --name config-container --network helloworld-network -e spring.cloud.config.server.git.default-label=docker -d config-image:0.0.1`
 1. In a command line tool build **Docker image BE** with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_BE/Dockerfile -t be-image:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_BE`
-1. In a command line tool build and start **Docker container BE** with `docker run -p 8081:8081 --name be-container --network helloworld-network -e spring.datasource.url=jdbc:mysql://mysql-container:3306/database -e eureka.client.service-url.defaultZone=http://config-container:8761/eureka -d be-image:0.0.1`
+1. In a command line tool build and start **Docker container BE** with `docker run -p 8081:8081 --name be-container --network helloworld-network -d be-image:0.0.1`
 1. In a command line tool build **Docker image FE** with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_FE/Dockerfile -t fe-image:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_FE`
-1. In a command line tool build and start **Docker container FE** with `docker run -p 8080:8080 --name fe-container --network helloworld-network -e baseurl.be=http://be-container:8081 -e eureka.client.service-url.defaultZone=http://config-container:8761/eureka -d fe-image:0.0.1`
+1. In a command line tool build and start **Docker container FE** with `docker run -p 8080:8080 --name fe-container --network helloworld-network -d fe-image:0.0.1`
 1. In a browser visit `http://localhost:8080`
-   * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
-1. In a browser visit `http://localhost:8761`
-   * Expected Discovery page with services **be** and **fe** details 
+   * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port**  
 1. Clean up environment 
      * In a command line tool stop and remove **BE Docker container** with `docker rm -f fe-container`
      * In a command line tool remove **BE Docker image** with `docker rmi fe-image:0.0.1`

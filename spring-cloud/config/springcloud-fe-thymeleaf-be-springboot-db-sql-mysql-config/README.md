@@ -2,7 +2,7 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to create **chain of applications (microservices)** with a **discovery service** type **Eureka** with usage **Java** programming language and **Spring Cloud** framework. Discovery service enables diaplay basic information - like status, port etc. - of microservices.
+The goal of this project is to present how to create **chain of applications (microservices)** with a **config service** with usage **Java** programming language and **Spring Cloud** framework. Config service enables reading configuration properties stored in the Github.
 
 This chain of services consists of following applications:
 * **Database**: SQL database - in this case type **MySql**
@@ -14,9 +14,6 @@ Fe output consists of following elements:
 * **Database Message**: the HTML displays the message stored in database. It's the simple text "Hello World!".
 * **Back-End Port**: the HTML page displays the port of Back-End application.
 * **Front-End Port**: the HTML page displays port of Front-End application.
-
-Eureka output consists of following elements:
-* **Services status**: basic information - like status, port etc. - about microservices
 
 ##### Terminology
 Terminology explanation:
@@ -31,9 +28,7 @@ Terminology explanation:
 * **Thymeleaf**: Thymeleaf is a modern server-side Java template engine for Java-based web applications. It processes HTML, XML, JavaScript, CSS, and plain text, integrating with the Spring framework. It allows dynamic content rendering on the server while ensuring templates are HTML-compliant. Thymeleaf's key features include natural templates (which work as valid HTML even before rendering), easy integration with Spring MVC, and powerful expressions for iterating, conditional display, and data binding. It's often used to create dynamic web pages that combine static HTML with server-side logic in a clean and intuitive way.
 * **Spring Cloud**: Spring Cloud is a framework within the Spring ecosystem that provides tools for building distributed systems and microservices. It simplifies tasks like service discovery, configuration management, load balancing, circuit breakers, and distributed tracing, allowing developers to build scalable and resilient cloud-native applications.
 * **Microservices**: Microservices are a software architecture style where an application is built as a collection of small, independent services that communicate through APIs. Each service focuses on a specific business function, allowing for easier scaling, deployment, and maintenance.
-* **Service Discovery**: Service discovery in microservices is the process of automatically detecting and connecting services within a distributed system. It allows services to find each other dynamically without hardcoding network locations, enabling seamless scaling and communication across microservices.
-* **Eureka Service Discovery**: Eureka Service Discovery is a system that allows microservices in a distributed architecture to dynamically register themselves and discover other services. It acts as a registry where services announce their availability, enabling seamless communication between services without needing hard-coded network addresses. Eureka is commonly used in Netflix's microservices architecture and part of the Spring Cloud ecosystem.
-
+* **Spring Cloud Config**: Spring Cloud Config is a tool within the Spring Cloud ecosystem that provides server-side and client-side support for externalized configuration in distributed systems. It allows you to store configuration data centrally (e.g., in a Git repository) and share it across multiple microservices, ensuring consistent and manageable configuration settings for your entire application environment.
 
 ##### Implementation
 Implementation details for **Config Server**:
@@ -53,8 +48,6 @@ EXAMPLE
 -------
 
 ![My Image](readme-images/image-01.png)
-
-![My Image](readme-images/image-02.png)
 
 
 USAGE MANUAL

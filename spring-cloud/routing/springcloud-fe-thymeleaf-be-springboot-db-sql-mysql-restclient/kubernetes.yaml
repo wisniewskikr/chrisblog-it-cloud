@@ -148,7 +148,7 @@ spec:
         ports:
         - containerPort: 8080
         env:
-        - name: openfeing.api.url
+        - name: api.url
           value: http://be-service:8081
         readinessProbe:
           httpGet:

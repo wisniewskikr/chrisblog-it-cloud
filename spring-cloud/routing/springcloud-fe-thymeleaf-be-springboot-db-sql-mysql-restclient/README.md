@@ -2,7 +2,7 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to create **chain of applications (microservices)** with **routing** type **OpenFeign** with usage **Java** programming language and **Spring Cloud** framework. Routing type OpenFeign is used as API Client - it enables communicate with API and get response from it. 
+The goal of this project is to present how to create **chain of applications (microservices)** with **routing** type **RestClient** with usage **Java** programming language and **Spring Cloud** framework. Routing type RestClient is used as API Client - it enables communicate with API and get response from it. 
 
 This chain of services consists of following applications:
 * **Database**: SQL database - in this case type **MySql**
@@ -27,13 +27,12 @@ Terminology explanation:
 * **Thymeleaf**: Thymeleaf is a modern server-side Java template engine for Java-based web applications. It processes HTML, XML, JavaScript, CSS, and plain text, integrating with the Spring framework. It allows dynamic content rendering on the server while ensuring templates are HTML-compliant. Thymeleaf's key features include natural templates (which work as valid HTML even before rendering), easy integration with Spring MVC, and powerful expressions for iterating, conditional display, and data binding. It's often used to create dynamic web pages that combine static HTML with server-side logic in a clean and intuitive way.
 * **Spring Cloud**: Spring Cloud is a framework within the Spring ecosystem that provides tools for building distributed systems and microservices. It simplifies tasks like service discovery, configuration management, load balancing, circuit breakers, and distributed tracing, allowing developers to build scalable and resilient cloud-native applications.
 * **Microservices**: Microservices are a software architecture style where an application is built as a collection of small, independent services that communicate through APIs. Each service focuses on a specific business function, allowing for easier scaling, deployment, and maintenance.
-* **OpenFeign**: OpenFeign is a Java library used for simplifying HTTP-based service-to-service communication in microservices. It provides a declarative web service client, allowing developers to define API interfaces and automatically create HTTP requests to call remote services, often using REST, without manually handling the low-level HTTP details.
+* **RestClient**: The Java REST client is a tool or library that allows Java applications to communicate with RESTful web services over HTTP.
 
 ##### Implementation
-Service with FeignClient:
-* Update file pom.xml with **spring-cloud-starter-openfeign**
-* Update Spring Boot start class with annotation **@EnableFeignClients**
-* Implement interface with annotation **@FeignClient**
+Service:
+* Implement interface **HelloWorldClinet** with annotation **@HttpExchange** and **@GetExchange**
+* Implement class **RestClientConfig** which connects **RestClient** with **HelloWorldClient**
 * Use above information in service to get data from API
 
 

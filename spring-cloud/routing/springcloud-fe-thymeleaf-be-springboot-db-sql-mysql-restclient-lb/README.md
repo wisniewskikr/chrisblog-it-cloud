@@ -68,10 +68,9 @@ USAGE MANUAL
 1. In the second command line tool **start Discovery application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-restclient-lb_DISCOVERY spring-boot:run`
 1. In the third command line tool **start Back-End application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-restclient-lb_BE spring-boot:run`
 1. In the fourth command line tool **start Front-End application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-restclient-lb_FE spring-boot:run`
-1. In a browser visit `http://localhost:8080`
+1. In the fifth command line tool **start Routing application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-restclient-lb_ROUTING spring-boot:run`
+1. In a browser visit `http://localhost:8762`
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
-1. In a browser visit `http://localhost:8761`
-   * Expected Discovery page with services **be** and **fe** details
 1. Clean up environment 
      * In the fourth command line tool **stop Front-End application** with `ctrl + C`
      * In the third command line tool **stop Back-End application** with `ctrl + C`
@@ -80,6 +79,8 @@ USAGE MANUAL
      * In the first command line tool **remove Docker MySql image** with `docker rmi mysql:5.7`
 
 ##### Optional steps:
+1. In a browser visit `http://localhost:8761`
+   * Expected Discovery page with services **be**, **fe** and **routing** details
 1. In a browser check Back-End application healthcheck with `http://localhost:8081/actuator/health`
 1. In a browser check Back-End application API result with `http://localhost:8081/message/1`
 1. In a browser check Front-End application healthcheck with `http://localhost:8080/actuator/health`

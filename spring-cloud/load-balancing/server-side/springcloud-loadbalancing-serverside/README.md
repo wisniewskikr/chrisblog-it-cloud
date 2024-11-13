@@ -69,7 +69,7 @@ USAGE MANUAL
 1. In the third command line tool **start Back-End application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-restclient-lb_BE spring-boot:run`
 1. In the fourth command line tool **start Front-End application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-restclient-lb_FE spring-boot:run`
 1. In the fifth command line tool **start Routing application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-restclient-lb_ROUTING spring-boot:run`
-1. In a browser visit `http://localhost:8762`
+1. In a browser visit `http://localhost:8762/fe`
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
 1. Clean up environment 
      * In the fourth command line tool **stop Front-End application** with `ctrl + C`

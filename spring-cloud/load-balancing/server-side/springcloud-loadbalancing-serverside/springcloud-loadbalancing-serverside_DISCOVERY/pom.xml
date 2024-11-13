@@ -11,7 +11,7 @@
 	</parent>
 
 	<groupId>com.example</groupId>
-	<artifactId>springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-restclient-lb_DISCOVERY</artifactId>
+	<artifactId>springcloud-loadbalancing-serverside_DISCOVERY</artifactId>
 	<version>0.0.1</version>
 
 	<properties>

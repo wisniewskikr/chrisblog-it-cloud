@@ -1,5 +1,3 @@
-version: '3'
- 
 services:
 
   mysql:
@@ -45,7 +43,6 @@ services:
   
   be:
     image: be-image:0.0.1
-    container_name: be-container
     build:
       context: ./springcloud-loadbalancing-serverside_BE
       dockerfile: Dockerfile
@@ -54,32 +51,46 @@ services:
       eureka.client.service-url.defaultZone: http://discovery:8761/eureka
     depends_on:
       - discovery
+    deploy:
+      replicas: 2
     ports:
-      - 8081:8081
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8081/actuator/health"]
-      interval: 10s
-      timeout: 10s
-      retries: 5
-      start_period: 10s
+      - 0:80
     networks:
       - helloworld-network
 
   fe:
     image: fe-image:0.0.1
-    container_name: fe-container
     build:
       context: ./springcloud-loadbalancing-serverside_FE
       dockerfile: Dockerfile
     environment:
-      baseurl.be: http://be:8081
+      eureka.client.service-url.defaultZone: http://discovery:8761/eureka
+    depends_on:      
+      - discovery
+      - be
+    deploy:
+      replicas: 2
+    ports:
+      - 0:80
+    networks:
+      - helloworld-network
+
+  gateway:
+    image: gateway-image
+    container_name: gateway-container
+    build:
+      context: ./springcloud-loadbalancing-serverside_ROUTING
+      dockerfile: Dockerfile
+    environment:
       eureka.client.service-url.defaultZone: http://discovery:8761/eureka
     depends_on:
+      - discovery
       - be
+      - fe
     ports:
-      - 8080:8080
+      - 8060:8060
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:8060/actuator/health"]
       interval: 10s
       timeout: 10s
       retries: 5

@@ -109,18 +109,24 @@ USAGE DOCKER
 1. In a command line tool build **Docker image DISCOVERY** with `docker build -f springcloud-loadbalancing-serverside_DISCOVERY/Dockerfile -t discovery-image:0.0.1 ./springcloud-loadbalancing-serverside_DISCOVERY`
 1. In a command line tool build and start **Docker container DISCOVERY** with `docker run -p 8761:8761 --name discovery-container --network helloworld-network -d discovery-image:0.0.1`
 1. In a command line tool build **Docker image BE** with `docker build -f springcloud-loadbalancing-serverside_BE/Dockerfile -t be-image:0.0.1 ./springcloud-loadbalancing-serverside_BE`
-1. In a command line tool build and start **Docker container BE** with `docker run -p 8081:8081 --name be-container --network helloworld-network -e spring.datasource.url=jdbc:mysql://mysql-container:3306/database -e eureka.client.service-url.defaultZone=http://discovery-container:8761/eureka -d be-image:0.0.1`
+1. In a command line tool build and start **Docker first container BE** with `docker run -P --name be-container-1 --network helloworld-network -e spring.datasource.url=jdbc:mysql://mysql-container:3306/database -e eureka.client.service-url.defaultZone=http://discovery-container:8761/eureka -d be-image:0.0.1`
+1. In a command line tool build and start **Docker second container BE** with `docker run -P --name be-container-2 --network helloworld-network -e spring.datasource.url=jdbc:mysql://mysql-container:3306/database -e eureka.client.service-url.defaultZone=http://discovery-container:8761/eureka -d be-image:0.0.1`
 1. In a command line tool build **Docker image FE** with `docker build -f springcloud-loadbalancing-serverside_FE/Dockerfile -t fe-image:0.0.1 ./springcloud-loadbalancing-serverside_FE`
-1. In a command line tool build and start **Docker container FE** with `docker run -p 8080:8080 --name fe-container --network helloworld-network -e baseurl.be=http://be-container:8081 -e eureka.client.service-url.defaultZone=http://discovery-container:8761/eureka -d fe-image:0.0.1`
-1. In a browser visit `http://localhost:8080`
+1. In a command line tool build and start **Docker first container FE** with `docker run -P --name fe-container-1 --network helloworld-network -e eureka.client.service-url.defaultZone=http://discovery-container:8761/eureka -d fe-image:0.0.1`
+1. In a command line tool build and start **Docker second container FE** with `docker run -P --name fe-container-2 --network helloworld-network -e eureka.client.service-url.defaultZone=http://discovery-container:8761/eureka -d fe-image:0.0.1`
+1. In a command line tool build **Docker image GATEWAY** with `docker build -f springcloud-loadbalancing-serverside_ROUTING/Dockerfile -t gateway-image:0.0.1 ./springcloud-loadbalancing-serverside_ROUTING`
+1. In a command line tool build and start **Docker container GATEWAY** with `docker run -p 8060:8060 --name gateway-container --network helloworld-network -e eureka.client.service-url.defaultZone=http://discovery-container:8761/eureka -d gateway-image:0.0.1`
+1. In a browser visit `http://localhost:8060/fe`
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
-1. In a browser visit `http://localhost:8761`
-   * Expected Discovery page with services **be** and **fe** details 
 1. Clean up environment 
-     * In a command line tool stop and remove **BE Docker container** with `docker rm -f fe-container`
-     * In a command line tool remove **BE Docker image** with `docker rmi fe-image:0.0.1`
-     * In a command line tool stop and remove **FE Docker container** with `docker rm -f be-container`
-     * In a command line tool remove **FE Docker image** with `docker rmi be-image:0.0.1`
+     * In a command line tool stop and remove **Gateway container** with `docker rm -f gateway-container`
+     * In a command line tool remove **Gateway Docker image** with `docker rmi gateway-image:0.0.1`
+     * In a command line tool stop and remove **second FE Docker container** with `docker rm -f fe-container-2`
+     * In a command line tool stop and remove **first FE Docker container** with `docker rm -f fe-container-1`
+     * In a command line tool remove **FE Docker image** with `docker rmi fe-image:0.0.1`
+     * In a command line tool stop and remove **second BE Docker container** with `docker rm -f be-container-2`
+     * In a command line tool stop and remove **first BE Docker container** with `docker rm -f be-container-1`
+     * In a command line tool remove **BE Docker image** with `docker rmi be-image:0.0.1`
      * In a command line tool stop and remove **DISCOVERY Docker container** with `docker rm -f discovery-container`
      * In a command line tool remove **DISCOVERY Docker image** with `docker rmi discovery-image:0.0.1`
      * In a command line tool stop and remove **Database Docker container** with `docker rm -f mysql-container`
@@ -128,9 +134,8 @@ USAGE DOCKER
      * In a command line tool remove **Docker Nerwork** with `docker network rm helloworld-network`
 
 ##### Optional steps:
-1. In a browser check Back-End application healthcheck with `http://localhost:8081/actuator/health`
-1. In a browser check Back-End application API result with `http://localhost:8081/message/1`
-1. In a browser check Front-End application healthcheck with `http://localhost:8080/actuator/health`
+1. In a browser visit `http://localhost:8761`
+   * Expected Discovery page with services **be** and **fe** details 
 1. In a command line tool check list of Docker images with `docker images`
 1. In a command line tool check list of all Docker containers with `docker ps -a`
 1. In a command line tool check list of active Docker containers with `docker ps`

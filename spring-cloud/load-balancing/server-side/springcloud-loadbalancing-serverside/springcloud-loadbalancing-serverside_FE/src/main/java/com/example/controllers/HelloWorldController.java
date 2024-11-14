@@ -9,6 +9,7 @@ import com.example.dtos.HelloWorldDto;
 import com.example.services.HelloWorldService;
 
 @Controller
+@RequestMapping("fe")
 public class HelloWorldController {
 
     private HelloWorldService helloWorldService;

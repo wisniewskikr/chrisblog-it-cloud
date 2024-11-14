@@ -9,7 +9,7 @@ import com.example.dtos.HelloWorldDto;
 @HttpExchange
 public interface HelloWorldClient {
 
-    @GetExchange("/message/{id}")
+    @GetExchange("/be/message/{id}")
     HelloWorldDto findById(@PathVariable("id") Long id);
 
 }

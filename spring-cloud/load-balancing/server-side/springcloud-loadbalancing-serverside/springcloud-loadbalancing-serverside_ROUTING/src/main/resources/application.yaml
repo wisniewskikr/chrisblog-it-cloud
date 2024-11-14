@@ -1,0 +1,24 @@
+server:
+  port: 8060
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      routes:
+        - id: fe
+          uri: lb://fe
+          predicates:
+            - Path=/fe/**
+        - id: be
+          uri: lb://be
+          predicates:
+            - Path=/be/**
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    instance-id: ${random.value}

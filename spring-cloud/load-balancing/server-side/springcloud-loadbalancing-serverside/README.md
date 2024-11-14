@@ -66,10 +66,12 @@ USAGE MANUAL
 ##### Required steps:
 1. In the first command line tool **start Docker MySql container** with `docker run -d --name mysql-container -e MYSQL_ROOT_PASSWORD=my_secret_password -e MYSQL_DATABASE=database -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin123 -p 3306:3306 mysql:5.7`
 1. In the second command line tool **start Discovery application** with `mvn -f ./springcloud-loadbalancing-serverside_DISCOVERY spring-boot:run`
-1. In the third command line tool **start Back-End application** with `mvn -f ./springcloud-loadbalancing-serverside_BE spring-boot:run`
-1. In the fourth command line tool **start Front-End application** with `mvn -f ./springcloud-loadbalancing-serverside_FE spring-boot:run`
-1. In the fifth command line tool **start Routing application** with `mvn -f ./springcloud-loadbalancing-serverside_ROUTING spring-boot:run`
-1. In a browser visit `http://localhost:8762/fe`
+1. In the third command line tool **start first Back-End application** with `mvn -f ./springcloud-loadbalancing-serverside_BE spring-boot:run`
+1. In the fourth command line tool **start second Back-End application** with `mvn -f ./springcloud-loadbalancing-serverside_BE spring-boot:run`
+1. In the fifth command line tool **start first Front-End application** with `mvn -f ./springcloud-loadbalancing-serverside_FE spring-boot:run`
+1. In the sixth command line tool **start second Front-End application** with `mvn -f ./springcloud-loadbalancing-serverside_FE spring-boot:run`
+1. In the seventh command line tool **start Routing application** with `mvn -f ./springcloud-loadbalancing-serverside_ROUTING spring-boot:run`
+1. In a browser visit `http://localhost:8060/fe`
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
 1. Clean up environment 
      * In the fourth command line tool **stop Front-End application** with `ctrl + C`

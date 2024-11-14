@@ -135,7 +135,7 @@ USAGE DOCKER
 
 ##### Optional steps:
 1. In a browser visit `http://localhost:8761`
-   * Expected Discovery page with services **be** and **fe** details 
+   * Expected Discovery page with services **be**, **fe** and **routing** details 
 1. In a command line tool check list of Docker images with `docker images`
 1. In a command line tool check list of all Docker containers with `docker ps -a`
 1. In a command line tool check list of active Docker containers with `docker ps`

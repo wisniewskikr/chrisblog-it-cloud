@@ -51,8 +51,6 @@ EXAMPLE
 
 ![My Image](readme-images/image-01.png)
 
-![My Image](readme-images/image-02.png)
-
 
 USAGE MANUAL
 ------------

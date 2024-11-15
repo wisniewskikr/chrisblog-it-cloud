@@ -207,6 +207,8 @@ USAGE KUBERNETES (MINIKUBE)
 1. In a command line tool push Docker BE image to Docker Repository with `docker push wisniewskikr/springcloud-loadbalancing-serverside_be:0.0.1` 
 1. In a command line tool build Docker FE image with `docker build -f springcloud-loadbalancing-serverside_FE/Dockerfile -t wisniewskikr/springcloud-loadbalancing-serverside_fe:0.0.1 ./springcloud-loadbalancing-serverside_FE`
 1. In a command line tool push Docker FE image to Docker Repository with `docker push wisniewskikr/springcloud-loadbalancing-serverside_fe:0.0.1` 
+1. In a command line tool build Docker ROUTING image with `docker build -f springcloud-loadbalancing-serverside_ROUTING/Dockerfile -t wisniewskikr/springcloud-loadbalancing-serverside_routing:0.0.1 ./springcloud-loadbalancing-serverside_ROUTING`
+1. In a command line tool push Docker ROUTING image to Docker Repository with `docker push wisniewskikr/springcloud-loadbalancing-serverside_routing:0.0.1`
 1. In the first command line tool with administrator privileges check status of Minikube with `minikube status`
 1. In the first command line tool with administrator privileges check Docker images in Minikube with `minikube ssh docker images`
 1. In the first command line tool with administrator privileges check Docker containers in Minikube with `minikube ssh docker ps`

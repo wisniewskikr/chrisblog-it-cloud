@@ -192,10 +192,9 @@ USAGE KUBERNETES (MINIKUBE)
 1. In the second command line tool **start Kubernetes Pods** with `kubectl apply -f kubernetes.yaml`
 1. In the second command line tool **check status of Kubernetes Pods** with `kubectl get pods`
    * Expected mysql, be and fe as **READY 1/1** (it can take few minutes)
-1. In the first command line tool **with administrator privileges** display FE service in a Browser with `minikube service fe-service`
+1. In the first command line tool **with administrator privileges** display ROUTING service in a Browser with `minikube service routing-service`
+   * In a browser change address to **URL + /fe**
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
-1. In the first command line tool **with administrator privileges** display DISCOVERY service in a Browser with `minikube service discovery-service-display`
-   * Expected Discovery page with services **be** and **fe** details
 1. Clean up environment 
      * In the second command line tool **remove Kubernetes Pods** with `kubectl delete -f kubernetes.yaml`
      * In the first command line tool **with administrator privileges** stop **Minikube** with `minikube stop`
@@ -209,6 +208,8 @@ USAGE KUBERNETES (MINIKUBE)
 1. In a command line tool push Docker FE image to Docker Repository with `docker push wisniewskikr/springcloud-loadbalancing-serverside_fe:0.0.1` 
 1. In a command line tool build Docker ROUTING image with `docker build -f springcloud-loadbalancing-serverside_ROUTING/Dockerfile -t wisniewskikr/springcloud-loadbalancing-serverside_routing:0.0.1 ./springcloud-loadbalancing-serverside_ROUTING`
 1. In a command line tool push Docker ROUTING image to Docker Repository with `docker push wisniewskikr/springcloud-loadbalancing-serverside_routing:0.0.1`
+1. In the first command line tool **with administrator privileges** display DISCOVERY service in a Browser with `minikube service discovery-service-display`
+   * Expected Discovery page with services **be**, **fe** and **routing** details
 1. In the first command line tool with administrator privileges check status of Minikube with `minikube status`
 1. In the first command line tool with administrator privileges check Docker images in Minikube with `minikube ssh docker images`
 1. In the first command line tool with administrator privileges check Docker containers in Minikube with `minikube ssh docker ps`

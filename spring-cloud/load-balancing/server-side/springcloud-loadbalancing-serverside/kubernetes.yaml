@@ -145,7 +145,7 @@ metadata:
   labels:
     app: be
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: be
@@ -208,7 +208,7 @@ metadata:
   labels:
     app: fe
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: fe
@@ -260,26 +260,26 @@ spec:
 
 ---
 
-# GATEWAY CONFIGURATION
+# ROUTING CONFIGURATION
 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gateway
+  name: routing
   labels:
-    app: gateway
+    app: routing
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: gateway
+      app: routing
   template:
     metadata:
       labels:
-        app: gateway
+        app: routing
     spec:
       containers:
-      - name: gateway
+      - name: routing
         image: wisniewskikr/springcloud-loadbalancing-serverside_routing:0.0.1
         ports:
         - containerPort: 8060
@@ -309,11 +309,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: gateway-service
+  name: routing-service
 spec:
   type: NodePort
   selector:
-    app: gateway
+    app: routing
   ports:
     - port: 8060
       targetPort: 8060

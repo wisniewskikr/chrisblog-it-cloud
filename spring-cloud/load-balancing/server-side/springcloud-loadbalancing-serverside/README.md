@@ -2,13 +2,16 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to create **chain of applications (microservices)** with a **discovery service** type **Eureka** with usage **Java** programming language and **Spring Cloud** framework. Discovery service enables diaplay basic information - like status, port etc. - of microservices.
+The goal of this project is to present how to create **chain of applications (microservices)** with a **load balancing** type **server-side** with usage **Java** programming language and **Spring Cloud** framework. Server-side load balancing is the process of distributing incoming network traffic across multiple servers on the server side. In Spring Cloud framework it requires:
+* **Eureka**: discovery service
+* **Gateway**: API Gateway servvie
 
 This chain of services consists of following applications:
 * **Database**: SQL database - in this case type **MySql**
 * **Back-End**: an application created in **Java** programming language with usage **Spring Boot** framework
 * **Front-End**: an application created in **Java** programming language with usage **Spring Boot** framework. **Thymeleaf** engine is used to display data
 * **Eureka**: a tool which displays basic information - like status, port etc. - about microservices
+* **API Gateway**: a tool which distibutes incoming network traffic
 
 Fe output consists of following elements:
 * **Database Message**: the HTML displays the message stored in database. It's the simple text "Hello World!".
@@ -33,6 +36,8 @@ Terminology explanation:
 * **Microservices**: Microservices are a software architecture style where an application is built as a collection of small, independent services that communicate through APIs. Each service focuses on a specific business function, allowing for easier scaling, deployment, and maintenance.
 * **Service Discovery**: Service discovery in microservices is the process of automatically detecting and connecting services within a distributed system. It allows services to find each other dynamically without hardcoding network locations, enabling seamless scaling and communication across microservices.
 * **Eureka Service Discovery**: Eureka Service Discovery is a system that allows microservices in a distributed architecture to dynamically register themselves and discover other services. It acts as a registry where services announce their availability, enabling seamless communication between services without needing hard-coded network addresses. Eureka is commonly used in Netflix's microservices architecture and part of the Spring Cloud ecosystem.
+* **Spring Cloud API Gateway**: it is a framework for building API gateways in microservices architectures. It provides routing, load balancing, security, and other features for managing and directing traffic between clients and microservices. 
+* **Server-side load balancing**: it is the process of distributing incoming network traffic across multiple servers on the server side to ensure efficient resource use, improve application performance, and enhance reliability. It is typically managed by a load balancer device or software that sits between the client and the servers.
 
 
 ##### Implementation

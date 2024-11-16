@@ -30,10 +30,9 @@ Terminology explanation:
 * **RestClient**: The Java REST client is a tool or library that allows Java applications to communicate with RESTful web services over HTTP.
 
 ##### Implementation
-Service:
-* Implement interface **HelloWorldClinet** with annotation **@HttpExchange** and **@GetExchange**
-* Implement class **RestClientConfig** which connects **RestClient** with **HelloWorldClient**
-* Use above information in service to get data from API
+Services:
+* In pom.xml file add following dependencies **micrometer-tracing-bridge-brave** and **zipkin-reporter-brave**
+* In application.properties file add property **management.tracing.sampling.probability** if you want to change default **0.1**
 
 
 EXAMPLE

@@ -58,13 +58,18 @@ USAGE MANUAL
 
 ##### Required steps:
 1. In the first command line tool **start Docker MySql container** with `docker run -d --name mysql-container -e MYSQL_ROOT_PASSWORD=my_secret_password -e MYSQL_DATABASE=database -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin123 -p 3306:3306 mysql:5.7`
-1. In the second command line tool **start Back-End application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-zipkin_BE spring-boot:run`
-1. In the third command line tool **start Front-End application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-zipkin_FE spring-boot:run`
+1. In the second command line tool **start Docker Zipkin container** with `docker run -d -p 9411:9411 --name zipkin-container openzipkin/zipkin:3.4.2`
+1. In the third command line tool **start Back-End application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-zipkin_BE spring-boot:run`
+1. In the fourth command line tool **start Front-End application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-zipkin_FE spring-boot:run`
 1. In a browser visit `http://localhost:8080`
-   * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
+   * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port**
+1. In a browser visit `http://localhost:9411`
+   * Expected HTML page with **Zipkin** dashboard 
 1. Clean up environment 
-     * In the third command line tool **stop Front-End application** with `ctrl + C`
-     * In the second command line tool **stop Back-End application** with `ctrl + C`
+     * In the fourth command line tool **stop Front-End application** with `ctrl + C`
+     * In the third command line tool **stop Back-End application** with `ctrl + C`
+     * In the second command line tool **stop and remove Docker Zipkin container** with `docker rm -f zipkin-container`
+     * In the second command line tool **remove Docker Zipkin image** with `docker rmi openzipkin/zipkin:3.4.2`
      * In the first command line tool **stop and remove Docker MySql container** with `docker rm -f mysql-container`
      * In the first command line tool **remove Docker MySql image** with `docker rmi mysql:5.7`
 

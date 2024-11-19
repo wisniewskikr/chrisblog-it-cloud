@@ -1,5 +1,7 @@
 package com.example.controllers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,8 @@ import com.example.services.HelloWorldService;
 @Controller
 public class HelloWorldController {
 
+    Logger logger = LoggerFactory.getLogger(HelloWorldController.class);
+
     private HelloWorldService helloWorldService;
     private Environment environment; 
 
@@ -21,6 +25,8 @@ public class HelloWorldController {
 
     @GetMapping
     String findById(Model model) {
+
+        logger.info("Called FE method HelloWorldController.findById()");
 
         HelloWorldDto helloWorldDto = helloWorldService.findById(1L);
         model.addAttribute("message", helloWorldDto.text());        

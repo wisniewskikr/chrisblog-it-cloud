@@ -80,7 +80,7 @@ USAGE MANUAL
      * In the first command line tool **stop and remove Docker MySql container** with `docker rm -f mysql-container`
      * In the first command line tool **remove Docker MySql image** with `docker rmi mysql:5.7`
      * In the first command line tool **stop and remove Logstash container** with `docker rm -f logstash`
-     * In the first command line tool **remove Logstash** image with `docker rmi logstash-container docker.elastic.co/logstash/logstash:8.3.3
+     * In the first command line tool **remove Logstash image** with `docker rmi logstash-container docker.elastic.co/logstash/logstash:8.3.3`
      * In the first command line tool **stop and remove Kibana container** with `docker rm -f kibana`
      * In the first command line tool **remove Kibana image** with `docker rmi docker.elastic.co/kibana/kibana:8.3.3` 
      * In the first command line tool **stop and remove Elasticsearch container** with `docker rm -f elasticsearch`

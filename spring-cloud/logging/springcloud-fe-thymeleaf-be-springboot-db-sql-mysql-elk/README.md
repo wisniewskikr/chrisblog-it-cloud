@@ -30,16 +30,24 @@ Terminology explanation:
 * **RestClient**: The Java REST client is a tool or library that allows Java applications to communicate with RESTful web services over HTTP.
 
 ##### Implementation
-Service:
-* Implement interface **HelloWorldClinet** with annotation **@HttpExchange** and **@GetExchange**
-* Implement class **RestClientConfig** which connects **RestClient** with **HelloWorldClient**
-* Use above information in service to get data from API
+Steps:
+* In project add folder **logstash**
+* In every service add file **src/main/resources/logback-spring.xml**
+* In every servide update **pom.xml** file with **net.logstash.logback**
 
 
 EXAMPLE
 -------
 
 ![My Image](readme-images/image-01.png)
+
+![My Image](readme-images/image-02.png)
+
+![My Image](readme-images/image-03.png)
+
+![My Image](readme-images/image-04.png)
+
+![My Image](readme-images/image-05.png)
 
 
 USAGE MANUAL

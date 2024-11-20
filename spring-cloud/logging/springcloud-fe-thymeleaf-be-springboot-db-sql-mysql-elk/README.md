@@ -112,13 +112,18 @@ USAGE DOCKER
 
 ##### Required steps:
 1. In a command line tool create **Docker Network** with `docker network create helloworld-network`
+1. In a command line tool **start Elasticsearch container** with `docker run -d -p 9200:9200 --network helloworld-network -e bootstrap.memory_lock=true -e ES_JAVA_OPTS="-Xms512m -Xmx512m" -e discovery.type=single-node -e xpack.security.enabled=false -v elasticsearch_data:/usr/share/elasticsearch/data --name elasticsearch docker.elastic.co/elasticsearch/elasticsearch:8.3.3`
+1. In a command line tool **start Kibana container** with `docker run -d -p 5601:5601 --network helloworld-network -e ELASTICSEARCH_URL=http://elasticsearch-container:9200 -e ELASTICSEARCH_HOSTS="http://elasticsearch:9200" --name kibana docker.elastic.co/kibana/kibana:8.3.3`
+1. In a line tool **start Logstash container** with `docker run -d -p 5044:5044 -p 5000:5000/tcp -p 5000:5000/udp -p 9600:9600 --network helloworld-network -e LS_JAVA_OPTS="-Xmx256m -Xms256m" -v "$(pwd)/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro" -v "$(pwd)/logstash/pipeline:/usr/share/logstash/pipeline:ro" --name logstash docker.elastic.co/logstash/logstash:8.3.3`
 1. In a command line tool build and start **Docker container MySql** database with `docker run -d --name mysql-container -e MYSQL_ROOT_PASSWORD=my_secret_password -e MYSQL_DATABASE=database -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin123 -p 3306:3306 --network helloworld-network mysql:5.7`
 1. In a command line tool build **Docker image BE** with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-elk_BE/Dockerfile -t be-image:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-elk_BE`
-1. In a command line tool build and start **Docker container BE** with `docker run -p 8081:8081 --name be-container --network helloworld-network -e spring.datasource.url=jdbc:mysql://mysql-container:3306/database -d be-image:0.0.1`
+1. In a command line tool build and start **Docker container BE** with `docker run -p 8081:8081 --name be-container --network helloworld-network -e spring.datasource.url=jdbc:mysql://mysql-container:3306/database -e logstash.server=logstash -e logstash.port=5000 -d be-image:0.0.1`
 1. In a command line tool build **Docker image FE** with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-elk_FE/Dockerfile -t fe-image:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-elk_FE`
-1. In a command line tool build and start **Docker container FE** with `docker run -p 8080:8080 --name fe-container --network helloworld-network -e api.url=http://be-container:8081 -d fe-image:0.0.1`
+1. In a command line tool build and start **Docker container FE** with `docker run -p 8080:8080 --name fe-container --network helloworld-network -e api.url=http://be-container:8081 -e logstash.server=logstash -e logstash.port=5000 -d fe-image:0.0.1`
 1. In a browser visit `http://localhost:8080`
-   * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port**  
+   * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
+1. In a browser visit `http://localhost:5601`
+   * Expected HTML page with **Kibana dashboard** 
 1. Clean up environment 
      * In a command line tool stop and remove **BE Docker container** with `docker rm -f fe-container`
      * In a command line tool remove **BE Docker image** with `docker rmi fe-image:0.0.1`
@@ -126,7 +131,13 @@ USAGE DOCKER
      * In a command line tool remove **FE Docker image** with `docker rmi be-image:0.0.1`
      * In a command line tool stop and remove **Database Docker container** with `docker rm -f mysql-container`
      * In a command line tool remove **Database Docker image** with `docker rmi mysql:5.7`
-     * In a command line tool remove **Docker Nerwork** with `docker network rm helloworld-network`
+     * In a command line tool **stop and remove Logstash container** with `docker rm -f logstash`
+     * In a command line tool **remove Logstash image** with `docker rmi logstash-container docker.elastic.co/logstash/logstash:8.3.3`
+     * In a command line tool **stop and remove Kibana container** with `docker rm -f kibana`
+     * In a command line tool **remove Kibana image** with `docker rmi docker.elastic.co/kibana/kibana:8.3.3` 
+     * In a command line tool **stop and remove Elasticsearch container** with `docker rm -f elasticsearch`
+     * In a command line tool **remove Elasticsearch image** with `docker rmi docker.elastic.co/elasticsearch/elasticsearch:8.3.3`   
+     * In a command line tool remove **Docker Nerwork** with `docker network rm helloworld-network` 
 
 ##### Optional steps:
 1. In a browser check Back-End application healthcheck with `http://localhost:8081/actuator/health`

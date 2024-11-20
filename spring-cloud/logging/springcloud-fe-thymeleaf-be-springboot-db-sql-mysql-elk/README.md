@@ -74,6 +74,8 @@ USAGE MANUAL
 1. In the third command line tool **start Front-End application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-elk_FE spring-boot:run`
 1. In a browser visit `http://localhost:8080`
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
+1. In a browser visit `http://localhost:5601`
+   * Expected HTML page with **Kibana dashboard**
 1. Clean up environment 
      * In the third command line tool **stop Front-End application** with `ctrl + C`
      * In the second command line tool **stop Back-End application** with `ctrl + C`
@@ -84,7 +86,8 @@ USAGE MANUAL
      * In the first command line tool **stop and remove Kibana container** with `docker rm -f kibana`
      * In the first command line tool **remove Kibana image** with `docker rmi docker.elastic.co/kibana/kibana:8.3.3` 
      * In the first command line tool **stop and remove Elasticsearch container** with `docker rm -f elasticsearch`
-     * In the first command line tool **remove Elasticsearch image** with `docker rmi docker.elastic.co/elasticsearch/elasticsearch:8.3.3`    
+     * In the first command line tool **remove Elasticsearch image** with `docker rmi docker.elastic.co/elasticsearch/elasticsearch:8.3.3`   
+     * In a command line tool remove **Docker Nerwork** with `docker network rm helloworld-network` 
 
 ##### Optional steps:
 1. In a browser check Back-End application healthcheck with `http://localhost:8081/actuator/health`

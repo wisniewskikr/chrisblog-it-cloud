@@ -167,6 +167,8 @@ USAGE DOCKER COMPOSE
 1. In a command line tool **start Docker containers** with `docker-compose up -d --build`
 1. In a browser visit `http://localhost:8080`
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
+1. In a browser visit `http://localhost:5601`
+   * Expected HTML page with **Kibana dashboard**
 1. Clean up environment 
      * In a command line tool **remove Docker containers** with `docker-compose down --rmi all`
 

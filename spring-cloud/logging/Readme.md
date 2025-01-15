@@ -4,4 +4,5 @@ Graylog
 Splunk
 AWS CloudWatch
 Datadog
+Loggy
 Loki (with Grafana)

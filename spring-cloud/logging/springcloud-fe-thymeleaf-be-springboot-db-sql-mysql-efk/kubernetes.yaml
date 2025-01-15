@@ -292,7 +292,7 @@ spec:
     spec:
       containers:
       - name: be
-        image: wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-elk_be:0.0.1
+        image: wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-efk_be:0.0.1
         ports:
         - containerPort: 8081
         env:
@@ -355,7 +355,7 @@ spec:
     spec:
       containers:
       - name: fe
-        image: wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-elk_fe:0.0.1
+        image: wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-efk_fe:0.0.1
         ports:
         - containerPort: 8080
         env:

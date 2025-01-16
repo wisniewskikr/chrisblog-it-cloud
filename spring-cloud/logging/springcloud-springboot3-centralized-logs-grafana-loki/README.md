@@ -69,6 +69,7 @@ USAGE MANUAL
 ##### Required steps:
 1. In the first command line tool **create network** with `docker network create helloworld-network`
 1. In the first command line tool **start Loki container** with `docker run -d -p 3100:3100 --network helloworld-network --name loki grafana/loki:main-45bae6d -config.file=/etc/loki/local-config.yaml`
+1. In the first command line tool **start Grafana container** with `docker run -d --name grafana -p 3000:3000 --network helloworld-network -v /grafana:/etc/grafana/provisioning/datasources:ro -e GF_AUTH_ANONYMOUS_ENABLED=true -e GF_AUTH_ANONYMOUS_ORG_ROLE=Admin -e GF_AUTH_DISABLE_LOGIN_FORM=true grafana/grafana:10.1.0`
 1. In the first command line tool **start Docker MySql container** with `docker run -d --name mysql-container -e MYSQL_ROOT_PASSWORD=my_secret_password -e MYSQL_DATABASE=database -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin123 -p 3306:3306 mysql:5.7`
 1. In the second command line tool **start Back-End application** with `mvn -f ./springcloud-springboot3-centralized-logs-grafana-loki_BE spring-boot:run`
 1. In the third command line tool **start Front-End application** with `mvn -f ./springcloud-springboot3-centralized-logs-grafana-loki_FE spring-boot:run`

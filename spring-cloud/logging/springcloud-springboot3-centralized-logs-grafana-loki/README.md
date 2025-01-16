@@ -68,9 +68,7 @@ USAGE MANUAL
 
 ##### Required steps:
 1. In the first command line tool **create network** with `docker network create helloworld-network`
-1. In the first command line tool **start Elasticsearch container** with `docker run -d -p 9200:9200 --network helloworld-network -e bootstrap.memory_lock=true -e ES_JAVA_OPTS="-Xms512m -Xmx512m" -e discovery.type=single-node -e xpack.security.enabled=false -v elasticsearch_data:/usr/share/elasticsearch/data --name elasticsearch docker.elastic.co/elasticsearch/elasticsearch:8.3.3`
-1. In the first command line tool **start Kibana container** with `docker run -d -p 5601:5601 --network helloworld-network -e ELASTICSEARCH_URL=http://elasticsearch-container:9200 -e ELASTICSEARCH_HOSTS="http://elasticsearch:9200" --name kibana docker.elastic.co/kibana/kibana:8.3.3`
-1. In the first command line tool **start Logstash container** with `docker run -d -p 5044:5044 -p 5000:5000/tcp -p 5000:5000/udp -p 9600:9600 --network helloworld-network -e LS_JAVA_OPTS="-Xmx256m -Xms256m" -v "$(pwd)/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro" -v "$(pwd)/logstash/pipeline:/usr/share/logstash/pipeline:ro" --name logstash docker.elastic.co/logstash/logstash:8.3.3`
+1. In the first command line tool **start Loki container** with `docker run -d -p 3100:3100 --network helloworld-network --name loki grafana/loki:main-45bae6d -config.file=/etc/loki/local-config.yaml`
 1. In the first command line tool **start Docker MySql container** with `docker run -d --name mysql-container -e MYSQL_ROOT_PASSWORD=my_secret_password -e MYSQL_DATABASE=database -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin123 -p 3306:3306 mysql:5.7`
 1. In the second command line tool **start Back-End application** with `mvn -f ./springcloud-springboot3-centralized-logs-grafana-loki_BE spring-boot:run`
 1. In the third command line tool **start Front-End application** with `mvn -f ./springcloud-springboot3-centralized-logs-grafana-loki_FE spring-boot:run`

@@ -292,7 +292,7 @@ spec:
     spec:
       containers:
       - name: be
-        image: wisniewskikr/springcloud-springboot3-centralized-logs-grafana-loki_be:0.0.1
+        image: wisniewskikr/springcloud-springboot3-centralized-traces-grafana-tempo_be:0.0.1
         ports:
         - containerPort: 8081
         env:
@@ -355,7 +355,7 @@ spec:
     spec:
       containers:
       - name: fe
-        image: wisniewskikr/springcloud-springboot3-centralized-logs-grafana-loki_fe:0.0.1
+        image: wisniewskikr/springcloud-springboot3-centralized-traces-grafana-tempo_fe:0.0.1
         ports:
         - containerPort: 8080
         env:

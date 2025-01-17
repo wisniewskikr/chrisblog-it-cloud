@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Hello World</title>
+</head>
+<body>
+    <ul>
+        <li>
+            <span><b>Database Message: </b></span>
+            <span th:text="${message}"></span>
+        </li>
+        <li>
+            <span><b>Back-End Port: </b></span>
+            <span th:text="${portBe}"></span>
+        </li>
+        <li>
+            <span><b>Front-End Port: </b></span>
+            <span th:text="${portFe}"></span>
+        </li>
+    </ul>
+</body>
+</html>

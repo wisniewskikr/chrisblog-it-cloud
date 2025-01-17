@@ -161,7 +161,7 @@ USAGE MANUAL + DOCKER COMPOSE
 USAGE DOCKER
 ------------
 
-> **Usage Docker** means that Back-End, Front-End services and Database are provided as **Docker containers**. 
+> **Usage Docker** means that all services are started as Docker containers. 
 
 > Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and then **proceed with steps below**.
 
@@ -171,32 +171,35 @@ USAGE DOCKER
 * **Docker** (tested on version 4.33.1 - it has to be up and running)
 
 ##### Required steps:
-1. In a command line tool create **Docker Network** with `docker network create helloworld-network`
-1. In a command line tool **start Elasticsearch container** with `docker run -d -p 9200:9200 --network helloworld-network -e bootstrap.memory_lock=true -e ES_JAVA_OPTS="-Xms512m -Xmx512m" -e discovery.type=single-node -e xpack.security.enabled=false -v elasticsearch_data:/usr/share/elasticsearch/data --name elasticsearch docker.elastic.co/elasticsearch/elasticsearch:8.3.3`
-1. In a command line tool **start Kibana container** with `docker run -d -p 5601:5601 --network helloworld-network -e ELASTICSEARCH_URL=http://elasticsearch-container:9200 -e ELASTICSEARCH_HOSTS="http://elasticsearch:9200" --name kibana docker.elastic.co/kibana/kibana:8.3.3`
-1. In a line tool **start Logstash container** with `docker run -d -p 5044:5044 -p 5000:5000/tcp -p 5000:5000/udp -p 9600:9600 --network helloworld-network -e LS_JAVA_OPTS="-Xmx256m -Xms256m" -v "$(pwd)/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro" -v "$(pwd)/logstash/pipeline:/usr/share/logstash/pipeline:ro" --name logstash docker.elastic.co/logstash/logstash:8.3.3`
-1. In a command line tool build and start **Docker container MySql** database with `docker run -d --name mysql-container -e MYSQL_ROOT_PASSWORD=my_secret_password -e MYSQL_DATABASE=database -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin123 -p 3306:3306 --network helloworld-network mysql:5.7`
+1. In the first command line tool **create network** with `docker network create helloworld-network`
+1. In the first command line tool **start Tempo container** with `docker run -d --name tempo -p 3110:3100 -p 9411:9411 --network helloworld-network -v ${pwd}/docker/tempo/tempo.yml:/etc/tempo.yaml:ro -v ${pwd}/docker/tempo/tempo-data:/tmp/tempo grafana/tempo:2.2.2 --config.file /etc/tempo.yaml`
+1. In the first command line tool **start Loki container** with `docker run -d -p 3100:3100 --network helloworld-network --name loki grafana/loki:main --config.file /etc/loki/local-config.yaml`
+1. In the first command line tool **start Prometheus container** with `docker run -d --name prometheus -p 9090:9090 --network helloworld-network -v ${pwd}/docker/prometheus/prometheus-localhost.yml:/etc/prometheus/prometheus.yml:ro prom/prometheus:v2.46.0 --enable-feature exemplar-storage --config.file /etc/prometheus/prometheus.yml`
+1. In the first command line tool **start Grafana container** with `docker run -d --name grafana -p 3000:3000 --network helloworld-network -v ${pwd}/docker/grafana:/etc/grafana/provisioning/datasources:ro -e GF_AUTH_ANONYMOUS_ENABLED=true -e GF_AUTH_ANONYMOUS_ORG_ROLE=Admin -e GF_AUTH_DISABLE_LOGIN_FORM=true grafana/grafana:10.1.0`
+1. In the first command line tool **start Docker MySql container** with `docker run -d --name mysql-container --network helloworld-network -e MYSQL_ROOT_PASSWORD=my_secret_password -e MYSQL_DATABASE=database -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin123 -p 3306:3306 mysql:5.7`
 1. In a command line tool build **Docker image BE** with `docker build -f springcloud-springboot3-observability-grafana-stack_BE/Dockerfile -t be-image:0.0.1 ./springcloud-springboot3-observability-grafana-stack_BE`
-1. In a command line tool build and start **Docker container BE** with `docker run -p 8081:8081 --name be-container --network helloworld-network -e spring.datasource.url=jdbc:mysql://mysql-container:3306/database -e logstash.server=logstash -e logstash.port=5000 -d be-image:0.0.1`
+1. In a command line tool build and start **Docker container BE** with `docker run -p 8081:8081 --name be-container --network helloworld-network -e spring.datasource.url=jdbc:mysql://mysql-container:3306/database -e management.zipkin.tracing.endpoint=http://tempo:9411/api/v2/spans -e LOKI_URL=http://loki:3100 -d be-image:0.0.1`
 1. In a command line tool build **Docker image FE** with `docker build -f springcloud-springboot3-observability-grafana-stack_FE/Dockerfile -t fe-image:0.0.1 ./springcloud-springboot3-observability-grafana-stack_FE`
-1. In a command line tool build and start **Docker container FE** with `docker run -p 8080:8080 --name fe-container --network helloworld-network -e api.url=http://be-container:8081 -e logstash.server=logstash -e logstash.port=5000 -d fe-image:0.0.1`
+1. In a command line tool build and start **Docker container FE** with `docker run -p 8080:8080 --name fe-container --network helloworld-network -e api.url=http://be-container:8081 -e management.zipkin.tracing.endpoint=http://tempo:9411/api/v2/spans -e LOKI_URL=http://loki:3100 -d fe-image:0.0.1`
 1. In a browser visit `http://localhost:8080`
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
-1. In a browser visit `http://localhost:5601`
-   * Expected HTML page with **Kibana dashboard** 
+1. In a browser visit `http://localhost:3000`
+   * Expected HTML page with **Grafana dashboard** (please check section **EXAMPLE**).
 1. Clean up environment 
-     * In a command line tool stop and remove **BE Docker container** with `docker rm -f fe-container`
-     * In a command line tool remove **BE Docker image** with `docker rmi fe-image:0.0.1`
-     * In a command line tool stop and remove **FE Docker container** with `docker rm -f be-container`
-     * In a command line tool remove **FE Docker image** with `docker rmi be-image:0.0.1`
-     * In a command line tool stop and remove **Database Docker container** with `docker rm -f mysql-container`
-     * In a command line tool remove **Database Docker image** with `docker rmi mysql:5.7`
-     * In a command line tool **stop and remove Logstash container** with `docker rm -f logstash`
-     * In a command line tool **remove Logstash image** with `docker rmi logstash-container docker.elastic.co/logstash/logstash:8.3.3`
-     * In a command line tool **stop and remove Kibana container** with `docker rm -f kibana`
-     * In a command line tool **remove Kibana image** with `docker rmi docker.elastic.co/kibana/kibana:8.3.3` 
-     * In a command line tool **stop and remove Elasticsearch container** with `docker rm -f elasticsearch`
-     * In a command line tool **remove Elasticsearch image** with `docker rmi docker.elastic.co/elasticsearch/elasticsearch:8.3.3`   
+     * In a command line tool stop and remove **FE Docker container** with `docker rm -f fe-container`
+     * In a command line tool remove **FE Docker image** with `docker rmi fe-image:0.0.1`
+     * In a command line tool stop and remove **BE Docker container** with `docker rm -f be-container`
+     * In a command line tool remove **BE Docker image** with `docker rmi be-image:0.0.1`
+     * In a command line tool **stop and remove Docker MySql container** with `docker rm -f mysql-container`
+     * In a command line tool **remove Docker MySql image** with `docker rmi mysql:5.7`
+     * In a command line tool **stop and remove Grafana container** with `docker rm -f grafana`
+     * In a command line tool **remove Grafana image** with `docker rmi grafana/grafana:10.1.0`
+     * In a command line tool **stop and remove Prometheus container** with `docker rm -f prometheus`
+     * In a command line tool **remove Prometheus image** with `docker rmi prom/prometheus:v2.46.0` 
+     * In a command line tool **stop and remove Loki container** with `docker rm -f loki`
+     * In a command line tool **remove Loki image** with `docker rmi grafana/loki:main`
+     * In a command line tool **stop and remove Tempo container** with `docker rm -f tempo`
+     * In a command line tool **remove Tempo image** with `docker rmi grafana/tempo:2.2.2`
      * In a command line tool remove **Docker Nerwork** with `docker network rm helloworld-network` 
 
 ##### Optional steps:

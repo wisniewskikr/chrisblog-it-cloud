@@ -12,7 +12,7 @@
 
 4. Obesrvability
 
-- springcloud-springboot3-centralized-observability-grafana-loki-propetheus-tempo
+- springcloud-springboot3-observability-grafana-stack
 
 Link:
 - https://www.youtube.com/watch?v=PT2yZTBnUwQ&list=PLSVW22jAG8pBnhAdq9S8BpLnZ0_jVBj0c&index=13&t=2s

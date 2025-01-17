@@ -72,7 +72,7 @@ You can test this project in many configurations. Please choose the configuratio
 USAGE MANUAL + DOCKER
 ---------------------
 
-> **Usage Manual + Docker** means that Back-End and Front-End services are provided as **Java and Maven applications** and started **manually**. Database is provided as **Docker container**.
+> **Usage Manual + Docker** means that custom services are started manually from command line. Other services (like Sql Databases, NoSql Databases etc.) are started as Docker containers.
 
 > Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and then **proceed with steps below**. 
 
@@ -85,27 +85,30 @@ USAGE MANUAL + DOCKER
 
 ##### Required steps:
 1. In the first command line tool **create network** with `docker network create helloworld-network`
-1. In the first command line tool **start Tempo container** with `docker run -d --name tempo -p 3110:3100 -p 9411:9411 --network helloworld-network -v /tempo/tempo.yml:/etc/tempo.yaml:ro -v /tempo/tempo-data:/tmp/tempo grafana/tempo:2.2.2`
-1. In the first command line tool **start Loki container** with `docker run -d -p 3100:3100 --network helloworld-network --name loki grafana/loki:main-45bae6d`
-1. In the first command line tool **start Grafana container** with `docker run -d --name grafana -p 3000:3000 --network helloworld-network -v /grafana:/etc/grafana/provisioning/datasources:ro -e GF_AUTH_ANONYMOUS_ENABLED=true -e GF_AUTH_ANONYMOUS_ORG_ROLE=Admin -e GF_AUTH_DISABLE_LOGIN_FORM=true grafana/grafana:10.1.0`
+1. In the first command line tool **start Tempo container** with `docker run -d --name tempo -p 3110:3100 -p 9411:9411 --network helloworld-network -v ${pwd}/docker/tempo/tempo.yml:/etc/tempo.yaml:ro -v ${pwd}/docker/tempo/tempo-data:/tmp/tempo grafana/tempo:2.2.2 --config.file /etc/tempo.yaml`
+1. In the first command line tool **start Loki container** with `docker run -d -p 3100:3100 --network helloworld-network --name loki grafana/loki:main --config.file /etc/loki/local-config.yaml`
+1. In the first command line tool **start Prometheus container** with `docker run -d --name prometheus -p 9090:9090 --network helloworld-network -v ${pwd}/docker/prometheus/prometheus-localhost.yml:/etc/prometheus/prometheus.yml:ro prom/prometheus:v2.46.0 --enable-feature exemplar-storage --config.file /etc/prometheus/prometheus.yml`
+1. In the first command line tool **start Grafana container** with `docker run -d --name grafana -p 3000:3000 --network helloworld-network -v ${pwd}/docker/grafana:/etc/grafana/provisioning/datasources:ro -e GF_AUTH_ANONYMOUS_ENABLED=true -e GF_AUTH_ANONYMOUS_ORG_ROLE=Admin -e GF_AUTH_DISABLE_LOGIN_FORM=true grafana/grafana:10.1.0`
 1. In the first command line tool **start Docker MySql container** with `docker run -d --name mysql-container -e MYSQL_ROOT_PASSWORD=my_secret_password -e MYSQL_DATABASE=database -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin123 -p 3306:3306 mysql:5.7`
 1. In the second command line tool **start Back-End application** with `mvn -f ./springcloud-springboot3-observability-grafana-stack_BE spring-boot:run`
 1. In the third command line tool **start Front-End application** with `mvn -f ./springcloud-springboot3-observability-grafana-stack_FE spring-boot:run`
 1. In a browser visit `http://localhost:8080`
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
-1. In a browser visit `http://localhost:5601`
-   * Expected HTML page with **Kibana dashboard**
+1. In a browser visit `http://localhost:3000`
+   * Expected HTML page with **Grafana dashboard** (please check section **EXAMPLE**).
 1. Clean up environment 
      * In the third command line tool **stop Front-End application** with `ctrl + C`
      * In the second command line tool **stop Back-End application** with `ctrl + C`
      * In the first command line tool **stop and remove Docker MySql container** with `docker rm -f mysql-container`
      * In the first command line tool **remove Docker MySql image** with `docker rmi mysql:5.7`
-     * In the first command line tool **stop and remove Logstash container** with `docker rm -f logstash`
-     * In the first command line tool **remove Logstash image** with `docker rmi logstash-container docker.elastic.co/logstash/logstash:8.3.3`
-     * In the first command line tool **stop and remove Kibana container** with `docker rm -f kibana`
-     * In the first command line tool **remove Kibana image** with `docker rmi docker.elastic.co/kibana/kibana:8.3.3` 
-     * In the first command line tool **stop and remove Elasticsearch container** with `docker rm -f elasticsearch`
-     * In the first command line tool **remove Elasticsearch image** with `docker rmi docker.elastic.co/elasticsearch/elasticsearch:8.3.3`   
+     * In the first command line tool **stop and remove Grafana container** with `docker rm -f grafana`
+     * In the first command line tool **remove Grafana image** with `docker rmi grafana/grafana:10.1.0`
+     * In the first command line tool **stop and remove Prometheus container** with `docker rm -f prometheus`
+     * In the first command line tool **remove Prometheus image** with `docker rmi prom/prometheus:v2.46.0` 
+     * In the first command line tool **stop and remove Loki container** with `docker rm -f loki`
+     * In the first command line tool **remove Loki image** with `docker rmi grafana/loki:main`
+     * In the first command line tool **stop and remove Tempo container** with `docker rm -f tempo`
+     * In the first command line tool **remove Tempo image** with `docker rmi grafana/tempo:2.2.2`
      * In a command line tool remove **Docker Nerwork** with `docker network rm helloworld-network` 
 
 ##### Optional steps:

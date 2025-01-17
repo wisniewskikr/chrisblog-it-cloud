@@ -2,12 +2,13 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to create **chain of applications (microservices)** with **logging** type **ELK (Elasticsearch - Kibana - Logstash)** with usage **Java** programming language and **Spring Cloud** framework. ELK enables to read logs from all services by Logstash, store them in database Elasticsearch and display them in dashborad Kibana.
+The goal of this project is to present how to create **chain of applications (microservices)** with **observability** type **Grafana Stack (Loki + Prometeus + Tempo)** with usage **Java** programming language and **Spring Cloud** framework. Grafana Stack enables observing many microservices (Logs, Metrics and Traces) in one central Grafana dashboard.
 
 This chain of services consists of following applications:
-* **Logstash**: it enables reading logs from services
-* **Elasticsearch**" it enables storing logs from services
-* **Kibana**: it enables displaying logs from servicesś
+* **Loki**: it enables collecting logs from many microservices
+* **Prometeus**" it enables collecting metrics from many microservices
+* **Tempo**: it enables collecting traces from many microservices
+* **Grafana**: it enables displaying logs, metrics and traces from Loki, Prometeus and Tempo tools 
 * **Database**: SQL database - in this case type **MySql**
 * **Back-End**: an application created in **Java** programming language with usage **Spring Boot** framework
 * **Front-End**: an application created in **Java** programming language with usage **Spring Boot** framework. **Thymeleaf** engine is used to display data
@@ -16,6 +17,7 @@ This output consists of following elements:
 * **Database Message**: the HTML displays the message stored in database. It's the simple text "Hello World!".
 * **Back-End Port**: the HTML page displays the port of Back-End application.
 * **Front-End Port**: the HTML page displays port of Front-End application.
+* **Grafana**: the HTML dashboard for displaing logs, metrics and traces
 
 ##### Terminology
 Terminology explanation:
@@ -23,13 +25,15 @@ Terminology explanation:
 * **Maven**: tool for build automation
 * **Java**: object-oriented programming language
 * **Spring Boot**: framework for Java. It consists of: Spring + Container + Configuration
+* **Spring Cloud**: Spring Cloud is a framework within the Spring ecosystem that provides tools for building distributed systems and microservices. It simplifies tasks like service discovery, configuration management, load balancing, circuit breakers, and distributed tracing, allowing developers to build scalable and resilient cloud-native applications.
 * **Database**: A database is an organized collection of data that is stored and managed electronically, allowing for efficient retrieval, manipulation, and updating of information. It is typically managed by a database management system (DBMS).
 * **MySql**: MySQL is an open-source relational database management system (RDBMS) that uses Structured Query Language (SQL) for managing and organizing data. It's widely used for web applications and is known for its speed, reliability, and ease of use.
 * **Back-End**: The back-end refers to the server-side part of a software application, responsible for managing the database, server logic, and application programming interface (API). It processes requests from the front-end (user interface), handles data storage, retrieval, and business logic, and sends the appropriate responses back to the front-end.
 * **Front-End**: Front-end refers to the part of a website or application that users interact with directly. It includes the visual elements, layout, and design, typically built using HTML, CSS, and JavaScript. The front-end is responsible for the user experience (UX) and interface (UI) that allows users to navigate and interact with the system.
-* **Thymeleaf**: Thymeleaf is a modern server-side Java template engine for Java-based web applications. It processes HTML, XML, JavaScript, CSS, and plain text, integrating with the Spring framework. It allows dynamic content rendering on the server while ensuring templates are HTML-compliant. Thymeleaf's key features include natural templates (which work as valid HTML even before rendering), easy integration with Spring MVC, and powerful expressions for iterating, conditional display, and data binding. It's often used to create dynamic web pages that combine static HTML with server-side logic in a clean and intuitive way.
-* **Spring Cloud**: Spring Cloud is a framework within the Spring ecosystem that provides tools for building distributed systems and microservices. It simplifies tasks like service discovery, configuration management, load balancing, circuit breakers, and distributed tracing, allowing developers to build scalable and resilient cloud-native applications.
-* **ELK**: Elk microservices refer to the use of the ELK stack (Elasticsearch, Logstash, and Kibana) in a microservices architecture for centralized logging, monitoring, and visualization. The ELK stack aggregates and analyzes logs from distributed microservices, providing insights into application performance, error tracking, and system behavior in real time. This helps manage the complexity of microservices by offering a unified observability solution.
+* **Loki**: Grafana Loki is a log aggregation system designed to store, query, and visualize logs efficiently. Unlike traditional log management tools, Loki is lightweight and cost-effective, as it indexes logs by labels (like Kubernetes pod or service name) rather than indexing the entire log content. It's tightly integrated with Grafana, enabling unified metrics and log analysis within the same interface, making it ideal for cloud-native environments.
+* **Prometeus**: Prometheus is an open-source monitoring and alerting toolkit designed for collecting, storing, and querying time-series data, primarily metrics from servers, applications, and services.
+* **Tempo**: Grafana Tempo is a highly scalable, distributed tracing backend used to collect, store, and query traces from applications. It supports open standards like OpenTelemetry, integrates seamlessly with Grafana for visualization, and is optimized for low-cost storage by only indexing trace IDs while keeping the rest of the trace data in object storage.
+* **Grafana**: Grafana is an open-source visualization and analytics platform used for monitoring, querying, and visualizing metrics from various data sources in customizable dashboards.
 
 ##### Implementation
 Steps:

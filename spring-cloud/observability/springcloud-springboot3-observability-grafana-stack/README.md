@@ -2,8 +2,9 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to create **chain of applications (microservices)** with **observability** type **Grafana Stack (Loki + Prometeus + Tempo)** with usage **Java** programming language and **Spring Cloud** framework. Grafana Stack enables observing many microservices (Logs, Metrics and Traces) in one central Grafana dashboard.
+The goal of this project is to present how to create **chain of applications (microservices)** with **observability** type **Grafana Stack (Loki + Prometeus + Tempo)** with usage **Java** programming language and **Spring Cloud** and **Spring Boot 3** frameworks. Grafana Stack enables observing many microservices (Logs, Metrics and Traces) in one central Grafana dashboard.
 
+##### Services
 This chain of services consists of following applications:
 * **Database**: SQL database - in this case type **MySql**
 * **Back-End**: an application created in **Java** programming language with usage **Spring Boot** framework
@@ -13,13 +14,18 @@ This chain of services consists of following applications:
 * **Tempo**: it enables collecting traces from many microservices
 * **Grafana**: it enables displaying logs, metrics and traces from Loki, Prometeus and Tempo tools 
 
+##### Outputs
 Output of custom services:
-* **Database Message**: the HTML displays the message stored in database. It's the simple text "Hello World!".
-* **Back-End Port**: the HTML page displays the port of Back-End application.
-* **Front-End Port**: the HTML page displays port of Front-End application.
+* **FE**: Front-End service connects with Back-End service which connects with database. Output displayed by FE:
+   * **Database Message**: the HTML displays the message stored in database. It's the simple text "Hello World!".
+   * **Back-End Port**: the HTML page displays the port of Back-End application.
+   * **Front-End Port**: the HTML page displays port of Front-End application.
 
 Output of other services:
-* **Grafana**: the HTML dashboard for displaing logs, metrics and traces
+* **Grafana**: this dashboard contains following data: 
+   * **Logs**: logs of all custom services 
+   * **Metrics**: metrics of all custom services
+   * **Traces**: traces of all custom services
 
 ##### Terminology
 Terminology explanation:
@@ -289,10 +295,23 @@ USAGE KUBERNETES (MINIKUBE) - DOESN'T WORK !!!
 IMPLEMENTATION
 --------------
 
-Implementation steps for Loki:
-* In project add folder **grafana**
-* In every service add file **src/main/resources/logback-spring.xml**
-* In every servide update **pom.xml** file with **loki-logback-appender**
+Implementation steps for **Loki (logs)**:
+* In every custom service add file **src/main/resources/logback-spring.xml**
+* In every custom servide update **pom.xml** file with **loki-logback-appender**
+* In every custom servide update **application.properties** file with **logging.pattern.correlation=[${spring.application.name:},%X{traceId:-},%X{spanId:-}]**
+
+Implementation steps for **Prometeus (metrics)**:
+* In every custom servide update **pom.xml** file with **spring-boot-starter-actuator** and **micrometer-registry-prometheus**
+* In every custom servide update **application.properties** file with **management.endpoints.web.exposure.include**, **management.metrics.distribution.percentiles-histogram.http.server.requests** and **management.observations.key-values.application**
+* In root folder create file **docker/prometheus/prometheus.yml**
+
+Implementation steps for **Tempo (tracks)**:
+* In every custom servide update **pom.xml** file with **micrometer-tracing-bridge-brave** and **zipkin-reporter-brave**
+* In every custom servide update **application.properties** file with **management.tracing.sampling.probability=1.0**
+* In root folder create file **docker/tempo/tempo.yml**
+
+Implementation steps for **Grafana (dashboard)**:
+* In root folder create file **docker/grafana/datasource.yml**
 
 
 ADDITIONAL SOURCES

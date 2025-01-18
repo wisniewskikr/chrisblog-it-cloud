@@ -86,7 +86,7 @@ USAGE MANUAL + DOCKER
 ##### Required steps:
 1. In the first command line tool **create network** with `docker network create helloworld-network`
 1. In the first command line tool **start Tempo container** with `docker run -d --name tempo -p 3110:3100 -p 9411:9411 --network helloworld-network -v ${pwd}/docker/tempo/tempo.yml:/etc/tempo.yaml:ro -v ${pwd}/docker/tempo/tempo-data:/tmp/tempo grafana/tempo:2.2.2 --config.file /etc/tempo.yaml`
-1. In the first command line tool **start Loki container** with `docker run -d -p 3100:3100 --network helloworld-network --name loki grafana/loki:main --config.file /etc/loki/local-config.yaml`
+1. In the first command line tool **start Loki container** with `docker run -d -p 3100:3100 --network helloworld-network --name loki grafana/loki:3.3.2 --config.file /etc/loki/local-config.yaml`
 1. In the first command line tool **start Prometheus container** with `docker run -d --name prometheus -p 9090:9090 --network helloworld-network -v ${pwd}/docker/prometheus/prometheus-localhost.yml:/etc/prometheus/prometheus.yml:ro prom/prometheus:v2.46.0 --enable-feature exemplar-storage --config.file /etc/prometheus/prometheus.yml`
 1. In the first command line tool **start Grafana container** with `docker run -d --name grafana -p 3000:3000 --network helloworld-network -v ${pwd}/docker/grafana:/etc/grafana/provisioning/datasources:ro -e GF_AUTH_ANONYMOUS_ENABLED=true -e GF_AUTH_ANONYMOUS_ORG_ROLE=Admin -e GF_AUTH_DISABLE_LOGIN_FORM=true grafana/grafana:10.1.0`
 1. In the first command line tool **start Docker MySql container** with `docker run -d --name mysql-container -e MYSQL_ROOT_PASSWORD=my_secret_password -e MYSQL_DATABASE=database -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin123 -p 3306:3306 mysql:5.7`
@@ -106,7 +106,7 @@ USAGE MANUAL + DOCKER
      * In the first command line tool **stop and remove Prometheus container** with `docker rm -f prometheus`
      * In the first command line tool **remove Prometheus image** with `docker rmi prom/prometheus:v2.46.0` 
      * In the first command line tool **stop and remove Loki container** with `docker rm -f loki`
-     * In the first command line tool **remove Loki image** with `docker rmi grafana/loki:main`
+     * In the first command line tool **remove Loki image** with `docker rmi grafana/loki:3.3.2`
      * In the first command line tool **stop and remove Tempo container** with `docker rm -f tempo`
      * In the first command line tool **remove Tempo image** with `docker rmi grafana/tempo:2.2.2`
      * In a command line tool remove **Docker Nerwork** with `docker network rm helloworld-network` 
@@ -173,7 +173,7 @@ USAGE DOCKER
 ##### Required steps:
 1. In the first command line tool **create network** with `docker network create helloworld-network`
 1. In the first command line tool **start Tempo container** with `docker run -d --name tempo -p 3110:3100 -p 9411:9411 --network helloworld-network -v ${pwd}/docker/tempo/tempo.yml:/etc/tempo.yaml:ro -v ${pwd}/docker/tempo/tempo-data:/tmp/tempo grafana/tempo:2.2.2 --config.file /etc/tempo.yaml`
-1. In the first command line tool **start Loki container** with `docker run -d -p 3100:3100 --network helloworld-network --name loki grafana/loki:main --config.file /etc/loki/local-config.yaml`
+1. In the first command line tool **start Loki container** with `docker run -d -p 3100:3100 --network helloworld-network --name loki grafana/loki:3.3.2 --config.file /etc/loki/local-config.yaml`
 1. In the first command line tool **start Prometheus container** with `docker run -d --name prometheus -p 9090:9090 --network helloworld-network -v ${pwd}/docker/prometheus/prometheus-localhost.yml:/etc/prometheus/prometheus.yml:ro prom/prometheus:v2.46.0 --enable-feature exemplar-storage --config.file /etc/prometheus/prometheus.yml`
 1. In the first command line tool **start Grafana container** with `docker run -d --name grafana -p 3000:3000 --network helloworld-network -v ${pwd}/docker/grafana:/etc/grafana/provisioning/datasources:ro -e GF_AUTH_ANONYMOUS_ENABLED=true -e GF_AUTH_ANONYMOUS_ORG_ROLE=Admin -e GF_AUTH_DISABLE_LOGIN_FORM=true grafana/grafana:10.1.0`
 1. In the first command line tool **start Docker MySql container** with `docker run -d --name mysql-container --network helloworld-network -e MYSQL_ROOT_PASSWORD=my_secret_password -e MYSQL_DATABASE=database -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin123 -p 3306:3306 mysql:5.7`
@@ -197,7 +197,7 @@ USAGE DOCKER
      * In a command line tool **stop and remove Prometheus container** with `docker rm -f prometheus`
      * In a command line tool **remove Prometheus image** with `docker rmi prom/prometheus:v2.46.0` 
      * In a command line tool **stop and remove Loki container** with `docker rm -f loki`
-     * In a command line tool **remove Loki image** with `docker rmi grafana/loki:main`
+     * In a command line tool **remove Loki image** with `docker rmi grafana/loki:3.3.2`
      * In a command line tool **stop and remove Tempo container** with `docker rm -f tempo`
      * In a command line tool **remove Tempo image** with `docker rmi grafana/tempo:2.2.2`
      * In a command line tool remove **Docker Nerwork** with `docker network rm helloworld-network` 

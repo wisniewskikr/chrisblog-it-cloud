@@ -248,7 +248,7 @@ USAGE DOCKER COMPOSE
 1. In a command line tool check FE container logs with `docker logs fe-container`
 
 
-USAGE KUBERNETES (MINIKUBE) - DOESN'T WORK !!!
+USAGE KUBERNETES (MINIKUBE)
 ---------------------------
 
 > **Usage Kubernetes** means that Back-End, Front-End services and Database are provided as **Docker containers** managed by **Kubernetes** type **Minikube**. 
@@ -262,13 +262,15 @@ USAGE KUBERNETES (MINIKUBE) - DOESN'T WORK !!!
 
 ##### Required steps:
 1. In the first command line tool **with administrator privileges** start **Minikube** with `minikube start --cpus 4 --memory 7000`
-1. In the second command line tool **start Kubernetes Pods** with `kubectl apply -f kubernetes.yaml`
+1. In the second command line tool **start Kubernetes Pods** with `kubectl apply -f ./k8s/kubernetes.yaml`
 1. In the second command line tool **check status of Kubernetes Pods** with `kubectl get pods`
    * Expected mysql, be and fe as **READY 1/1** (it can take few minutes)
 1. In the first command line tool **with administrator privileges** display FE service in a Browser with `minikube service fe-service`
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
+1. In the first command line tool **with administrator privileges** display Grafana service in a Browser with `minikube service grafana`
+   * Expected HTML page with **Grafana dashboard** (please check section **EXAMPLE**).
 1. Clean up environment 
-     * In the second command line tool **remove Kubernetes Pods** with `kubectl delete -f kubernetes.yaml`
+     * In the second command line tool **remove Kubernetes Pods** with `kubectl delete -f ./k8s/kubernetes.yaml`
      * In the first command line tool **with administrator privileges** stop **Minikube** with `minikube stop`
 
 ##### Optional steps:

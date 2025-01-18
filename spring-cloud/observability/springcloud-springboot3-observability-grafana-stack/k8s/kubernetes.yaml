@@ -106,7 +106,7 @@ data:
         static_configs:
           - targets: ['be.default.svc.cluster.local:8081'] ## only for demo purposes don't use host.docker.internal in production
             labels:
-              application: 'FE'
+              application: 'BE'
 
 ---
 
@@ -433,10 +433,10 @@ spec:
         env:
         - name: spring.datasource.url
           value: jdbc:mysql://mysql:3306/database
-        - name: logstash.server
-          value: logstash 
-        - name: logstash.port
-          value: "5000"
+        - name: management.zipkin.tracing.endpoint
+          value: http://tempo:9411/api/v2/spans
+        - name: LOKI_URL
+          value: http://loki:3100
         readinessProbe:
           httpGet:
             path: /actuator/health
@@ -496,10 +496,10 @@ spec:
         env:
         - name: api.url
           value: http://be-service:8081
-        - name: logstash.server
-          value: logstash 
-        - name: logstash.port
-          value: "5000"
+        - name: management.zipkin.tracing.endpoint
+          value: http://tempo:9411/api/v2/spans
+        - name: LOKI_URL
+          value: http://loki:3100
         readinessProbe:
           httpGet:
             path: /actuator/health

@@ -1,23 +1,15 @@
 package com.example.clients;
 
-import org.springframework.http.HttpMethod;
-import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.service.annotation.GetExchange;
+import org.springframework.web.service.annotation.HttpExchange;
+
 import com.example.dtos.HelloWorldDto;
 
-@Component
-public class HelloWorldClient {
+@HttpExchange
+public interface HelloWorldClient {
 
-    private final RestTemplate beRestTemplate;
-
-    public HelloWorldClient(RestTemplate beRestTemplate) {
-        this.beRestTemplate = beRestTemplate;
-    }
-
-    public HelloWorldDto findById(Long id) {
-        return beRestTemplate.exchange("/message/" + id,
-                        HttpMethod.GET, null, HelloWorldDto.class)
-                .getBody();
-    }
+    @GetExchange("/message/{id}")
+    HelloWorldDto findById(@PathVariable("id") Long id);
 
 }

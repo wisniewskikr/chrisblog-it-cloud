@@ -218,9 +218,6 @@ spec:
         image: wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_fe:0.0.1
         ports:
         - containerPort: 8080
-        env:
-        - name: baseurl.be
-          value: http://be-service:8081
         readinessProbe:
           httpGet:
             path: /actuator/health

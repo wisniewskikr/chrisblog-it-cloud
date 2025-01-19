@@ -71,8 +71,6 @@ services:
     build:
       context: ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_FE
       dockerfile: Dockerfile
-    environment:
-      baseurl.be: http://be:8081
     depends_on:
       config:
         condition: service_healthy

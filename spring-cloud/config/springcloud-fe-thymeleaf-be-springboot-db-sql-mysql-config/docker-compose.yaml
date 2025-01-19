@@ -29,6 +29,8 @@ services:
     build:
       context: ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_SERVER
       dockerfile: Dockerfile
+    environment:
+      spring.cloud.config.server.git.default-label: docker-compose
     depends_on:
       mysql:
         condition: service_healthy
@@ -49,8 +51,6 @@ services:
     build:
       context: ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_BE
       dockerfile: Dockerfile
-    environment:
-      spring.datasource.url: jdbc:mysql://mysql:3306/database
     depends_on:
       - config
     ports:

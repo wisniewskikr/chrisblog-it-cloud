@@ -88,6 +88,9 @@ spec:
         image: wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_server:0.0.1
         ports:
         - containerPort: 8888
+        env:
+        - name: spring.cloud.config.server.git.default-label
+          value: kubernetes
         readinessProbe:
           httpGet:
             path: /actuator/health
@@ -159,9 +162,6 @@ spec:
         image: wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_be:0.0.1
         ports:
         - containerPort: 8081
-        env:
-        - name: spring.datasource.url
-          value: jdbc:mysql://mysql:3306/database
         readinessProbe:
           httpGet:
             path: /actuator/health

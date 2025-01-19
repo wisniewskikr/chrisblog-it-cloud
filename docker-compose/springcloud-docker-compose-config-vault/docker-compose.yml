@@ -39,7 +39,7 @@ services:
       - spring.cloud.config.server.vault.order=1
       - spring.cloud.config.server.vault.kv-version=2
       - spring.cloud.config.server.vault.authentication=TOKEN
-      - spring.cloud.config.server.vault.token=hvs.vMZOjf1ReD3GMFzxfRaoQJPk
+      - spring.cloud.config.server.vault.token=
       - spring.profiles.active=git,vault      
     ports:
       - 8888:8888

@@ -59,7 +59,7 @@ USAGE
 Usage steps:
 1. Start Vault with `docker-compose -f docker-compose-vault.yml up -d`
 1. Configure Vault (please check section **Usage Vault**)
-1. Update property **spring.cloud.vault.token** in file **docker-compose.yml**
+1. Update property **spring.cloud.config.server.vault.token** in file **docker-compose.yml**
 1. Build packages with `mvn clean package -D maven.test.skip`
 1. Start services with `docker-compose up -d --build`
 1. Visit: `http://localhost:8762`

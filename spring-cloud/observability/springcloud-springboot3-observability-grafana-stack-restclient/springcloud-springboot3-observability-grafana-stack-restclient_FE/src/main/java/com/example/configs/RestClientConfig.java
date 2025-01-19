@@ -7,7 +7,7 @@ import org.springframework.web.client.RestClient;
 import org.springframework.web.client.support.RestClientAdapter;
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 
-import com.example.clients.HelloWorldClient;
+import com.example.clients.BeClient;
 
 @Configuration
 public class RestClientConfig {
@@ -16,14 +16,14 @@ public class RestClientConfig {
     private String apiUrl;
 
     @Bean
-    public HelloWorldClient helloWorldClient() {
+    public BeClient beClient() {
 
         RestClient restClient = RestClient.builder()
                 .baseUrl(apiUrl)
                 .build();
         var restClientAdapter = RestClientAdapter.create(restClient);
         var httpServiceProxyFactory = HttpServiceProxyFactory.builderFor(restClientAdapter).build();
-        return httpServiceProxyFactory.createClient(HelloWorldClient.class);
+        return httpServiceProxyFactory.createClient(BeClient.class);
 
     }
 

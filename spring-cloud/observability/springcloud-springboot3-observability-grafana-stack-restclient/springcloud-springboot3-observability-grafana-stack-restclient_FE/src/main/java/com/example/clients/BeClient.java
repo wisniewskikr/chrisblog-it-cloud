@@ -7,7 +7,7 @@ import org.springframework.web.service.annotation.HttpExchange;
 import com.example.dtos.HelloWorldDto;
 
 @HttpExchange
-public interface HelloWorldClient {
+public interface BeClient {
 
     @GetExchange("/message/{id}")
     HelloWorldDto findById(@PathVariable("id") Long id);

@@ -16,9 +16,9 @@ public class RestClientConfig {
     private String apiUrl;
 
     @Bean
-    public BeClient beClient() {
+    public BeClient beClient(RestClient.Builder restClientBuilder) {
 
-        RestClient restClient = RestClient.builder()
+        RestClient restClient = restClientBuilder
                 .baseUrl(apiUrl)
                 .build();
         var restClientAdapter = RestClientAdapter.create(restClient);

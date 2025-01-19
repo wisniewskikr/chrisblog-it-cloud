@@ -14,6 +14,13 @@ This chain of services consists of following applications:
 * **Tempo**: it enables collecting traces from many microservices
 * **Grafana**: it enables displaying logs, metrics and traces from Loki, Prometeus and Tempo tools 
 
+##### Inputs
+Inputs to custom services:
+* **FE**: http call from any browser
+
+Inputs to other services:
+* **Grafana**: http call from any browser
+
 ##### Outputs
 Output of custom services:
 * **FE**: Front-End service connects with Back-End service which connects with database. Output displayed by FE:
@@ -76,7 +83,7 @@ USAGE DOCKER COMPOSE (RECOMMENDED)
 
 > Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and then **proceed with steps below**.
 
-> Please be aware that following tools should be installed on your local PC:  
+> **Prerequisites**:  
 * **Operating System** (tested on Windows 11)
 * **Git** (tested on version 2.33.0.windows.2)
 * **Docker** (tested on version 4.33.1)
@@ -112,7 +119,7 @@ USAGE KUBERNETES (MINIKUBE) (RECOMMENDED)
 
 > Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and then **proceed with steps below**.
 
-> Please be aware that following tools should be installed on your local PC:  
+> **Prerequisites**:  
 * **Operating System** (tested on Windows 11)
 * **Git** (tested on version 2.33.0.windows.2)
 * **Minikube** (tested on version 1.33.1)
@@ -154,7 +161,7 @@ USAGE MANUAL + DOCKER
 
 > Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and then **proceed with steps below**. 
 
-> Please be aware that following tools should be installed on your local PC:  
+> **Prerequisites**:  
 * **Operating System** (tested on Windows 11)
 * **Java** (tested on version 17.0.5)
 * **Maven** (tested on version 3.8.5)
@@ -207,7 +214,7 @@ USAGE MANUAL + DOCKER COMPOSE
 
 > Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and then **proceed with steps below**.
 
-> Please be aware that following tools should be installed on your local PC:  
+> **Prerequisites**:  
 * **Operating System** (tested on Windows 11)
 * **Git** (tested on version 2.33.0.windows.2)
 * **Docker** (tested on version 4.33.1)
@@ -247,7 +254,7 @@ USAGE DOCKER
 
 > Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and then **proceed with steps below**.
 
-> Please be aware that following tools should be installed on your local PC:  
+> **Prerequisites**:  
 * **Operating System** (tested on Windows 11)
 * **Git** (tested on version 2.33.0.windows.2)
 * **Docker** (tested on version 4.33.1)

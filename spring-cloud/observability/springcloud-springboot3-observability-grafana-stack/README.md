@@ -81,9 +81,10 @@ USAGE MANUAL + DOCKER
 * **Java** (tested on version 17.0.5)
 * **Maven** (tested on version 3.8.5)
 * **Git** (tested on version 2.33.0.windows.2)
-* **Docker** (tested on version 4.33.1 - it has to be up and running)
+* **Docker** (tested on version 4.33.1)
 
 ##### Required steps:
+1. Start **Docker** tool
 1. In the first command line tool **create network** with `docker network create helloworld-network`
 1. In the first command line tool **start Tempo container** with `docker run -d --name tempo -p 3110:3100 -p 9411:9411 --network helloworld-network -v ${pwd}/docker/tempo/tempo.yml:/etc/tempo.yaml:ro -v ${pwd}/docker/tempo/tempo-data:/tmp/tempo grafana/tempo:2.2.2 --config.file /etc/tempo.yaml`
 1. In the first command line tool **start Loki container** with `docker run -d -p 3100:3100 --network helloworld-network --name loki grafana/loki:3.3.2 --config.file /etc/loki/local-config.yaml`
@@ -110,6 +111,7 @@ USAGE MANUAL + DOCKER
      * In the first command line tool **stop and remove Tempo container** with `docker rm -f tempo`
      * In the first command line tool **remove Tempo image** with `docker rmi grafana/tempo:2.2.2`
      * In a command line tool remove **Docker Nerwork** with `docker network rm helloworld-network` 
+     * Stop **Docker** tool
 
 ##### Optional steps:
 1. In a browser check Back-End application healthcheck with `http://localhost:8081/actuator/health`
@@ -130,9 +132,10 @@ USAGE MANUAL + DOCKER COMPOSE
 > Please be aware that following tools should be installed on your local PC:  
 * **Operating System** (tested on Windows 11)
 * **Git** (tested on version 2.33.0.windows.2)
-* **Docker** (tested on version 4.33.1 - it has to be up and running)
+* **Docker** (tested on version 4.33.1)
 
 ##### Required steps:
+1. Start **Docker** tool
 1. In the first command line tool **start Docker containers** with `docker-compose -f .\docker-compose\without-custom-services\docker-compose.yaml up -d`
 1. In the second command line tool **start Back-End application** with `mvn -f ./springcloud-springboot3-observability-grafana-stack_BE spring-boot:run`
 1. In the third command line tool **start Front-End application** with `mvn -f ./springcloud-springboot3-observability-grafana-stack_FE spring-boot:run`
@@ -144,6 +147,7 @@ USAGE MANUAL + DOCKER COMPOSE
      * In the third command line tool **stop Front-End application** with `ctrl + C`
      * In the second command line tool **stop Back-End application** with `ctrl + C`
      * In the first command line tool **remove Docker containers** with `docker-compose -f .\docker-compose\without-custom-services\docker-compose.yaml down --rmi all`
+     * Stop **Docker** tool
 
 ##### Optional steps:
 1. In a browser check Back-End application healthcheck with `http://localhost:8081/actuator/health`
@@ -168,9 +172,10 @@ USAGE DOCKER
 > Please be aware that following tools should be installed on your local PC:  
 * **Operating System** (tested on Windows 11)
 * **Git** (tested on version 2.33.0.windows.2)
-* **Docker** (tested on version 4.33.1 - it has to be up and running)
+* **Docker** (tested on version 4.33.1)
 
 ##### Required steps:
+1. Start **Docker** tool
 1. In the first command line tool **create network** with `docker network create helloworld-network`
 1. In the first command line tool **start Tempo container** with `docker run -d --name tempo -p 3110:3100 -p 9411:9411 --network helloworld-network -v ${pwd}/docker/tempo/tempo.yml:/etc/tempo.yaml:ro -v ${pwd}/docker/tempo/tempo-data:/tmp/tempo grafana/tempo:2.2.2 --config.file /etc/tempo.yaml`
 1. In the first command line tool **start Loki container** with `docker run -d -p 3100:3100 --network helloworld-network --name loki grafana/loki:3.3.2 --config.file /etc/loki/local-config.yaml`
@@ -201,6 +206,7 @@ USAGE DOCKER
      * In a command line tool **stop and remove Tempo container** with `docker rm -f tempo`
      * In a command line tool **remove Tempo image** with `docker rmi grafana/tempo:2.2.2`
      * In a command line tool remove **Docker Nerwork** with `docker network rm helloworld-network` 
+     * Stop **Docker** tool
 
 ##### Optional steps:
 1. In a browser check Back-End application healthcheck with `http://localhost:8081/actuator/health`
@@ -224,9 +230,10 @@ USAGE DOCKER COMPOSE
 > Please be aware that following tools should be installed on your local PC:  
 * **Operating System** (tested on Windows 11)
 * **Git** (tested on version 2.33.0.windows.2)
-* **Docker** (tested on version 4.33.1 - it has to be up and running)
+* **Docker** (tested on version 4.33.1)
 
 ##### Required steps:
+1. Start **Docker** tool
 1. In a command line tool **start Docker containers** with `docker-compose -f .\docker-compose\with-custom-services\docker-compose.yaml up -d --build`
 1. In a browser visit `http://localhost:8080`
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
@@ -234,6 +241,7 @@ USAGE DOCKER COMPOSE
    * Expected HTML page with **Grafana dashboard** (please check section **EXAMPLE**).
 1. Clean up environment 
      * In a command line tool **remove Docker containers** with `docker-compose -f .\docker-compose\with-custom-services\docker-compose.yaml down --rmi all`
+     * Stop **Docker** tool
 
 ##### Optional steps:
 1. In a browser check Back-End application healthcheck with `http://localhost:8081/actuator/health`

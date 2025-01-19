@@ -11,7 +11,7 @@
 	</parent>
 	
 	<groupId>com.example</groupId>
-	<artifactId>springcloud-springboot3-observability-grafana-stack_BE</artifactId>
+	<artifactId>springcloud-springboot3-observability-grafana-stack-restclient_BE</artifactId>
 	<version>0.0.1</version>
 
 	<properties>

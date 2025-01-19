@@ -134,10 +134,10 @@ USAGE KUBERNETES (MINIKUBE) (RECOMMENDED)
      * In the first command line tool **with administrator privileges** stop **Minikube** with `minikube stop`
 
 ##### Optional steps:
-1. In a command line tool build Docker BE image with `docker build -f springcloud-springboot3-observability-grafana-stack_BE/Dockerfile -t wisniewskikr/springcloud-springboot3-observability-grafana-stack_be:0.0.1 ./springcloud-springboot3-observability-grafana-stack_BE`
-1. In a command line tool push Docker BE image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-observability-grafana-stack_be:0.0.1` 
-1. In a command line tool build Docker FE image with `docker build -f springcloud-springboot3-observability-grafana-stack_FE/Dockerfile -t wisniewskikr/springcloud-springboot3-observability-grafana-stack_fe:0.0.1 ./springcloud-springboot3-observability-grafana-stack_FE`
-1. In a command line tool push Docker FE image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-observability-grafana-stack_fe:0.0.1` 
+1. In a command line tool build Docker BE image with `docker build -f springcloud-springboot3-observability-grafana-stack-restclient_BE/Dockerfile -t wisniewskikr/springcloud-springboot3-observability-grafana-stack-restclient_be:0.0.1 ./springcloud-springboot3-observability-grafana-stack-restclient_BE`
+1. In a command line tool push Docker BE image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-observability-grafana-stack-restclient_be:0.0.1` 
+1. In a command line tool build Docker FE image with `docker build -f springcloud-springboot3-observability-grafana-stack-restclient_FE/Dockerfile -t wisniewskikr/springcloud-springboot3-observability-grafana-stack-restclient_fe:0.0.1 ./springcloud-springboot3-observability-grafana-stack-restclient_FE`
+1. In a command line tool push Docker FE image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-observability-grafana-stack-restclient_fe:0.0.1` 
 1. In the first command line tool with administrator privileges check status of Minikube with `minikube status`
 1. In the first command line tool with administrator privileges check Docker images in Minikube with `minikube ssh docker images`
 1. In the first command line tool with administrator privileges check Docker containers in Minikube with `minikube ssh docker ps`
@@ -172,8 +172,8 @@ USAGE MANUAL + DOCKER
 1. In the first command line tool **start Prometheus container** with `docker run -d --name prometheus -p 9090:9090 --network helloworld-network -v ${pwd}/docker/prometheus/prometheus-localhost.yml:/etc/prometheus/prometheus.yml:ro prom/prometheus:v2.46.0 --enable-feature exemplar-storage --config.file /etc/prometheus/prometheus.yml`
 1. In the first command line tool **start Grafana container** with `docker run -d --name grafana -p 3000:3000 --network helloworld-network -v ${pwd}/docker/grafana:/etc/grafana/provisioning/datasources:ro -e GF_AUTH_ANONYMOUS_ENABLED=true -e GF_AUTH_ANONYMOUS_ORG_ROLE=Admin -e GF_AUTH_DISABLE_LOGIN_FORM=true grafana/grafana:10.1.0`
 1. In the first command line tool **start Docker MySql container** with `docker run -d --name mysql-container -e MYSQL_ROOT_PASSWORD=my_secret_password -e MYSQL_DATABASE=database -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin123 -p 3306:3306 mysql:5.7`
-1. In the second command line tool **start Back-End application** with `mvn -f ./springcloud-springboot3-observability-grafana-stack_BE spring-boot:run`
-1. In the third command line tool **start Front-End application** with `mvn -f ./springcloud-springboot3-observability-grafana-stack_FE spring-boot:run`
+1. In the second command line tool **start Back-End application** with `mvn -f ./springcloud-springboot3-observability-grafana-stack-restclient_BE spring-boot:run`
+1. In the third command line tool **start Front-End application** with `mvn -f ./springcloud-springboot3-observability-grafana-stack-restclient_FE spring-boot:run`
 1. In a browser visit `http://localhost:8080`
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
 1. In a browser visit `http://localhost:3000`
@@ -218,8 +218,8 @@ USAGE MANUAL + DOCKER COMPOSE
 ##### Required steps:
 1. Start **Docker** tool
 1. In the first command line tool **start Docker containers** with `docker-compose -f .\docker-compose\without-custom-services\docker-compose.yaml up -d`
-1. In the second command line tool **start Back-End application** with `mvn -f ./springcloud-springboot3-observability-grafana-stack_BE spring-boot:run`
-1. In the third command line tool **start Front-End application** with `mvn -f ./springcloud-springboot3-observability-grafana-stack_FE spring-boot:run`
+1. In the second command line tool **start Back-End application** with `mvn -f ./springcloud-springboot3-observability-grafana-stack-restclient_BE spring-boot:run`
+1. In the third command line tool **start Front-End application** with `mvn -f ./springcloud-springboot3-observability-grafana-stack-restclient_FE spring-boot:run`
 1. In a browser visit `http://localhost:8080`
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
 1. In a browser visit `http://localhost:3000`
@@ -263,9 +263,9 @@ USAGE DOCKER
 1. In the first command line tool **start Prometheus container** with `docker run -d --name prometheus -p 9090:9090 --network helloworld-network -v ${pwd}/docker/prometheus/prometheus-localhost.yml:/etc/prometheus/prometheus.yml:ro prom/prometheus:v2.46.0 --enable-feature exemplar-storage --config.file /etc/prometheus/prometheus.yml`
 1. In the first command line tool **start Grafana container** with `docker run -d --name grafana -p 3000:3000 --network helloworld-network -v ${pwd}/docker/grafana:/etc/grafana/provisioning/datasources:ro -e GF_AUTH_ANONYMOUS_ENABLED=true -e GF_AUTH_ANONYMOUS_ORG_ROLE=Admin -e GF_AUTH_DISABLE_LOGIN_FORM=true grafana/grafana:10.1.0`
 1. In the first command line tool **start Docker MySql container** with `docker run -d --name mysql-container --network helloworld-network -e MYSQL_ROOT_PASSWORD=my_secret_password -e MYSQL_DATABASE=database -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin123 -p 3306:3306 mysql:5.7`
-1. In a command line tool build **Docker image BE** with `docker build -f springcloud-springboot3-observability-grafana-stack_BE/Dockerfile -t be-image:0.0.1 ./springcloud-springboot3-observability-grafana-stack_BE`
+1. In a command line tool build **Docker image BE** with `docker build -f springcloud-springboot3-observability-grafana-stack-restclient_BE/Dockerfile -t be-image:0.0.1 ./springcloud-springboot3-observability-grafana-stack-restclient_BE`
 1. In a command line tool build and start **Docker container BE** with `docker run -p 8081:8081 --name be-container --network helloworld-network -e spring.datasource.url=jdbc:mysql://mysql-container:3306/database -e management.zipkin.tracing.endpoint=http://tempo:9411/api/v2/spans -e LOKI_URL=http://loki:3100 -d be-image:0.0.1`
-1. In a command line tool build **Docker image FE** with `docker build -f springcloud-springboot3-observability-grafana-stack_FE/Dockerfile -t fe-image:0.0.1 ./springcloud-springboot3-observability-grafana-stack_FE`
+1. In a command line tool build **Docker image FE** with `docker build -f springcloud-springboot3-observability-grafana-stack-restclient_FE/Dockerfile -t fe-image:0.0.1 ./springcloud-springboot3-observability-grafana-stack-restclient_FE`
 1. In a command line tool build and start **Docker container FE** with `docker run -p 8080:8080 --name fe-container --network helloworld-network -e api.url=http://be-container:8081 -e management.zipkin.tracing.endpoint=http://tempo:9411/api/v2/spans -e LOKI_URL=http://loki:3100 -d fe-image:0.0.1`
 1. In a browser visit `http://localhost:8080`
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 

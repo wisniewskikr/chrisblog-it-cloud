@@ -2,7 +2,7 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to create **chain of applications (microservices)** with **observability** type **Grafana Stack (Loki + Prometeus + Tempo)** with usage **Java** programming language and **Spring Cloud** and **Spring Boot 3** frameworks. Grafana Stack enables observing many microservices (Logs, Metrics and Traces) in one central Grafana dashboard.
+The goal of this project is to present how to create **chain of applications (microservices)** with **observability** type **Grafana Stack (Loki + Prometeus + Tempo)** with additional **database tracking** with usage **Java** programming language and **Spring Cloud** and **Spring Boot 3** frameworks. Grafana Stack enables observing many microservices (Logs, Metrics and Traces) in one central Grafana dashboard. Database tracking enables additional tracking not only custom services but also database connections.
 
 ##### Services
 This chain of services consists of following applications:
@@ -11,7 +11,7 @@ This chain of services consists of following applications:
 * **Front-End**: an application created in **Java** programming language with usage **Spring Boot** framework. **Thymeleaf** engine is used to display data
 * **Loki**: it enables collecting logs from many microservices
 * **Prometeus**" it enables collecting metrics from many microservices
-* **Tempo**: it enables collecting traces from many microservices
+* **Tempo**: it enables collecting traces from many microservices. It traces additionally database connection
 * **Grafana**: it enables displaying logs, metrics and traces from Loki, Prometeus and Tempo tools 
 
 ##### Outputs
@@ -25,7 +25,7 @@ Output of other services:
 * **Grafana**: this dashboard contains following data: 
    * **Logs**: logs of all custom services 
    * **Metrics**: metrics of all custom services
-   * **Traces**: traces of all custom services
+   * **Traces**: traces of all custom services and databases
 
 ##### Terminology
 Terminology explanation:
@@ -307,6 +307,11 @@ Implementation steps for **Tempo (tracks)**:
 * In every custom servide update **pom.xml** file with **micrometer-tracing-bridge-brave** and **zipkin-reporter-brave**
 * In every custom servide update **application.properties** file with **management.tracing.sampling.probability=1.0**
 * In root folder create file **docker/tempo/tempo.yml**
+
+Implementation steps for **Tempo (tracks database)**:
+* In custom servides with databases update **pom.xml** file with **datasource-micrometer-spring-boot** and **spring-boot-starter-aop**
+* In custom servide with databases update **repository class** with annotation **@Observed**
+* In custom servide with databases create **configuration class** named **ObservationConfig**
 
 Implementation steps for **Grafana (dashboard)**:
 * In root folder create file **docker/grafana/datasource.yml**

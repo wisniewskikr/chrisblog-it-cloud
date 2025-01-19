@@ -5,7 +5,7 @@ DESCRIPTION
 The goal of this project is to present how to create **chain of applications (microservices)** with **observability** type **Grafana Stack (Loki + Prometeus + Tempo)** with usage **Java** programming language and **Spring Cloud** and **Spring Boot 3** frameworks. Grafana Stack enables observing many microservices (Logs, Metrics and Traces) in one central Grafana dashboard.
 
 ##### Services
-This chain of services consists of following applications:
+This project consists of following applications:
 * **Database**: SQL database - in this case type **MySql**
 * **Back-End**: an application created in **Java** programming language with usage **Spring Boot** framework
 * **Front-End**: an application created in **Java** programming language with usage **Spring Boot** framework. **Thymeleaf** engine is used to display data
@@ -15,20 +15,16 @@ This chain of services consists of following applications:
 * **Grafana**: it enables displaying logs, metrics and traces from Loki, Prometeus and Tempo tools 
 
 ##### Inputs
-Inputs to custom services:
+This project requires following inputs:
 * **FE**: http call from any browser
-
-Inputs to other services:
 * **Grafana**: http call from any browser
 
 ##### Outputs
-Output of custom services:
+This project provides following outputs:
 * **FE**: Front-End service connects with Back-End service which connects with database. Output displayed by FE:
    * **Database Message**: the HTML displays the message stored in database. It's the simple text "Hello World!".
    * **Back-End Port**: the HTML page displays the port of Back-End application.
    * **Front-End Port**: the HTML page displays port of Front-End application.
-
-Output of other services:
 * **Grafana**: this dashboard contains following data: 
    * **Logs**: logs of all custom services 
    * **Metrics**: metrics of all custom services
@@ -68,7 +64,7 @@ EXAMPLE
 USAGES
 ------
 
-You can test this project in many configurations. Please choose the configuration that suits you best. Configurations:
+This project can be tested in following configurations:
 * **Usage Docker Compose (Recommended)**: all services are started as Docker containers definied in "docker-compose/with-custom-services/docker-compose.yaml" file.
 * **Usage Kubernetes (Minikube) (Recommended)**: all services are started as Kubernetes pods.
 * **Usage Manual + Docker**: custom services are started manually from command line. Other services (like Sql Databases, NoSql Databases etc.) are started as Docker containers.
@@ -115,7 +111,7 @@ USAGE DOCKER COMPOSE (RECOMMENDED)
 USAGE KUBERNETES (MINIKUBE) (RECOMMENDED)
 ----------------------------------------
 
-> **Usage Kubernetes** means that Back-End, Front-End services and Database are provided as **Docker containers** managed by **Kubernetes** type **Minikube**. 
+> **Usage Kubernetes** means that all services are started as Kubernetes pods. 
 
 > Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and then **proceed with steps below**.
 

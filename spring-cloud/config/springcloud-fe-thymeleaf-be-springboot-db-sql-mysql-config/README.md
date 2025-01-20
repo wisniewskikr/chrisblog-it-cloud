@@ -67,8 +67,8 @@ USAGE MANUAL
 ##### Required steps:
 1. In the first command line tool **start Docker MySql container** with `docker run -d --name mysql-container -e MYSQL_ROOT_PASSWORD=my_secret_password -e MYSQL_DATABASE=database -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin123 -p 3306:3306 mysql:5.7`
 1. In the second command line tool **start Config application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_SERVER spring-boot:run`
-1. In the third command line tool **start Back-End application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_BE spring-boot:run`
-1. In the fourth command line tool **start Front-End application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_FE spring-boot:run`
+1. In the third command line tool (it has to be **BASH** tool e.g. Git Bash) **start Back-End application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_BE spring-boot:run -Dspring-boot.run.arguments="--spring.config.import=configserver:http://localhost:8888"`
+1. In the fourth command line tool (it has to be **BASH** tool e.g. Git Bash) **start Front-End application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_FE spring-boot:run -Dspring-boot.run.arguments="--spring.config.import=configserver:http://localhost:8888"`
 1. In a browser visit `http://localhost:8080`
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
 1. Clean up environment 
@@ -104,12 +104,10 @@ USAGE DOCKER
 1. In a command line tool build and start **Docker container MySql** database with `docker run -d --name mysql-container -e MYSQL_ROOT_PASSWORD=my_secret_password -e MYSQL_DATABASE=database -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin123 -p 3306:3306 --network helloworld-network mysql:5.7`
 1. In a command line tool build **Docker image CONFIG** with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_SERVER/Dockerfile -t config-image:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_SERVER`
 1. In a command line tool build and start **Docker container CONFIG** with `docker run -p 8888:8888 --name config-container --network helloworld-network -e spring.cloud.config.server.git.default-label=docker -d config-image:0.0.1`
-1. In the file **springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_BE\src\main\resources\application.properties** comment property **Config Server - USAGE MANUAL** and uncomment property **Config Server - USAGE DOCKER**
 1. In a command line tool build **Docker image BE** with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_BE/Dockerfile -t be-image:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_BE`
-1. In a command line tool build and start **Docker container BE** with `docker run -p 8081:8081 --name be-container --network helloworld-network -d be-image:0.0.1`
-1. In the file **springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_FE\src\main\resources\application.properties** comment property **Config Server - USAGE MANUAL** and uncomment property **Config Server - USAGE DOCKER**
+1. In a command line tool build and start **Docker container BE** with `docker run -p 8081:8081 --name be-container -e spring.config.import=configserver:http://config-container:8888 --network helloworld-network -d be-image:0.0.1`
 1. In a command line tool build **Docker image FE** with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_FE/Dockerfile -t fe-image:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_FE`
-1. In a command line tool build and start **Docker container FE** with `docker run -p 8080:8080 --name fe-container --network helloworld-network -d fe-image:0.0.1`
+1. In a command line tool build and start **Docker container FE** with `docker run -p 8080:8080 --name fe-container -e spring.config.import=configserver:http://config-container:8888 --network helloworld-network -d fe-image:0.0.1`
 1. In a browser visit `http://localhost:8080`
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port**  
 1. Clean up environment 

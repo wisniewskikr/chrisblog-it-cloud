@@ -146,8 +146,6 @@ USAGE DOCKER COMPOSE
 * **Docker** (tested on version 4.33.1 - it has to be up and running)
 
 ##### Required steps:
-1. In the file **springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_BE\src\main\resources\application.properties** comment property **Config Server - USAGE MANUAL** and uncomment property **Config Server - USAGE DOCKER COMPOSE**
-1. In the file **springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_FE\src\main\resources\application.properties** comment property **Config Server - USAGE MANUAL** and uncomment property **Config Server - USAGE DOCKER COMPOSE**
 1. In a command line tool **start Docker containers** with `docker-compose up -d --build`
 1. In a browser visit `http://localhost:8080`
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 

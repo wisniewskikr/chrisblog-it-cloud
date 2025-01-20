@@ -57,14 +57,13 @@ This project can be tested in following configurations:
 * **Usage Docker Compose (Recommended)**: all services are started as Docker containers definied in "docker-compose/with-custom-services/docker-compose.yaml" file.
 * **Usage Kubernetes (Minikube) (Recommended)**: all services are started as Kubernetes pods.
 * **Usage Manual + Docker**: custom services are started manually from command line. Other services (like Sql Databases, NoSql Databases etc.) are started as Docker containers.
-* **Usage Manual + Docker Compose**: custom services are started manually from command line. Other services (like Sql Databases, NoSql Databases etc.) are started as Docker containers definied in "docker-compose/without-custom-services/docker-compose.yaml" file.
 * **Usage Docker**: all services are started as Docker containers.
 
 
 USAGE DOCKER COMPOSE (RECOMMENDED)
 ----------------------------------
 
-> **Usage Docker Compse** means that all services are started as Docker containers definied in "docker-compose/with-custom-services/docker-compose.yaml" file.
+> **Usage Docker Compse** means that all services are started as Docker containers definied in "docker-compose.yaml" file.
 
 > Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and then **proceed with steps below**.
 

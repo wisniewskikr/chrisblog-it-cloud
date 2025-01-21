@@ -192,7 +192,7 @@ USAGE DOCKER
 1. In a command line tool create **Docker Network** with `docker network create helloworld-network`
 1. In a command line tool build and start **Docker container MySql** database with `docker run -d --name mysql-container -e MYSQL_ROOT_PASSWORD=my_secret_password -e MYSQL_DATABASE=database -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin123 -p 3306:3306 --network helloworld-network mysql:5.7`
 1. In a command line tool build **Docker image CONFIG** with `docker build -f springboot3-microservices-config-valut_SERVER/Dockerfile -t config-image:0.0.1 ./springboot3-microservices-config-valut_SERVER`
-1. In a command line tool build and start **Docker container CONFIG** with `docker run -p 8888:8888 --name config-container --network helloworld-network -e spring.cloud.config.server.git.default-label=docker -d config-image:0.0.1`
+1. In a command line tool build and start **Docker container CONFIG** with `docker run -p 8888:8888 --name config-container --network helloworld-network -e spring.cloud.config.server.git.default-label=docker-vault -d config-image:0.0.1`
 1. In a command line tool build **Docker image BE** with `docker build -f springboot3-microservices-config-valut_BE/Dockerfile -t be-image:0.0.1 ./springboot3-microservices-config-valut_BE`
 1. In a command line tool build and start **Docker container BE** with `docker run -p 8081:8081 --name be-container -e spring.config.import=configserver:http://config-container:8888 -e spring.application.name=be --network helloworld-network -d be-image:0.0.1`
 1. In a command line tool build **Docker image FE** with `docker build -f springboot3-microservices-config-valut_FE/Dockerfile -t fe-image:0.0.1 ./springboot3-microservices-config-valut_FE`

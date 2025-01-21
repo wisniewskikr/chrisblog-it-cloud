@@ -30,7 +30,7 @@ services:
       context: ./springboot3-microservices-config-valut_SERVER
       dockerfile: Dockerfile
     environment:
-      spring.cloud.config.server.git.default-label: docker-compose
+      spring.cloud.config.server.git.default-label: docker-compose-vault
     depends_on:
       mysql:
         condition: service_healthy

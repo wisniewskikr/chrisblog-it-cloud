@@ -154,8 +154,8 @@ USAGE MANUAL + DOCKER
 1. Start **Docker** tool
 1. In the first command line tool **start Docker MySql container** with `docker run -d --name mysql-container -e MYSQL_ROOT_PASSWORD=my_secret_password -e MYSQL_DATABASE=database -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin123 -p 3306:3306 mysql:5.7`
 1. In the second command line tool **start Config application** with `mvn -f ./springboot3-microservices-config-valut_SERVER spring-boot:run`
-1. In the third command line tool (it has to be **BASH** tool e.g. Git Bash) **start Back-End application** with `mvn -f ./springboot3-microservices-config-valut_BE spring-boot:run -Dspring-boot.run.arguments="--spring.config.import=configserver:http://localhost:8888"`
-1. In the fourth command line tool (it has to be **BASH** tool e.g. Git Bash) **start Front-End application** with `mvn -f ./springboot3-microservices-config-valut_FE spring-boot:run -Dspring-boot.run.arguments="--spring.config.import=configserver:http://localhost:8888"`
+1. In the third command line tool (it has to be **BASH** tool e.g. Git Bash) **start Back-End application** with `mvn -f ./springboot3-microservices-config-valut_BE spring-boot:run -Dspring-boot.run.arguments="--spring.config.import=configserver:http://localhost:8888 --spring.application.name=be"`
+1. In the fourth command line tool (it has to be **BASH** tool e.g. Git Bash) **start Front-End application** with `mvn -f ./springboot3-microservices-config-valut_FE spring-boot:run -Dspring-boot.run.arguments="--spring.config.import=configserver:http://localhost:8888 --spring.application.name=fe"`
 1. In a browser visit `http://localhost:8080`
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
 1. Clean up environment 

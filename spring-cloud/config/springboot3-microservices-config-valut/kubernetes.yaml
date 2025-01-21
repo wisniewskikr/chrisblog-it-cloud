@@ -165,6 +165,8 @@ spec:
         env:
         - name: spring.config.import
           value: configserver:http://config-service:8888
+        - name: spring.application.name
+          value: be
         readinessProbe:
           httpGet:
             path: /actuator/health
@@ -222,6 +224,8 @@ spec:
         ports:
         - containerPort: 8080
         env:
+        - name: spring.application.name
+          value: fe
         - name: spring.config.import
           value: configserver:http://config-service:8888
         readinessProbe:

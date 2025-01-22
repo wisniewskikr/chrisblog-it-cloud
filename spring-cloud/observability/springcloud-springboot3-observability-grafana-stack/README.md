@@ -324,7 +324,7 @@ USAGE KUBERNETES (KIND)
 > **Prerequisites**:  
 * **Operating System** (tested on Windows 11)
 * **Git** (tested on version 2.33.0.windows.2)
-* **Minikube** (tested on version 1.33.1)
+* **Kind** (tested on version 0.26.0)
 
 ##### Required steps:
 1. Start **Docker** tool

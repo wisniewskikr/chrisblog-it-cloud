@@ -22,7 +22,7 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to use **Kafka** type **KRaft** for implementation of asynchronous communication between two applications created with usage **Java** programming language and **Spring Boot 3** framework. Additionally **Krafka UI** is used to present messages sent between these two applications.
+The goal of this project is to present how to use **Kafka** type **KRaft** for implementation of asynchronous communication between two microservices created with usage **Java** programming language, **Spring Boot 3** and **Spring Cloud** frameworks. Additionally **Krafka UI** is used to present messages sent between these two microservices.
 
 ##### Content
 This project consists of following applications:
@@ -53,6 +53,8 @@ Terminology explanation:
 * **Docker Compose**: Docker Compose is a tool for defining and running multi-container Docker applications using a simple YAML configuration file (docker-compose.yml). It allows you to specify services, networks, and volumes, enabling easy orchestration and management of containerized applications.
 * **Kubernetes**: Kubernetes is an open-source platform for automating the deployment, scaling, and management of containerized applications. It organizes containers into logical units called pods and helps ensure high availability, scalability, and efficient resource utilization.
 * **Kind**: Kubernetes Kind (Kubernetes IN Docker) is a tool for running Kubernetes clusters locally using Docker containers. It allows developers to easily create and manage multi-node Kubernetes clusters for testing and development purposes in a lightweight environment.
+* **Microservice**: A microservice is a small, independently deployable service that focuses on performing a specific business function. It operates as part of a larger system and communicates with other microservices via lightweight protocols, such as HTTP or messaging queues, typically in a loosely coupled architecture.
+* **Spring Cloud**: Spring Cloud is a framework within the Spring ecosystem that provides tools and solutions for building distributed systems and microservices. It simplifies the development of cloud-native applications by offering features such as service discovery, configuration management, load balancing, circuit breakers, distributed tracing, and API gateways. It integrates seamlessly with popular cloud platforms and services, enabling developers to focus on business logic while handling the complexities of distributed systems.
 
 
 USAGES

@@ -15,7 +15,7 @@ spec:
         app: consumer
     spec:
       containers:
-        - image: wisniewskikr/springboot-kafka-bitnami-docker-compose_consumer:0.0.1
+        - image: wisniewskikr/springcloud-eventdriven-kafka-bitnami_consumer:0.0.1
           name: consumer
           ports:
             - containerPort: 9090

@@ -9,7 +9,7 @@
 		<relativePath/>		
 	</parent>
 	<groupId>com.example.app</groupId>
-	<artifactId>springboot-kafka-bitnami-docker-compose_producer</artifactId>
+	<artifactId>springcloud-eventdriven-kafka-bitnami_producer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<properties>

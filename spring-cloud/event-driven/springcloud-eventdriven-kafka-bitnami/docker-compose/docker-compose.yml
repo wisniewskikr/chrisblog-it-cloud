@@ -41,7 +41,7 @@ services:
     image: producer
     container_name: producer
     build:
-      context: ./../springboot-kafka-bitnami-docker-compose_producer
+      context: ./../springcloud-eventdriven-kafka-bitnami_producer
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
@@ -54,7 +54,7 @@ services:
     image: consumer
     container_name: consumer
     build:
-      context: ./../springboot-kafka-bitnami-docker-compose_consumer
+      context: ./../springcloud-eventdriven-kafka-bitnami_consumer
       dockerfile: Dockerfile
     ports:
       - "9090:9090"

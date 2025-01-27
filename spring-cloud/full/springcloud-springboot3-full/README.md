@@ -1,8 +1,24 @@
+EXAMPLE
+-------
+
+![My Image](readme-images/image-01.png)
+
+![My Image](readme-images/image-02.png)
+
+![My Image](readme-images/image-03.png)
+
+![My Image](readme-images/image-04.png)
+
+![My Image](readme-images/image-05.png)
+
+![My Image](readme-images/image-06.png)
+
+
 DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to create **chain of applications (microservices)** with **observability** type **Grafana Stack (Loki + Prometeus + Tempo)** with usage **Java** programming language and **Spring Cloud** and **Spring Boot 3** frameworks. Grafana Stack enables observing many microservices (Logs, Metrics and Traces) in one central Grafana dashboard. Class **RestClient** is used to handle REST connection between FE and BE services.
+The goal of this project is to present how to create **ecosystem of microservices** with usage **Java** programming language and **Spring Cloud** and **Spring Boot 3** frameworks.
 
 ##### Services
 This project consists of following applications:
@@ -51,20 +67,6 @@ Terminology explanation:
 * **Grafana**: Grafana is an open-source visualization and analytics platform used for monitoring, querying, and visualizing metrics from various data sources in customizable dashboards.
 * **API Gateway**: An API Gateway is a management tool that acts as an entry point for APIs, handling tasks like routing, authentication, rate limiting, monitoring, and load balancing. It simplifies communication between clients and backend services, often used in microservices architectures to centralize API requests and enforce policies.
 * **Service Discovery**: Service discovery is the process of automatically detecting and locating network services or resources in a system, enabling communication between components without requiring manual configuration. It ensures that services can find and connect to each other dynamically in distributed or microservices architectures.
-
-
-EXAMPLE
--------
-
-![My Image](readme-images/image-01.png)
-
-![My Image](readme-images/image-02.png)
-
-![My Image](readme-images/image-03.png)
-
-![My Image](readme-images/image-04.png)
-
-![My Image](readme-images/image-05.png)
 
 
 USAGES

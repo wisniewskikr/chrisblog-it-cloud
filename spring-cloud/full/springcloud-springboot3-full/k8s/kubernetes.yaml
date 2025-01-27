@@ -437,6 +437,8 @@ spec:
           value: http://tempo:9411/api/v2/spans
         - name: LOKI_URL
           value: http://loki:3100
+        - name: eureka.client.service-url.defaultZone
+          value: http://discovery:8761/eureka
         readinessProbe:
           httpGet:
             path: /actuator/health
@@ -500,6 +502,8 @@ spec:
           value: http://tempo:9411/api/v2/spans
         - name: LOKI_URL
           value: http://loki:3100
+        - name: eureka.client.service-url.defaultZone
+          value: http://discovery:8761/eureka
         readinessProbe:
           httpGet:
             path: /actuator/health
@@ -564,6 +568,8 @@ spec:
           value: http://fe-service:8080
         - name: spring_cloud_gateway_routes_0_predicates_0
           value: Path=/**
+        - name: eureka.client.service-url.defaultZone
+          value: http://discovery:8761/eureka
         readinessProbe:
           httpGet:
             path: /actuator/health

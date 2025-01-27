@@ -87,6 +87,8 @@ USAGE DOCKER COMPOSE (RECOMMENDED)
 ##### Required steps:
 1. Start **Docker** tool
 1. In a command line tool **start Docker containers** with `docker-compose -f .\docker-compose\with-custom-services\docker-compose.yaml up -d --build`
+1. In a browser visit `http://localhost:8761`
+   * Expected HTML page with **Discovery dashboard**
 1. In a browser visit `http://localhost:8762`
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
 1. In a browser visit `http://localhost:3000`

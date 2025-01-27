@@ -89,7 +89,7 @@ USAGE DOCKER COMPOSE
 
 ##### Required steps:
 1. Start **Docker** tool
-1. In a command line tool **start Docker containers** with `docker-compose -f .\docker-compose\with-custom-services\docker-compose.yaml up -d --build`
+1. In a command line tool **start Docker containers** with `docker-compose -f .\docker-compose\docker-compose.yaml up -d --build`
 1. In a browser visit `http://localhost:8761`
    * Expected HTML page with **Discovery dashboard**
 1. In a browser visit `http://localhost:8762`
@@ -97,7 +97,7 @@ USAGE DOCKER COMPOSE
 1. In a browser visit `http://localhost:3000`
    * Expected HTML page with **Grafana dashboard** (please check section **EXAMPLE**).
 1. Clean up environment 
-     * In a command line tool **remove Docker containers** with `docker-compose -f .\docker-compose\with-custom-services\docker-compose.yaml down --rmi all`
+     * In a command line tool **remove Docker containers** with `docker-compose -f .\docker-compose\docker-compose.yaml down --rmi all`
      * Stop **Docker** tool
 
 ##### Optional steps:

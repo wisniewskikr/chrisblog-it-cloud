@@ -74,7 +74,7 @@ USAGES
 
 This project can be tested in following configurations:
 * **Usage Docker Compose**: all services are started as Docker containers definied in docker compose file.
-* **Usage Kubernetes (Minikube)**: all services are started as Kubernetes pods.
+* **Usage Kubernetes (Kind)**: all services are started as Kubernetes pods.
 
 
 USAGE DOCKER COMPOSE
@@ -115,7 +115,7 @@ USAGE DOCKER COMPOSE
 1. In a command line tool check FE container logs with `docker logs fe-container`
 
 
-USAGE KUBERNETES (MINIKUBE)
+USAGE KUBERNETES (KIND)
 ---------------------------
 
 > **Usage Kubernetes** means that all services are started as Kubernetes pods. 
@@ -125,20 +125,21 @@ USAGE KUBERNETES (MINIKUBE)
 > **Prerequisites**:  
 * **Operating System** (tested on Windows 11)
 * **Git** (tested on version 2.33.0.windows.2)
-* **Minikube** (tested on version 1.33.1)
+* **Kind** (tested on version 0.26.0)
 
 ##### Required steps:
-1. In the first command line tool **with administrator privileges** start **Minikube** with `minikube start --cpus 4 --memory 7000`
+1. Start **Docker** tool
+1. In the first command line tool create and start cluster **Kind** with `kind create cluster --name helloworld`
 1. In the second command line tool **start Kubernetes Pods** with `kubectl apply -f ./k8s/kubernetes.yaml`
 1. In the second command line tool **check status of Kubernetes Pods** with `kubectl get pods`
    * Expected mysql, be and fe as **READY 1/1** (it can take few minutes)
-1. In the first command line tool **with administrator privileges** display FE service in a Browser with `minikube service fe-service`
-   * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
-1. In the first command line tool **with administrator privileges** display Grafana service in a Browser with `minikube service grafana`
-   * Expected HTML page with **Grafana dashboard** (please check section **EXAMPLE**).
+
+...
+
 1. Clean up environment 
      * In the second command line tool **remove Kubernetes Pods** with `kubectl delete -f ./k8s/kubernetes.yaml`
-     * In the first command line tool **with administrator privileges** stop **Minikube** with `minikube stop`
+     * In the first command line tool delete cluster **Kind** with `kind delete cluster --name helloworld`
+     * Stop **Docker** tool
 
 ##### Optional steps:
 1. In a command line tool build Docker BE image with `docker build -f springcloud-springboot3-full_BE/Dockerfile -t wisniewskikr/springcloud-springboot3-full_be:0.0.1 ./springcloud-springboot3-full_BE`

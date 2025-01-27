@@ -87,7 +87,7 @@ USAGE DOCKER COMPOSE (RECOMMENDED)
 ##### Required steps:
 1. Start **Docker** tool
 1. In a command line tool **start Docker containers** with `docker-compose -f .\docker-compose\with-custom-services\docker-compose.yaml up -d --build`
-1. In a browser visit `http://localhost:8080`
+1. In a browser visit `http://localhost:8762`
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
 1. In a browser visit `http://localhost:3000`
    * Expected HTML page with **Grafana dashboard** (please check section **EXAMPLE**).

@@ -125,9 +125,7 @@ services:
       context: ./../springcloud-springboot3-full_GATEWAY
       dockerfile: Dockerfile
     environment:
-      spring_cloud_gateway_routes_0_id: forward_route_to_fe
-      spring_cloud_gateway_routes_0_uri: http://fe:8080
-      spring_cloud_gateway_routes_0_predicates_0: Path=/**
+      fe.service.url: http://fe:8080
       management.zipkin.tracing.endpoint: http://tempo:9411/api/v2/spans
       LOKI_URL: http://loki:3100
       eureka.client.service-url.defaultZone: http://discovery:8761/eureka

@@ -20,12 +20,8 @@ spec:
         ports:
         - containerPort: 8762
         env:
-        - name: spring_cloud_gateway_routes_0_id
-          value: forward_route_to_fe
-        - name: spring_cloud_gateway_routes_0_uri
+        - name: fe.service.url
           value: http://fe:8080
-        - name: spring_cloud_gateway_routes_0_predicates_0
-          value: Path=/**
         - name: management.zipkin.tracing.endpoint
           value: http://tempo:9411/api/v2/spans
         - name: LOKI_URL

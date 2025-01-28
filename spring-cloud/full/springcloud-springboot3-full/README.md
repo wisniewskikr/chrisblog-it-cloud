@@ -130,7 +130,7 @@ USAGE KUBERNETES (KIND)
 ##### Required steps:
 1. Start **Docker** tool
 1. In the first command line tool create and start cluster **Kind** with `kind create cluster --name helloworld`
-1. In the second command line tool **start Kubernetes Pods** with `kubectl apply -f ./k8s/kubernetes.yaml`
+1. In the second command line tool **start Kubernetes Pods** with `kubectl apply -f ./k8s --recursive`
 1. In the second command line tool **check status of Kubernetes Pods** with `kubectl get pods`
    * Expected mysql, be and fe as **READY 1/1** (it can take few minutes)
 1. In the second command line tool **forward port of Discovery service** with `kubectl port-forward service/discovery 8761:8761`
@@ -146,7 +146,7 @@ USAGE KUBERNETES (KIND)
      * In the fourth command line tool **stop forwarding port of Kafka UI service** with `ctrl + C`
      * In the third command line tool **stop forwarding port of Consumer service** with `ctrl + C`
      * In the second command line tool **stop forwarding port of Producer service** with `ctrl + C`
-     * In the second command line tool **remove Kubernetes Pods** with `kubectl delete -f ./k8s/kubernetes.yaml`
+     * In the second command line tool **remove Kubernetes Pods** with `kubectl delete -f ./k8s --recursive`
      * In the first command line tool delete cluster **Kind** with `kind delete cluster --name helloworld`
      * Stop **Docker** tool
 

@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fe
+  labels:
+    app: fe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fe
+  template:
+    metadata:
+      labels:
+        app: fe
+    spec:
+      containers:
+      - name: fe
+        image: wisniewskikr/springcloud-springboot3-full_fe:0.0.1
+        ports:
+        - containerPort: 8080
+        env:
+        - name: api.url
+          value: http://be:8081
+        - name: management.zipkin.tracing.endpoint
+          value: http://tempo:9411/api/v2/spans
+        - name: LOKI_URL
+          value: http://loki:3100
+        - name: eureka.client.service-url.defaultZone
+          value: http://discovery:8761/eureka
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+      restartPolicy: Always
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: fe
+spec:
+  selector:
+    app: fe
+  ports:
+    - port: 8080
+      targetPort: 8080

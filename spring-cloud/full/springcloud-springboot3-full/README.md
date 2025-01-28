@@ -133,10 +133,19 @@ USAGE KUBERNETES (KIND)
 1. In the second command line tool **start Kubernetes Pods** with `kubectl apply -f ./k8s/kubernetes.yaml`
 1. In the second command line tool **check status of Kubernetes Pods** with `kubectl get pods`
    * Expected mysql, be and fe as **READY 1/1** (it can take few minutes)
-
-...
-
+1. In the second command line tool **forward port of Discovery service** with `kubectl port-forward service/discovery 8761:8761`
+1. In the third command line tool **forward port of Gateway service** with `kubectl port-forward service/gateway 8762:8762`
+1. In the fourth command line tool**forward port of Grafana service** with `kubectl port-forward service/grafana 3000:3000`
+1. In a browser visit `http://localhost:8761`
+   * Expected HTML page with **Discovery dashboard**
+1. In a browser visit `http://localhost:8762`
+   * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
+1. In a browser visit `http://localhost:3000`
+   * Expected HTML page with **Grafana dashboard** (please check section **EXAMPLE**).
 1. Clean up environment 
+     * In the fourth command line tool **stop forwarding port of Kafka UI service** with `ctrl + C`
+     * In the third command line tool **stop forwarding port of Consumer service** with `ctrl + C`
+     * In the second command line tool **stop forwarding port of Producer service** with `ctrl + C`
      * In the second command line tool **remove Kubernetes Pods** with `kubectl delete -f ./k8s/kubernetes.yaml`
      * In the first command line tool delete cluster **Kind** with `kind delete cluster --name helloworld`
      * Stop **Docker** tool

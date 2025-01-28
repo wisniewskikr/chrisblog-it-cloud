@@ -271,13 +271,11 @@ kind: Service
 metadata:
   name: grafana
 spec:
-  type: NodePort
   selector:
     app: grafana
   ports:
     - port: 3000
       targetPort: 3000
-      nodePort: 30001
 
 ---
 
@@ -462,7 +460,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: be-service
+  name: be
 spec:
   selector:
     app: be
@@ -497,7 +495,7 @@ spec:
         - containerPort: 8080
         env:
         - name: api.url
-          value: http://be-service:8081
+          value: http://be:8081
         - name: management.zipkin.tracing.endpoint
           value: http://tempo:9411/api/v2/spans
         - name: LOKI_URL
@@ -527,7 +525,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: fe-service
+  name: fe
 spec:
   selector:
     app: fe
@@ -565,7 +563,7 @@ spec:
         - name: spring_cloud_gateway_routes_0_id
           value: forward_route_to_fe
         - name: spring_cloud_gateway_routes_0_uri
-          value: http://fe-service:8080
+          value: http://fe:8080
         - name: spring_cloud_gateway_routes_0_predicates_0
           value: Path=/**
         - name: eureka.client.service-url.defaultZone
@@ -593,7 +591,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: gateway-service
+  name: gateway
 spec:
   selector:
     app: gateway
@@ -649,7 +647,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: discovery-service
+  name: discovery
 spec:
   selector:
     app: discovery

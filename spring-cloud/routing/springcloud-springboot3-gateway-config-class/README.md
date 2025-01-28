@@ -102,9 +102,11 @@ USAGE KUBERNETES (KIND)
 1. In the second command line tool **start Kubernetes Pods** with `kubectl apply -f kubernetes.yaml`
 1. In the second command line tool **check status of Kubernetes Pods** with `kubectl get pods`
    * Expected mysql, be and fe as **READY 1/1** (it can take few minutes)
-1. In the first command line tool **with administrator privileges** display FE service in a Browser with `minikube service gateway-service`
-   * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
-1. Clean up environment 
+1. In the second command line tool **forward port of Gateway service** with `kubectl port-forward service/gateway 8762:8762`
+1. In a browser visit `http://localhost:8762`
+   * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port**
+1. Clean up environment
+     * In the second command line tool **stop forwarding port of Gateway service** with `ctrl + C`
      * In the second command line tool **remove Kubernetes Pods** with `kubectl delete -f kubernetes.yaml`
      * In the first command line tool delete cluster **Kind** with `kind delete cluster --name helloworld`
      * Stop **Docker** tool

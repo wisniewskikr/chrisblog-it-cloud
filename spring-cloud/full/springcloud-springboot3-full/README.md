@@ -159,9 +159,7 @@ USAGE KUBERNETES (KIND)
 1. In a command line tool push Docker GATEWAY image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-full_gateway:0.0.1`
 1. In a command line tool build Docker DISCOVERY image with `docker build -f springcloud-springboot3-full_DISCOVERY/Dockerfile -t wisniewskikr/springcloud-springboot3-full_discovery:0.0.1 ./springcloud-springboot3-full_DISCOVERY`
 1. In a command line tool push Docker DISCOVERY image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-full_discovery:0.0.1`  
-1. In the first command line tool with administrator privileges check status of Minikube with `minikube status`
-1. In the first command line tool with administrator privileges check Docker images in Minikube with `minikube ssh docker images`
-1. In the first command line tool with administrator privileges check Docker containers in Minikube with `minikube ssh docker ps`
+1. In the first command line tool with administrator privileges check clusers with `kind get clusters`
 1. In a command line tool check Kubernetes Deployments with `kubectl get deployments`
 1. In a command line tool check Kubernetes Deployments details with **kubectl describe deployment {deployment-name}**
 1. In a command line tool check Kubernetes Services with `kubectl get services`

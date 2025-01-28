@@ -107,6 +107,12 @@ data:
           - targets: ['be.default.svc.cluster.local:8081'] ## only for demo purposes don't use host.docker.internal in production
             labels:
               application: 'BE'
+      - job_name: 'gateway'
+        metrics_path: '/actuator/prometheus'
+        static_configs:
+          - targets: ['gateway.default.svc.cluster.local:3000'] ## only for demo purposes don't use host.docker.internal in production
+            labels:
+              application: 'GATEWAY'
 
 ---
 
@@ -566,6 +572,10 @@ spec:
           value: http://fe:8080
         - name: spring_cloud_gateway_routes_0_predicates_0
           value: Path=/**
+        - name: management.zipkin.tracing.endpoint
+          value: http://tempo:9411/api/v2/spans
+        - name: LOKI_URL
+          value: http://loki:3100
         - name: eureka.client.service-url.defaultZone
           value: http://discovery:8761/eureka
         readinessProbe:

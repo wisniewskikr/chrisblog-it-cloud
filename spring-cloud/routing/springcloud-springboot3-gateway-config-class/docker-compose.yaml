@@ -73,9 +73,7 @@ services:
       context: ./springcloud-springboot3-gateway-config-class_ROUTING
       dockerfile: Dockerfile
     environment:
-      spring_cloud_gateway_routes_0_id: forward_route_to_fe
-      spring_cloud_gateway_routes_0_uri: http://fe:8080
-      spring_cloud_gateway_routes_0_predicates_0: Path=/**
+      fe.service.url: http://fe:8080
     depends_on:
       - fe
     ports:

@@ -52,14 +52,16 @@ USAGE DOCKER COMPOSE
 > Please be aware that following tools should be installed on your local PC:  
 * **Operating System** (tested on Windows 11)
 * **Git** (tested on version 2.33.0.windows.2)
-* **Docker** (tested on version 4.33.1 - it has to be up and running)
+* **Docker** (tested on version 4.33.1)
 
 ##### Required steps:
+1. Start **Docker** tool
 1. In a command line tool **start Docker containers** with `docker-compose up -d --build`
 1. In a browser visit `http://localhost:8762`
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port**
 1. Clean up environment 
      * In a command line tool **remove Docker containers** with `docker-compose down --rmi all`
+     * Stop **Docker** tool
 
 ##### Optional steps:
 1. In a browser check Back-End application healthcheck with `http://localhost:8081/actuator/health`

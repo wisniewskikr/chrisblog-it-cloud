@@ -58,9 +58,9 @@ USAGE MANUAL
 
 ##### Required steps:
 1. In the first command line tool **start Docker MySql container** with `docker run -d --name mysql-container -e MYSQL_ROOT_PASSWORD=my_secret_password -e MYSQL_DATABASE=database -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin123 -p 3306:3306 mysql:5.7`
-1. In the second command line tool **start Back-End application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_BE spring-boot:run`
-1. In the third command line tool **start Front-End application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_FE spring-boot:run`
-1. In the fourth command line tool **start Gateway application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_ROUTING spring-boot:run`
+1. In the second command line tool **start Back-End application** with `mvn -f ./springcloud-springboot3-gateway-config-class_BE spring-boot:run`
+1. In the third command line tool **start Front-End application** with `mvn -f ./springcloud-springboot3-gateway-config-class_FE spring-boot:run`
+1. In the fourth command line tool **start Gateway application** with `mvn -f ./springcloud-springboot3-gateway-config-class_ROUTING spring-boot:run`
 1. In a browser visit `http://localhost:8762`
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
 1. Clean up environment 
@@ -94,11 +94,11 @@ USAGE DOCKER
 ##### Required steps:
 1. In a command line tool create **Docker Network** with `docker network create helloworld-network`
 1. In a command line tool build and start **Docker container MySql** database with `docker run -d --name mysql-container -e MYSQL_ROOT_PASSWORD=my_secret_password -e MYSQL_DATABASE=database -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin123 -p 3306:3306 --network helloworld-network mysql:5.7`
-1. In a command line tool build **Docker image BE** with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_BE/Dockerfile -t be-image:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_BE`
+1. In a command line tool build **Docker image BE** with `docker build -f springcloud-springboot3-gateway-config-class_BE/Dockerfile -t be-image:0.0.1 ./springcloud-springboot3-gateway-config-class_BE`
 1. In a command line tool build and start **Docker container BE** with `docker run -p 8081:8081 --name be-container --network helloworld-network -e spring.datasource.url=jdbc:mysql://mysql-container:3306/database -d be-image:0.0.1`
-1. In a command line tool build **Docker image FE** with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_FE/Dockerfile -t fe-image:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_FE`
+1. In a command line tool build **Docker image FE** with `docker build -f springcloud-springboot3-gateway-config-class_FE/Dockerfile -t fe-image:0.0.1 ./springcloud-springboot3-gateway-config-class_FE`
 1. In a command line tool build and start **Docker container FE** with `docker run -p 8080:8080 --name fe-container --network helloworld-network -e baseurl.be=http://be-container:8081 -d fe-image:0.0.1`
-1. In a command line tool build **Docker image GATEWAY** with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_ROUTING/Dockerfile -t gateway-image:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_ROUTING`
+1. In a command line tool build **Docker image GATEWAY** with `docker build -f springcloud-springboot3-gateway-config-class_ROUTING/Dockerfile -t gateway-image:0.0.1 ./springcloud-springboot3-gateway-config-class_ROUTING`
 1. In a command line tool build and start **Docker container GATEWAY** with `docker run -p 8762:8762 --name gateway-container --network helloworld-network -e spring_cloud_gateway_routes_0_id=forward_route_to_fe -e spring_cloud_gateway_routes_0_uri=http://fe-container:8080 -e spring_cloud_gateway_routes_0_predicates_0=Path=/** -d gateway-image:0.0.1`
 1. In a browser visit `http://localhost:8762`
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
@@ -181,12 +181,12 @@ USAGE KUBERNETES (MINIKUBE)
      * In the first command line tool **with administrator privileges** stop **Minikube** with `minikube stop`
 
 ##### Optional steps:
-1. In a command line tool build Docker BE image with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_BE/Dockerfile -t wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_be:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_BE`
-1. In a command line tool push Docker BE image to Docker Repository with `docker push wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_be:0.0.1` 
-1. In a command line tool build Docker FE image with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_FE/Dockerfile -t wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_fe:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_FE`
-1. In a command line tool push Docker FE image to Docker Repository with `docker push wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_fe:0.0.1`
-1. In a command line tool build Docker GATEWAY image with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_ROUTING/Dockerfile -t wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_routing:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_ROUTING`
-1. In a command line tool push Docker GATEWAY image to Docker Repository with `docker push wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_routing:0.0.1` 
+1. In a command line tool build Docker BE image with `docker build -f springcloud-springboot3-gateway-config-class_BE/Dockerfile -t wisniewskikr/springcloud-springboot3-gateway-config-class_be:0.0.1 ./springcloud-springboot3-gateway-config-class_BE`
+1. In a command line tool push Docker BE image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-gateway-config-class_be:0.0.1` 
+1. In a command line tool build Docker FE image with `docker build -f springcloud-springboot3-gateway-config-class_FE/Dockerfile -t wisniewskikr/springcloud-springboot3-gateway-config-class_fe:0.0.1 ./springcloud-springboot3-gateway-config-class_FE`
+1. In a command line tool push Docker FE image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-gateway-config-class_fe:0.0.1`
+1. In a command line tool build Docker GATEWAY image with `docker build -f springcloud-springboot3-gateway-config-class_ROUTING/Dockerfile -t wisniewskikr/springcloud-springboot3-gateway-config-class_routing:0.0.1 ./springcloud-springboot3-gateway-config-class_ROUTING`
+1. In a command line tool push Docker GATEWAY image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-gateway-config-class_routing:0.0.1` 
 1. In the first command line tool with administrator privileges check status of Minikube with `minikube status`
 1. In the first command line tool with administrator privileges check Docker images in Minikube with `minikube ssh docker images`
 1. In the first command line tool with administrator privileges check Docker containers in Minikube with `minikube ssh docker ps`

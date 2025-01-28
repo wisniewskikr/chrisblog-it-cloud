@@ -85,7 +85,7 @@ spec:
     spec:
       containers:
       - name: be
-        image: wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_be:0.0.1
+        image: wisniewskikr/springcloud-springboot3-gateway-config-class_be:0.0.1
         ports:
         - containerPort: 8081
         env:
@@ -144,7 +144,7 @@ spec:
     spec:
       containers:
       - name: fe
-        image: wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_fe:0.0.1
+        image: wisniewskikr/springcloud-springboot3-gateway-config-class_fe:0.0.1
         ports:
         - containerPort: 8080
         env:
@@ -203,7 +203,7 @@ spec:
     spec:
       containers:
       - name: gateway
-        image: wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-gateway_routing:0.0.1
+        image: wisniewskikr/springcloud-springboot3-gateway-config-class_routing:0.0.1
         ports:
         - containerPort: 8762
         env:

@@ -2,7 +2,7 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to create **chain of applications (microservices)** with a **routing** type **Gateway API** with usage **Java** programming language and **Spring Cloud** framework. Gateway API enables routing - mapping - from one route to another. In this way all microservices can have one URL.
+The goal of this project is to present how to create **chain of applications (microservices)** with a **routing** type **Gateway API** with usage **Java** programming language and **Spring Cloud** framework. Gateway API enables routing - mapping - from one route to another. In this way all microservices can have one URL. It this example Gateway API is **configured the config class**, not in application.properties file. 
 
 This chain of services consists of following applications:
 * **Database**: SQL database - in this case type **MySql**

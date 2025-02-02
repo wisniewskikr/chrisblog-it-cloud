@@ -155,9 +155,9 @@ USAGE KUBERNETES (KIND)
 1. In a browser visit `http://localhost:3000`
    * Expected HTML page with **Grafana dashboard** (please check section **EXAMPLE**).
 1. Clean up environment 
-     * In the fourth command line tool **stop forwarding port of Kafka UI service** with `ctrl + C`
-     * In the third command line tool **stop forwarding port of Consumer service** with `ctrl + C`
-     * In the second command line tool **stop forwarding port of Producer service** with `ctrl + C`
+     * In the fourth command line tool **stop forwarding port of Grafana service** with `ctrl + C`
+     * In the third command line tool **stop forwarding port of Gateway service** with `ctrl + C`
+     * In the second command line tool **stop forwarding port of Discovery service** with `ctrl + C`
      * In the second command line tool **remove Kubernetes Pods** with `kubectl delete -f ./k8s --recursive`
      * In the first command line tool delete cluster **Kind** with `kind delete cluster --name helloworld`
      * Stop **Docker** tool

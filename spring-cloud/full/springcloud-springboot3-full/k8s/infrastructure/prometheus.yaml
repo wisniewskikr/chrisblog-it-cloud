@@ -69,6 +69,6 @@ data:
       - job_name: 'gateway'
         metrics_path: '/actuator/prometheus'
         static_configs:
-          - targets: ['gateway.default.svc.cluster.local:3000'] ## only for demo purposes don't use host.docker.internal in production
+          - targets: ['gateway.default.svc.cluster.local:8762'] ## only for demo purposes don't use host.docker.internal in production
             labels:
               application: 'GATEWAY'

@@ -11,7 +11,7 @@
 	</parent>
 
 	<groupId>com.example</groupId>
-	<artifactId>springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_FE</artifactId>
+	<artifactId>springcloud-springboot3-config-file_FE</artifactId>
 	<version>0.0.1</version>
 
 	<properties>

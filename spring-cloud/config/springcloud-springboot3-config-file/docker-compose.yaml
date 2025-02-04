@@ -27,7 +27,7 @@ services:
     image: config-image
     container_name: config-container
     build:
-      context: ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_SERVER
+      context: ./springcloud-springboot3-config-file_SERVER
       dockerfile: Dockerfile
     environment:
       spring.cloud.config.server.git.default-label: docker-compose
@@ -49,7 +49,7 @@ services:
     image: be-image:0.0.1
     container_name: be-container
     build:
-      context: ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_BE
+      context: ./springcloud-springboot3-config-file_BE
       dockerfile: Dockerfile
     depends_on:
       config:
@@ -72,7 +72,7 @@ services:
     image: fe-image:0.0.1
     container_name: fe-container
     build:
-      context: ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config_FE
+      context: ./springcloud-springboot3-config-file_FE
       dockerfile: Dockerfile
     depends_on:
       config:

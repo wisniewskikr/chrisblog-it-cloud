@@ -8,13 +8,13 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to create **chain of applications (microservices)** with a **config service** with usage **Java** programming language and **Spring Cloud** framework. Config service enables reading configuration properties stored on the Github. 
+The goal of this project is to present how to create **chain of applications (microservices)** with a **config service** where configurations are stored as **files** with usage **Java** programming language and **Spring Cloud** framework. Config service enables reading configuration properties stored as files in "resources/configurations" folder. 
 
-Link tu Github project with properties: `https://github.com/wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-config.git`. Propeties are stored in different branches regarding to usage:
-* branch **manual**: for Usage Manual + Docker
-* branch **docker**: for Usage Docker
-* branch **docker-compose**: for *sage Docker Compose
-* branch **kubernetes**: for Usage Kubernetes
+Propeties are stored in different folders regarding to usage:
+* folder **manual**: for Usage Manual + Docker
+* folder **docker**: for Usage Docker
+* folder **docker-compose**: for *sage Docker Compose
+* folder **k8s**: for Usage Kubernetes
 
 ##### Content
 This project consists of following applications:

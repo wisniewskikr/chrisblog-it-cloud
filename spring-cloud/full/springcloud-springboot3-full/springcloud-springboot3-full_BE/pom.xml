@@ -48,6 +48,12 @@
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
 
+		<!-- Config Server -->
+		<dependency>
+        	<groupId>org.springframework.cloud</groupId>
+        	<artifactId>spring-cloud-starter-config</artifactId>
+    	</dependency>
+
 		<!-- Logging -->
 		<dependency>
 			<groupId>com.github.loki4j</groupId>

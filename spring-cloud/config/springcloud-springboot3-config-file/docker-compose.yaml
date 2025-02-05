@@ -30,7 +30,7 @@ services:
       context: ./springcloud-springboot3-config-file_SERVER
       dockerfile: Dockerfile
     environment:
-      spring.cloud.config.server.git.default-label: docker-compose
+      spring.cloud.config.server.native.search-locations: classpath:/configurations/docker-compose
     depends_on:
       mysql:
         condition: service_healthy

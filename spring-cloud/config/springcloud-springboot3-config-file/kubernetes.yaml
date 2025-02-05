@@ -89,8 +89,8 @@ spec:
         ports:
         - containerPort: 8888
         env:
-        - name: spring.cloud.config.server.git.default-label
-          value: kubernetes
+        - name: spring.cloud.config.server.native.search-locations
+          value: classpath:/configurations/k8s
         readinessProbe:
           httpGet:
             path: /actuator/health

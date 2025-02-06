@@ -43,6 +43,7 @@ This project consists of following applications:
 * **Grafana**: it enables displaying logs, metrics and traces from Loki, Prometeus and Tempo tools 
 * **Api Gateway**: it enables redirectic traffic to different microservices
 * **Service Discovery**: it manages microservices
+* **Config Server**: it stores configs of all microservices
 
 ##### Inputs
 This project requires following inputs:
@@ -79,6 +80,7 @@ Terminology explanation:
 * **Grafana**: Grafana is an open-source visualization and analytics platform used for monitoring, querying, and visualizing metrics from various data sources in customizable dashboards.
 * **API Gateway**: An API Gateway is a management tool that acts as an entry point for APIs, handling tasks like routing, authentication, rate limiting, monitoring, and load balancing. It simplifies communication between clients and backend services, often used in microservices architectures to centralize API requests and enforce policies.
 * **Service Discovery**: Service discovery is the process of automatically detecting and locating network services or resources in a system, enabling communication between components without requiring manual configuration. It ensures that services can find and connect to each other dynamically in distributed or microservices architectures.
+* **Config Server**: A Config Server is a centralized service that manages and provides external configuration for distributed applications. It enables dynamic configuration updates without redeploying applications, improving maintainability and scalability.
 
 
 USAGES

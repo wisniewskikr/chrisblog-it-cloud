@@ -1,35 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: be
+  name: config
   labels:
-    app: be
+    app: config
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: be
+      app: config
   template:
     metadata:
       labels:
-        app: be
+        app: config
     spec:
       containers:
-      - name: be
-        image: wisniewskikr/springcloud-springboot3-full_be:0.0.1
+      - name: config
+        image: wisniewskikr/springcloud-springboot3-full_config:0.0.1
         ports:
-        - containerPort: 8081
+        - containerPort: 8888
         env:
-        - name: spring.application.name
-          value: be
-        - name: spring.config.import
-          value: configserver:http://config:8888
-        - name: LOKI_URL
-          value: http://loki:3100
+        - name: spring.cloud.config.server.native.search-locations
+          value: classpath:/configurations/k8s
+        - name: eureka.client.service-url.defaultZone
+          value: http://discovery:8761/eureka
         readinessProbe:
           httpGet:
             path: /actuator/health
-            port: 8081
+            port: 8888
           initialDelaySeconds: 30
           periodSeconds: 10
           timeoutSeconds: 5
@@ -37,7 +35,7 @@ spec:
         livenessProbe:
           httpGet:
             path: /actuator/health
-            port: 8081
+            port: 8888
           initialDelaySeconds: 30
           periodSeconds: 10
           timeoutSeconds: 5
@@ -49,10 +47,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: be
+  name: config
 spec:
   selector:
-    app: be
+    app: config
   ports:
-    - port: 8081
-      targetPort: 8081
+    - port: 8888
+      targetPort: 8888

@@ -48,6 +48,7 @@ services:
         condition: service_healthy
     environment:
       spring.cloud.config.server.native.search-locations: classpath:/configurations/docker-compose
+      eureka.client.service-url.defaultZone: http://discovery:8761/eureka
     ports:
       - 8888:8888
     healthcheck:

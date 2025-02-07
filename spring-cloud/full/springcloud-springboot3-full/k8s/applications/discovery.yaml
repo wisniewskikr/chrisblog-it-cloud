@@ -19,6 +19,11 @@ spec:
         image: wisniewskikr/springcloud-springboot3-full_discovery:0.0.1
         ports:
         - containerPort: 8761
+        env:
+        - name: spring.application.name
+          value: discovery
+        - name: spring.config.import
+          value: configserver:http://config:8888
         readinessProbe:
           httpGet:
             path: /actuator/health

@@ -22,8 +22,6 @@ spec:
         env:
         - name: spring.cloud.config.server.native.search-locations
           value: classpath:/configurations/k8s
-        - name: eureka.client.service-url.defaultZone
-          value: http://discovery:8761/eureka
         readinessProbe:
           httpGet:
             path: /actuator/health

@@ -19,24 +19,6 @@ services:
 #    volumes:
 #      - dbdata:/var/lib/mysql
 
-  discovery:
-    image: discovery-image
-    container_name: discovery-container
-    build:
-      context: ./../springcloud-springboot3-full_DISCOVERY
-      dockerfile: Dockerfile
-    depends_on:
-      mysql:
-        condition: service_healthy
-    ports:
-      - 8761:8761
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8761/actuator/health"]
-      interval: 10s
-      timeout: 10s
-      retries: 5
-      start_period: 10s
-
   config:
     image: config
     container_name: config
@@ -44,11 +26,10 @@ services:
       context: ./../springcloud-springboot3-full_CONFIG
       dockerfile: Dockerfile
     depends_on:
-      discovery:
+      mysql:
         condition: service_healthy
     environment:
       spring.cloud.config.server.native.search-locations: classpath:/configurations/docker-compose
-      eureka.client.service-url.defaultZone: http://discovery:8761/eureka
     ports:
       - 8888:8888
     healthcheck:
@@ -57,6 +38,27 @@ services:
       timeout: 10s
       retries: 5
       start_period: 10s
+
+  discovery:
+    image: discovery-image
+    container_name: discovery-container
+    build:
+      context: ./../springcloud-springboot3-full_DISCOVERY
+      dockerfile: Dockerfile
+    environment:
+      spring.application.name: discovery
+      spring.config.import: configserver:http://config:8888
+    depends_on:
+      config:
+        condition: service_healthy
+    ports:
+      - 8761:8761
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8761/actuator/health"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 10s  
 
   tempo:
     image: grafana/tempo:2.2.2
@@ -106,7 +108,7 @@ services:
       spring.config.import: configserver:http://config:8888
       LOKI_URL: http://loki:3100
     depends_on:
-      config:
+      discovery:
         condition: service_healthy
     ports:
       - 8081:8081
@@ -128,7 +130,7 @@ services:
       spring.config.import: configserver:http://config:8888
       LOKI_URL: http://loki:3100
     depends_on:
-      config:
+      discovery:
         condition: service_healthy
     ports:
       - 8080:8080
@@ -150,7 +152,7 @@ services:
       spring.config.import: configserver:http://config:8888
       LOKI_URL: http://loki:3100
     depends_on:
-      config:
+      discovery:
         condition: service_healthy
     ports:
       - 8762:8762

@@ -46,7 +46,7 @@ USAGE DOCKER COMPOSE
 ##### Required steps:
 1. Start **Docker** tool
 1. In a command line tool **start Docker containers** with `docker-compose up -d --build`
-1. In any rest client (e.g. Postman) use GET method and visit `http://localhost:8762`
+1. In any REST Client (e.g. Postman) use GET method and visit `http://localhost:8762`
    * Expected message **Hello World!**
 1. Clean up environment 
      * In a command line tool **remove Docker containers** with `docker-compose down --rmi all`
@@ -80,8 +80,8 @@ USAGE KUBERNETES (KIND)
 1. In the command line tool **check status of Kubernetes Pods** with `kubectl get pods`
    * Expected mysql, be and fe as **READY 1/1** (it can take few minutes)
 1. In the command line tool **forward port of Gateway service** with `kubectl port-forward service/gateway 8762:8762`
-1. In a browser visit `http://localhost:8762`
-   * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port**
+1. In any REST Client (e.g. Postman) use GET method and visit `http://localhost:8762`
+   * Expected message **Hello World!**
 1. Clean up environment
      * In the command line tool **stop forwarding port of Gateway service** with `ctrl + C`
      * In the command line tool **remove Kubernetes Pods** with `kubectl delete -f kubernetes.yaml`
@@ -89,12 +89,10 @@ USAGE KUBERNETES (KIND)
      * Stop **Docker** tool
 
 ##### Optional steps:
-1. In a command line tool build Docker BE image with `docker build -f springcloud-springboot3-gateway-config-class_BE/Dockerfile -t wisniewskikr/springcloud-springboot3-gateway-config-class_be:0.0.1 ./springcloud-springboot3-gateway-config-class_BE`
-1. In a command line tool push Docker BE image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-gateway-config-class_be:0.0.1` 
-1. In a command line tool build Docker FE image with `docker build -f springcloud-springboot3-gateway-config-class_FE/Dockerfile -t wisniewskikr/springcloud-springboot3-gateway-config-class_fe:0.0.1 ./springcloud-springboot3-gateway-config-class_FE`
-1. In a command line tool push Docker FE image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-gateway-config-class_fe:0.0.1`
-1. In a command line tool build Docker GATEWAY image with `docker build -f springcloud-springboot3-gateway-config-class_ROUTING/Dockerfile -t wisniewskikr/springcloud-springboot3-gateway-config-class_routing:0.0.1 ./springcloud-springboot3-gateway-config-class_ROUTING`
-1. In a command line tool push Docker GATEWAY image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-gateway-config-class_routing:0.0.1` 
+1. In a command line tool build Docker Service image with `docker build -f springcloud-springboot3-gateway-simple_service/Dockerfile -t wisniewskikr/springcloud-springboot3-gateway-simple_service:0.0.1 ./springcloud-springboot3-gateway-simple_service`
+1. In a command line tool push Docker Service image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-gateway-simple_service:0.0.1` 
+1. In a command line tool build Docker GATEWAY image with `docker build -f springcloud-springboot3-gateway-simple_routing/Dockerfile -t wisniewskikr/springcloud-springboot3-gateway-simple_routing:0.0.1 ./springcloud-springboot3-gateway-simple_routing`
+1. In a command line tool push Docker GATEWAY image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-gateway-simple_routing:0.0.1` 
 1. In a command line tool check Kubernetes Deployments with `kubectl get deployments`
 1. In a command line tool check Kubernetes Deployments with `kubectl get deployments`
 1. In a command line tool check Kubernetes Deployments details with **kubectl describe deployment {deployment-name}**

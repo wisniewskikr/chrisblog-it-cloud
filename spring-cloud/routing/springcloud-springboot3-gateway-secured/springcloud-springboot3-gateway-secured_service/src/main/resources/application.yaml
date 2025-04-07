@@ -1,0 +1,8 @@
+# Service Name
+spring:
+    application:
+        name: service
+
+# Server Port
+server:
+    port: 9090

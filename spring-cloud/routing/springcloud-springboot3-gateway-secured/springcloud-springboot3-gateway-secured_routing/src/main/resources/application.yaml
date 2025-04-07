@@ -14,4 +14,4 @@ server:
     port: 8762
 
 service:
-    url: http://localhost:8080
+    url: http://localhost:9090

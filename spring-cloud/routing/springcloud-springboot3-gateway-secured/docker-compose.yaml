@@ -40,7 +40,7 @@ services:
       context: ./springcloud-springboot3-gateway-secured_routing
       dockerfile: Dockerfile
     environment:
-      SERVICE_URL: http://service:8080
+      SERVICE_URL: http://service:9090
       SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER-URI: http://keycloak:8080/realms/helloworld-realm
     depends_on:
       - service

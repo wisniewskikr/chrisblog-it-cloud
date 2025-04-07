@@ -16,9 +16,16 @@ public class RoutesConfig {
     private String serviceUrl;
 
     @Bean
-    public RouterFunction<ServerResponse> feServiceRoute() {
-        return GatewayRouterFunctions.route("service")
-                .route(RequestPredicates.path("/"), HandlerFunctions.http(serviceUrl))                
+    public RouterFunction<ServerResponse> publicServiceRoute() {
+        return GatewayRouterFunctions.route("publicService")
+                .route(RequestPredicates.path("/public"), HandlerFunctions.http(serviceUrl + "/public"))                
+                .build();
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> securedServiceRoute() {
+        return GatewayRouterFunctions.route("securedService")
+                .route(RequestPredicates.path("/secured"), HandlerFunctions.http(serviceUrl + "/secured"))                
                 .build();
     }
     

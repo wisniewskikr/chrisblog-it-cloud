@@ -18,7 +18,7 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to create **microservice** and **routing** type **Gateway API** with usage **Java** programming language and **Spring Cloud** framework. Gateway API enables routing - mapping - from one route to another. In this way all microservices can have one URL. It this example Gateway API is **configured the config class**, not in application.properties file. 
+The goal of this project is to present how to use **Keycloak** to **secure** routing type **Gateway API** with usage **Java** programming language and **Spring Cloud** framework. Gateway API enables routing - mapping - from one route to another. In this way all microservices can have one URL. It this example Gateway API is **configured the config class**, not in application.properties file. 
 
 This chain of services consists of following applications:
 * **Service**: java REST API application which displays "Hello World!" text
@@ -31,6 +31,7 @@ Terminology explanation:
 * **Java**: object-oriented programming language
 * **Spring Boot**: framework for Java. It consists of: Spring + Container + Configuration
 * **Spring Cloud Gateway**: Spring Cloud Gateway is a reactive, API gateway service in the Spring Cloud ecosystem. It provides routing, load balancing, and API request handling. Built on top of Spring WebFlux, it allows dynamic routing, filtering, and monitoring of requests to various microservices, acting as a reverse proxy with features like path rewriting, rate limiting, and security integration.
+**Keycloak**: Keycloak is an open-source identity and access management solution that provides features like single sign-on (SSO), user federation, identity brokering, and role-based access control (RBAC). It allows secure authentication and authorization for web apps and services with minimal setup.
 
 
 USAGES

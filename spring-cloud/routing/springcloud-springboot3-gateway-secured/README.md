@@ -89,10 +89,10 @@ USAGE KUBERNETES (KIND)
      * Stop **Docker** tool
 
 ##### Optional steps:
-1. In a command line tool build Docker Service image with `docker build -f springcloud-springboot3-gateway-simple_service/Dockerfile -t wisniewskikr/springcloud-springboot3-gateway-simple_service:0.0.1 ./springcloud-springboot3-gateway-simple_service`
-1. In a command line tool push Docker Service image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-gateway-simple_service:0.0.1` 
-1. In a command line tool build Docker GATEWAY image with `docker build -f springcloud-springboot3-gateway-simple_routing/Dockerfile -t wisniewskikr/springcloud-springboot3-gateway-simple_routing:0.0.1 ./springcloud-springboot3-gateway-simple_routing`
-1. In a command line tool push Docker GATEWAY image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-gateway-simple_routing:0.0.1` 
+1. In a command line tool build Docker Service image with `docker build -f springcloud-springboot3-gateway-secured_service/Dockerfile -t wisniewskikr/springcloud-springboot3-gateway-secured_service:0.0.1 ./springcloud-springboot3-gateway-secured_service`
+1. In a command line tool push Docker Service image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-gateway-secured_service:0.0.1` 
+1. In a command line tool build Docker GATEWAY image with `docker build -f springcloud-springboot3-gateway-secured_routing/Dockerfile -t wisniewskikr/springcloud-springboot3-gateway-secured_routing:0.0.1 ./springcloud-springboot3-gateway-secured_routing`
+1. In a command line tool push Docker GATEWAY image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-gateway-secured_routing:0.0.1` 
 1. In a command line tool check Kubernetes Deployments with `kubectl get deployments`
 1. In a command line tool check Kubernetes Deployments with `kubectl get deployments`
 1. In a command line tool check Kubernetes Deployments details with **kubectl describe deployment {deployment-name}**

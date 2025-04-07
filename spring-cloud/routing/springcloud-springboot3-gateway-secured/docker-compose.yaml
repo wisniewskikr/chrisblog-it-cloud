@@ -6,7 +6,7 @@ services:
     image: service-image:0.0.1
     container_name: service-container
     build:
-      context: ./springcloud-springboot3-gateway-simple_service
+      context: ./springcloud-springboot3-gateway-secured_service
       dockerfile: Dockerfile
     ports:
       - 8080:8080
@@ -23,7 +23,7 @@ services:
     image: gateway-image
     container_name: gateway-container
     build:
-      context: ./springcloud-springboot3-gateway-simple_routing
+      context: ./springcloud-springboot3-gateway-secured_routing
       dockerfile: Dockerfile
     environment:
       service.url: http://service:8080

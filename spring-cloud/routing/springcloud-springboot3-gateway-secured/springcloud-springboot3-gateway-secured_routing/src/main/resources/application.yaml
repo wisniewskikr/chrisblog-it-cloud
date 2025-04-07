@@ -1,0 +1,17 @@
+# Service Name
+spring:
+    application:
+        name: gateway
+    security:
+        oauth2:
+            resourceserver:
+                jwt:
+                    issuer-uri: http://localhost:8080/realms/helloworld-realm
+                    jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+
+# Server Port
+server:
+    port: 8762
+
+service:
+    url: http://localhost:8080

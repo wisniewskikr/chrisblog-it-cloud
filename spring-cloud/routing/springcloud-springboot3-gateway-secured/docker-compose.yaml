@@ -1,0 +1,45 @@
+version: '3'
+ 
+services:
+  
+  service:
+    image: service-image:0.0.1
+    container_name: service-container
+    build:
+      context: ./springcloud-springboot3-gateway-simple_service
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+    networks:
+      - helloworld-network
+
+  gateway:
+    image: gateway-image
+    container_name: gateway-container
+    build:
+      context: ./springcloud-springboot3-gateway-simple_routing
+      dockerfile: Dockerfile
+    environment:
+      service.url: http://service:8080
+    depends_on:
+      - service
+    ports:
+      - 8762:8762
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8762/actuator/health"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+    networks:
+      - helloworld-network
+
+networks:
+  helloworld-network:
+    name: helloworld-network-name

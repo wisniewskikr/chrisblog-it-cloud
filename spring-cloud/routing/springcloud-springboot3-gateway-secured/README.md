@@ -136,7 +136,6 @@ USAGE KUBERNETES (KIND)
 1. In a command line tool build Docker GATEWAY image with `docker build -f springcloud-springboot3-gateway-secured_routing/Dockerfile -t wisniewskikr/springcloud-springboot3-gateway-secured_routing:0.0.1 ./springcloud-springboot3-gateway-secured_routing`
 1. In a command line tool push Docker GATEWAY image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-gateway-secured_routing:0.0.1` 
 1. In a command line tool check Kubernetes Deployments with `kubectl get deployments`
-1. In a command line tool check Kubernetes Deployments with `kubectl get deployments`
 1. In a command line tool check Kubernetes Deployments details with **kubectl describe deployment {deployment-name}**
 1. In a command line tool check Kubernetes Services with `kubectl get services`
 1. In a command line tool check Kubernetes Services details with **kubectl describe service {service-name}**

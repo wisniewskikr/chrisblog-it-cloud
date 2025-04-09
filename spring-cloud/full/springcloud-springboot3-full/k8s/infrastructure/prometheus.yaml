@@ -54,18 +54,18 @@ data:
       evaluation_interval: 2s
 
     scrape_configs:      
-      - job_name: 'fe'
+      - job_name: 'first'
         metrics_path: '/actuator/prometheus'
         static_configs:
-          - targets: ['fe.default.svc.cluster.local:8080'] ## only for demo purposes don't use host.docker.internal in production
+          - targets: ['first.default.svc.cluster.local:8080'] ## only for demo purposes don't use host.docker.internal in production
             labels:
-              application: 'FE'
-      - job_name: 'be'
+              application: 'FIRST'
+      - job_name: 'second'
         metrics_path: '/actuator/prometheus'
         static_configs:
-          - targets: ['be.default.svc.cluster.local:8081'] ## only for demo purposes don't use host.docker.internal in production
+          - targets: ['second.default.svc.cluster.local:8081'] ## only for demo purposes don't use host.docker.internal in production
             labels:
-              application: 'BE'
+              application: 'SECOND'
       - job_name: 'gateway'
         metrics_path: '/actuator/prometheus'
         static_configs:

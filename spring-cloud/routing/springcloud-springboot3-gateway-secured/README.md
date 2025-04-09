@@ -115,8 +115,8 @@ USAGE KUBERNETES (KIND)
    * Token Name: **Token**
    * Grant Type: **Authorization Code (With PKCE)
    * Callback URL: **http://localhost:8762**
-   * Auth URL: **http://keycloak:8080/realms/helloworld-realm/protocol/openid-connect/auth**
-   * Access Token URL: **http://keycloak:8080/realms/helloworld-realm/protocol/openid-connect/token**
+   * Auth URL: **http://keycloak.default.svc.cluster.local:8080/realms/helloworld-realm/protocol/openid-connect/auth**
+   * Access Token URL: **http://keycloak.default.svc.cluster.local:8080/realms/helloworld-realm/protocol/openid-connect/token**
    * Client ID: **helloworld-client**
    * Code Challenge Method: **SHA-256**
    * Click **Get New Access Token -> Use Token**

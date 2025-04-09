@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: fe
-        image: wisniewskikr/springcloud-springboot3-full_fe:0.0.1
+        image: wisniewskikr/springcloud-springboot3-full_first:0.0.1
         ports:
         - containerPort: 8080
         env:

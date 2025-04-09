@@ -167,8 +167,8 @@ USAGE KUBERNETES (KIND)
 ##### Optional steps:
 1. In a command line tool build Docker BE image with `docker build -f springcloud-springboot3-full_SECOND/Dockerfile -t wisniewskikr/springcloud-springboot3-full_second:0.0.1 ./springcloud-springboot3-full_SECOND`
 1. In a command line tool push Docker BE image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-full_second:0.0.1` 
-1. In a command line tool build Docker FE image with `docker build -f springcloud-springboot3-full_FE/Dockerfile -t wisniewskikr/springcloud-springboot3-full_fe:0.0.1 ./springcloud-springboot3-full_FE`
-1. In a command line tool push Docker FE image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-full_fe:0.0.1` 
+1. In a command line tool build Docker FE image with `docker build -f springcloud-springboot3-full_FIRST/Dockerfile -t wisniewskikr/springcloud-springboot3-full_first:0.0.1 ./springcloud-springboot3-full_FIRST`
+1. In a command line tool push Docker FE image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-full_first:0.0.1` 
 1. In a command line tool build Docker GATEWAY image with `docker build -f springcloud-springboot3-full_GATEWAY/Dockerfile -t wisniewskikr/springcloud-springboot3-full_gateway:0.0.1 ./springcloud-springboot3-full_GATEWAY`
 1. In a command line tool push Docker GATEWAY image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-full_gateway:0.0.1`
 1. In a command line tool build Docker DISCOVERY image with `docker build -f springcloud-springboot3-full_DISCOVERY/Dockerfile -t wisniewskikr/springcloud-springboot3-full_discovery:0.0.1 ./springcloud-springboot3-full_DISCOVERY`

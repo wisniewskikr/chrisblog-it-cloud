@@ -123,7 +123,7 @@ services:
     image: fe-image:0.0.1
     container_name: fe-container
     build:
-      context: ./../springcloud-springboot3-full_FE
+      context: ./../springcloud-springboot3-full_FIRST
       dockerfile: Dockerfile
     environment:
       spring.application.name: fe

@@ -125,8 +125,8 @@ USAGE DOCKER COMPOSE
 1. In a command line tool check list of all Docker containers with `docker ps -a`
 1. In a command line tool check list of active Docker containers with `docker ps`
 1. In a command line tool check list of Docker nerworks with `docker network ls`
-1. In a command line tool check BE container logs with `docker logs be-container`
-1. In a command line tool check FE container logs with `docker logs fe-container`
+1. In a command line tool check SECOND container logs with `docker logs second-container`
+1. In a command line tool check FIRST container logs with `docker logs first-container`
 
 
 USAGE KUBERNETES (KIND)
@@ -146,7 +146,7 @@ USAGE KUBERNETES (KIND)
 1. In the first command line tool create and start cluster **Kind** with `kind create cluster --name helloworld`
 1. In the second command line tool **start Kubernetes Pods** with `kubectl apply -f ./k8s --recursive`
 1. In the second command line tool **check status of Kubernetes Pods** with `kubectl get pods`
-   * Expected mysql, be and fe as **READY 1/1** (it can take few minutes)
+   * Expected mysql, second and first as **READY 1/1** (it can take few minutes)
 1. In the second command line tool **forward port of Discovery service** with `kubectl port-forward service/discovery 8761:8761`
 1. In the third command line tool **forward port of Gateway service** with `kubectl port-forward service/gateway 8762:8762`
 1. In the fourth command line tool**forward port of Grafana service** with `kubectl port-forward service/grafana 3000:3000`
@@ -165,10 +165,10 @@ USAGE KUBERNETES (KIND)
      * Stop **Docker** tool
 
 ##### Optional steps:
-1. In a command line tool build Docker BE image with `docker build -f springcloud-springboot3-full_SECOND/Dockerfile -t wisniewskikr/springcloud-springboot3-full_second:0.0.1 ./springcloud-springboot3-full_SECOND`
-1. In a command line tool push Docker BE image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-full_second:0.0.1` 
-1. In a command line tool build Docker FE image with `docker build -f springcloud-springboot3-full_FIRST/Dockerfile -t wisniewskikr/springcloud-springboot3-full_first:0.0.1 ./springcloud-springboot3-full_FIRST`
-1. In a command line tool push Docker FE image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-full_first:0.0.1` 
+1. In a command line tool build Docker SECOND image with `docker build -f springcloud-springboot3-full_SECOND/Dockerfile -t wisniewskikr/springcloud-springboot3-full_second:0.0.1 ./springcloud-springboot3-full_SECOND`
+1. In a command line tool push Docker SECOND image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-full_second:0.0.1` 
+1. In a command line tool build Docker FIRST image with `docker build -f springcloud-springboot3-full_FIRST/Dockerfile -t wisniewskikr/springcloud-springboot3-full_first:0.0.1 ./springcloud-springboot3-full_FIRST`
+1. In a command line tool push Docker FIRST image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-full_first:0.0.1` 
 1. In a command line tool build Docker GATEWAY image with `docker build -f springcloud-springboot3-full_GATEWAY/Dockerfile -t wisniewskikr/springcloud-springboot3-full_gateway:0.0.1 ./springcloud-springboot3-full_GATEWAY`
 1. In a command line tool push Docker GATEWAY image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-full_gateway:0.0.1`
 1. In a command line tool build Docker DISCOVERY image with `docker build -f springcloud-springboot3-full_DISCOVERY/Dockerfile -t wisniewskikr/springcloud-springboot3-full_discovery:0.0.1 ./springcloud-springboot3-full_DISCOVERY`

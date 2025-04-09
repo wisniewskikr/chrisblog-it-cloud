@@ -26,7 +26,7 @@ public class HelloWorldController {
     @GetMapping
     String findById(Model model) {
 
-        logger.info("Called FE method HelloWorldController.findById()");
+        logger.info("Called FIRST method HelloWorldController.findById()");
 
         HelloWorldDto helloWorldDto = helloWorldService.findById(1L);
         model.addAttribute("message", helloWorldDto.text());        

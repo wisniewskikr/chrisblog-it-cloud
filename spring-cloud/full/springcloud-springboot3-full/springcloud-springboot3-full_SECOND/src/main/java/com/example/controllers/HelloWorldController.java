@@ -26,7 +26,7 @@ public class HelloWorldController {
 	@GetMapping("/message/{id}")
 	public ResponseEntity<HelloWorldDto> helloWorld(@PathVariable Long id) {
 
-		logger.info("Called BE method HelloWorldController.helloWorld() for id {}", id);
+		logger.info("Called SECOND method HelloWorldController.helloWorld() for id {}", id);
 
 		HelloWorldDto helloWorldDto = helloWorldService.findById(id);
 		return ResponseEntity.ok(helloWorldDto);		

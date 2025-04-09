@@ -23,8 +23,8 @@ public class HelloWorldService {
     public HelloWorldDto findById(Long id) {
         
         HelloWorldEntity helloWorldEntity = helloWorldRepository.findById(id).orElseThrow(() -> new RuntimeException("Message doesn't exist"));
-        String portBe = environment.getProperty("local.server.port");
-        return new HelloWorldDto(helloWorldEntity.getId(), helloWorldEntity.getText(), portBe);
+        String portSecond = environment.getProperty("local.server.port");
+        return new HelloWorldDto(helloWorldEntity.getId(), helloWorldEntity.getText(), portSecond);
 
     }
 

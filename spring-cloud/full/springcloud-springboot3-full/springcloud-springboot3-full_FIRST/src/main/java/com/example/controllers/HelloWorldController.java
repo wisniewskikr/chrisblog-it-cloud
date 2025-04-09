@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.dtos.HelloWorldDto;
+import com.example.dtos.HelloWorldSecondDto;
 import com.example.services.HelloWorldService;
 
 @Controller
@@ -28,9 +28,9 @@ public class HelloWorldController {
 
         logger.info("Called FIRST method HelloWorldController.findById()");
 
-        HelloWorldDto helloWorldDto = helloWorldService.findById(1L);
-        model.addAttribute("message", helloWorldDto.text());        
-        model.addAttribute("portSecond", helloWorldDto.portSecond());
+        HelloWorldSecondDto helloWorldSecondDto = helloWorldService.findById(1L);
+        model.addAttribute("message", helloWorldSecondDto.text());        
+        model.addAttribute("portSecond", helloWorldSecondDto.portSecond());
         model.addAttribute("portFirst", environment.getProperty("local.server.port"));
         return "helloworld";
 

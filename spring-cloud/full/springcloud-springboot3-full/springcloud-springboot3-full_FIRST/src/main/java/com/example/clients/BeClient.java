@@ -4,12 +4,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.service.annotation.GetExchange;
 import org.springframework.web.service.annotation.HttpExchange;
 
-import com.example.dtos.HelloWorldDto;
+import com.example.dtos.HelloWorldSecondDto;
 
 @HttpExchange
 public interface BeClient {
 
     @GetExchange("/message/{id}")
-    HelloWorldDto findById(@PathVariable("id") Long id);
+    HelloWorldSecondDto findById(@PathVariable("id") Long id);
 
 }

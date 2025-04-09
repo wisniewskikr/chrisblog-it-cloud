@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.clients.BeClient;
-import com.example.dtos.HelloWorldDto;
+import com.example.dtos.HelloWorldSecondDto;
 
 @Service
 public class HelloWorldService {
@@ -16,7 +16,7 @@ public class HelloWorldService {
         this.beClient = beClient;
     }
 
-    public HelloWorldDto findById(Long id) {
+    public HelloWorldSecondDto findById(Long id) {
         return beClient.findById(id);
     }
 

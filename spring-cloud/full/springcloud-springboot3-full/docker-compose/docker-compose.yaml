@@ -97,14 +97,14 @@ services:
     ports:
       - "3000:3000"
 
-  be:
-    image: be-image:0.0.1
-    container_name: be-container
+  second:
+    image: second-image:0.0.1
+    container_name: second-container
     build:
       context: ./../springcloud-springboot3-full_SECOND
       dockerfile: Dockerfile
     environment:
-      spring.application.name: be
+      spring.application.name: second
       spring.config.import: configserver:http://config:8888
       LOKI_URL: http://loki:3100
     depends_on:
@@ -119,14 +119,14 @@ services:
       retries: 5
       start_period: 10s
 
-  fe:
-    image: fe-image:0.0.1
-    container_name: fe-container
+  first:
+    image: first-image:0.0.1
+    container_name: first-container
     build:
       context: ./../springcloud-springboot3-full_FIRST
       dockerfile: Dockerfile
     environment:
-      spring.application.name: fe
+      spring.application.name: first
       spring.config.import: configserver:http://config:8888
       LOKI_URL: http://loki:3100
     depends_on:

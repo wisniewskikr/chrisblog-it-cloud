@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fe
+  name: second
   labels:
-    app: fe
+    app: second
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: fe
+      app: second
   template:
     metadata:
       labels:
-        app: fe
+        app: second
     spec:
       containers:
-      - name: fe
-        image: wisniewskikr/springcloud-springboot3-full_first:0.0.1
+      - name: second
+        image: wisniewskikr/springcloud-springboot3-full_second:0.0.1
         ports:
-        - containerPort: 8080
+        - containerPort: 8081
         env:
         - name: spring.application.name
-          value: fe
+          value: second
         - name: spring.config.import
           value: configserver:http://config:8888
         - name: LOKI_URL
@@ -29,7 +29,7 @@ spec:
         readinessProbe:
           httpGet:
             path: /actuator/health
-            port: 8080
+            port: 8081
           initialDelaySeconds: 30
           periodSeconds: 10
           timeoutSeconds: 5
@@ -37,7 +37,7 @@ spec:
         livenessProbe:
           httpGet:
             path: /actuator/health
-            port: 8080
+            port: 8081
           initialDelaySeconds: 30
           periodSeconds: 10
           timeoutSeconds: 5
@@ -49,10 +49,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: fe
+  name: second
 spec:
   selector:
-    app: fe
+    app: second
   ports:
-    - port: 8080
-      targetPort: 8080
+    - port: 8081
+      targetPort: 8081

@@ -3,21 +3,21 @@ package com.example.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.clients.BeClient;
+import com.example.clients.SecondClient;
 import com.example.dtos.HelloWorldSecondDto;
 
 @Service
 public class HelloWorldService {
     
-    private BeClient beClient;    
+    private SecondClient secondClient;    
 
     @Autowired
-    public HelloWorldService(BeClient beClient) {
-        this.beClient = beClient;
+    public HelloWorldService(SecondClient secondClient) {
+        this.secondClient = secondClient;
     }
 
     public HelloWorldSecondDto findById(Long id) {
-        return beClient.findById(id);
+        return secondClient.findById(id);
     }
 
 }

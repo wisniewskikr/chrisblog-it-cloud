@@ -101,7 +101,7 @@ services:
     image: be-image:0.0.1
     container_name: be-container
     build:
-      context: ./../springcloud-springboot3-full_BE
+      context: ./../springcloud-springboot3-full_SECOND
       dockerfile: Dockerfile
     environment:
       spring.application.name: be

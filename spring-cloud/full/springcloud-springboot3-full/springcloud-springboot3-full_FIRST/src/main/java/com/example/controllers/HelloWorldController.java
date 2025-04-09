@@ -30,8 +30,8 @@ public class HelloWorldController {
 
         HelloWorldDto helloWorldDto = helloWorldService.findById(1L);
         model.addAttribute("message", helloWorldDto.text());        
-        model.addAttribute("portBe", helloWorldDto.portBe());
-        model.addAttribute("portFe", environment.getProperty("local.server.port"));
+        model.addAttribute("portSecond", helloWorldDto.portSecond());
+        model.addAttribute("portFirst", environment.getProperty("local.server.port"));
         return "helloworld";
 
     }

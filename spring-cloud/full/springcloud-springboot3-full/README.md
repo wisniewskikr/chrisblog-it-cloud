@@ -9,6 +9,17 @@ EXAMPLE PUBLIC
 EXAMPLE SECURED
 ---------------
 
+![My Image](readme-images/secured-01.png)
+
+![My Image](readme-images/secured-02.png)
+
+![My Image](readme-images/secured-03.png)
+
+![My Image](readme-images/secured-04.png)
+
+![My Image](readme-images/secured-05.png)
+
+
 
 EXAMPLE GRAFANA
 ---------------

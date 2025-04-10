@@ -172,6 +172,7 @@ USAGE KUBERNETES (KIND)
 * **Kind** (tested on version 0.26.0)
 
 ##### Required steps:
+1. Update **hosts** file (Run as Administrator; Windows: "Windows\System32\drivers\etc\hosts"; MAC/Linux: "etc/hosts") with new line **127.0.0.1 keycloak.default.svc.cluster.local**
 1. Start **Docker** tool
 1. In the first command line tool create and start cluster **Kind** with `kind create cluster --name helloworld`
 1. In the second command line tool **start Kubernetes Pods** with `kubectl apply -f ./k8s --recursive`
@@ -180,19 +181,34 @@ USAGE KUBERNETES (KIND)
 1. In the second command line tool **forward port of Discovery service** with `kubectl port-forward service/discovery 8761:8761`
 1. In the third command line tool **forward port of Gateway service** with `kubectl port-forward service/gateway 8762:8762`
 1. In the fourth command line tool**forward port of Grafana service** with `kubectl port-forward service/grafana 3000:3000`
-1. In a browser visit `http://localhost:8761`
+1. In the fifth command line tool **forward port of Keycloak service** with `kubectl port-forward service/keycloak 8080:8080`
+1. In any browser visit `http://localhost:8761`
    * Expected HTML page with **Discovery dashboard**
-1. In a browser visit `http://localhost:8762`
-   * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
-1. In a browser visit `http://localhost:3000`
-   * Expected HTML page with **Grafana dashboard** (please check section **EXAMPLE**).
+1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8762/public`
+   * Expected JSON with **Database Message**, **Second Service Port** and **First Service Port** 
+1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8762/secured`
+   * Authorization -> Type -> OAuth 2.0
+   * Token Name: **Token**
+   * Grant Type: **Authorization Code (With PKCE)
+   * Callback URL: **http://localhost:8762**
+   * Auth URL: **http://keycloak.default.svc.cluster.local:8080/realms/helloworld-realm/protocol/openid-connect/auth**
+   * Access Token URL: **http://keycloak.default.svc.cluster.local:8080/realms/helloworld-realm/protocol/openid-connect/token**
+   * Client ID: **helloworld-client**
+   * Code Challenge Method: **SHA-256**
+   * Click **Get New Access Token -> Use Token**
+   * Click **Send**
+   * Expected JSON with **Database Message**, **Second Service Port** and **First Service Port** 
+1. In any browser visit `http://localhost:3000`
+   * Expected HTML page with **Grafana dashboard** (please check section **EXAMPLE GRAFANA**)
 1. Clean up environment 
+     * In the fifth command line tool **stop forwarding port of Keycloak service** with `ctrl + C`
      * In the fourth command line tool **stop forwarding port of Grafana service** with `ctrl + C`
      * In the third command line tool **stop forwarding port of Gateway service** with `ctrl + C`
      * In the second command line tool **stop forwarding port of Discovery service** with `ctrl + C`
      * In the second command line tool **remove Kubernetes Pods** with `kubectl delete -f ./k8s --recursive`
      * In the first command line tool delete cluster **Kind** with `kind delete cluster --name helloworld`
      * Stop **Docker** tool
+     * Remove new line from **hosts**
 
 ##### Optional steps:
 1. In a command line tool build Docker SECOND image with `docker build -f springcloud-springboot3-full_SECOND/Dockerfile -t wisniewskikr/springcloud-springboot3-full_second:0.0.1 ./springcloud-springboot3-full_SECOND`

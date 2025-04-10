@@ -57,13 +57,13 @@ data:
       - job_name: 'first'
         metrics_path: '/actuator/prometheus'
         static_configs:
-          - targets: ['first.default.svc.cluster.local:8080'] ## only for demo purposes don't use host.docker.internal in production
+          - targets: ['first.default.svc.cluster.local:8081'] ## only for demo purposes don't use host.docker.internal in production
             labels:
               application: 'FIRST'
       - job_name: 'second'
         metrics_path: '/actuator/prometheus'
         static_configs:
-          - targets: ['second.default.svc.cluster.local:8081'] ## only for demo purposes don't use host.docker.internal in production
+          - targets: ['second.default.svc.cluster.local:8082'] ## only for demo purposes don't use host.docker.internal in production
             labels:
               application: 'SECOND'
       - job_name: 'gateway'

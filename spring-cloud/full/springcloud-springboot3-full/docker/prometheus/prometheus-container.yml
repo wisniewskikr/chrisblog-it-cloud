@@ -9,11 +9,11 @@ scrape_configs:
   - job_name: 'first'
     metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: ['first:8080']
+      - targets: ['first:8081']
   - job_name: 'second'
     metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: ['second:8081']
+      - targets: ['second:8082']
   - job_name: 'gateway'
     metrics_path: '/actuator/prometheus'
     static_configs:

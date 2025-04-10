@@ -54,29 +54,30 @@ The goal of this project is to present how to create **ecosystem of microservice
 ##### Services
 This project consists of following applications:
 * **Database**: SQL database - in this case type **MySql**
-* **Back-End**: an application created in **Java** programming language with usage **Spring Boot** framework
-* **Front-End**: an application created in **Java** programming language with usage **Spring Boot** framework. **Thymeleaf** engine is used to display data
+* **Second Service**: an application created in **Java** programming language with usage **Spring Boot** framework. It has connection with MySql database
+* **First Service**: an application created in **Java** programming language with usage **Spring Boot** framework. It has connection with Second Service
 * **Loki**: it enables collecting logs from many microservices
 * **Prometeus**" it enables collecting metrics from many microservices
 * **Tempo**: it enables collecting traces from many microservices
 * **Grafana**: it enables displaying logs, metrics and traces from Loki, Prometeus and Tempo tools 
-* **Api Gateway**: it enables redirectic traffic to different microservices
+* **Api Gateway**: it enables redirectic traffic to different microservices. It is secured by Keycloak tool
 * **Service Discovery**: it manages microservices
 * **Config Server**: it stores configs of all microservices
+* **Keycloak**: it enables user management
 
 ##### Inputs
 This project requires following inputs:
-* **Service Discovery**: http call from any browser
+* **Service Discovery**: http call from any Rest Client
 * **Api Gateway**: http call from any browser
 * **Grafana**: http call from any browser
 
 ##### Outputs
 This project provides following outputs:
 * **Service Discovery**: it displayes all microservices in ecosystem
-* **Api Gateway**: it redirects trafic to Front-End service which connects with Back-End service which connects with database. Output:
-   * **Database Message**: the HTML displays the message stored in database. It's the simple text "Hello World!".
-   * **Back-End Port**: the HTML page displays the port of Back-End application.
-   * **Front-End Port**: the HTML page displays port of Front-End application.
+* **Api Gateway**: it redirects trafic to First service which connects with Second service which connects with database. Output:
+   * **Database Message**: JSON property displays the message stored in database. The message depends on public or secured API. 
+   * **Second Port**: JSON property displays the port of Second application.
+   * **First Port**: JSON property displays port of First application.
 * **Grafana**: this dashboard contains following data: 
    * **Logs**: logs of all custom services 
    * **Metrics**: metrics of all custom services
@@ -91,8 +92,6 @@ Terminology explanation:
 * **Spring Cloud**: Spring Cloud is a framework within the Spring ecosystem that provides tools for building distributed systems and microservices. It simplifies tasks like service discovery, configuration management, load balancing, circuit breakers, and distributed tracing, allowing developers to build scalable and resilient cloud-native applications.
 * **Database**: A database is an organized collection of data that is stored and managed electronically, allowing for efficient retrieval, manipulation, and updating of information. It is typically managed by a database management system (DBMS).
 * **MySql**: MySQL is an open-source relational database management system (RDBMS) that uses Structured Query Language (SQL) for managing and organizing data. It's widely used for web applications and is known for its speed, reliability, and ease of use.
-* **Back-End**: The back-end refers to the server-side part of a software application, responsible for managing the database, server logic, and application programming interface (API). It processes requests from the front-end (user interface), handles data storage, retrieval, and business logic, and sends the appropriate responses back to the front-end.
-* **Front-End**: Front-end refers to the part of a website or application that users interact with directly. It includes the visual elements, layout, and design, typically built using HTML, CSS, and JavaScript. The front-end is responsible for the user experience (UX) and interface (UI) that allows users to navigate and interact with the system.
 * **Loki**: Grafana Loki is a log aggregation system designed to store, query, and visualize logs efficiently. Unlike traditional log management tools, Loki is lightweight and cost-effective, as it indexes logs by labels (like Kubernetes pod or service name) rather than indexing the entire log content. It's tightly integrated with Grafana, enabling unified metrics and log analysis within the same interface, making it ideal for cloud-native environments.
 * **Prometeus**: Prometheus is an open-source monitoring and alerting toolkit designed for collecting, storing, and querying time-series data, primarily metrics from servers, applications, and services.
 * **Tempo**: Grafana Tempo is a highly scalable, distributed tracing backend used to collect, store, and query traces from applications. It supports open standards like OpenTelemetry, integrates seamlessly with Grafana for visualization, and is optimized for low-cost storage by only indexing trace IDs while keeping the rest of the trace data in object storage.
@@ -100,6 +99,7 @@ Terminology explanation:
 * **API Gateway**: An API Gateway is a management tool that acts as an entry point for APIs, handling tasks like routing, authentication, rate limiting, monitoring, and load balancing. It simplifies communication between clients and backend services, often used in microservices architectures to centralize API requests and enforce policies.
 * **Service Discovery**: Service discovery is the process of automatically detecting and locating network services or resources in a system, enabling communication between components without requiring manual configuration. It ensures that services can find and connect to each other dynamically in distributed or microservices architectures.
 * **Config Server**: A Config Server is a centralized service that manages and provides external configuration for distributed applications. It enables dynamic configuration updates without redeploying applications, improving maintainability and scalability.
+* **Keycloak**: Keycloak is an open-source identity and access management solution that provides features like single sign-on (SSO), user federation, role-based access control, and multi-factor authentication for web and mobile applications.
 
 
 USAGES
@@ -123,17 +123,31 @@ USAGE DOCKER COMPOSE
 * **Docker** (tested on version 4.33.1)
 
 ##### Required steps:
+1. Update **hosts** file (Run as Administrator; Windows: "Windows\System32\drivers\etc\hosts"; MAC/Linux: "etc/hosts") with new line **127.0.0.1 keycloak**
 1. Start **Docker** tool
-1. In a command line tool **start Docker containers** with `docker-compose -f .\docker-compose\docker-compose.yaml up -d --build`
-1. In a browser visit `http://localhost:8761`
+1. In any command line tool **start Docker containers** with `docker-compose -f .\docker-compose\docker-compose.yaml up -d --build`
+1. In any browser visit `http://localhost:8761`
    * Expected HTML page with **Discovery dashboard**
-1. In a browser visit `http://localhost:8762`
-   * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
-1. In a browser visit `http://localhost:3000`
-   * Expected HTML page with **Grafana dashboard** (please check section **EXAMPLE**).
+1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8762/public`
+   * Expected JSON with **Database Message**, **Second Service Port** and **First Service Port** 
+1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8762/secured`
+   * Authorization -> Type -> OAuth 2.0
+   * Token Name: **Token**
+   * Grant Type: **Authorization Code (With PKCE)
+   * Callback URL: **http://localhost:8762**
+   * Auth URL: **http://keycloak:8080/realms/helloworld-realm/protocol/openid-connect/auth**
+   * Access Token URL: **http://keycloak:8080/realms/helloworld-realm/protocol/openid-connect/token**
+   * Client ID: **helloworld-client**
+   * Code Challenge Method: **SHA-256**
+   * Click **Get New Access Token -> Use Token**
+   * Click **Send**
+   * Expected JSON with **Database Message**, **Second Service Port** and **First Service Port** 
+1. In any browser visit `http://localhost:3000`
+   * Expected HTML page with **Grafana dashboard** (please check section **EXAMPLE GRAFANA**).
 1. Clean up environment 
      * In a command line tool **remove Docker containers** with `docker-compose -f .\docker-compose\docker-compose.yaml down --rmi all`
      * Stop **Docker** tool
+     * Remove new line from **hosts**
 
 ##### Optional steps:
 1. In a command line tool validate Docker Compose with `docker-compose config`

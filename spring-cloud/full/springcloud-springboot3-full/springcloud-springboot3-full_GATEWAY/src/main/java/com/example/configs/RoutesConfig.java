@@ -16,9 +16,23 @@ public class RoutesConfig {
     private String firstServiceUrl;
 
     @Bean
-    public RouterFunction<ServerResponse> firstServiceRoute() {
-        return GatewayRouterFunctions.route("first_service")
+    public RouterFunction<ServerResponse> defaultRoute() {
+        return GatewayRouterFunctions.route("default")
                 .route(RequestPredicates.path("/"), HandlerFunctions.http(firstServiceUrl))                
+                .build();
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> publicRoute() {
+        return GatewayRouterFunctions.route("public")
+                .route(RequestPredicates.path("/public"), HandlerFunctions.http(firstServiceUrl))                
+                .build();
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> securedRoute() {
+        return GatewayRouterFunctions.route("secured")
+                .route(RequestPredicates.path("/secured"), HandlerFunctions.http(firstServiceUrl))                
                 .build();
     }
     

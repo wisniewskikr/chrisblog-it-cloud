@@ -1,23 +1,31 @@
 package com.example.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import com.example.clients.SecondClient;
+import com.example.dtos.HelloWorldFirstDto;
 import com.example.dtos.HelloWorldSecondDto;
 
 @Service
 public class HelloWorldService {
     
-    private SecondClient secondClient;    
+    private SecondClient secondClient;  
+    private Environment environment;   
 
-    @Autowired
-    public HelloWorldService(SecondClient secondClient) {
+    public HelloWorldService(SecondClient secondClient, Environment environment) {
         this.secondClient = secondClient;
+        this.environment = environment;
     }
 
-    public HelloWorldSecondDto findById(Long id) {
-        return secondClient.findById(id);
+    public HelloWorldFirstDto getPublicMessage() {
+        HelloWorldSecondDto helloWorldSecondDto = secondClient.findById(1L);
+        return new HelloWorldFirstDto(helloWorldSecondDto.text(), environment.getProperty("local.server.port"), helloWorldSecondDto.portSecond());
+    }
+
+    public HelloWorldFirstDto getSecuredMessage() {
+        HelloWorldSecondDto helloWorldSecondDto = secondClient.findById(2L);
+        return new HelloWorldFirstDto(helloWorldSecondDto.text(), environment.getProperty("local.server.port"), helloWorldSecondDto.portSecond());
     }
 
 }

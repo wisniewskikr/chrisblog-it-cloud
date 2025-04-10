@@ -163,6 +163,7 @@ services:
       spring.application.name: gateway
       spring.config.import: configserver:http://config:8888
       LOKI_URL: http://loki:3100
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER-URI: http://keycloak:8080/realms/helloworld-realm
     depends_on:
       discovery:
         condition: service_healthy

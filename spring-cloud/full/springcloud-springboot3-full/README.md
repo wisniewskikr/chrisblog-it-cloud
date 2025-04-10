@@ -1,9 +1,17 @@
-EXAMPLE
--------
+EXAMPLE PUBLIC
+--------------
 
-![My Image](readme-images/image-01.png)
+![My Image](readme-images/public-01.png)
 
-![My Image](readme-images/image-02.png)
+![My Image](readme-images/public-02.png)
+
+
+EXAMPLE SECURED
+---------------
+
+
+EXAMPLE GRAFANA
+---------------
 
 ![My Image](readme-images/image-03.png)
 

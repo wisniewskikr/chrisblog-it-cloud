@@ -20,8 +20,8 @@ spec:
         ports:
         - containerPort: 8082
         env:
-        - name: spring.application.name
-          value: second
+        - name: spring.datasource.url
+          value: jdbc:mysql://mysql:3306/database
         readinessProbe:
           httpGet:
             path: /actuator/health

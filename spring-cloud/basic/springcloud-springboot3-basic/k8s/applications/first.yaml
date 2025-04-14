@@ -22,10 +22,6 @@ spec:
         env:
         - name: spring.application.name
           value: first
-        - name: spring.config.import
-          value: configserver:http://config:8888
-        - name: LOKI_URL
-          value: http://loki:3100
         readinessProbe:
           httpGet:
             path: /actuator/health

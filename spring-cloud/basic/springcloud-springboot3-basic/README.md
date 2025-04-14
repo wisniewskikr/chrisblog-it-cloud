@@ -1,48 +1,9 @@
-EXAMPLE PUBLIC
---------------
+EXAMPLE
+-------
 
-![My Image](readme-images/public-01.png)
+![My Image](readme-images/image-01.png)
 
-![My Image](readme-images/public-02.png)
-
-
-EXAMPLE SECURED
----------------
-
-![My Image](readme-images/secured-01.png)
-
-![My Image](readme-images/secured-02.png)
-
-![My Image](readme-images/secured-03.png)
-
-![My Image](readme-images/secured-04.png)
-
-![My Image](readme-images/secured-05.png)
-
-
-
-EXAMPLE GRAFANA
----------------
-
-![My Image](readme-images/image-03.png)
-
-![My Image](readme-images/image-04.png)
-
-![My Image](readme-images/image-05.png)
-
-![My Image](readme-images/image-06.png)
-
-![My Image](readme-images/image-07.png)
-
-![My Image](readme-images/image-08.png)
-
-![My Image](readme-images/image-09.png)
-
-![My Image](readme-images/image-10.png)
-
-![My Image](readme-images/image-11.png)
-
-![My Image](readme-images/image-12.png)
+![My Image](readme-images/image-02.png)
 
 
 DESCRIPTION

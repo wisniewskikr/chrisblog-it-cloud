@@ -211,16 +211,16 @@ USAGE KUBERNETES (KIND)
      * Remove new line from **hosts**
 
 ##### Optional steps:
-1. In a command line tool build Docker SECOND image with `docker build -f springcloud-springboot3-full_SECOND/Dockerfile -t wisniewskikr/springcloud-springboot3-full_second:0.0.1 ./springcloud-springboot3-full_SECOND`
-1. In a command line tool push Docker SECOND image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-full_second:0.0.1` 
-1. In a command line tool build Docker FIRST image with `docker build -f springcloud-springboot3-full_FIRST/Dockerfile -t wisniewskikr/springcloud-springboot3-full_first:0.0.1 ./springcloud-springboot3-full_FIRST`
-1. In a command line tool push Docker FIRST image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-full_first:0.0.1` 
-1. In a command line tool build Docker GATEWAY image with `docker build -f springcloud-springboot3-full_GATEWAY/Dockerfile -t wisniewskikr/springcloud-springboot3-full_gateway:0.0.1 ./springcloud-springboot3-full_GATEWAY`
-1. In a command line tool push Docker GATEWAY image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-full_gateway:0.0.1`
-1. In a command line tool build Docker DISCOVERY image with `docker build -f springcloud-springboot3-full_DISCOVERY/Dockerfile -t wisniewskikr/springcloud-springboot3-full_discovery:0.0.1 ./springcloud-springboot3-full_DISCOVERY`
-1. In a command line tool push Docker DISCOVERY image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-full_discovery:0.0.1`  
-1. In a command line tool build Docker CONFIG image with `docker build -f springcloud-springboot3-full_CONFIG/Dockerfile -t wisniewskikr/springcloud-springboot3-full_config:0.0.1 ./springcloud-springboot3-full_CONFIG`
-1. In a command line tool push Docker CONFIG image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-full_config:0.0.1` 
+1. In a command line tool build Docker SECOND image with `docker build -f springcloud-springboot3-basic_SECOND/Dockerfile -t wisniewskikr/springcloud-springboot3-basic_second:0.0.1 ./springcloud-springboot3-basic_SECOND`
+1. In a command line tool push Docker SECOND image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-basic_second:0.0.1` 
+1. In a command line tool build Docker FIRST image with `docker build -f springcloud-springboot3-basic_FIRST/Dockerfile -t wisniewskikr/springcloud-springboot3-basic_first:0.0.1 ./springcloud-springboot3-basic_FIRST`
+1. In a command line tool push Docker FIRST image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-basic_first:0.0.1` 
+1. In a command line tool build Docker GATEWAY image with `docker build -f springcloud-springboot3-basic_GATEWAY/Dockerfile -t wisniewskikr/springcloud-springboot3-basic_gateway:0.0.1 ./springcloud-springboot3-basic_GATEWAY`
+1. In a command line tool push Docker GATEWAY image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-basic_gateway:0.0.1`
+1. In a command line tool build Docker DISCOVERY image with `docker build -f springcloud-springboot3-basic_DISCOVERY/Dockerfile -t wisniewskikr/springcloud-springboot3-basic_discovery:0.0.1 ./springcloud-springboot3-basic_DISCOVERY`
+1. In a command line tool push Docker DISCOVERY image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-basic_discovery:0.0.1`  
+1. In a command line tool build Docker CONFIG image with `docker build -f springcloud-springboot3-basic_CONFIG/Dockerfile -t wisniewskikr/springcloud-springboot3-basic_config:0.0.1 ./springcloud-springboot3-basic_CONFIG`
+1. In a command line tool push Docker CONFIG image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-basic_config:0.0.1` 
 1. In the first command line tool with administrator privileges check clusers with `kind get clusters`
 1. In a command line tool check Kubernetes Deployments with `kubectl get deployments`
 1. In a command line tool check Kubernetes Deployments details with **kubectl describe deployment {deployment-name}**

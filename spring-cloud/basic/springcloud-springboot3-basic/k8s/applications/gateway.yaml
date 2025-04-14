@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: gateway
-        image: wisniewskikr/springcloud-springboot3-full_gateway:0.0.1
+        image: wisniewskikr/springcloud-springboot3-basic_gateway:0.0.1
         ports:
         - containerPort: 8762
         env:

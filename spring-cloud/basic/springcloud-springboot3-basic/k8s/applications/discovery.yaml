@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: discovery
-        image: wisniewskikr/springcloud-springboot3-full_discovery:0.0.1
+        image: wisniewskikr/springcloud-springboot3-basic_discovery:0.0.1
         ports:
         - containerPort: 8761
         env:

@@ -23,7 +23,7 @@ services:
     image: config
     container_name: config
     build:
-      context: ./../springcloud-springboot3-full_CONFIG
+      context: ./../springcloud-springboot3-basic_CONFIG
       dockerfile: Dockerfile
     depends_on:
       mysql:
@@ -43,7 +43,7 @@ services:
     image: discovery-image
     container_name: discovery-container
     build:
-      context: ./../springcloud-springboot3-full_DISCOVERY
+      context: ./../springcloud-springboot3-basic_DISCOVERY
       dockerfile: Dockerfile
     environment:
       spring.application.name: discovery
@@ -113,7 +113,7 @@ services:
     image: second-image:0.0.1
     container_name: second-container
     build:
-      context: ./../springcloud-springboot3-full_SECOND
+      context: ./../springcloud-springboot3-basic_SECOND
       dockerfile: Dockerfile
     environment:
       spring.application.name: second
@@ -135,7 +135,7 @@ services:
     image: first-image:0.0.1
     container_name: first-container
     build:
-      context: ./../springcloud-springboot3-full_FIRST
+      context: ./../springcloud-springboot3-basic_FIRST
       dockerfile: Dockerfile
     environment:
       spring.application.name: first
@@ -157,7 +157,7 @@ services:
     image: gateway-image:0.0.1
     container_name: gateway-container
     build:
-      context: ./../springcloud-springboot3-full_GATEWAY
+      context: ./../springcloud-springboot3-basic_GATEWAY
       dockerfile: Dockerfile
     environment:
       spring.application.name: gateway

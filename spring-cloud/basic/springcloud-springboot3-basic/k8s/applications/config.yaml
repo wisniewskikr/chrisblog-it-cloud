@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: config
-        image: wisniewskikr/springcloud-springboot3-full_config:0.0.1
+        image: wisniewskikr/springcloud-springboot3-basic_config:0.0.1
         ports:
         - containerPort: 8888
         env:

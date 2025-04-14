@@ -20,8 +20,8 @@ spec:
         ports:
         - containerPort: 8081
         env:
-        - name: spring.application.name
-          value: first
+        - name: api.url
+          value: http://second:8082
         readinessProbe:
           httpGet:
             path: /actuator/health

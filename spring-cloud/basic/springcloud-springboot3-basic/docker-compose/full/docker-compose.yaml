@@ -46,7 +46,7 @@ services:
       context: ./../springcloud-springboot3-basic_FIRST
       dockerfile: Dockerfile
     environment:
-      spring.application.name: first
+      api.url: http://second:8082
     depends_on:
       discovery:
         condition: service_healthy

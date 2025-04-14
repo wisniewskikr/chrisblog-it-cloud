@@ -19,96 +19,6 @@ services:
 #    volumes:
 #      - dbdata:/var/lib/mysql
 
-  config:
-    image: config
-    container_name: config
-    build:
-      context: ./../springcloud-springboot3-basic_CONFIG
-      dockerfile: Dockerfile
-    depends_on:
-      mysql:
-        condition: service_healthy
-    environment:
-      spring.cloud.config.server.native.search-locations: classpath:/configurations/docker-compose
-    ports:
-      - 8888:8888
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8888/actuator/health"]
-      interval: 10s
-      timeout: 10s
-      retries: 5
-      start_period: 10s
-
-  discovery:
-    image: discovery-image
-    container_name: discovery-container
-    build:
-      context: ./../springcloud-springboot3-basic_DISCOVERY
-      dockerfile: Dockerfile
-    environment:
-      spring.application.name: discovery
-      spring.config.import: configserver:http://config:8888
-    depends_on:
-      config:
-        condition: service_healthy
-    ports:
-      - 8761:8761
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8761/actuator/health"]
-      interval: 10s
-      timeout: 10s
-      retries: 5
-      start_period: 10s  
-
-  tempo:
-    image: grafana/tempo:2.2.2
-    command: [ "-config.file=/etc/tempo.yaml" ]
-    volumes:
-      - ./../docker/tempo/tempo.yml:/etc/tempo.yaml:ro
-      - ./../docker/tempo/tempo-data:/tmp/tempo
-    ports:
-      - "3110:3100"  # Tempo
-      - "9411:9411" # zipkin
-
-  loki:
-    image: grafana/loki:3.3.2
-    command: [ "-config.file=/etc/loki/local-config.yaml" ]
-    ports:
-      - "3100:3100"
-
-  prometheus:
-    image: prom/prometheus:v2.46.0
-    command:
-      - --enable-feature=exemplar-storage
-      - --config.file=/etc/prometheus/prometheus.yml
-    volumes:
-      - ./../docker/prometheus/prometheus-container.yml:/etc/prometheus/prometheus.yml:ro
-    ports:
-      - "9090:9090"
-
-  grafana:
-    image: grafana/grafana:10.1.0
-    volumes:
-      - ./../docker/grafana:/etc/grafana/provisioning/datasources:ro
-    environment:
-      - GF_AUTH_ANONYMOUS_ENABLED=true
-      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
-      - GF_AUTH_DISABLE_LOGIN_FORM=true
-    ports:
-      - "3000:3000"
-
-  keycloak:
-    container_name: keycloak
-    image: quay.io/keycloak/keycloak:26.0
-    environment:
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: admin
-    command: ["start-dev", "--import-realm"]
-    volumes:
-      - ./../docker/keycloak/realm-export.json:/opt/keycloak/data/import/realm-export.json
-    ports:
-      - "8080:8080"
-
   second:
     image: second-image:0.0.1
     container_name: second-container
@@ -117,8 +27,6 @@ services:
       dockerfile: Dockerfile
     environment:
       spring.application.name: second
-      spring.config.import: configserver:http://config:8888
-      LOKI_URL: http://loki:3100
     depends_on:
       discovery:
         condition: service_healthy
@@ -139,8 +47,6 @@ services:
       dockerfile: Dockerfile
     environment:
       spring.application.name: first
-      spring.config.import: configserver:http://config:8888
-      LOKI_URL: http://loki:3100
     depends_on:
       discovery:
         condition: service_healthy
@@ -148,29 +54,6 @@ services:
       - 8081:8081
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8081/actuator/health"]
-      interval: 10s
-      timeout: 10s
-      retries: 5
-      start_period: 10s
-
-  gateway:
-    image: gateway-image:0.0.1
-    container_name: gateway-container
-    build:
-      context: ./../springcloud-springboot3-basic_GATEWAY
-      dockerfile: Dockerfile
-    environment:
-      spring.application.name: gateway
-      spring.config.import: configserver:http://config:8888
-      LOKI_URL: http://loki:3100
-      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER-URI: http://keycloak:8080/realms/helloworld-realm
-    depends_on:
-      discovery:
-        condition: service_healthy
-    ports:
-      - 8762:8762
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8762/actuator/health"]
       interval: 10s
       timeout: 10s
       retries: 5

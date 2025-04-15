@@ -122,8 +122,8 @@ USAGE KUBERNETES (KIND)
 ##### Required steps:
 1. Start **Docker** tool
 1. In the first command line tool create and start cluster **Kind** with `kind create cluster --name helloworld`
-1. In the second command line tool **start Kubernetes Pods** with `kubectl apply -f ./k8s --recursive`
-1. In the second command line tool **check status of Kubernetes Pods** with `kubectl get pods`
+1. In the first command line tool **start Kubernetes Pods** with `kubectl apply -f ./k8s --recursive`
+1. In the first command line tool **check status of Kubernetes Pods** with `kubectl get pods`
    * Expected mysql, second and first as **READY 1/1** (it can take few minutes)
 1. In the second command line tool **forward port of Second service** with `kubectl port-forward service/second 8082:8082`
 1. In the third command line tool **forward port of First service** with `kubectl port-forward service/first 8081:8081`
@@ -134,7 +134,7 @@ USAGE KUBERNETES (KIND)
 1. Clean up environment
      * In the third command line tool **stop forwarding port of First service** with `ctrl + C`
      * In the second command line tool **stop forwarding port of Second service** with `ctrl + C`
-     * In the second command line tool **remove Kubernetes Pods** with `kubectl delete -f ./k8s --recursive`
+     * In the first command line tool **remove Kubernetes Pods** with `kubectl delete -f ./k8s --recursive`
      * In the first command line tool delete cluster **Kind** with `kind delete cluster --name helloworld`
      * Stop **Docker** tool
 

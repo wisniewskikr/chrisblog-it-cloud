@@ -87,31 +87,15 @@ USAGE DOCKER COMPOSE
 * **Docker** (tested on version 4.33.1)
 
 ##### Required steps:
-1. Update **hosts** file (Run as Administrator; Windows: "Windows\System32\drivers\etc\hosts"; MAC/Linux: "etc/hosts") with new line **127.0.0.1 keycloak**
 1. Start **Docker** tool
-1. In any command line tool **start Docker containers** with `docker-compose -f .\docker-compose\docker-compose.yaml up -d --build`
-1. In any browser visit `http://localhost:8761`
-   * Expected HTML page with **Discovery dashboard**
-1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8762/public`
-   * Expected JSON with **Database Message**, **Second Service Port** and **First Service Port** 
-1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8762/secured`
-   * Authorization -> Type -> OAuth 2.0
-   * Token Name: **Token**
-   * Grant Type: **Authorization Code (With PKCE)
-   * Callback URL: **http://localhost:8762**
-   * Auth URL: **http://keycloak:8080/realms/helloworld-realm/protocol/openid-connect/auth**
-   * Access Token URL: **http://keycloak:8080/realms/helloworld-realm/protocol/openid-connect/token**
-   * Client ID: **helloworld-client**
-   * Code Challenge Method: **SHA-256**
-   * Click **Get New Access Token -> Use Token**
-   * Click **Send**
-   * Expected JSON with **Database Message**, **Second Service Port** and **First Service Port** 
-1. In any browser visit `http://localhost:3000`
-   * Expected HTML page with **Grafana dashboard** (please check section **EXAMPLE GRAFANA**).
+1. In any command line tool **start Docker containers** with `docker-compose -f .\docker-compose\full\docker-compose.yaml up -d --build`
+1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8081/public`
+   * Expected following **JSON**: {"text": "Hello World, Public!", "portFirst": "8081", "portSecond": "8082"}
+1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8081/secured`
+   * Expected following **JSON**: {"text": "Hello World, Secured!", "portFirst": "8081", "portSecond": "8082"}
 1. Clean up environment 
-     * In a command line tool **remove Docker containers** with `docker-compose -f .\docker-compose\docker-compose.yaml down --rmi all`
+     * In a command line tool **remove Docker containers** with `docker-compose -f .\docker-compose\full\docker-compose.yaml down --rmi all`
      * Stop **Docker** tool
-     * Remove new line from **hosts**
 
 ##### Optional steps:
 1. In a command line tool validate Docker Compose with `docker-compose config`

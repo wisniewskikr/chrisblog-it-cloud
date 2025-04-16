@@ -61,8 +61,8 @@ USAGE MANUAL
 ##### Required steps:
 1. Start **Docker** tool
 1. In a first command line tool **start Docker containers** with `docker-compose -f .\docker-compose\infrastructure\docker-compose.yaml up -d --build`
-1. In a second command line tool **start Second application** with `mvn -f ./springcloud-springboot3-basic_SECOND spring-boot:run`
-1. In a third command line tool **start First application** with `mvn -f ./springcloud-springboot3-basic_FIRST spring-boot:run`
+1. In a second command line tool **start Second application** with `mvn -f ./springcloud-springboot3-documentation_SECOND spring-boot:run`
+1. In a third command line tool **start First application** with `mvn -f ./springcloud-springboot3-documentation_FIRST spring-boot:run`
 1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8081/public`
    * Expected following **JSON**: {"text": "Hello World, Public!", "portFirst": "8081", "portSecond": "8082"}
 1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8081/secured`
@@ -139,10 +139,10 @@ USAGE KUBERNETES (KIND)
      * Stop **Docker** tool
 
 ##### Optional steps:
-1. In a command line tool build Docker SECOND image with `docker build -f springcloud-springboot3-basic_SECOND/Dockerfile -t wisniewskikr/springcloud-springboot3-basic_second:0.0.1 ./springcloud-springboot3-basic_SECOND`
-1. In a command line tool push Docker SECOND image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-basic_second:0.0.1` 
-1. In a command line tool build Docker FIRST image with `docker build -f springcloud-springboot3-basic_FIRST/Dockerfile -t wisniewskikr/springcloud-springboot3-basic_first:0.0.1 ./springcloud-springboot3-basic_FIRST`
-1. In a command line tool push Docker FIRST image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-basic_first:0.0.1`  
+1. In a command line tool build Docker SECOND image with `docker build -f springcloud-springboot3-documentation_SECOND/Dockerfile -t wisniewskikr/springcloud-springboot3-documentation_second:0.0.1 ./springcloud-springboot3-documentation_SECOND`
+1. In a command line tool push Docker SECOND image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-documentation_second:0.0.1` 
+1. In a command line tool build Docker FIRST image with `docker build -f springcloud-springboot3-documentation_FIRST/Dockerfile -t wisniewskikr/springcloud-springboot3-documentation_first:0.0.1 ./springcloud-springboot3-documentation_FIRST`
+1. In a command line tool push Docker FIRST image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-documentation_first:0.0.1`  
 1. In the first command line tool with administrator privileges check clusers with `kind get clusters`
 1. In a command line tool check Kubernetes Deployments with `kubectl get deployments`
 1. In a command line tool check Kubernetes Deployments details with **kubectl describe deployment {deployment-name}**

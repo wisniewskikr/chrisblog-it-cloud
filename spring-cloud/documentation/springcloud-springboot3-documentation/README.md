@@ -151,3 +151,11 @@ USAGE KUBERNETES (KIND)
 1. In a command line tool check Kubernetes Pods with `kubectl get pods`
 1. In a command line tool check Kubernetes Pods details with **kubectl describe pod {pod-name}**
 1. In a command line tool check Kubernetes Pods logs with **kubectl logs {pod-name}**
+
+
+IMPLEMENTATION
+--------------
+
+Implementation steps:
+* In all projects update **pom.xml** file with dependencies: **springdoc-openapi-starter-webmvc-ui** and **springdoc-openapi-starter-webmvc-api**
+* In all projects update **application.properties** file with properties: **springdoc.swagger-ui.path** and **springdoc.api-docs.path**

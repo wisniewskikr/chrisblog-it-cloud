@@ -67,6 +67,7 @@ USAGE MANUAL
 1. In a first command line tool **start Docker containers** with `docker-compose -f .\docker-compose\infrastructure\docker-compose.yaml up -d --build`
 1. In a second command line tool **start Second application** with `mvn -f ./springcloud-springboot3-documentation-gateway_SECOND spring-boot:run`
 1. In a third command line tool **start First application** with `mvn -f ./springcloud-springboot3-documentation-gateway_FIRST spring-boot:run`
+1. In a fourth command line tool **start Routing application** with `mvn -f ./springcloud-springboot3-documentation-gateway_ROUTING spring-boot:run`
 1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8081/swagger-ui.html`
    * Expected HTML page with First service documentation
 1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8081/api-docs`
@@ -75,7 +76,8 @@ USAGE MANUAL
    * Expected HTML page with Second service documentation
 1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8082/api-docs`
    * Expected JSON with Second service documentation
-1. Clean up environment
+1. Clean up environment:
+   * In the fourth command line tool **stop Routing application** with `ctrl + C`
    * In the third command line tool **stop First application** with `ctrl + C`
    * In the second command line tool **stop Second application** with `ctrl + C`
    * In the first command line tool **remove Docker containers** with `docker-compose -f .\docker-compose\infrastructure\docker-compose.yaml down --rmi all`

@@ -11,7 +11,7 @@
 	</parent>
 	
 	<groupId>com.example</groupId>
-	<artifactId>springcloud-springboot3-documentation_SECOND</artifactId>
+	<artifactId>springcloud-springboot3-documentation-gateway_SECOND</artifactId>
 	<version>0.0.1</version>
 
 	<properties>

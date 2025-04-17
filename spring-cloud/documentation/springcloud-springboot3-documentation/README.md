@@ -97,10 +97,14 @@ USAGE DOCKER COMPOSE
 ##### Required steps:
 1. Start **Docker** tool
 1. In any command line tool **start Docker containers** with `docker-compose -f .\docker-compose\full\docker-compose.yaml up -d --build`
-1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8081/public`
-   * Expected following **JSON**: {"text": "Hello World, Public!", "portFirst": "8081", "portSecond": "8082"}
-1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8081/secured`
-   * Expected following **JSON**: {"text": "Hello World, Secured!", "portFirst": "8081", "portSecond": "8082"}
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8081/swagger-ui.html`
+   * Expected HTML page with First service documentation
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8081/api-docs`
+   * Expected JSON with First service documentation
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8082/swagger-ui.html`
+   * Expected HTML page with Second service documentation
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8082/api-docs`
+   * Expected JSON with Second service documentation
 1. Clean up environment 
      * In a command line tool **remove Docker containers** with `docker-compose -f .\docker-compose\full\docker-compose.yaml down --rmi all`
      * Stop **Docker** tool

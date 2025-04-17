@@ -14,7 +14,7 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to create **basic ecosystem of microservices** with usage **Java** programming language and **Spring Cloud** and **Spring Boot 3** frameworks.
+The goal of this project is to present how to create **Open API documentation** for  microservices with usage **Java** programming language and **Spring Cloud** and **Spring Boot 3** frameworks.
 
 ##### Services
 This project consists of following applications:
@@ -67,10 +67,14 @@ USAGE MANUAL
 1. In a first command line tool **start Docker containers** with `docker-compose -f .\docker-compose\infrastructure\docker-compose.yaml up -d --build`
 1. In a second command line tool **start Second application** with `mvn -f ./springcloud-springboot3-documentation_SECOND spring-boot:run`
 1. In a third command line tool **start First application** with `mvn -f ./springcloud-springboot3-documentation_FIRST spring-boot:run`
-1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8081/public`
-   * Expected following **JSON**: {"text": "Hello World, Public!", "portFirst": "8081", "portSecond": "8082"}
-1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8081/secured`
-   * Expected following **JSON**: {"text": "Hello World, Secured!", "portFirst": "8081", "portSecond": "8082"}
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8081/swagger-ui.html`
+   * Expected HTML page with First service documentation
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8081/api-docs`
+   * Expected JSON with First service documentation
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8082/swagger-ui.html`
+   * Expected HTML page with Second service documentation
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8082/api-docs`
+   * Expected JSON with Second service documentation
 1. Clean up environment
    * In the third command line tool **stop First application** with `ctrl + C`
    * In the second command line tool **stop Second application** with `ctrl + C`

@@ -139,10 +139,14 @@ USAGE KUBERNETES (KIND)
    * Expected mysql, second and first as **READY 1/1** (it can take few minutes)
 1. In the second command line tool **forward port of Second service** with `kubectl port-forward service/second 8082:8082`
 1. In the third command line tool **forward port of First service** with `kubectl port-forward service/first 8081:8081`
-1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8081/public`
-   * Expected following **JSON**: {"text": "Hello World, Public!", "portFirst": "8081", "portSecond": "8082"}
-1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8081/secured`
-   * Expected following **JSON**: {"text": "Hello World, Secured!", "portFirst": "8081", "portSecond": "8082"}
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8081/swagger-ui.html`
+   * Expected HTML page with First service documentation
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8081/api-docs`
+   * Expected JSON with First service documentation
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8082/swagger-ui.html`
+   * Expected HTML page with Second service documentation
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8082/api-docs`
+   * Expected JSON with Second service documentation
 1. Clean up environment
      * In the third command line tool **stop forwarding port of First service** with `ctrl + C`
      * In the second command line tool **stop forwarding port of Second service** with `ctrl + C`

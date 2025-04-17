@@ -16,8 +16,8 @@ public class RoutesConfig {
     private String serviceUrl;
 
     @Bean
-    public RouterFunction<ServerResponse> feServiceRoute() {
-        return GatewayRouterFunctions.route("service")
+    public RouterFunction<ServerResponse> firstServiceRoute() {
+        return GatewayRouterFunctions.route("firstService")
                 .route(RequestPredicates.path("/"), HandlerFunctions.http(serviceUrl))                
                 .build();
     }

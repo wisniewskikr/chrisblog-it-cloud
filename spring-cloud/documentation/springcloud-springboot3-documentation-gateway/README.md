@@ -10,7 +10,7 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to create **Open API documentation** for  microservices with usage **Java** programming language and **Spring Cloud** and **Spring Boot 3** frameworks.
+The goal of this project is to present how to create **Open API documentation** for **Gateway** service and custom microservices with usage **Java** programming language and **Spring Cloud** and **Spring Boot 3** frameworks.
 
 ##### Services
 This project consists of following applications:
@@ -20,11 +20,13 @@ This project consists of following applications:
 
 ##### Inputs
 This project requires following inputs:
-* **First Service**: http requests from any Rest Client. It handles GET method for paths "/public" and "/secured"
+* **Gateway Service**: http requests from any Rest Client. It handles GET method for paths "/public" and "/secured"
+* **Gateway Service**: http requests from any Internet Browser. It handles path "swagger-ui.html"
 
 ##### Outputs
 This project provides following outputs:
-* **First Service**: http responses with JSONs with data
+* **Gateway Service**: http responses with JSONs with data
+* **Gateway service**: http response with HTML with documentation for custom services
 
 ##### Terminology
 Terminology explanation:
@@ -49,7 +51,7 @@ This project can be tested in following configurations:
 USAGE MANUAL
 ------------
 
-> **Usage Manual** means that infrastucture services are started as Docker containers. Application services are started manually in command line.
+> **Usage Manual** means that infrastructure services are started as Docker containers. Application services are started manually in command line.
 
 > Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and then **proceed with steps below**.
 
@@ -64,14 +66,8 @@ USAGE MANUAL
 1. In a second command line tool **start Second application** with `mvn -f ./springcloud-springboot3-documentation-gateway_SECOND spring-boot:run`
 1. In a third command line tool **start First application** with `mvn -f ./springcloud-springboot3-documentation-gateway_FIRST spring-boot:run`
 1. In a fourth command line tool **start Routing application** with `mvn -f ./springcloud-springboot3-documentation-gateway_ROUTING spring-boot:run`
-1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8081/swagger-ui.html`
-   * Expected HTML page with First service documentation
-1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8081/api-docs`
-   * Expected JSON with First service documentation
-1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8082/swagger-ui.html`
-   * Expected HTML page with Second service documentation
-1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8082/api-docs`
-   * Expected JSON with Second service documentation
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8762/swagger-ui.html`
+   * Expected HTML page with First and Second services documentation
 1. Clean up environment:
    * In the fourth command line tool **stop Routing application** with `ctrl + C`
    * In the third command line tool **stop First application** with `ctrl + C`

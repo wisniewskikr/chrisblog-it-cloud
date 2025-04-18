@@ -23,7 +23,7 @@ public class RoutesConfig {
     @Bean
     public RouterFunction<ServerResponse> firstServiceRoute() {
         return GatewayRouterFunctions.route("first_service")
-                .route(RequestPredicates.path("/"), HandlerFunctions.http(serviceFirstUrl))
+                .route(RequestPredicates.path("/*"), HandlerFunctions.http(serviceFirstUrl))
                 .build();
     }
 

@@ -184,8 +184,6 @@ USAGE KUBERNETES (KIND)
 1. In the third command line tool **forward port of Gateway service** with `kubectl port-forward service/gateway 8762:8762`
 1. In the fourth command line tool**forward port of Grafana service** with `kubectl port-forward service/grafana 3000:3000`
 1. In the fifth command line tool **forward port of Keycloak service** with `kubectl port-forward service/keycloak 8080:8080`
-1. In any browser visit `http://localhost:8761`
-   * Expected HTML page with **Discovery dashboard**
 1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8762/public`
    * Expected JSON with **Database Message**, **Second Service Port** and **First Service Port** 
 1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8762/secured`
@@ -222,7 +220,11 @@ USAGE KUBERNETES (KIND)
 1. In a command line tool build Docker DISCOVERY image with `docker build -f springcloud-springboot3-full_DISCOVERY/Dockerfile -t wisniewskikr/springcloud-springboot3-full_discovery:0.0.1 ./springcloud-springboot3-full_DISCOVERY`
 1. In a command line tool push Docker DISCOVERY image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-full_discovery:0.0.1`  
 1. In a command line tool build Docker CONFIG image with `docker build -f springcloud-springboot3-full_CONFIG/Dockerfile -t wisniewskikr/springcloud-springboot3-full_config:0.0.1 ./springcloud-springboot3-full_CONFIG`
-1. In a command line tool push Docker CONFIG image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-full_config:0.0.1` 
+1. In a command line tool push Docker CONFIG image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-full_config:0.0.1`
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8762/swagger-ui.html`
+   * Expected HTML page with First and Second services documentation
+1. In any browser visit `http://localhost:8761`
+   * Expected HTML page with **Discovery dashboard**
 1. In the first command line tool with administrator privileges check clusers with `kind get clusters`
 1. In a command line tool check Kubernetes Deployments with `kubectl get deployments`
 1. In a command line tool check Kubernetes Deployments details with **kubectl describe deployment {deployment-name}**

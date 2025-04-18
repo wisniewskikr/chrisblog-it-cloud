@@ -125,19 +125,11 @@ USAGE KUBERNETES (KIND)
 1. In the first command line tool **start Kubernetes Pods** with `kubectl apply -f ./k8s --recursive`
 1. In the first command line tool **check status of Kubernetes Pods** with `kubectl get pods`
    * Expected mysql, second and first as **READY 1/1** (it can take few minutes)
-1. In the second command line tool **forward port of Second service** with `kubectl port-forward service/second 8082:8082`
-1. In the third command line tool **forward port of First service** with `kubectl port-forward service/first 8081:8081`
-1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8081/swagger-ui.html`
-   * Expected HTML page with First service documentation
-1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8081/api-docs`
-   * Expected JSON with First service documentation
-1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8082/swagger-ui.html`
-   * Expected HTML page with Second service documentation
-1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8082/api-docs`
-   * Expected JSON with Second service documentation
+1. In the second command line tool **forward port of Gateway service** with `kubectl port-forward service/gateway 8762:8762`
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8762/swagger-ui.html`
+   * Expected HTML page with First and Second services documentation
 1. Clean up environment
-     * In the third command line tool **stop forwarding port of First service** with `ctrl + C`
-     * In the second command line tool **stop forwarding port of Second service** with `ctrl + C`
+     * In the second command line tool **stop forwarding port of Gateway service** with `ctrl + C`
      * In the first command line tool **remove Kubernetes Pods** with `kubectl delete -f ./k8s --recursive`
      * In the first command line tool delete cluster **Kind** with `kind delete cluster --name helloworld`
      * Stop **Docker** tool
@@ -146,7 +138,9 @@ USAGE KUBERNETES (KIND)
 1. In a command line tool build Docker SECOND image with `docker build -f springcloud-springboot3-documentation-gateway_SECOND/Dockerfile -t wisniewskikr/springcloud-springboot3-documentation-gateway_second:0.0.1 ./springcloud-springboot3-documentation-gateway_SECOND`
 1. In a command line tool push Docker SECOND image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-documentation-gateway_second:0.0.1` 
 1. In a command line tool build Docker FIRST image with `docker build -f springcloud-springboot3-documentation-gateway_FIRST/Dockerfile -t wisniewskikr/springcloud-springboot3-documentation-gateway_first:0.0.1 ./springcloud-springboot3-documentation-gateway_FIRST`
-1. In a command line tool push Docker FIRST image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-documentation-gateway_first:0.0.1`  
+1. In a command line tool push Docker FIRST image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-documentation-gateway_first:0.0.1`
+1. In a command line tool build Docker ROUTING image with `docker build -f springcloud-springboot3-documentation-gateway_ROUTING/Dockerfile -t wisniewskikr/springcloud-springboot3-documentation-gateway_routing:0.0.1 ./springcloud-springboot3-documentation-gateway_ROUTING`
+1. In a command line tool push Docker ROUTING image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-documentation-gateway_routing:0.0.1`
 1. In the first command line tool with administrator privileges check clusers with `kind get clusters`
 1. In a command line tool check Kubernetes Deployments with `kubectl get deployments`
 1. In a command line tool check Kubernetes Deployments details with **kubectl describe deployment {deployment-name}**

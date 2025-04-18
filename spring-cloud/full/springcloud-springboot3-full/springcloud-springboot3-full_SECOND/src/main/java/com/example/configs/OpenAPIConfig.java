@@ -11,14 +11,14 @@ import org.springframework.context.annotation.Configuration;
 public class OpenAPIConfig {
 
     @Bean
-    public OpenAPI productServiceAPI() {
+    public OpenAPI secondServiceAPI() {
         return new OpenAPI()
-                .info(new Info().title("First Service API")
-                        .description("This is the REST API for First Service")
+                .info(new Info().title("Second Service API")
+                        .description("This is the REST API for Second Service")
                         .version("v0.0.1")
                         .license(new License().name("Apache 2.0")))
                 .externalDocs(new ExternalDocumentation()
-                        .description("You can refer to the First Service Documentation")
+                        .description("You can refer to the Second Service Documentation")
                         .url("https://www.google.com/"));
     }
 }

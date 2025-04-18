@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 public class OpenAPIConfig {
 
     @Bean
-    public OpenAPI productServiceAPI() {
+    public OpenAPI firstServiceAPI() {
         return new OpenAPI()
                 .info(new Info().title("First Service API")
                         .description("This is the REST API for First Service")

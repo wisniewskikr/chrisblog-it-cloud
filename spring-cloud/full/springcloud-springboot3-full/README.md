@@ -126,8 +126,6 @@ USAGE DOCKER COMPOSE
 1. Update **hosts** file (Run as Administrator; Windows: "Windows\System32\drivers\etc\hosts"; MAC/Linux: "etc/hosts") with new line **127.0.0.1 keycloak**
 1. Start **Docker** tool
 1. In any command line tool **start Docker containers** with `docker-compose -f .\docker-compose\docker-compose.yaml up -d --build`
-1. In any browser visit `http://localhost:8761`
-   * Expected HTML page with **Discovery dashboard**
 1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8762/public`
    * Expected JSON with **Database Message**, **Second Service Port** and **First Service Port** 
 1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8762/secured`
@@ -150,6 +148,10 @@ USAGE DOCKER COMPOSE
      * Remove new line from **hosts**
 
 ##### Optional steps:
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8762/swagger-ui.html`
+   * Expected HTML page with First and Second services documentation
+1. In any browser visit `http://localhost:8761`
+   * Expected HTML page with **Discovery dashboard**
 1. In a command line tool validate Docker Compose with `docker-compose config`
 1. In a command line tool check list of Docker images with `docker images`
 1. In a command line tool check list of all Docker containers with `docker ps -a`

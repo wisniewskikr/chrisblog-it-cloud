@@ -4,7 +4,6 @@ import com.example.Application;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.DynamicPropertyRegistry;
@@ -17,7 +16,6 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @Testcontainers
 public class HelloWorldControllerTest {
 
@@ -29,9 +27,6 @@ public class HelloWorldControllerTest {
 
     @DynamicPropertySource
     static void configureProperties(DynamicPropertyRegistry registry) {
-
-        mysqlContainer.start();
-
         registry.add("spring.datasource.url", mysqlContainer::getJdbcUrl);
         registry.add("spring.datasource.username", mysqlContainer::getUsername);
         registry.add("spring.datasource.password", mysqlContainer::getPassword);
@@ -49,6 +44,10 @@ public class HelloWorldControllerTest {
         RestAssured.port = port;
     }
 
+    static {
+        mysqlContainer.start();
+    }
+
     @Test
     void testHelloWorld_public() {
 
@@ -63,5 +62,18 @@ public class HelloWorldControllerTest {
 
     }
 
+    @Test
+    void testHelloWorld_secured() {
+
+        given()
+                .when()
+                .get("/message/2")
+                .then()
+                .statusCode(200)
+                .body("id", equalTo(2))
+                .body("text", equalTo("Hello World, Secured!"))
+                .body("portSecond", equalTo(String.valueOf(port)));
+
+    }
 
 }

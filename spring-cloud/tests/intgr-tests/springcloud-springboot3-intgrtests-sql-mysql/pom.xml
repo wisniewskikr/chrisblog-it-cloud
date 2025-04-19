@@ -8,7 +8,7 @@
     <artifactId>springcloud-springboot3-intgrtests-sql-myslq</artifactId>
     <version>0.1.0</version>
     <modules>
-        <module>springcloud-springboot3-intgrtests-sql-mysql_SERVICE</module>
+        <module>springcloud-springboot3-intgrtests-sql-myslq_SERVICE</module>
     </modules>
     <packaging>pom</packaging>
 

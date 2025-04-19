@@ -1,4 +1,4 @@
-package com.example.unit.controllers;
+package unit.com.example.controllers;
 
 import com.example.controllers.HelloWorldController;
 import com.example.dtos.HelloWorldSecondDto;

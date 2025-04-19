@@ -1,4 +1,4 @@
-package com.example.unit.services;
+package unit.com.example.services;
 
 import com.example.dtos.HelloWorldSecondDto;
 import com.example.entities.HelloWorldEntity;

@@ -13,8 +13,7 @@ import org.springframework.core.env.Environment;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -51,6 +50,23 @@ class HelloWorldServiceTest {
         assertEquals("Hello World!", result.text());
         assertEquals("8082", result.portSecond());
         verify(helloWorldRepository, times(1)).findById(id);
+
+    }
+
+    @Test
+    public void testFindById_exception() {
+
+        // Given
+        Long id = 1L;
+        when(helloWorldRepository.findById(id)).thenReturn(Optional.empty());
+
+        // When
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            helloWorldService.findById(id);
+        });
+
+        // Then
+        assertEquals("Message doesn't exist", exception.getMessage());
 
     }
 

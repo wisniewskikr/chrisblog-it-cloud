@@ -3,23 +3,24 @@ package com.example.unit.controllers;
 import com.example.controllers.HelloWorldController;
 import com.example.dtos.HelloWorldSecondDto;
 import com.example.services.HelloWorldService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 public class HelloWorldControllerTest {
 
+    @Mock
     private HelloWorldService helloWorldService;
-    private HelloWorldController helloWorldController;
 
-    @BeforeEach
-    public void setUp() {
-        helloWorldService = mock(HelloWorldService.class);
-        helloWorldController = new HelloWorldController(helloWorldService);
-    }
+    @InjectMocks
+    private HelloWorldController helloWorldController;
 
     @Test
     public void testHelloWorld() {

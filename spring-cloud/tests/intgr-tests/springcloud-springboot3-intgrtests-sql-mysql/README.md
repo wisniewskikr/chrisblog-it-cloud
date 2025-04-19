@@ -15,16 +15,15 @@ The goal of this project is to present how to create **Unit Tests** for microser
 ##### Services
 This project consists of following applications:
 * **Database**: SQL database - in this case type **MySql**
-* **Second Service**: an application created in **Java** programming language with usage **Spring Boot** framework. It has connection with MySql database
-* **First Service**: an application created in **Java** programming language with usage **Spring Boot** framework. It has connection with Second Service
+* **Service**: an application created in **Java** programming language with usage **Spring Boot** framework. It has connection with MySql database
 
 ##### Inputs
 This project requires following inputs:
-* **First Service**: http requests from any Rest Client. It handles GET method for paths "/public" and "/secured"
+* **Service**: http requests from any Rest Client. It handles GET method for path "/message/{id}"
 
 ##### Outputs
 This project provides following outputs:
-* **First Service**: http responses with JSONs with data
+* **Service**: http responses with JSONs with data
 
 ##### Terminology
 Terminology explanation:
@@ -60,7 +59,7 @@ USAGE MANUAL
 
 ##### Required steps:
 1. In a first command line tool **start Unit Tests** with `mvn clean test`
-   * Expected **passed tests** for First and Second services
+   * Expected **passed tests** for Service
 1. Clean up environment
    * N/A
 

@@ -10,7 +10,7 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to create **basic ecosystem of microservices** with usage **Java** programming language and **Spring Cloud** and **Spring Boot 3** frameworks.
+The goal of this project is to present how to create ** Unit Tests** for microservices with usage **Java** programming language and **Spring Cloud** and **Spring Boot 3** frameworks.
 
 ##### Services
 This project consists of following applications:
@@ -35,6 +35,7 @@ Terminology explanation:
 * **Spring Cloud**: Spring Cloud is a framework within the Spring ecosystem that provides tools for building distributed systems and microservices. It simplifies tasks like service discovery, configuration management, load balancing, circuit breakers, and distributed tracing, allowing developers to build scalable and resilient cloud-native applications.
 * **Database**: A database is an organized collection of data that is stored and managed electronically, allowing for efficient retrieval, manipulation, and updating of information. It is typically managed by a database management system (DBMS).
 * **MySql**: MySQL is an open-source relational database management system (RDBMS) that uses Structured Query Language (SQL) for managing and organizing data. It's widely used for web applications and is known for its speed, reliability, and ease of use.
+* **Unit Tests**: Unit tests are short, automated tests written to verify that individual units of code (like functions or methods) work as expected. They're typically fast, isolated, and help catch bugs early in development.
 
 
 USAGES
@@ -59,19 +60,10 @@ USAGE MANUAL
 * **Docker** (tested on version 4.33.1)
 
 ##### Required steps:
-1. Start **Docker** tool
-1. In a first command line tool **start Docker containers** with `docker-compose -f .\docker-compose\infrastructure\docker-compose.yaml up -d --build`
-1. In a second command line tool **start Second application** with `mvn -f ./springcloud-springboot3-unittests_SECOND spring-boot:run`
-1. In a third command line tool **start First application** with `mvn -f ./springcloud-springboot3-unittests_FIRST spring-boot:run`
-1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8081/public`
-   * Expected following **JSON**: {"text": "Hello World, Public!", "portFirst": "8081", "portSecond": "8082"}
-1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8081/secured`
-   * Expected following **JSON**: {"text": "Hello World, Secured!", "portFirst": "8081", "portSecond": "8082"}
+1. In a first command line tool **start Unit Tests* with `mvn clean test`
+   * Expected **passed tests** for First and Second services
 1. Clean up environment
-   * In the third command line tool **stop First application** with `ctrl + C`
-   * In the second command line tool **stop Second application** with `ctrl + C`
-   * In the first command line tool **remove Docker containers** with `docker-compose -f .\docker-compose\infrastructure\docker-compose.yaml down --rmi all`
-   * Stop **Docker** tool
+   * N/A
 
 
 USAGE DOCKER COMPOSE

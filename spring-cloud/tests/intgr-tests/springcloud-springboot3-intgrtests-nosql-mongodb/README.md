@@ -10,7 +10,7 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to create **Integration Tests** for microservices with **sql** database type **MySql** with usage **Java** programming language and **Spring Cloud** and **Spring Boot 3** frameworks.
+The goal of this project is to present how to create **Integration Tests** for microservices with **no sql** database type **MongoDb** with usage **Java** programming language and **Spring Cloud** and **Spring Boot 3** frameworks.
 
 ##### Services
 This project consists of following applications:
@@ -33,7 +33,7 @@ Terminology explanation:
 * **Spring Boot**: framework for Java. It consists of: Spring + Container + Configuration
 * **Spring Cloud**: Spring Cloud is a framework within the Spring ecosystem that provides tools for building distributed systems and microservices. It simplifies tasks like service discovery, configuration management, load balancing, circuit breakers, and distributed tracing, allowing developers to build scalable and resilient cloud-native applications.
 * **Database**: A database is an organized collection of data that is stored and managed electronically, allowing for efficient retrieval, manipulation, and updating of information. It is typically managed by a database management system (DBMS).
-* **MySql**: MySQL is an open-source relational database management system (RDBMS) that uses Structured Query Language (SQL) for managing and organizing data. It's widely used for web applications and is known for its speed, reliability, and ease of use.
+* **MongoDb**: MongoDB is a NoSQL, document-oriented database that stores data in JSON-like BSON (Binary JSON) format. It's designed for scalability, flexibility, and high performance, making it ideal for handling large volumes of unstructured or semi-structured data. Instead of tables and rows (like in relational databases), MongoDB uses collections and documents, allowing for dynamic schemas and easier data modeling for modern applications.
 * **Unit Tests**: Unit tests are short, automated tests written to verify that individual units of code (like functions or methods) work as expected. They're typically fast, isolated, and help catch bugs early in development.
 
 

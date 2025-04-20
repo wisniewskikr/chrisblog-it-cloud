@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.dtos.HelloWorldSecondDto;
+import com.example.dtos.HelloWorldDto;
 import com.example.services.HelloWorldService;
 
 @RestController
@@ -18,12 +18,12 @@ public class HelloWorldController {
 	private HelloWorldService helloWorldService;
 
 	@GetMapping("/message/{id}")
-	public ResponseEntity<HelloWorldSecondDto> helloWorld(@PathVariable Long id) {
+	public ResponseEntity<HelloWorldDto> helloWorld(@PathVariable String id) {
 
 		log.info("Called SECOND method HelloWorldController.helloWorld() for id {}", id);
 
-		HelloWorldSecondDto helloWorldSecondDto = helloWorldService.findById(id);
-		return ResponseEntity.ok(helloWorldSecondDto);		
+		HelloWorldDto helloWorldDto = helloWorldService.findById(id);
+		return ResponseEntity.ok(helloWorldDto);
 		
 	}
 	

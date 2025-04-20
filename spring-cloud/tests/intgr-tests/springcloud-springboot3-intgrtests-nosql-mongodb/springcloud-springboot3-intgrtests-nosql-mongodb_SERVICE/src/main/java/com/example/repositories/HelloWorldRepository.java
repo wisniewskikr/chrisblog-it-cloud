@@ -1,10 +1,9 @@
 package com.example.repositories;
 
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.entities.HelloWorldEntity;
-
-import org.springframework.data.repository.CrudRepository;
+import com.example.models.HelloWorldDoc;
 
 @Repository
-public interface HelloWorldRepository extends CrudRepository<HelloWorldEntity, Long> {}
+public interface HelloWorldRepository extends MongoRepository<HelloWorldDoc, String> {}

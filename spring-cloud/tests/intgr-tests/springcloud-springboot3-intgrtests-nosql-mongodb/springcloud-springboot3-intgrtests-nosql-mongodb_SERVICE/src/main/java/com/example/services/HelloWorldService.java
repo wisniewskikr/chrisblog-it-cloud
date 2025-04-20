@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
-import com.example.dtos.HelloWorldSecondDto;
-import com.example.entities.HelloWorldEntity;
+import com.example.dtos.HelloWorldDto;
+import com.example.models.HelloWorldDoc;
 import com.example.repositories.HelloWorldRepository;
 
 @Service
@@ -15,11 +15,11 @@ public class HelloWorldService {
     private HelloWorldRepository helloWorldRepository;
     private Environment environment;
 
-    public HelloWorldSecondDto findById(Long id) {
+    public HelloWorldDto findById(String id) {
         
-        HelloWorldEntity helloWorldEntity = helloWorldRepository.findById(id).orElseThrow(() -> new RuntimeException("Message doesn't exist"));
+        HelloWorldDoc helloWorldDoc = helloWorldRepository.findById(id).orElseThrow(() -> new RuntimeException("Message doesn't exist"));
         String portSecond = environment.getProperty("local.server.port");
-        return new HelloWorldSecondDto(helloWorldEntity.getId(), helloWorldEntity.getText(), portSecond);
+        return new HelloWorldDto(helloWorldDoc.getId(), helloWorldDoc.getText(), portSecond);
 
     }
 

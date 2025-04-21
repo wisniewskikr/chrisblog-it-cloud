@@ -23,7 +23,7 @@ services:
     image: second-image:0.0.1
     container_name: second-container
     build:
-      context: ./../../springcloud-springboot3-basic_SECOND
+      context: ./../../springcloud-springboot3-intgrtests-restclient_SECOND
       dockerfile: Dockerfile
     environment:
       spring.datasource.url: jdbc:mysql://mysql:3306/database
@@ -43,7 +43,7 @@ services:
     image: first-image:0.0.1
     container_name: first-container
     build:
-      context: ./../../springcloud-springboot3-basic_FIRST
+      context: ./../../springcloud-springboot3-intgrtests-restclient_FIRST
       dockerfile: Dockerfile
     environment:
       api.url: http://second:8082

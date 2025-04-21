@@ -5,21 +5,18 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import com.example.dtos.HelloWorldSecondDto;
-import com.example.entities.HelloWorldEntity;
-import com.example.repositories.HelloWorldRepository;
 
 @Service
 @AllArgsConstructor
 public class HelloWorldService {
 
-    private HelloWorldRepository helloWorldRepository;
     private Environment environment;
 
     public HelloWorldSecondDto findById(Long id) {
         
-        HelloWorldEntity helloWorldEntity = helloWorldRepository.findById(id).orElseThrow(() -> new RuntimeException("Message doesn't exist"));
+        String text = (id == 1) ? "Hello World, Public!" : "Hello World, Secured!";
         String portSecond = environment.getProperty("local.server.port");
-        return new HelloWorldSecondDto(helloWorldEntity.getId(), helloWorldEntity.getText(), portSecond);
+        return new HelloWorldSecondDto(id, text, portSecond);
 
     }
 

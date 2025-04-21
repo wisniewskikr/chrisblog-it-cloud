@@ -14,7 +14,7 @@ public class HelloWorldService {
 
     public HelloWorldSecondDto findById(Long id) {
         
-        String text = (id == 1) ? "Hello World, Public!" : "Hello World, Secured!";
+        String text = (id == 2) ? "Hello World, Secured!" : "Hello World, Public!";
         String portSecond = environment.getProperty("local.server.port");
         return new HelloWorldSecondDto(id, text, portSecond);
 

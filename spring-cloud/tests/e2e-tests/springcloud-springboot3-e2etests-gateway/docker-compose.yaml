@@ -23,9 +23,9 @@ services:
 #    volumes:
 #      - dbdata:/var/lib/mysql
   
-  be:
-    image: be-image:0.0.1
-    container_name: be-container
+  second:
+    image: second-image:0.0.1
+    container_name: second-container
     build:
       context: ./springcloud-springboot3-e2etests-gateway_SECOND
       dockerfile: Dockerfile
@@ -45,16 +45,16 @@ services:
     networks:
       - helloworld-network
 
-  fe:
-    image: fe-image:0.0.1
-    container_name: fe-container
+  first:
+    image: first-image:0.0.1
+    container_name: first-container
     build:
       context: ./springcloud-springboot3-e2etests-gateway_FIRST
       dockerfile: Dockerfile
     environment:
-      baseurl.be: http://be:8081
+      baseurl.be: http://second:8081
     depends_on:
-      - be
+      - second
     ports:
       - 8080:8080
     healthcheck:
@@ -75,7 +75,7 @@ services:
     environment:
       first.service.url: http://fe:8080
     depends_on:
-      - fe
+      - first
     ports:
       - 8762:8762
     healthcheck:

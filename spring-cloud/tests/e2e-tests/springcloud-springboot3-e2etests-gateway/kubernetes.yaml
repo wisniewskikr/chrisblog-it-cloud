@@ -70,21 +70,21 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: be
+  name: second
   labels:
-    app: be
+    app: second
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: be
+      app: second
   template:
     metadata:
       labels:
-        app: be
+        app: second
     spec:
       containers:
-      - name: be
+      - name: second
         image: wisniewskikr/springcloud-springboot3-e2etests-gateway_second:0.0.1
         ports:
         - containerPort: 8081
@@ -114,10 +114,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: be
+  name: second
 spec:
   selector:
-    app: be
+    app: second
   ports:
     - port: 8081
       targetPort: 8081
@@ -129,27 +129,27 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fe
+  name: first
   labels:
-    app: fe
+    app: first
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: fe
+      app: first
   template:
     metadata:
       labels:
-        app: fe
+        app: first
     spec:
       containers:
-      - name: fe
+      - name: first
         image: wisniewskikr/springcloud-springboot3-e2etests-gateway_first:0.0.1
         ports:
         - containerPort: 8080
         env:
         - name: baseurl.be
-          value: http://be:8081
+          value: http://second:8081
         readinessProbe:
           httpGet:
             path: /actuator/health
@@ -173,10 +173,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: fe
+  name: first
 spec:
   selector:
-    app: fe
+    app: first
   ports:
     - port: 8080
       targetPort: 8080
@@ -207,8 +207,8 @@ spec:
         ports:
         - containerPort: 8762
         env:
-        - name: fe.service.url
-          value: http://fe:8080
+        - name: first.service.url
+          value: http://first:8080
         readinessProbe:
           httpGet:
             path: /actuator/health

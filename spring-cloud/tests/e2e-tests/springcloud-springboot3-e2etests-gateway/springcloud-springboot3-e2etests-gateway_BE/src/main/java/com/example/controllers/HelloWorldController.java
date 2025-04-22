@@ -22,8 +22,8 @@ public class HelloWorldController {
 	@GetMapping("/message/{id}")
 	public ResponseEntity<HelloWorldSecondDto> helloWorld(@PathVariable Long id) {
 
-		HelloWorldSecondDto helloWorldDto = helloWorldService.findById(id);
-		return ResponseEntity.ok(helloWorldDto);		
+		HelloWorldSecondDto helloWorldSecondDto = helloWorldService.findById(id);
+		return ResponseEntity.ok(helloWorldSecondDto);
 		
 	}
 	

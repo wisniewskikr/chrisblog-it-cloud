@@ -12,13 +12,13 @@ import org.springframework.cloud.gateway.server.mvc.handler.HandlerFunctions;
 @Configuration
 public class RoutesConfig {
 
-    @Value("${fe.service.url}")
-    private String feServiceUrl;
+    @Value("${first.service.url}")
+    private String firstServiceUrl;
 
     @Bean
-    public RouterFunction<ServerResponse> feServiceRoute() {
-        return GatewayRouterFunctions.route("fe_service")
-                .route(RequestPredicates.path("/*"), HandlerFunctions.http(feServiceUrl))
+    public RouterFunction<ServerResponse> firstServiceRoute() {
+        return GatewayRouterFunctions.route("first_service")
+                .route(RequestPredicates.path("/*"), HandlerFunctions.http(firstServiceUrl))
                 .build();
     }
     

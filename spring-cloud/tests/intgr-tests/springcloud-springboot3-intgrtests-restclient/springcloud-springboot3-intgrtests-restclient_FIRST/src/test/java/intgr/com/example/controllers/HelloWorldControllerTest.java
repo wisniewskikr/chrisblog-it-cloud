@@ -2,6 +2,8 @@ package intgr.com.example.controllers;
 
 import com.example.Application;
 import io.restassured.RestAssured;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,8 +33,14 @@ class HelloWorldControllerTest {
         RestAssured.port = port;
     }
 
-    static {
+    @BeforeAll
+    static void setUp() {
         secondServiceContainer.start();
+    }
+
+    @AfterAll
+    static void tearDown() {
+        secondServiceContainer.stop();
     }
 
     @DynamicPropertySource

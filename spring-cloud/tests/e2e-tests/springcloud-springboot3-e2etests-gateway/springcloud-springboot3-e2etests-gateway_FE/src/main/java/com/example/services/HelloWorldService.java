@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
-import com.example.dtos.HelloWorldDto;
+import com.example.dtos.HelloWorldSecondDto;
 
 @Service
 public class HelloWorldService {
@@ -16,11 +16,11 @@ public class HelloWorldService {
         this.restClient = restClient;
     }
 
-    public HelloWorldDto findById(Long id) {
+    public HelloWorldSecondDto findById(Long id) {
         return restClient.get()
                 .uri("/message/{id}", id)
                 .retrieve()
-                .body(HelloWorldDto.class);
+                .body(HelloWorldSecondDto.class);
     }
 
 }

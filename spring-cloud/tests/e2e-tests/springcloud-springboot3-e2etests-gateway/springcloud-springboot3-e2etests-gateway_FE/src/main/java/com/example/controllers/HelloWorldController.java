@@ -1,14 +1,14 @@
 package com.example.controllers;
 
+import com.example.dtos.HelloWorldFirstDto;
 import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.dtos.HelloWorldDto;
+import com.example.dtos.HelloWorldSecondDto;
 import com.example.services.HelloWorldService;
 
-@Controller
+@RestController
 public class HelloWorldController {
 
     private HelloWorldService helloWorldService;
@@ -19,15 +19,16 @@ public class HelloWorldController {
         this.environment = environment;
     }
 
-    @GetMapping
-    String findById(Model model) {
+    @GetMapping("/public")
+    ResponseEntity<HelloWorldFirstDto> publicMethod() {
+        HelloWorldSecondDto helloWorldSecondDto = helloWorldService.findById(1L);
+        return ResponseEntity.ok(new HelloWorldFirstDto(1L, helloWorldSecondDto.text(), environment.getProperty("local.server.port"), helloWorldSecondDto.portSecond()));
+    }
 
-        HelloWorldDto helloWorldDto = helloWorldService.findById(1L);
-        model.addAttribute("message", helloWorldDto.text());        
-        model.addAttribute("portBe", helloWorldDto.portBe());
-        model.addAttribute("portFe", environment.getProperty("local.server.port"));
-        return "helloworld";
-
+    @GetMapping("/secured")
+    ResponseEntity<HelloWorldFirstDto> securedMethod() {
+        HelloWorldSecondDto helloWorldSecondDto = helloWorldService.findById(2L);
+        return ResponseEntity.ok(new HelloWorldFirstDto(1L, helloWorldSecondDto.text(), environment.getProperty("local.server.port"), helloWorldSecondDto.portSecond()));
     }
 
 }

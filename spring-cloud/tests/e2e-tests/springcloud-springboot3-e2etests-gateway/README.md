@@ -112,10 +112,10 @@ USAGE KUBERNETES (KIND)
      * Stop **Docker** tool
 
 ##### Optional steps:
-1. In a command line tool build Docker BE image with `docker build -f springcloud-springboot3-e2etests-gateway_BE/Dockerfile -t wisniewskikr/springcloud-springboot3-e2etests-gateway_be:0.0.1 ./springcloud-springboot3-e2etests-gateway_BE`
-1. In a command line tool push Docker BE image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-e2etests-gateway_be:0.0.1` 
-1. In a command line tool build Docker FE image with `docker build -f springcloud-springboot3-e2etests-gateway_FE/Dockerfile -t wisniewskikr/springcloud-springboot3-e2etests-gateway_fe:0.0.1 ./springcloud-springboot3-e2etests-gateway_FE`
-1. In a command line tool push Docker FE image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-e2etests-gateway_fe:0.0.1`
+1. In a command line tool build Docker BE image with `docker build -f springcloud-springboot3-e2etests-gateway_SECOND/Dockerfile -t wisniewskikr/springcloud-springboot3-e2etests-gateway_second:0.0.1 ./springcloud-springboot3-e2etests-gateway_SECOND`
+1. In a command line tool push Docker BE image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-e2etests-gateway_second:0.0.1` 
+1. In a command line tool build Docker FE image with `docker build -f springcloud-springboot3-e2etests-gateway_FIRST/Dockerfile -t wisniewskikr/springcloud-springboot3-e2etests-gateway_first:0.0.1 ./springcloud-springboot3-e2etests-gateway_FIRST`
+1. In a command line tool push Docker FE image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-e2etests-gateway_first:0.0.1`
 1. In a command line tool build Docker GATEWAY image with `docker build -f springcloud-springboot3-e2etests-gateway_ROUTING/Dockerfile -t wisniewskikr/springcloud-springboot3-e2etests-gateway_routing:0.0.1 ./springcloud-springboot3-e2etests-gateway_ROUTING`
 1. In a command line tool push Docker GATEWAY image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-e2etests-gateway_routing:0.0.1` 
 1. In a command line tool check Kubernetes Deployments with `kubectl get deployments`

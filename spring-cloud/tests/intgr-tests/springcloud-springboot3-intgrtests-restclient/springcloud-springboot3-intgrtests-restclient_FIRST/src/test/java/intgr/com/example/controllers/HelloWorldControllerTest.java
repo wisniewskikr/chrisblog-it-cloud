@@ -6,13 +6,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Testcontainers
@@ -34,25 +35,52 @@ class HelloWorldControllerTest {
         secondServiceContainer.start();
     }
 
+    @DynamicPropertySource
+    static void configureProperties(DynamicPropertyRegistry registry) {
+        String apiUrl = "http://" + secondServiceContainer.getHost() + ":" + secondServiceContainer.getMappedPort(8082);
+        registry.add("api.url", () -> apiUrl);
+    }
+
     @Test
     void defaultHelloWorld() {
 
         given()
-                .when()
+            .when()
                 .get()
-                .then()
+            .then()
                 .statusCode(200)
-                .body("id", equalTo(1))
                 .body("text", equalTo("Hello World, Public!"))
-                .body("portSecond", equalTo(String.valueOf(port)));
+                .body("portFirst", equalTo(String.valueOf(port)))
+                .body("portSecond", equalTo("8082"));
 
     }
 
     @Test
     void publicHelloWorld() {
+
+        given()
+            .when()
+                .get("/public")
+            .then()
+                .statusCode(200)
+                .body("text", equalTo("Hello World, Public!"))
+                .body("portFirst", equalTo(String.valueOf(port)))
+                .body("portSecond", equalTo("8082"));
+
     }
 
     @Test
     void securedHelloWorld() {
+
+        given()
+            .when()
+                .get("/secured")
+            .then()
+                .statusCode(200)
+                .body("text", equalTo("Hello World, Secured!"))
+                .body("portFirst", equalTo(String.valueOf(port)))
+                .body("portSecond", equalTo("8082"));
+
     }
+
 }

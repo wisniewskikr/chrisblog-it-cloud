@@ -73,7 +73,7 @@ services:
       context: ./springcloud-springboot3-e2etests-gateway_ROUTING
       dockerfile: Dockerfile
     environment:
-      first.service.url: http://fe:8080
+      first.service.url: http://first:8080
     depends_on:
       - first
     ports:

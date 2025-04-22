@@ -8,13 +8,13 @@ import org.springframework.web.client.RestClient;
 @Configuration
 public class RestClientConfig {
 
-    @Value("${baseurl.be}")
-    private String baseUrlBe;
+    @Value("${baseurl.second}")
+    private String baseUrlSecond;
     
     @Bean
     public RestClient restClient() {
         return RestClient.builder()
-                .baseUrl(baseUrlBe)
+                .baseUrl(baseUrlSecond)
                 .build();
     }
 

@@ -52,7 +52,7 @@ services:
       context: ./springcloud-springboot3-e2etests-gateway_FIRST
       dockerfile: Dockerfile
     environment:
-      baseurl.be: http://second:8081
+      baseurl.second: http://second:8081
     depends_on:
       - second
     ports:

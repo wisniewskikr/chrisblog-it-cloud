@@ -148,7 +148,7 @@ spec:
         ports:
         - containerPort: 8080
         env:
-        - name: baseurl.be
+        - name: baseurl.second
           value: http://second:8081
         readinessProbe:
           httpGet:

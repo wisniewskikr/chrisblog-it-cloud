@@ -96,4 +96,19 @@ class RoutesConfigTest {
 
     }
 
+    @Test
+    void firstServiceRoute_secured() {
+
+        given()
+                .when()
+                .get("/secured")
+                .then()
+                .statusCode(200)
+                .body("id", equalTo(2))
+                .body("text", equalTo("Hello World, Secured!"))
+                .body("portFirst", equalTo("8080"))
+                .body("portSecond", equalTo("8081"));
+
+    }
+
 }

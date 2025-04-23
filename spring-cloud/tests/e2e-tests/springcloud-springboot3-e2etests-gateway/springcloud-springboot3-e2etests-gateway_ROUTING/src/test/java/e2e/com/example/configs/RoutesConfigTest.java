@@ -14,8 +14,7 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static io.restassured.RestAssured.given;
-import static org.bouncycastle.math.raw.Nat.equalTo;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.hamcrest.Matchers.equalTo;
 
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Testcontainers
@@ -63,8 +62,8 @@ class RoutesConfigTest {
     void firstServiceRoute_public() {
 
         given()
-            .when("/public")
-                .get()
+            .when()
+                .get("/public")
             .then()
                 .statusCode(200)
                 .body("id", equalTo(String.valueOf(1)))

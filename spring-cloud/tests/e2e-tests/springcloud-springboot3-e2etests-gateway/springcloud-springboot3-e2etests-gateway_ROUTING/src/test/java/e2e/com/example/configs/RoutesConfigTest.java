@@ -56,6 +56,9 @@ class RoutesConfigTest {
 
         String baseurlSecond = "http://" + secondServiceContainer.getHost() + ":" + secondServiceContainer.getMappedPort(8081);
         registry.add("baseurl.second", () -> baseurlSecond);
+
+        String firstServiceUrl = "http://" + firstServiceContainer.getHost() + ":" + firstServiceContainer.getMappedPort(8080);
+        registry.add("first.service.url", () -> firstServiceUrl);
     }
 
     @Test

@@ -36,7 +36,7 @@ class RoutesConfigTest {
             .withNetworkAliases("mysql");
 
     @Container
-    static GenericContainer<?> secondContainer = new GenericContainer<>(DockerImageName.parse("wisniewskikr/springcloud-springboot3-e2etests-gateway_second:0.0.1"))
+    static GenericContainer<?> secondContainer = new GenericContainer<>(DockerImageName.parse("wisniewskikr/springcloud-springboot3-fulltests-gateway_second:0.0.1"))
             .withExposedPorts(8081)
             .dependsOn(mysqlContainer)
             .withNetwork(network)
@@ -45,7 +45,7 @@ class RoutesConfigTest {
             .waitingFor(Wait.forHttp("/message/1").forStatusCode(200));
 
     @Container
-    static GenericContainer<?> firstContainer = new GenericContainer<>(DockerImageName.parse("wisniewskikr/springcloud-springboot3-e2etests-gateway_first:0.0.1"))
+    static GenericContainer<?> firstContainer = new GenericContainer<>(DockerImageName.parse("wisniewskikr/springcloud-springboot3-fulltests-gateway_first:0.0.1"))
             .withExposedPorts(8080)
             .dependsOn(secondContainer)
             .withNetwork(network)

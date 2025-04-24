@@ -63,10 +63,10 @@ USAGE MANUAL
    * N/A
 
 ##### Optional steps:
-1. In a command line tool build Docker SECOND image with `docker build -f springcloud-springboot3-e2etests-gateway_SECOND/Dockerfile -t wisniewskikr/springcloud-springboot3-e2etests-gateway_second:0.0.1 ./springcloud-springboot3-e2etests-gateway_SECOND`
-1. In a command line tool push Docker SECOND image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-e2etests-gateway_second:0.0.1`
-1. In a command line tool build Docker FIRST image with `docker build -f springcloud-springboot3-e2etests-gateway_FIRST/Dockerfile -t wisniewskikr/springcloud-springboot3-e2etests-gateway_first:0.0.1 ./springcloud-springboot3-e2etests-gateway_FIRST`
-1. In a command line tool push Docker FIRST image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-e2etests-gateway_first:0.0.1`
+1. In a command line tool build Docker SECOND image with `docker build -f springcloud-springboot3-fulltests-gateway_SECOND/Dockerfile -t wisniewskikr/springcloud-springboot3-fulltests-gateway_second:0.0.1 ./springcloud-springboot3-fulltests-gateway_SECOND`
+1. In a command line tool push Docker SECOND image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-fulltests-gateway_second:0.0.1`
+1. In a command line tool build Docker FIRST image with `docker build -f springcloud-springboot3-fulltests-gateway_FIRST/Dockerfile -t wisniewskikr/springcloud-springboot3-fulltests-gateway_first:0.0.1 ./springcloud-springboot3-fulltests-gateway_FIRST`
+1. In a command line tool push Docker FIRST image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-fulltests-gateway_first:0.0.1`
 
 
 USAGE DOCKER COMPOSE

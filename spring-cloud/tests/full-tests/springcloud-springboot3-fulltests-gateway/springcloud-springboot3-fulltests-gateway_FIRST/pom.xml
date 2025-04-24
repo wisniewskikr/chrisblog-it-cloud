@@ -11,7 +11,7 @@
 	</parent>
 
 	<groupId>com.example</groupId>
-	<artifactId>springcloud-springboot3-e2etests-gateway_FIRST</artifactId>
+	<artifactId>springcloud-springboot3-fulltests-gateway_FIRST</artifactId>
 	<version>0.0.1</version>
 
 	<properties>

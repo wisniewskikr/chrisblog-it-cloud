@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>springcloud-springboot3-e2etests-gateway</artifactId>
+    <artifactId>springcloud-springboot3-fulltests-gateway</artifactId>
     <version>0.1.0</version>
     <modules>
-        <module>springcloud-springboot3-e2etests-gateway_SECOND</module>
-        <module>springcloud-springboot3-e2etests-gateway_FIRST</module>
-        <module>springcloud-springboot3-e2etests-gateway_ROUTING</module>
+        <module>springcloud-springboot3-fulltests-gateway_SECOND</module>
+        <module>springcloud-springboot3-fulltests-gateway_FIRST</module>
+        <module>springcloud-springboot3-fulltests-gateway_ROUTING</module>
     </modules>
     <packaging>pom</packaging>
 

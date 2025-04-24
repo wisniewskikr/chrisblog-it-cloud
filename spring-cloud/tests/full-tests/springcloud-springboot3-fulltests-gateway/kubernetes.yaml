@@ -85,7 +85,7 @@ spec:
     spec:
       containers:
       - name: second
-        image: wisniewskikr/springcloud-springboot3-e2etests-gateway_second:0.0.1
+        image: wisniewskikr/springcloud-springboot3-fulltests-gateway_second:0.0.1
         ports:
         - containerPort: 8081
         env:
@@ -144,7 +144,7 @@ spec:
     spec:
       containers:
       - name: first
-        image: wisniewskikr/springcloud-springboot3-e2etests-gateway_first:0.0.1
+        image: wisniewskikr/springcloud-springboot3-fulltests-gateway_first:0.0.1
         ports:
         - containerPort: 8080
         env:
@@ -203,7 +203,7 @@ spec:
     spec:
       containers:
       - name: gateway
-        image: wisniewskikr/springcloud-springboot3-e2etests-gateway_routing:0.0.1
+        image: wisniewskikr/springcloud-springboot3-fulltests-gateway_routing:0.0.1
         ports:
         - containerPort: 8762
         env:

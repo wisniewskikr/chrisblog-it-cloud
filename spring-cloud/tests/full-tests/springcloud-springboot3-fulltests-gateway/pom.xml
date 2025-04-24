@@ -13,5 +13,4 @@
         <module>springcloud-springboot3-fulltests-gateway_ROUTING</module>
     </modules>
     <packaging>pom</packaging>
-
 </project>

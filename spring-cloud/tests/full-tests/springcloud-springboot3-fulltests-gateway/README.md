@@ -26,7 +26,13 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to create **End-To-End Tests** with a **routing** type **Gateway API** with usage **Java** programming language and **Spring Cloud** framework. Gateway API enables routing - mapping - from one route to another. In this way all microservices can have one URL. It this example Gateway API is **configured the config class**, not in application.properties file. 
+The goal of this project is to present how to implement all types of tests - **unit, integration and end-to-end** - in microservices with usage **Java** programming language and **Spring Cloud** framework.
+
+Tests can be run with usage **Maven Profiles**:
+* **full**: it's **default** profile. It runs all types of tests - **unit, integration and end-to-end**. It requires **Docker** up and running.
+* **e2e**: it runs **end-to-end** tests. These tests are implemented in ROUTING service. It requires **Docker** up and running.
+* **intgr**: it runs **integration** tests. These tests are implemented in FIRST and SECOND services. It requires **Docker** up and running.
+* **unit**: it runs **unit** tests. These tests are implemented in FIRST and SECOND services.
 
 This chain of services consists of following applications:
 * **Database**: SQL database - in this case type **MySql**
@@ -51,6 +57,8 @@ Terminology explanation:
 * **Microservices**: Microservices are a software architecture style where an application is built as a collection of small, independent services that communicate through APIs. Each service focuses on a specific business function, allowing for easier scaling, deployment, and maintenance.
 * **Spring Cloud Gateway**: Spring Cloud Gateway is a reactive, API gateway service in the Spring Cloud ecosystem. It provides routing, load balancing, and API request handling. Built on top of Spring WebFlux, it allows dynamic routing, filtering, and monitoring of requests to various microservices, acting as a reverse proxy with features like path rewriting, rate limiting, and security integration.
 * **End-To-End Tests**: End-to-end (E2E) tests are a type of software testing that validate the complete flow of an application—from start to finish—to ensure all integrated components work together as expected. These tests simulate real user scenarios to verify the system behaves correctly across the full stack, including frontend, backend, databases, and external services.
+* **Integration Tests**: Integration testing checks if different parts of an application work together as expected.
+* **Unit Tests**: Unit tests are short, automated tests that check whether individual parts (or "units") of a program—like functions, methods, or classes—work as expected. Each test typically focuses on a single piece of code in isolation.
 
 USAGES
 ------
@@ -71,12 +79,24 @@ USAGE MANUAL
 > **Prerequisites**:
 * **Operating System** (tested on Windows 11)
 * **Git** (tested on version 2.33.0.windows.2)
+* **Java** (tested on version 23.0.1)
+* **Maven** (tested on version 3.9.6)
+* **Docker** (tested on version 4.40.0)
 
 ##### Required steps:
-1. In a first command line tool **start End-To-End Tests** with `mvn clean test`
+1. Start **Docker** tool
+1. In a first command line tool **start all Tests** with `mvn clean test`
+   * Expected all tests are passed
+1. In a first command line tool **start all Tests** with `mvn clean test -Pfull`
+   * Expected all tests are passed
+1. In a first command line tool **start end-to-end Tests** with `mvn clean test -Pe2e`
+   * Expected all tests are passed
+1. In a first command line tool **start integration Tests** with `mvn clean test -Pintgr`
+   * Expected all tests are passed
+1. In a first command line tool **start unit Tests** with `mvn clean test -Punit`
    * Expected all tests are passed
 1. Clean up environment
-   * N/A
+   * Stop **Docker** tool
 
 ##### Optional steps:
 1. In a command line tool build Docker SECOND image with `docker build -f springcloud-springboot3-fulltests-gateway_SECOND/Dockerfile -t wisniewskikr/springcloud-springboot3-fulltests-gateway_second:0.0.1 ./springcloud-springboot3-fulltests-gateway_SECOND`

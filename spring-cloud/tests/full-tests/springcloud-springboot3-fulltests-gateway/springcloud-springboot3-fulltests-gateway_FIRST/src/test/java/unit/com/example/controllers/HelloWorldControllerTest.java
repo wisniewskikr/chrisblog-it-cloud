@@ -43,4 +43,21 @@ class HelloWorldControllerTest {
 
     }
 
+    @Test
+    public void securedMethod() {
+
+        // Given
+        Long id = 2L;
+        HelloWorldSecondDto mockDto = new HelloWorldSecondDto(id, "Hello World, Secured!", "8081");
+        when(helloWorldService.findById(id)).thenReturn(mockDto);
+        when(environment.getProperty("local.server.port")).thenReturn("8080");
+
+        // When
+        ResponseEntity<HelloWorldFirstDto> responseEntity = helloWorldController.securedMethod();
+
+        // Then
+        assertEquals(ResponseEntity.ok(new HelloWorldFirstDto(mockDto.id(), mockDto.text(), environment.getProperty("local.server.port"), mockDto.portSecond())), responseEntity);
+
+    }
+
 }

@@ -49,4 +49,23 @@ class HelloWorldServiceTest {
 
     }
 
+    @Test
+    void findByIdTest_secured() {
+
+        // Given
+        Long id = 2L;
+        HelloWorldSecondDto mockDto = new HelloWorldSecondDto(id, "Hello World, Secured!", "8081");
+        when(restClient.get()).thenReturn(requestHeadersUriSpec);
+        when(requestHeadersUriSpec.uri("/message/{id}", id)).thenReturn(requestHeadersSpec);
+        when(requestHeadersSpec.retrieve()).thenReturn(responseSpec);
+        when(responseSpec.body(HelloWorldSecondDto.class)).thenReturn(mockDto);
+
+        // When
+        HelloWorldSecondDto resultDto = helloWorldService.findById(id);
+
+        // Then
+        assertEquals(mockDto, resultDto);
+
+    }
+
 }

@@ -20,13 +20,13 @@ public class HelloWorldController {
     }
 
     @GetMapping("/public")
-    ResponseEntity<HelloWorldFirstDto> publicMethod() {
+    public ResponseEntity<HelloWorldFirstDto> publicMethod() {
         HelloWorldSecondDto helloWorldSecondDto = helloWorldService.findById(1L);
         return ResponseEntity.ok(new HelloWorldFirstDto(helloWorldSecondDto.id(), helloWorldSecondDto.text(), environment.getProperty("local.server.port"), helloWorldSecondDto.portSecond()));
     }
 
     @GetMapping("/secured")
-    ResponseEntity<HelloWorldFirstDto> securedMethod() {
+    public ResponseEntity<HelloWorldFirstDto> securedMethod() {
         HelloWorldSecondDto helloWorldSecondDto = helloWorldService.findById(2L);
         return ResponseEntity.ok(new HelloWorldFirstDto(helloWorldSecondDto.id(), helloWorldSecondDto.text(), environment.getProperty("local.server.port"), helloWorldSecondDto.portSecond()));
     }

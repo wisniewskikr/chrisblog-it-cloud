@@ -137,10 +137,10 @@ USAGE KUBERNETES (KIND)
      * Stop **Docker** tool
 
 ##### Optional steps:
-1. In a command line tool build Docker Producer image with `docker build -f springcloud-eventdriven-kafka-bitnami_producer/Dockerfile -t wisniewskikr/springcloud-eventdriven-kafka-bitnami_producer:0.0.1 ./springcloud-eventdriven-kafka-bitnami_producer`
-1. In a command line tool push Docker Procuder image to Docker Repository with `docker push wisniewskikr/springcloud-eventdriven-kafka-bitnami_producer:0.0.1` 
-1. In a command line tool build Docker Consumer image with `docker build -f springcloud-eventdriven-kafka-bitnami_consumer/Dockerfile -t wisniewskikr/springcloud-eventdriven-kafka-bitnami_consumer:0.0.1 ./springcloud-eventdriven-kafka-bitnami_consumer`
-1. In a command line tool push Docker Consumer image to Docker Repository with `docker push wisniewskikr/springcloud-eventdriven-kafka-bitnami_consumer:0.0.1` 
+1. In a command line tool build Docker Producer image with `docker build -f springcloud-springboot3-kafkatests_producer/Dockerfile -t wisniewskikr/springcloud-springboot3-kafkatests_producer:0.0.1 ./springcloud-springboot3-kafkatests_producer`
+1. In a command line tool push Docker Procuder image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-kafkatests_producer:0.0.1` 
+1. In a command line tool build Docker Consumer image with `docker build -f springcloud-springboot3-kafkatests_consumer/Dockerfile -t wisniewskikr/springcloud-springboot3-kafkatests_consumer:0.0.1 ./springcloud-springboot3-kafkatests_consumer`
+1. In a command line tool push Docker Consumer image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-kafkatests_consumer:0.0.1` 
 1. In the first command line tool with administrator privileges check clusers with `kind get clusters`
 1. In a command line tool check Kubernetes Deployments with `kubectl get deployments`
 1. In a command line tool check Kubernetes Deployments details with **kubectl describe deployment {deployment-name}**

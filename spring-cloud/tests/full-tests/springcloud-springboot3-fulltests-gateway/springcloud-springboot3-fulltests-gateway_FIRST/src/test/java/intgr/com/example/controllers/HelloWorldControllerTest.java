@@ -80,7 +80,7 @@ class HelloWorldControllerTest {
                 .statusCode(200)
                 .body("id", equalTo(1))
                 .body("text", equalTo("Hello World, Public!"))
-                .body("portFirst", equalTo("8080"))
+                .body("portFirst", equalTo(String.valueOf(port)))
                 .body("portSecond", equalTo("8081"));
 
     }

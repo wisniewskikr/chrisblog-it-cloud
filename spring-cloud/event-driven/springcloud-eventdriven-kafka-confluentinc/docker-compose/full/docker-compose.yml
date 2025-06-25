@@ -41,8 +41,8 @@ services:
     image: producer
     container_name: producer
     build:
-      context: ./../springcloud-eventdriven-kafka-confluentinc_producer
-      dockerfile: Dockerfile
+      context: ../../springcloud-eventdriven-kafka-confluentinc_producer
+      dockerfile: ../../springcloud-eventdriven-kafka-confluentinc_producer/Dockerfile
     ports:
       - "8080:8080"
     networks:
@@ -54,8 +54,8 @@ services:
     image: consumer
     container_name: consumer
     build:
-      context: ./../springcloud-eventdriven-kafka-confluentinc_consumer
-      dockerfile: Dockerfile
+      context: ../../springcloud-eventdriven-kafka-confluentinc_consumer
+      dockerfile: ../../springcloud-eventdriven-kafka-confluentinc_consumer/Dockerfile
     ports:
       - "9090:9090"
     networks:

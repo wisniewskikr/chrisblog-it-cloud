@@ -8,8 +8,8 @@
     <artifactId>springboot-kafka-docker-compose</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <modules>
-    	<module>springcloud-eventdriven-kafka-bitnami_producer</module>
-        <module>springcloud-eventdriven-kafka-bitnami_consumer</module>
+    	<module>springcloud-eventdriven-kafka-confluentinc_producer</module>
+        <module>springcloud-eventdriven-kafka-confluentinc_consumer</module>
     </modules>
     <packaging>pom</packaging>
 

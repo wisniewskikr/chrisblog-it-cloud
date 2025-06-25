@@ -22,7 +22,7 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to use **Kafka** type **KRaft** for implementation of asynchronous communication between two microservices created with usage **Java** programming language, **Spring Boot 3** and **Spring Cloud** frameworks. Additionally **Krafka UI** is used to present messages sent between these two microservices.
+The goal of this project is to present how to use **Kafka** type **Zookeeper** for implementation of asynchronous communication between two microservices created with usage **Java** programming language, **Spring Boot 3** and **Spring Cloud** frameworks. Additionally **Krafka UI** is used to present messages sent between these two microservices.
 
 ##### Content
 This project consists of following applications:
@@ -46,7 +46,6 @@ Terminology explanation:
 * **Java**: Java is a high-level, object-oriented programming language known for its platform independence, achieved through the Java Virtual Machine (JVM). It is widely used for developing web, mobile, desktop, and enterprise applications, emphasizing simplicity, security, and portability. "Write once, run anywhere" is its core principle.
 * **Maven**: Maven is a build automation and dependency management tool for Java projects, streamlining project builds, managing libraries, and ensuring consistent project configurations.
 * **Spring Boot**: Spring Boot is a framework for building Java-based applications that simplifies development by providing auto-configuration, embedded servers, and production-ready tools, enabling developers to create standalone, production-ready applications with minimal configuration.
-* **Kafka KRaft**: Kafka KRaft (Kafka Raft) is a mode of running Apache Kafka without the need for Apache ZooKeeper. It uses the Raft consensus algorithm for managing metadata and leader election, simplifying the architecture by removing ZooKeeper's dependency while maintaining Kafka's distributed, fault-tolerant capabilities. This mode enhances scalability and operational simplicity.
 * **Kafka UI**: Kafka UI is a web-based interface for managing and monitoring Apache Kafka clusters. It allows users to visualize topics, partitions, consumer groups, and messages, making it easier to interact with Kafka without using the command line.
 * **Asynchronous Communication**: Asynchronous communication is the exchange of information without requiring participants to be present or respond in real time, allowing for flexibility in timing (e.g., emails or messaging apps).
 * **Docker**: Docker is a platform that allows you to build, run, and manage applications in lightweight, portable containers. These containers package the application and its dependencies, ensuring consistency across development, testing, and production environments.

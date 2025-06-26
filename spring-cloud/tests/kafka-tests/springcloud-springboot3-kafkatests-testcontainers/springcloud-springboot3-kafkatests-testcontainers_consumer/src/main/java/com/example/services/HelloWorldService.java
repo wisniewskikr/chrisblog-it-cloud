@@ -14,10 +14,9 @@ public class HelloWorldService {
     }
 
     @KafkaListener(topics = "#{'${topic.name}'}")
-    public String helloWorldListener(String message) {
+    public void helloWorldListener(String message) {
         helloWorldController.setMessage(message);
         System.out.println(message);
-        return message;
     }
 
 }

@@ -21,13 +21,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 public class HelloWorldServiceTest {
 
+    private static final String TOPIC_NAME = "helloworld";
+    private static final String MESSAGE = "Hello World Stranger";
+
     private static KafkaContainer kafkaContainer;
 
     @Autowired
     private HelloWorldService helloWorldService;
-
-    private static final String TOPIC_NAME = "helloworld";
-    private static final String MESSAGE = "Hello World Stranger";
 
     @DynamicPropertySource
     static void overrideKafkaProperties(DynamicPropertyRegistry registry) {

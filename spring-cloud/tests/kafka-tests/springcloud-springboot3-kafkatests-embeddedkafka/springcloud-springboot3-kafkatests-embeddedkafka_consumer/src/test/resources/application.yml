@@ -7,5 +7,5 @@ spring:
         key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
         value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 
-#topic: - This part is not required
-#  name: helloworld
+topic:
+  name: helloworld

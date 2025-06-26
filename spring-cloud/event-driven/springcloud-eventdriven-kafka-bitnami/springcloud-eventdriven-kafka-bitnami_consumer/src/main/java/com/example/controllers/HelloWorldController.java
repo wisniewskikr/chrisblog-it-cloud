@@ -1,6 +1,5 @@
 package com.example.controllers;
 
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -11,14 +10,16 @@ public class HelloWorldController {
 
 	@GetMapping
 	public String helloWorld() {		
-		return "Message from Producer via Kafka is: " + message;
+		return "Message from Producer via Kafka is: " + getMessage();
 		
 	}
-		
-	@KafkaListener(topics = "#{'${topic.name}'}")
-	public void helloWorldListener(String message) {
-		this.message = message;		
-		System.out.println(message);		
+
+	public String getMessage() {
+		return message;
 	}
-	
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
 }

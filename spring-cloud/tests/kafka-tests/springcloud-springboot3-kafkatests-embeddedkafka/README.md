@@ -10,7 +10,7 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to create integration tests with usage **test containers** library for **Apache Kafka** tool and microservices created with usage **Java** programming language, **Spring Boot 3** and **Spring Cloud** frameworks.
+The goal of this project is to present how to create integration tests with usage **@EmbeddedKafka** annotation for **Apache Kafka** tool and microservices created with usage **Java** programming language, **Spring Boot 3** and **Spring Cloud** frameworks.
 
 Apacha Kafka tool is tested as:
 * **Producer**: integration tests check if event is sent to the tool 
@@ -65,14 +65,12 @@ USAGE MANUAL
 * **Git** (tested on version 2.33.0.windows.2)
 * **Java** (tested on version 23.0.1)
 * **Maven** (tested on version 3.9.6)
-* **Docker** (tested on version 4.40.0)
 
 ##### Required steps:
-1. Start **Docker** tool
 1. In a first command line tool **start integration tests** with `mvn clean test`
     * Expected all tests are passed
 1. Clean up environment
-    * Stop **Docker** tool
+    * N/A
 
 
 USAGE DOCKER COMPOSE

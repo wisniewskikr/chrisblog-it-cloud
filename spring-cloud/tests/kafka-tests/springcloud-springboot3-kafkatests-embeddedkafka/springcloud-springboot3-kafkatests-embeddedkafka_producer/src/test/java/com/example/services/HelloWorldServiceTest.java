@@ -4,47 +4,30 @@ import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.AfterAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.kafka.test.context.EmbeddedKafka;
 import org.springframework.kafka.test.utils.KafkaTestUtils;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
-import org.testcontainers.containers.KafkaContainer;
-import org.testcontainers.utility.DockerImageName;
 
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
+@EmbeddedKafka(
+        partitions = 1,
+        brokerProperties = {
+                "listeners=PLAINTEXT://localhost:9092",
+                "port=9092"
+        }
+)
 public class HelloWorldServiceTest {
 
     private static final String TOPIC_NAME = "helloworld";
     private static final String MESSAGE = "Hello World Stranger";
 
-    private static KafkaContainer kafkaContainer;
-
     @Autowired
     private HelloWorldService helloWorldService;
-
-    @DynamicPropertySource
-    static void overrideKafkaProperties(DynamicPropertyRegistry registry) {
-        registry.add("spring.kafka.bootstrap-servers", kafkaContainer::getBootstrapServers);
-        registry.add("topic.name", () -> TOPIC_NAME);
-    }
-
-    @BeforeAll
-    static void startKafkaContainer() {
-        kafkaContainer = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:7.5.0"));
-        kafkaContainer.start();
-    }
-
-    @AfterAll
-    static void stopKafkaContainer() {
-        kafkaContainer.stop();
-    }
 
     @Test
     public void testSendMessage() {
@@ -55,7 +38,7 @@ public class HelloWorldServiceTest {
 
         // Set up test Kafka consumer manually
         Map<String, Object> consumerProps = Map.of(
-                ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaContainer.getBootstrapServers(),
+                ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092",
                 ConsumerConfig.GROUP_ID_CONFIG, "testGroup",
                 ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest",
                 ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName(),
@@ -71,6 +54,7 @@ public class HelloWorldServiceTest {
 
             assertThat(record.value()).isEqualTo(MESSAGE);
         }
+
     }
 
 }

@@ -1,9 +1,9 @@
 spring:
    kafka:
      producer:
-#        bootstrap-servers: kafka:9092 - This part has to be removed in test
+#        bootstrap-servers: kafka:9092 - This property is not required
         key-serializer: org.apache.kafka.common.serialization.StringSerializer
         value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
-#topic: - This part is not required
-#  name: helloworld
+topic:
+  name: helloworld

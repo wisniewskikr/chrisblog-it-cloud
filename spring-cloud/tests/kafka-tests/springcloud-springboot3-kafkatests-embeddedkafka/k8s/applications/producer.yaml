@@ -15,7 +15,7 @@ spec:
         app: producer
     spec:
       containers:
-        - image: wisniewskikr/springcloud-springboot3-kafkatests-testcontainers_producer:0.0.1
+        - image: wisniewskikr/springcloud-springboot3-kafkatests-embeddedkafka_producer:0.0.1
           name: producer
           ports:
             - containerPort: 8080

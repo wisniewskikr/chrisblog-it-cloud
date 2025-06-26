@@ -1,0 +1,9 @@
+spring:
+   kafka:
+     producer:
+#        bootstrap-servers: kafka:9092 - This part has to be removed in test
+        key-serializer: org.apache.kafka.common.serialization.StringSerializer
+        value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+topic:
+  name: helloworld

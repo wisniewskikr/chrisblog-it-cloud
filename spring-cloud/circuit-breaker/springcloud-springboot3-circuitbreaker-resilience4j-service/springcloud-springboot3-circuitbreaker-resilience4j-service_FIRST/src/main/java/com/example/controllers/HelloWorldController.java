@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.dtos.HelloWorldFirstDto;
 import com.example.services.HelloWorldService;
 
 @RestController
@@ -13,17 +12,20 @@ public class HelloWorldController {
 
     private HelloWorldService helloWorldService;
 
-    @GetMapping("/")
-    public ResponseEntity<HelloWorldFirstDto> defaultHelloWorld() {
-        return publicHelloWorld();
+    // TODO
+//    @GetMapping("/")
+//    public String defaultHelloWorld() {
+//        return "redirect: /status/200";
+//    }
+
+    @GetMapping("/status/200")
+    public ResponseEntity<String> status200() {
+        return ResponseEntity.ok(helloWorldService.get200Message());
     }
 
     @GetMapping("/status/timeout")
-    public ResponseEntity<HelloWorldFirstDto> publicHelloWorld() {
-
-        HelloWorldFirstDto helloWorldFirstDto = helloWorldService.getTimeoutMessage();
-        return ResponseEntity.ok(helloWorldFirstDto);
-
+    public ResponseEntity<String> statusTimeout() {
+        return ResponseEntity.ok(helloWorldService.getTimeoutMessage());
     }
 
 }

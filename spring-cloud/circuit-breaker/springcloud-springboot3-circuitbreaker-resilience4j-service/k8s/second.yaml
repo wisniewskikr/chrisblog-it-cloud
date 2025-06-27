@@ -19,9 +19,6 @@ spec:
         image: wisniewskikr/springcloud-springboot3-circuitbreaker-resilience4j-service_second:0.0.1
         ports:
         - containerPort: 8082
-        env:
-        - name: spring.datasource.url
-          value: jdbc:mysql://mysql:3306/database
         readinessProbe:
           httpGet:
             path: /actuator/health

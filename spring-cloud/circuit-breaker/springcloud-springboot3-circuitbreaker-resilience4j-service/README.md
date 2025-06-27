@@ -56,11 +56,8 @@ USAGE MANUAL
 > **Prerequisites**:
 * **Operating System** (tested on Windows 11)
 * **Git** (tested on version 2.33.0.windows.2)
-* **Docker** (tested on version 4.33.1)
 
 ##### Required steps:
-1. Start **Docker** tool
-1. In a first command line tool **start Docker containers** with `docker-compose -f .\docker-compose\infrastructure\docker-compose.yaml up -d --build`
 1. In a second command line tool **start Second application** with `mvn -f ./springcloud-springboot3-circuitbreaker-resilience4j-service_SECOND spring-boot:run`
 1. In a third command line tool **start First application** with `mvn -f ./springcloud-springboot3-circuitbreaker-resilience4j-service_FIRST spring-boot:run`
 1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8081/public`
@@ -70,8 +67,6 @@ USAGE MANUAL
 1. Clean up environment
    * In the third command line tool **stop First application** with `ctrl + C`
    * In the second command line tool **stop Second application** with `ctrl + C`
-   * In the first command line tool **remove Docker containers** with `docker-compose -f .\docker-compose\infrastructure\docker-compose.yaml down --rmi all`
-   * Stop **Docker** tool
 
 
 USAGE DOCKER COMPOSE
@@ -88,13 +83,13 @@ USAGE DOCKER COMPOSE
 
 ##### Required steps:
 1. Start **Docker** tool
-1. In any command line tool **start Docker containers** with `docker-compose -f .\docker-compose\full\docker-compose.yaml up -d --build`
+1. In any command line tool **start Docker containers** with `docker-compose -f .\docker-compose\docker-compose.yaml up -d --build`
 1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8081/public`
    * Expected following **JSON**: {"text": "Hello World, Public!", "portFirst": "8081", "portSecond": "8082"}
 1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8081/secured`
    * Expected following **JSON**: {"text": "Hello World, Secured!", "portFirst": "8081", "portSecond": "8082"}
 1. Clean up environment 
-     * In a command line tool **remove Docker containers** with `docker-compose -f .\docker-compose\full\docker-compose.yaml down --rmi all`
+     * In a command line tool **remove Docker containers** with `docker-compose -f .\docker-compose\docker-compose.yaml down --rmi all`
      * Stop **Docker** tool
 
 ##### Optional steps:

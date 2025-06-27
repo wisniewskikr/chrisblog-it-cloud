@@ -10,6 +10,12 @@ public interface SecondClient {
     @GetExchange("/status/200")
     public ResponseEntity<String> status200();
 
+    @GetExchange("/status/400")
+    public ResponseEntity<String> status400();
+
+    @GetExchange("/status/500")
+    public ResponseEntity<String> status500();
+
     @GetExchange("/status/timeout")
     public ResponseEntity<String> statusTimeout();
 

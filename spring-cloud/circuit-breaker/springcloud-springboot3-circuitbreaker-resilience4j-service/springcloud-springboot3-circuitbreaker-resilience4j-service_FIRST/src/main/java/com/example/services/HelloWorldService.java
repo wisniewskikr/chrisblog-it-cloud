@@ -11,8 +11,16 @@ public class HelloWorldService {
     
     private SecondClient secondClient;
 
-    public String get200Message() {
+    public String getStatus200Message() {
         return secondClient.status200().getBody();
+    }
+
+    public String getStatus400Message() {
+        return secondClient.status400().getBody();
+    }
+
+    public String getStatus500Message() {
+        return secondClient.status500().getBody();
     }
 
     public String getTimeoutMessage() {

@@ -20,7 +20,17 @@ public class HelloWorldController {
 
     @GetMapping("/status/200")
     public ResponseEntity<String> status200() {
-        return ResponseEntity.ok(helloWorldService.get200Message());
+        return ResponseEntity.ok(helloWorldService.getStatus200Message());
+    }
+
+    @GetMapping("/status/400")
+    public ResponseEntity<String> status400() {
+        return ResponseEntity.ok(helloWorldService.getStatus400Message());
+    }
+
+    @GetMapping("/status/500")
+    public ResponseEntity<String> status500() {
+        return ResponseEntity.ok(helloWorldService.getStatus500Message());
     }
 
     @GetMapping("/status/timeout")

@@ -13,7 +13,13 @@ public class HelloWorldService {
     private Environment environment;
 
     public HelloWorldSecondDto findById(Long id) {
-        
+
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
         String text = (id == 1L) ? "Hello World, Public" : "Hello World, Secured";
         String portSecond = environment.getProperty("local.server.port");
         return new HelloWorldSecondDto(id, text, portSecond);

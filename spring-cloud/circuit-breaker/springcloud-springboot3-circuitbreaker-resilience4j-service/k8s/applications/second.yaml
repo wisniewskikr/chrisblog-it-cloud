@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: second
-        image: wisniewskikr/springcloud-springboot3-basic_second:0.0.1
+        image: wisniewskikr/springcloud-springboot3-circuitbreaker-resilience4j-service_second:0.0.1
         ports:
         - containerPort: 8082
         env:

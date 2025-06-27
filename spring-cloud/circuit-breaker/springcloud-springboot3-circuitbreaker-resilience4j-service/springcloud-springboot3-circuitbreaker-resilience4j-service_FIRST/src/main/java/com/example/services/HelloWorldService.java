@@ -15,14 +15,9 @@ public class HelloWorldService {
     private SecondClient secondClient;  
     private Environment environment;
 
-    public HelloWorldFirstDto getPublicMessage() {
+    public HelloWorldFirstDto getTimeoutMessage() {
         HelloWorldSecondDto helloWorldSecondDto = secondClient.findById(1L);
-        return new HelloWorldFirstDto(helloWorldSecondDto.text(), environment.getProperty("local.server.port"), helloWorldSecondDto.portSecond());
-    }
-
-    public HelloWorldFirstDto getSecuredMessage() {
-        HelloWorldSecondDto helloWorldSecondDto = secondClient.findById(2L);
-        return new HelloWorldFirstDto(helloWorldSecondDto.text(), environment.getProperty("local.server.port"), helloWorldSecondDto.portSecond());
+        return new HelloWorldFirstDto(helloWorldSecondDto.text());
     }
 
 }

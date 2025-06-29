@@ -146,3 +146,13 @@ USAGE KUBERNETES (KIND)
 1. In a command line tool check Kubernetes Pods with `kubectl get pods`
 1. In a command line tool check Kubernetes Pods details with **kubectl describe pod {pod-name}**
 1. In a command line tool check Kubernetes Pods logs with **kubectl logs {pod-name}**
+
+
+IMPLEMENTATION
+--------------
+
+Implementation details:
+* In First service update file **pom.xml** with dependencies **spring-cloud-starter-circuitbreaker-resilience4j** and **spring-boot-starter-aop**
+* In First service update file **application.properties** with properties **resilience4j.circuitbreaker.instances.status500fallback**
+* In First Service update class **SecondClient** with annotations **@CircuitBreaker** and **@Retry**
+* In First Service update class **SecondClient** with method **status500Fallback()**

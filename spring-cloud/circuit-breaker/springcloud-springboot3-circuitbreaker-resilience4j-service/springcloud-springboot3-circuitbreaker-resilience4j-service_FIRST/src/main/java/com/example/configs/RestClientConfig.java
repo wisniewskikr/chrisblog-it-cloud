@@ -53,6 +53,9 @@ public class RestClientConfig {
                 if (response.getStatusCode().value() == 400) {
                     System.out.println("First service handles status 400");
                 }
+                if (response.getStatusCode().value() == 500) {
+                    System.out.println("First service handles status 500");
+                }
                 return response;
             }
 

@@ -16,15 +16,16 @@ public interface SecondClient {
     public ResponseEntity<String> status400();
 
     @GetExchange("/status/500")
-    @CircuitBreaker(name = "status500fallback", fallbackMethod = "status500Fallback")
-    @Retry(name = "status500fallback")
+    @CircuitBreaker(name = "fallback-second", fallbackMethod = "fallbackSecond")
     public ResponseEntity<String> status500();
 
     @GetExchange("/status/timeout")
+    @CircuitBreaker(name = "fallback-second", fallbackMethod = "fallbackSecond")
+    @Retry(name = "fallback-second", fallbackMethod = "fallbackSecond")
     public ResponseEntity<String> statusTimeout();
 
-    default ResponseEntity<String> status500Fallback(Throwable throwable) {
-        System.out.println("First service handles status 500 using CircuitBreaker. Error details: " + throwable.getMessage());
+    default ResponseEntity<String> fallbackSecond(Throwable throwable) {
+        System.out.println("First service handles an error using CircuitBreaker. Error details: " + throwable.getMessage());
         return ResponseEntity.ok("Temporary problem with the application. It seems that external service is unavailable");
     }
 

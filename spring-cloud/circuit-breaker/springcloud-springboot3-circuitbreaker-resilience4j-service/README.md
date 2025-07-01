@@ -79,6 +79,8 @@ USAGE MANUAL
 > **Prerequisites**:
 * **Operating System** (tested on Windows 11)
 * **Git** (tested on version 2.33.0.windows.2)
+* **Java** (tested on version 23.0.1)
+* **Maven** (tested on version 3.9.6)
 
 ##### Required steps:
 1. In a second command line tool **start Second application** with `mvn -f ./springcloud-springboot3-circuitbreaker-resilience4j-service_SECOND spring-boot:run`

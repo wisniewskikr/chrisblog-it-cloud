@@ -83,7 +83,7 @@ USAGE MANUAL
 ##### Required steps:
 1. In a second command line tool **start Second application** with `mvn -f ./springcloud-springboot3-circuitbreaker-resilience4j-service_SECOND spring-boot:run`
 1. In a third command line tool **start First application** with `mvn -f ./springcloud-springboot3-circuitbreaker-resilience4j-service_FIRST spring-boot:run`
-1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8081/public`
+1. In any Browser (e.g. Chrome) visit `http://localhost:8081/status/200`
    * Expected following **JSON**: {"text": "Hello World, Public!", "portFirst": "8081", "portSecond": "8082"}
 1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8081/secured`
    * Expected following **JSON**: {"text": "Hello World, Secured!", "portFirst": "8081", "portSecond": "8082"}

@@ -129,7 +129,7 @@ USAGE MANUAL
 USAGE DOCKER COMPOSE
 --------------------
 
-> **Usage Docker Compse** means all services are started as Docker containers definied in docker compose file.
+> **Usage Docker Compose** means all services are started as Docker containers defined in docker compose file.
 
 > Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and then **proceed with steps below**.
 
@@ -141,10 +141,42 @@ USAGE DOCKER COMPOSE
 ##### Required steps:
 1. Start **Docker** tool
 1. In any command line tool **start Docker containers** with `docker-compose -f .\docker-compose\docker-compose.yaml up -d --build`
-1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8081/public`
-   * Expected following **JSON**: {"text": "Hello World, Public!", "portFirst": "8081", "portSecond": "8082"}
-1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8081/secured`
-   * Expected following **JSON**: {"text": "Hello World, Secured!", "portFirst": "8081", "portSecond": "8082"}
+1. In any Browser (e.g. Chrome) visit `http://localhost:8081/status/200`
+   * Expected text: Second service returns status 200
+   * Expected logs: N/A
+1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+   * Expected JSON with value: "state": "CLOSED"
+1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8081/status/400`
+   * Expected text: Temporary problem with the application. Our administrators will resolve it as soon as possible!
+   * Expected logs: First service handles status 400 using interceptor
+1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+   * Expected JSON with value: "state": "CLOSED"
+1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8081/status/500`
+   * Expected text: Temporary problem with the application. It seems that external service is unavailable
+   * Expected logs: First service handles an error using CircuitBreaker. Error details: 500 : "Second service returns status 500"
+1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+   * Expected JSON with value: "state": "OPEN"
+1. In any Browser (e.g. Chrome) visit `http://localhost:8081/status/500`
+   * Expected text: Temporary problem with the application. It seems that external service is unavailable
+   * Expected logs: First service handles an error using CircuitBreaker. Error details: CircuitBreaker 'fallback-second' is OPEN and does not permit further calls
+1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+   * Expected JSON with value: "state": "OPEN"
+1. Please wait at least 10 seconds
+1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+   * Expected JSON with value: "state": "HALF_OPEN"
+1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8081/status/500`
+   * Expected text: Temporary problem with the application. It seems that external service is unavailable
+   * Expected logs: First service handles an error using CircuitBreaker. Error details: 500 : "Second service returns status 500"
+1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+   * Expected JSON with value: "state": "OPEN"
+1. Please wait at least 10 seconds
+1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+   * Expected JSON with value: "state": "HALF_OPEN"
+1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8081/status/200`
+   * Expected text: Second service returns status 200
+   * Expected logs: N/A
+1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+   * (**THIS DOES NOT WORK - STATE IS HALF_OPEN FOREVER**) Expected JSON with value: "state": "CLOSED"
 1. Clean up environment 
      * In a command line tool **remove Docker containers** with `docker-compose -f .\docker-compose\docker-compose.yaml down --rmi all`
      * Stop **Docker** tool

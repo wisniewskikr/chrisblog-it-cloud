@@ -165,4 +165,4 @@ Implementation details:
 * In First service update file **pom.xml** with dependencies **spring-cloud-starter-circuitbreaker-resilience4j** and **spring-boot-starter-aop**
 * In First service update file **application.properties** with properties **resilience4j.circuitbreaker.instances.status500fallback**
 * In First Service update class **SecondClient** with annotations **@CircuitBreaker** and **@Retry**
-* In First Service update class **SecondClient** with method **status500Fallback()**
+* In First Service update class **SecondClient** with method **fallbackSecond()**

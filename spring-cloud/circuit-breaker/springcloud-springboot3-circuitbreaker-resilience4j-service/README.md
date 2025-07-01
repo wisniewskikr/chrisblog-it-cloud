@@ -84,9 +84,41 @@ USAGE MANUAL
 1. In a second command line tool **start Second application** with `mvn -f ./springcloud-springboot3-circuitbreaker-resilience4j-service_SECOND spring-boot:run`
 1. In a third command line tool **start First application** with `mvn -f ./springcloud-springboot3-circuitbreaker-resilience4j-service_FIRST spring-boot:run`
 1. In any Browser (e.g. Chrome) visit `http://localhost:8081/status/200`
-   * Expected following **JSON**: {"text": "Hello World, Public!", "portFirst": "8081", "portSecond": "8082"}
-1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8081/secured`
-   * Expected following **JSON**: {"text": "Hello World, Secured!", "portFirst": "8081", "portSecond": "8082"}
+   * Expected text: Second service returns status 200
+   * Expected logs: N/A
+1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+   * Expected JSON with value: "state": "CLOSED"
+1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8081/status/400`
+   * Expected text: Temporary problem with the application. Our administrators will resolve it as soon as possible!
+   * Expected logs: First service handles status 400 using interceptor
+1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+   * Expected JSON with value: "state": "CLOSED"
+1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8081/status/500`
+   * Expected text: Temporary problem with the application. It seems that external service is unavailable
+   * Expected logs: First service handles an error using CircuitBreaker. Error details: 500 : "Second service returns status 500"
+1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+   * Expected JSON with value: "state": "OPEN"
+1. In any Browser (e.g. Chrome) visit `http://localhost:8081/status/500`
+   * Expected text: Temporary problem with the application. It seems that external service is unavailable
+   * Expected logs: First service handles an error using CircuitBreaker. Error details: CircuitBreaker 'fallback-second' is OPEN and does not permit further calls
+1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+   * Expected JSON with value: "state": "OPEN"
+1. Please wait at least 10 seconds
+1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+   * Expected JSON with value: "state": "HALF_OPEN"
+1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8081/status/500`
+   * Expected text: Temporary problem with the application. It seems that external service is unavailable
+   * Expected logs: First service handles an error using CircuitBreaker. Error details: 500 : "Second service returns status 500"
+1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+   * Expected JSON with value: "state": "OPEN"
+1. Please wait at least 10 seconds
+1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+   * Expected JSON with value: "state": "HALF_OPEN"
+1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8081/status/200`
+   * Expected text: Second service returns status 200
+   * Expected logs: N/A
+1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+   * (**THIS DOES NOT WORK - STATE IS HALF_OPEN FOREVER**) Expected JSON with value: "state": "CLOSED"
 1. Clean up environment
    * In the third command line tool **stop First application** with `ctrl + C`
    * In the second command line tool **stop Second application** with `ctrl + C`

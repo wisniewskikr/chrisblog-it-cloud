@@ -120,10 +120,13 @@ USAGE MANUAL
    * Expected text: Second service returns status 200
    * Expected logs: N/A
 1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
-   * (**THIS DOES NOT WORK - STATE IS HALF_OPEN FOREVER**) Expected JSON with value: "state": "CLOSED"
+   * Expected JSON with value: "state": "CLOSED"
 1. Clean up environment
    * In the third command line tool **stop First application** with `ctrl + C`
    * In the second command line tool **stop Second application** with `ctrl + C`
+
+##### Optional steps:
+1. In a command line tool check Circuit Breaker events with `http://localhost:8081/actuator/circuitbreakerevents`
 
 
 USAGE DOCKER COMPOSE
@@ -176,12 +179,13 @@ USAGE DOCKER COMPOSE
    * Expected text: Second service returns status 200
    * Expected logs: N/A
 1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
-   * (**THIS DOES NOT WORK - STATE IS HALF_OPEN FOREVER**) Expected JSON with value: "state": "CLOSED"
+   * Expected JSON with value: "state": "CLOSED"
 1. Clean up environment 
      * In a command line tool **remove Docker containers** with `docker-compose -f .\docker-compose\docker-compose.yaml down --rmi all`
      * Stop **Docker** tool
 
 ##### Optional steps:
+1. In a command line tool check Circuit Breaker events with `http://localhost:8081/actuator/circuitbreakerevents`
 1. In a command line tool validate Docker Compose with `docker-compose config`
 1. In a command line tool check list of Docker images with `docker images`
 1. In a command line tool check list of all Docker containers with `docker ps -a`
@@ -246,7 +250,7 @@ USAGE KUBERNETES (KIND)
    * Expected text: Second service returns status 200
    * Expected logs: N/A
 1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
-   * (**THIS DOES NOT WORK - STATE IS HALF_OPEN FOREVER**) Expected JSON with value: "state": "CLOSED"
+   * Expected JSON with value: "state": "CLOSED"
 1. Clean up environment
      * In the third command line tool **stop forwarding port of First service** with `ctrl + C`
      * In the second command line tool **stop forwarding port of Second service** with `ctrl + C`
@@ -255,6 +259,7 @@ USAGE KUBERNETES (KIND)
      * Stop **Docker** tool
 
 ##### Optional steps:
+1. In a command line tool check Circuit Breaker events with `http://localhost:8081/actuator/circuitbreakerevents`
 1. In a command line tool build Docker SECOND image with `docker build -f springcloud-springboot3-circuitbreaker-resilience4j-service_SECOND/Dockerfile -t wisniewskikr/springcloud-springboot3-circuitbreaker-resilience4j-service_second:0.0.1 ./springcloud-springboot3-circuitbreaker-resilience4j-service_SECOND`
 1. In a command line tool push Docker SECOND image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-circuitbreaker-resilience4j-service_second:0.0.1` 
 1. In a command line tool build Docker FIRST image with `docker build -f springcloud-springboot3-circuitbreaker-resilience4j-service_FIRST/Dockerfile -t wisniewskikr/springcloud-springboot3-circuitbreaker-resilience4j-service_first:0.0.1 ./springcloud-springboot3-circuitbreaker-resilience4j-service_FIRST`

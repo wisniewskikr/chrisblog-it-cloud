@@ -10,6 +10,8 @@ import org.springframework.web.service.annotation.HttpExchange;
 public interface SecondClient {
 
     @GetExchange("/status/200")
+    // This code is required for counting valid requests by Circuit Breaker
+    @CircuitBreaker(name = "fallback-second", fallbackMethod = "fallbackSecond")
     public ResponseEntity<String> status200();
 
     @GetExchange("/status/400")

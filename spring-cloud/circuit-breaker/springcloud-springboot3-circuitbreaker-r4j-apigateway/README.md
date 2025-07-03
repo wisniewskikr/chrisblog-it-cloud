@@ -86,7 +86,7 @@ USAGE MANUAL
 
 ##### Required steps:
 1. In a second command line tool **start Second application** with `mvn -f ./springcloud-springboot3-circuitbreaker-r4j-apigateway_SERVICE spring-boot:run`
-1. In a third command line tool **start First application** with `mvn -f ./springcloud-springboot3-circuitbreaker-resilience4j-service_FIRST spring-boot:run`
+1. In a third command line tool **start First application** with `mvn -f ./springcloud-springboot3-circuitbreaker-r4j-apigateway_GATEWAY spring-boot:run`
 1. In any Browser (e.g. Chrome) visit `http://localhost:8081/status/200`
    * Expected text: Second service returns status 200
    * Expected logs: N/A
@@ -264,8 +264,8 @@ USAGE KUBERNETES (KIND)
 1. In a command line tool check Circuit Breaker events with `http://localhost:8081/actuator/circuitbreakerevents`
 1. In a command line tool build Docker SECOND image with `docker build -f springcloud-springboot3-circuitbreaker-r4j-apigateway_SERVICE/Dockerfile -t wisniewskikr/springcloud-springboot3-circuitbreaker-r4j-apigateway_service:0.0.1 ./springcloud-springboot3-circuitbreaker-r4j-apigateway_SERVICE`
 1. In a command line tool push Docker SECOND image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-circuitbreaker-r4j-apigateway_service:0.0.1` 
-1. In a command line tool build Docker FIRST image with `docker build -f springcloud-springboot3-circuitbreaker-resilience4j-service_FIRST/Dockerfile -t wisniewskikr/springcloud-springboot3-circuitbreaker-resilience4j-service_first:0.0.1 ./springcloud-springboot3-circuitbreaker-resilience4j-service_FIRST`
-1. In a command line tool push Docker FIRST image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-circuitbreaker-resilience4j-service_first:0.0.1`  
+1. In a command line tool build Docker FIRST image with `docker build -f springcloud-springboot3-circuitbreaker-r4j-apigateway_GATEWAY/Dockerfile -t wisniewskikr/springcloud-springboot3-circuitbreaker-r4j-apigateway_gateway:0.0.1 ./springcloud-springboot3-circuitbreaker-r4j-apigateway_GATEWAY`
+1. In a command line tool push Docker FIRST image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-circuitbreaker-r4j-apigateway_gateway:0.0.1`  
 1. In the first command line tool with administrator privileges check clusers with `kind get clusters`
 1. In a command line tool check Kubernetes Deployments with `kubectl get deployments`
 1. In a command line tool check Kubernetes Deployments details with **kubectl describe deployment {deployment-name}**

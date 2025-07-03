@@ -20,7 +20,7 @@ services:
     image: first-image:0.0.1
     container_name: first-container
     build:
-      context: ../springcloud-springboot3-circuitbreaker-resilience4j-service_FIRST
+      context: ../springcloud-springboot3-circuitbreaker-r4j-apigateway_GATEWAY
       dockerfile: Dockerfile
     environment:
       api.url: http://second:8082

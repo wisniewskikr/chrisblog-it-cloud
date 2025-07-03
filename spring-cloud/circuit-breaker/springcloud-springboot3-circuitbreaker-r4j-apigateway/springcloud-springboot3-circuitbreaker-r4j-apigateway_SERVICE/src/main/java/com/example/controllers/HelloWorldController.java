@@ -12,17 +12,17 @@ public class HelloWorldController {
 
 	@GetMapping("/status/200")
 	public ResponseEntity<String> status200() {
-		return ResponseEntity.ok("Second service returns status 200");
+		return ResponseEntity.ok("Service returns status 200");
 	}
 
 	@GetMapping("/status/400")
 	public ResponseEntity<String> status400() {
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Second service returns status 400");
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Service returns status 400");
 	}
 
 	@GetMapping("/status/500")
 	public ResponseEntity<String> status500() {
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Second service returns status 500");
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Service returns status 500");
 	}
 
 	@GetMapping("/status/timeout")
@@ -34,7 +34,7 @@ public class HelloWorldController {
             throw new RuntimeException(e);
         }
 
-        return ResponseEntity.ok("Second service returns status Timeout");
+        return ResponseEntity.ok("Service returns status Timeout");
 	}
 	
 }

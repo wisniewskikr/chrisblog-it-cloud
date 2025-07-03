@@ -5,7 +5,7 @@ services:
     image: second-image:0.0.1
     container_name: second-container
     build:
-      context: ../springcloud-springboot3-circuitbreaker-resilience4j-service_SECOND
+      context: ../springcloud-springboot3-circuitbreaker-r4j-apigateway_SERVICE
       dockerfile: Dockerfile
     ports:
       - 8082:8082

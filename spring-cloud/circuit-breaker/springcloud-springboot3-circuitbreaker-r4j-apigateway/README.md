@@ -85,7 +85,7 @@ USAGE MANUAL
 * **Maven** (tested on version 3.9.6)
 
 ##### Required steps:
-1. In a second command line tool **start Second application** with `mvn -f ./springcloud-springboot3-circuitbreaker-resilience4j-service_SECOND spring-boot:run`
+1. In a second command line tool **start Second application** with `mvn -f ./springcloud-springboot3-circuitbreaker-r4j-apigateway_SERVICE spring-boot:run`
 1. In a third command line tool **start First application** with `mvn -f ./springcloud-springboot3-circuitbreaker-resilience4j-service_FIRST spring-boot:run`
 1. In any Browser (e.g. Chrome) visit `http://localhost:8081/status/200`
    * Expected text: Second service returns status 200
@@ -262,7 +262,7 @@ USAGE KUBERNETES (KIND)
 
 ##### Optional steps:
 1. In a command line tool check Circuit Breaker events with `http://localhost:8081/actuator/circuitbreakerevents`
-1. In a command line tool build Docker SECOND image with `docker build -f springcloud-springboot3-circuitbreaker-resilience4j-service_SECOND/Dockerfile -t wisniewskikr/springcloud-springboot3-circuitbreaker-resilience4j-service_second:0.0.1 ./springcloud-springboot3-circuitbreaker-resilience4j-service_SECOND`
+1. In a command line tool build Docker SECOND image with `docker build -f springcloud-springboot3-circuitbreaker-r4j-apigateway_SERVICE/Dockerfile -t wisniewskikr/springcloud-springboot3-circuitbreaker-resilience4j-service_second:0.0.1 ./springcloud-springboot3-circuitbreaker-r4j-apigateway_SERVICE`
 1. In a command line tool push Docker SECOND image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-circuitbreaker-resilience4j-service_second:0.0.1` 
 1. In a command line tool build Docker FIRST image with `docker build -f springcloud-springboot3-circuitbreaker-resilience4j-service_FIRST/Dockerfile -t wisniewskikr/springcloud-springboot3-circuitbreaker-resilience4j-service_first:0.0.1 ./springcloud-springboot3-circuitbreaker-resilience4j-service_FIRST`
 1. In a command line tool push Docker FIRST image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-circuitbreaker-resilience4j-service_first:0.0.1`  

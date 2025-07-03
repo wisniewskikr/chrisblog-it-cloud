@@ -18,7 +18,7 @@ public class RoutesConfig {
     @Bean
     public RouterFunction<ServerResponse> feServiceRoute() {
         return GatewayRouterFunctions.route("service")
-                .route(RequestPredicates.path("/"), HandlerFunctions.http(serviceUrl))                
+                .route(RequestPredicates.path("/status/*"), HandlerFunctions.http(serviceUrl))
                 .build();
     }
     

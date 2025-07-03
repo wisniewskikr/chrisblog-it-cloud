@@ -1,0 +1,34 @@
+version: "4"
+services:
+
+  second:
+    image: second-image:0.0.1
+    container_name: second-container
+    build:
+      context: ../springcloud-springboot3-circuitbreaker-resilience4j-service_SECOND
+      dockerfile: Dockerfile
+    ports:
+      - 8082:8082
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8082/actuator/health"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+
+  first:
+    image: first-image:0.0.1
+    container_name: first-container
+    build:
+      context: ../springcloud-springboot3-circuitbreaker-resilience4j-service_FIRST
+      dockerfile: Dockerfile
+    environment:
+      api.url: http://second:8082
+    ports:
+      - 8081:8081
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8081/actuator/health"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 10s

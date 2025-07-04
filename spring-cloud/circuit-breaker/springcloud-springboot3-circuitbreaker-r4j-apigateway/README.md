@@ -91,48 +91,42 @@ USAGE MANUAL
 ##### Required steps:
 1. In a second command line tool **start Second application** with `mvn -f ./springcloud-springboot3-circuitbreaker-r4j-apigateway_SERVICE spring-boot:run`
 1. In a third command line tool **start First application** with `mvn -f ./springcloud-springboot3-circuitbreaker-r4j-apigateway_GATEWAY spring-boot:run`
-1. In any Browser (e.g. Chrome) visit `http://localhost:8081/status/200`
-   * Expected text: Second service returns status 200
-   * Expected logs: N/A
-1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+1. In any Browser (e.g. Chrome) visit `http://localhost:8762/status/200`
+   * Expected text: Service returns status 200
+1. In any Browser (e.g. Chrome) visit `http://localhost:8762/actuator/circuitbreakers`
    * Expected JSON with value: "state": "CLOSED"
-1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8081/status/400`
-   * Expected text: Temporary problem with the application. Our administrators will resolve it as soon as possible!
-   * Expected logs: First service handles status 400 using interceptor
-1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8762/status/400`
+   * Expected text: Service returns status 400
+1. In any Browser (e.g. Chrome) visit `http://localhost:8762/actuator/circuitbreakers`
    * Expected JSON with value: "state": "CLOSED"
-1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8081/status/500`
+1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8762/status/500`
    * Expected text: Temporary problem with the application. It seems that external service is unavailable
-   * Expected logs: First service handles an error using CircuitBreaker. Error details: 500 : "Second service returns status 500"
-1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+1. In any Browser (e.g. Chrome) visit `http://localhost:8762/actuator/circuitbreakers`
    * Expected JSON with value: "state": "OPEN"
-1. In any Browser (e.g. Chrome) visit `http://localhost:8081/status/500`
+1. In any Browser (e.g. Chrome) visit `http://localhost:8762/status/500`
    * Expected text: Temporary problem with the application. It seems that external service is unavailable
-   * Expected logs: First service handles an error using CircuitBreaker. Error details: CircuitBreaker 'fallback-second' is OPEN and does not permit further calls
-1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+1. In any Browser (e.g. Chrome) visit `http://localhost:8762/actuator/circuitbreakers`
    * Expected JSON with value: "state": "OPEN"
 1. Please wait at least 10 seconds
-1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+1. In any Browser (e.g. Chrome) visit `http://localhost:8762/actuator/circuitbreakers`
    * Expected JSON with value: "state": "HALF_OPEN"
-1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8081/status/500`
+1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8762/status/500`
    * Expected text: Temporary problem with the application. It seems that external service is unavailable
-   * Expected logs: First service handles an error using CircuitBreaker. Error details: 500 : "Second service returns status 500"
-1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+1. In any Browser (e.g. Chrome) visit `http://localhost:8762/actuator/circuitbreakers`
    * Expected JSON with value: "state": "OPEN"
 1. Please wait at least 10 seconds
-1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+1. In any Browser (e.g. Chrome) visit `http://localhost:8762/actuator/circuitbreakers`
    * Expected JSON with value: "state": "HALF_OPEN"
-1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8081/status/200`
+1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8762/status/200`
    * Expected text: Second service returns status 200
-   * Expected logs: N/A
-1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+1. In any Browser (e.g. Chrome) visit `http://localhost:8762/actuator/circuitbreakers`
    * Expected JSON with value: "state": "CLOSED"
 1. Clean up environment
    * In the third command line tool **stop First application** with `ctrl + C`
    * In the second command line tool **stop Second application** with `ctrl + C`
 
 ##### Optional steps:
-1. In a command line tool check Circuit Breaker events with `http://localhost:8081/actuator/circuitbreakerevents`
+1. In a command line tool check Circuit Breaker events with `http://localhost:8762/actuator/circuitbreakerevents`
 
 
 USAGE DOCKER COMPOSE
@@ -150,48 +144,48 @@ USAGE DOCKER COMPOSE
 ##### Required steps:
 1. Start **Docker** tool
 1. In any command line tool **start Docker containers** with `docker-compose -f .\docker-compose\docker-compose.yaml up -d --build`
-1. In any Browser (e.g. Chrome) visit `http://localhost:8081/status/200`
+1. In any Browser (e.g. Chrome) visit `http://localhost:8762/status/200`
    * Expected text: Second service returns status 200
    * Expected logs: N/A
-1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+1. In any Browser (e.g. Chrome) visit `http://localhost:8762/actuator/circuitbreakers`
    * Expected JSON with value: "state": "CLOSED"
-1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8081/status/400`
+1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8762/status/400`
    * Expected text: Temporary problem with the application. Our administrators will resolve it as soon as possible!
    * Expected logs: First service handles status 400 using interceptor
-1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+1. In any Browser (e.g. Chrome) visit `http://localhost:8762/actuator/circuitbreakers`
    * Expected JSON with value: "state": "CLOSED"
-1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8081/status/500`
+1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8762/status/500`
    * Expected text: Temporary problem with the application. It seems that external service is unavailable
    * Expected logs: First service handles an error using CircuitBreaker. Error details: 500 : "Second service returns status 500"
-1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+1. In any Browser (e.g. Chrome) visit `http://localhost:8762/actuator/circuitbreakers`
    * Expected JSON with value: "state": "OPEN"
-1. In any Browser (e.g. Chrome) visit `http://localhost:8081/status/500`
+1. In any Browser (e.g. Chrome) visit `http://localhost:8762/status/500`
    * Expected text: Temporary problem with the application. It seems that external service is unavailable
    * Expected logs: First service handles an error using CircuitBreaker. Error details: CircuitBreaker 'fallback-second' is OPEN and does not permit further calls
-1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+1. In any Browser (e.g. Chrome) visit `http://localhost:8762/actuator/circuitbreakers`
    * Expected JSON with value: "state": "OPEN"
 1. Please wait at least 10 seconds
-1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+1. In any Browser (e.g. Chrome) visit `http://localhost:8762/actuator/circuitbreakers`
    * Expected JSON with value: "state": "HALF_OPEN"
-1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8081/status/500`
+1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8762/status/500`
    * Expected text: Temporary problem with the application. It seems that external service is unavailable
    * Expected logs: First service handles an error using CircuitBreaker. Error details: 500 : "Second service returns status 500"
-1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+1. In any Browser (e.g. Chrome) visit `http://localhost:8762/actuator/circuitbreakers`
    * Expected JSON with value: "state": "OPEN"
 1. Please wait at least 10 seconds
-1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+1. In any Browser (e.g. Chrome) visit `http://localhost:8762/actuator/circuitbreakers`
    * Expected JSON with value: "state": "HALF_OPEN"
-1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8081/status/200`
+1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8762/status/200`
    * Expected text: Second service returns status 200
    * Expected logs: N/A
-1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+1. In any Browser (e.g. Chrome) visit `http://localhost:8762/actuator/circuitbreakers`
    * Expected JSON with value: "state": "CLOSED"
 1. Clean up environment 
      * In a command line tool **remove Docker containers** with `docker-compose -f .\docker-compose\docker-compose.yaml down --rmi all`
      * Stop **Docker** tool
 
 ##### Optional steps:
-1. In a command line tool check Circuit Breaker events with `http://localhost:8081/actuator/circuitbreakerevents`
+1. In a command line tool check Circuit Breaker events with `http://localhost:8762/actuator/circuitbreakerevents`
 1. In a command line tool validate Docker Compose with `docker-compose config`
 1. In a command line tool check list of Docker images with `docker images`
 1. In a command line tool check list of all Docker containers with `docker ps -a`
@@ -221,41 +215,41 @@ USAGE KUBERNETES (KIND)
    * Expected mysql, second and first as **READY 1/1** (it can take few minutes)
 1. In the second command line tool **forward port of Second service** with `kubectl port-forward service/second 8082:8082`
 1. In the third command line tool **forward port of First service** with `kubectl port-forward service/first 8081:8081`
-1. In any Browser (e.g. Chrome) visit `http://localhost:8081/status/200`
+1. In any Browser (e.g. Chrome) visit `http://localhost:8762/status/200`
    * Expected text: Second service returns status 200
    * Expected logs: N/A
-1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+1. In any Browser (e.g. Chrome) visit `http://localhost:8762/actuator/circuitbreakers`
    * Expected JSON with value: "state": "CLOSED"
-1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8081/status/400`
+1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8762/status/400`
    * Expected text: Temporary problem with the application. Our administrators will resolve it as soon as possible!
    * Expected logs: First service handles status 400 using interceptor
-1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+1. In any Browser (e.g. Chrome) visit `http://localhost:8762/actuator/circuitbreakers`
    * Expected JSON with value: "state": "CLOSED"
-1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8081/status/500`
+1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8762/status/500`
    * Expected text: Temporary problem with the application. It seems that external service is unavailable
    * Expected logs: First service handles an error using CircuitBreaker. Error details: 500 : "Second service returns status 500"
-1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+1. In any Browser (e.g. Chrome) visit `http://localhost:8762/actuator/circuitbreakers`
    * Expected JSON with value: "state": "OPEN"
-1. In any Browser (e.g. Chrome) visit `http://localhost:8081/status/500`
+1. In any Browser (e.g. Chrome) visit `http://localhost:8762/status/500`
    * Expected text: Temporary problem with the application. It seems that external service is unavailable
    * Expected logs: First service handles an error using CircuitBreaker. Error details: CircuitBreaker 'fallback-second' is OPEN and does not permit further calls
-1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+1. In any Browser (e.g. Chrome) visit `http://localhost:8762/actuator/circuitbreakers`
    * Expected JSON with value: "state": "OPEN"
 1. Please wait at least 10 seconds
-1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+1. In any Browser (e.g. Chrome) visit `http://localhost:8762/actuator/circuitbreakers`
    * Expected JSON with value: "state": "HALF_OPEN"
-1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8081/status/500`
+1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8762/status/500`
    * Expected text: Temporary problem with the application. It seems that external service is unavailable
    * Expected logs: First service handles an error using CircuitBreaker. Error details: 500 : "Second service returns status 500"
-1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+1. In any Browser (e.g. Chrome) visit `http://localhost:8762/actuator/circuitbreakers`
    * Expected JSON with value: "state": "OPEN"
 1. Please wait at least 10 seconds
-1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+1. In any Browser (e.g. Chrome) visit `http://localhost:8762/actuator/circuitbreakers`
    * Expected JSON with value: "state": "HALF_OPEN"
-1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8081/status/200`
+1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8762/status/200`
    * Expected text: Second service returns status 200
    * Expected logs: N/A
-1. In any Browser (e.g. Chrome) visit `http://localhost:8081/actuator/circuitbreakers`
+1. In any Browser (e.g. Chrome) visit `http://localhost:8762/actuator/circuitbreakers`
    * Expected JSON with value: "state": "CLOSED"
 1. Clean up environment
      * In the third command line tool **stop forwarding port of First service** with `ctrl + C`
@@ -265,7 +259,7 @@ USAGE KUBERNETES (KIND)
      * Stop **Docker** tool
 
 ##### Optional steps:
-1. In a command line tool check Circuit Breaker events with `http://localhost:8081/actuator/circuitbreakerevents`
+1. In a command line tool check Circuit Breaker events with `http://localhost:8762/actuator/circuitbreakerevents`
 1. In a command line tool build Docker SECOND image with `docker build -f springcloud-springboot3-circuitbreaker-r4j-apigateway_SERVICE/Dockerfile -t wisniewskikr/springcloud-springboot3-circuitbreaker-r4j-apigateway_service:0.0.1 ./springcloud-springboot3-circuitbreaker-r4j-apigateway_SERVICE`
 1. In a command line tool push Docker SECOND image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-circuitbreaker-r4j-apigateway_service:0.0.1` 
 1. In a command line tool build Docker FIRST image with `docker build -f springcloud-springboot3-circuitbreaker-r4j-apigateway_GATEWAY/Dockerfile -t wisniewskikr/springcloud-springboot3-circuitbreaker-r4j-apigateway_gateway:0.0.1 ./springcloud-springboot3-circuitbreaker-r4j-apigateway_GATEWAY`

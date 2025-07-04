@@ -210,23 +210,19 @@ USAGE KUBERNETES (KIND)
 1. In the second command line tool **forward port of Second service** with `kubectl port-forward service/second 8082:8082`
 1. In the third command line tool **forward port of First service** with `kubectl port-forward service/first 8081:8081`
 1. In any Browser (e.g. Chrome) visit `http://localhost:8762/status/200`
-   * Expected text: Second service returns status 200
-   * Expected logs: N/A
+   * Expected text: Service returns status 200
 1. In any Browser (e.g. Chrome) visit `http://localhost:8762/actuator/circuitbreakers`
    * Expected JSON with value: "state": "CLOSED"
 1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8762/status/400`
-   * Expected text: Temporary problem with the application. Our administrators will resolve it as soon as possible!
-   * Expected logs: First service handles status 400 using interceptor
+   * Expected text: Service returns status 400
 1. In any Browser (e.g. Chrome) visit `http://localhost:8762/actuator/circuitbreakers`
    * Expected JSON with value: "state": "CLOSED"
 1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8762/status/500`
    * Expected text: Temporary problem with the application. It seems that external service is unavailable
-   * Expected logs: First service handles an error using CircuitBreaker. Error details: 500 : "Second service returns status 500"
 1. In any Browser (e.g. Chrome) visit `http://localhost:8762/actuator/circuitbreakers`
    * Expected JSON with value: "state": "OPEN"
 1. In any Browser (e.g. Chrome) visit `http://localhost:8762/status/500`
    * Expected text: Temporary problem with the application. It seems that external service is unavailable
-   * Expected logs: First service handles an error using CircuitBreaker. Error details: CircuitBreaker 'fallback-second' is OPEN and does not permit further calls
 1. In any Browser (e.g. Chrome) visit `http://localhost:8762/actuator/circuitbreakers`
    * Expected JSON with value: "state": "OPEN"
 1. Please wait at least 10 seconds
@@ -234,7 +230,6 @@ USAGE KUBERNETES (KIND)
    * Expected JSON with value: "state": "HALF_OPEN"
 1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8762/status/500`
    * Expected text: Temporary problem with the application. It seems that external service is unavailable
-   * Expected logs: First service handles an error using CircuitBreaker. Error details: 500 : "Second service returns status 500"
 1. In any Browser (e.g. Chrome) visit `http://localhost:8762/actuator/circuitbreakers`
    * Expected JSON with value: "state": "OPEN"
 1. Please wait at least 10 seconds
@@ -242,7 +237,6 @@ USAGE KUBERNETES (KIND)
    * Expected JSON with value: "state": "HALF_OPEN"
 1. In any Browser (e.g. Chrome) visit 3 times `http://localhost:8762/status/200`
    * Expected text: Second service returns status 200
-   * Expected logs: N/A
 1. In any Browser (e.g. Chrome) visit `http://localhost:8762/actuator/circuitbreakers`
    * Expected JSON with value: "state": "CLOSED"
 1. Clean up environment
@@ -256,8 +250,8 @@ USAGE KUBERNETES (KIND)
 1. In a command line tool check Circuit Breaker events with `http://localhost:8762/actuator/circuitbreakerevents`
 1. In a command line tool build Docker SECOND image with `docker build -f springcloud-springboot3-circuitbreaker-r4j-apigateway_SERVICE/Dockerfile -t wisniewskikr/springcloud-springboot3-circuitbreaker-r4j-apigateway_service:0.0.1 ./springcloud-springboot3-circuitbreaker-r4j-apigateway_SERVICE`
 1. In a command line tool push Docker SECOND image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-circuitbreaker-r4j-apigateway_service:0.0.1` 
-1. In a command line tool build Docker FIRST image with `docker build -f springcloud-springboot3-circuitbreaker-r4j-apigateway_GATEWAY/Dockerfile -t wisniewskikr/springcloud-springboot3-circuitbreaker-r4j-apigateway_gateway:0.0.1 ./springcloud-springboot3-circuitbreaker-r4j-apigateway_GATEWAY`
-1. In a command line tool push Docker FIRST image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-circuitbreaker-r4j-apigateway_gateway:0.0.1`  
+1. In a command line tool build Docker FIRST image with `docker build -f springcloud-springboot3-circuitbreaker-r4j-apigateway_APIGATEWAY/Dockerfile -t wisniewskikr/springcloud-springboot3-circuitbreaker-r4j-apigateway_apigateway:0.0.1 ./springcloud-springboot3-circuitbreaker-r4j-apigateway_APIGATEWAY`
+1. In a command line tool push Docker FIRST image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-circuitbreaker-r4j-apigateway_apigateway:0.0.1`  
 1. In the first command line tool with administrator privileges check clusers with `kind get clusters`
 1. In a command line tool check Kubernetes Deployments with `kubectl get deployments`
 1. In a command line tool check Kubernetes Deployments details with **kubectl describe deployment {deployment-name}**

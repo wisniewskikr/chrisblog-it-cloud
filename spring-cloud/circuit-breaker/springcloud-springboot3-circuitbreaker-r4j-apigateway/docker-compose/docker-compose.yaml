@@ -1,9 +1,26 @@
 version: "4"
 services:
 
-  second:
-    image: second-image:0.0.1
-    container_name: second-container
+  apigateway:
+    image: apigateway-image
+    container_name: apigateway-container
+    build:
+      context: ../springcloud-springboot3-circuitbreaker-r4j-apigateway_APIGATEWAY
+      dockerfile: Dockerfile
+    environment:
+      service.url: http://service:8082
+    ports:
+      - 8762:8762
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8762/actuator/health" ]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+
+  service:
+    image: service-image:0.0.1
+    container_name: service-container
     build:
       context: ../springcloud-springboot3-circuitbreaker-r4j-apigateway_SERVICE
       dockerfile: Dockerfile
@@ -11,23 +28,6 @@ services:
       - 8082:8082
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8082/actuator/health"]
-      interval: 10s
-      timeout: 10s
-      retries: 5
-      start_period: 10s
-
-  first:
-    image: first-image:0.0.1
-    container_name: first-container
-    build:
-      context: ../springcloud-springboot3-circuitbreaker-r4j-apigateway_GATEWAY
-      dockerfile: Dockerfile
-    environment:
-      api.url: http://second:8082
-    ports:
-      - 8081:8081
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8081/actuator/health"]
       interval: 10s
       timeout: 10s
       retries: 5

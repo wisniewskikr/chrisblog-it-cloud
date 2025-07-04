@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: second
+  name: service
   labels:
-    app: second
+    app: service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: second
+      app: service
   template:
     metadata:
       labels:
-        app: second
+        app: service
     spec:
       containers:
-      - name: second
+      - name: service
         image: wisniewskikr/springcloud-springboot3-circuitbreaker-r4j-apigateway_service:0.0.1
         ports:
         - containerPort: 8082
@@ -42,10 +42,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: second
+  name: service
 spec:
   selector:
-    app: second
+    app: service
   ports:
     - port: 8082
       targetPort: 8082

@@ -24,7 +24,17 @@ public class RoutesConfig {
     @Bean
     public RouterFunction<ServerResponse> serviceRoute() {
         return GatewayRouterFunctions.route("service")
-                .route(RequestPredicates.path("/status/*"), HandlerFunctions.http(serviceUrl))
+                .route(RequestPredicates.path("/status/*"), request -> {
+                    // Call the downstream service
+                    ServerResponse response = HandlerFunctions.http(serviceUrl).handle(request);
+
+                    // Check the status and throw exception on error
+                    if (response.statusCode().isError()) {
+                        throw new RuntimeException("Downstream service returned error status: " + response.statusCode());
+                    }
+
+                    return response;
+                })
                 .filter(CircuitBreakerFilterFunctions.circuitBreaker("fallback-service",
                         URI.create("forward:/fallbackRoute")))
                 .build();

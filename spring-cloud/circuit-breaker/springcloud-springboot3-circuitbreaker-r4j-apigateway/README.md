@@ -23,8 +23,9 @@ DESCRIPTION
 
 ##### Goal
 The goal of this project is to present how to use **Circuit Breaker** type **Resilience4J** in
-a **microservice** with usage **Java** programming language and **Spring Cloud** and **Spring Boot 3** frameworks.
-Circuit Breaker helps of handling 5xx or timeout errors - if such errors occur then special code is run.
+a **Api Gateway** with usage **Java** programming language and **Spring Cloud** and **Spring Boot 3** frameworks.
+API Gateway redirects traffic to Service. Circuit Breaker helps of handling 5xx or timeout errors - 
+if such errors occur then special code is run.
 
 Circuit Breaker stages:
 * **CLOSED**: Circuit Breaker is turned off. It doesn't do anything. Original code handles requests
@@ -39,9 +40,9 @@ Circuit Breaker and statuses:
 
 ##### Services
 This project consists of following applications:
-* **Second Service**: an application created in **Java** programming language with usage **Spring Boot** framework.
-* **First Service**: an application created in **Java** programming language with usage **Spring Boot** framework. 
-It has connection with Second Service
+* **Api Gateway**: an application created in **Java** programming language with usage **Spring Boot** framework.
+It redirects traffic to Service.
+* **Service**: an application created in **Java** programming language with usage **Spring Boot** framework.
 
 ##### Terminology
 Terminology explanation:
@@ -61,6 +62,9 @@ This is especially useful in microservices and distributed systems.
 programming. It provides easy-to-use and customizable components like Circuit Breaker, Rate Limiter, Retry, Bulkhead, 
 and TimeLimiter to build resilient and stable applications. It's designed to work well with frameworks like 
 Spring Boot and can be integrated without heavy dependencies.
+* **API Gateway**: An API Gateway is a server that acts as an entry point for client requests to a set of backend 
+services. It handles tasks like request routing, authentication, rate limiting, load balancing, and protocol translation. 
+API Gateways simplify client interactions and centralize common concerns across microservices.
 
 USAGES
 ------

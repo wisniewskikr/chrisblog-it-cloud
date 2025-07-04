@@ -29,7 +29,7 @@ public class RoutesConfig {
                     ServerResponse response = HandlerFunctions.http(serviceUrl).handle(request);
 
                     // Check the status and throw exception on error
-                    if (response.statusCode().isError()) {
+                    if (response.statusCode().is5xxServerError()) {
                         throw new RuntimeException("Downstream service returned error status: " + response.statusCode());
                     }
 

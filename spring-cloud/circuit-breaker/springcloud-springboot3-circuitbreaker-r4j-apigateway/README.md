@@ -206,9 +206,9 @@ USAGE KUBERNETES (KIND)
 1. In the first command line tool create and start cluster **Kind** with `kind create cluster --name helloworld`
 1. In the first command line tool **start Kubernetes Pods** with `kubectl apply -f ./k8s --recursive`
 1. In the first command line tool **check status of Kubernetes Pods** with `kubectl get pods`
-   * Expected mysql, second and first as **READY 1/1** (it can take few minutes)
-1. In the second command line tool **forward port of Second service** with `kubectl port-forward service/second 8082:8082`
-1. In the third command line tool **forward port of First service** with `kubectl port-forward service/first 8081:8081`
+   * Expected **READY 1/1** (it can take few minutes)
+1. In the second command line tool **forward port of Service service** with `kubectl port-forward service/service 8082:8082`
+1. In the third command line tool **forward port of ApiGateway service** with `kubectl port-forward service/apigateway 8762:8762`
 1. In any Browser (e.g. Chrome) visit `http://localhost:8762/status/200`
    * Expected text: Service returns status 200
 1. In any Browser (e.g. Chrome) visit `http://localhost:8762/actuator/circuitbreakers`
@@ -266,7 +266,7 @@ IMPLEMENTATION
 --------------
 
 Implementation details:
-* In First service update file **pom.xml** with dependencies **spring-cloud-starter-circuitbreaker-resilience4j** and **spring-boot-starter-aop**
-* In First service update file **application.properties** with properties **resilience4j.circuitbreaker.instances.status500fallback**
-* In First Service update class **SecondClient** with annotations **@CircuitBreaker** and **@Retry**
-* In First Service update class **SecondClient** with method **fallbackSecond()**
+* In ApiGateway service update file **pom.xml** with dependencies **spring-cloud-starter-circuitbreaker-resilience4j** and **spring-boot-starter-aop**
+* In ApiGateway service update file **application.properties** with properties **resilience4j.circuitbreaker.instances.fallback-service**
+* In ApiGateway Service update class **RoutesConfig** with method **fallbackRoute()**
+* In ApiGateway Service update class **RoutesConfig** with new predicate and filter in method **serviceRoute()**

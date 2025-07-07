@@ -15,7 +15,7 @@ spec:
         app: consumer
     spec:
       containers:
-        - image: wisniewskikr/springcloud-eventdriven-kafka-confluentinc_consumer:0.0.1
+        - image: wisniewskikr/springcloud-transactions-saga-choreography_consumer:0.0.1
           name: consumer
           ports:
             - containerPort: 9090

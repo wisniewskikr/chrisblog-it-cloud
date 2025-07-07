@@ -50,7 +50,7 @@ services:
     image: producer
     container_name: producer
     build:
-      context: ../springcloud-eventdriven-kafka-confluentinc_producer
+      context: ../springcloud-transactions-saga-choreography_producer
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
@@ -63,7 +63,7 @@ services:
     image: consumer
     container_name: consumer
     build:
-      context: ../springcloud-eventdriven-kafka-confluentinc_consumer
+      context: ../springcloud-transactions-saga-choreography_consumer
       dockerfile: Dockerfile
     ports:
       - "9090:9090"

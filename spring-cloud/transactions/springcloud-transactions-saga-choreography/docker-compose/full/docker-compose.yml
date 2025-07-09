@@ -50,8 +50,8 @@ services:
     image: first
     container_name: first
     build:
-      context: ../springcloud-transactions-saga-choreography_first
-      dockerfile: Dockerfile
+      context: ../../springcloud-transactions-saga-choreography_first
+      dockerfile: ../../springcloud-transactions-saga-choreography_first/Dockerfile
     ports:
       - "8080:8080"
     networks:
@@ -63,8 +63,8 @@ services:
     image: second
     container_name: second
     build:
-      context: ../springcloud-transactions-saga-choreography_second
-      dockerfile: Dockerfile
+      context: ../../springcloud-transactions-saga-choreography_second
+      dockerfile: ../../springcloud-transactions-saga-choreography_second/Dockerfile
     ports:
       - "9090:9090"
     networks:

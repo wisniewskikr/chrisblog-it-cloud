@@ -46,11 +46,11 @@ services:
     networks:
       - network
 
-  producer:
-    image: producer
-    container_name: producer
+  first:
+    image: first
+    container_name: first
     build:
-      context: ../springcloud-transactions-saga-choreography_producer
+      context: ../springcloud-transactions-saga-choreography_first
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
@@ -59,11 +59,11 @@ services:
     depends_on:
       - kafka
 
-  consumer:
-    image: consumer
-    container_name: consumer
+  second:
+    image: second
+    container_name: second
     build:
-      context: ../springcloud-transactions-saga-choreography_consumer
+      context: ../springcloud-transactions-saga-choreography_second
       dockerfile: Dockerfile
     ports:
       - "9090:9090"

@@ -9,7 +9,7 @@
 		<relativePath/>		
 	</parent>
 	<groupId>com.example.app</groupId>
-	<artifactId>springcloud-transactions-saga-choreography_consumer</artifactId>
+	<artifactId>springcloud-transactions-saga-choreography_second</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<properties>

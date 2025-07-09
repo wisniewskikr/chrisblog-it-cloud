@@ -8,8 +8,8 @@
     <artifactId>springcloud-transactions-saga-choreography</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <modules>
-    	<module>springcloud-transactions-saga-choreography_producer</module>
-        <module>springcloud-transactions-saga-choreography_consumer</module>
+    	<module>springcloud-transactions-saga-choreography_first</module>
+        <module>springcloud-transactions-saga-choreography_second</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -16,9 +16,8 @@ public class HelloWorldService {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    public String sendMessage(String message) {
+    public void sendMessage(String message) {
         kafkaTemplate.send(topicName, message);
-        return "The message was sent to Consumer via Kafka";
     }
 
 }

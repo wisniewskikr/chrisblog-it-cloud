@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SSE Hello World</title>
+</head>
+<body>
+<h1>Spring Boot 3 SSE</h1>
+<h2>Manual Events from FE</h2>
+<button onclick="sendRequest()">Send Hello</button>
+<div id="output"></div>
+
+<script>
+    const output = document.getElementById("output");
+
+    // Connect to SSE endpoint
+    const eventSource = new EventSource("/sse");
+
+    eventSource.onmessage = function (event) {
+        const msg = document.createElement("p");
+        msg.textContent = event.data;
+        output.appendChild(msg);
+    };
+
+    function sendRequest() {
+        fetch("/send", {
+            method: "POST"
+        });
+    }
+</script>
+</body>
+</html>

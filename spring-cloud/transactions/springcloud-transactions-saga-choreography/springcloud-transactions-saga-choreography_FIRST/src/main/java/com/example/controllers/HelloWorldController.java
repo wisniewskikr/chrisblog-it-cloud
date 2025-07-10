@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import com.example.dtos.HelloWorldFirstDto;
 import com.example.services.HelloWorldService;
 
 @RestController
@@ -15,28 +13,12 @@ public class HelloWorldController {
 
     private HelloWorldService helloWorldService;
 
-    @GetMapping("/")
-    public ResponseEntity<HelloWorldFirstDto> defaultHelloWorld() {
-        return publicHelloWorld();
-    }
+    @GetMapping
+    public ResponseEntity<String> helloWorld() {
 
-    @GetMapping("/public")
-    public ResponseEntity<HelloWorldFirstDto> publicHelloWorld() {
-
-        log.info("Called FIRST method HelloWorldController.publicHelloWorld()");
-
-        HelloWorldFirstDto helloWorldFirstDto = helloWorldService.getPublicMessage();
-        return ResponseEntity.ok(helloWorldFirstDto);
-
-    }
-
-    @GetMapping("/secured")
-    public ResponseEntity<HelloWorldFirstDto> securedHelloWorld() {
-
-        log.info("Called FIRST method HelloWorldController.securedHelloWorld()");
-
-        HelloWorldFirstDto helloWorldFirstDto = helloWorldService.getSecuredMessage();
-        return ResponseEntity.ok(helloWorldFirstDto);
+        String message = "Hello World!";
+        helloWorldService.sendMessage(message);
+        return ResponseEntity.ok(message);
 
     }
 

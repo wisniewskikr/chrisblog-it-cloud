@@ -9,7 +9,7 @@
 <button onclick="sendRequest()">Send Hello</button>
 <div>
     <span>Message: </span>
-    <span id="text">N/A</span>
+    <span id="message">N/A</span>
 </div>
 <div>
     <span>Status: </span>
@@ -18,11 +18,10 @@
 
 <script>
 
-    // Connect to SSE endpoint
-    const eventSource = new EventSource("/sse");
+    const eventSourceMessage = new EventSource("/sse-message");
 
-    eventSource.onmessage = function (event) {
-        document.getElementById("text").textContent = event.data;
+    eventSourceMessage.onmessage = function (event) {
+        document.getElementById("message").textContent = event.data;
     };
 
     function sendRequest() {

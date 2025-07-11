@@ -7,18 +7,22 @@
 <body>
 <h1>Spring Boot 3 SAGA</h1>
 <button onclick="sendRequest()">Send Hello</button>
-<div id="output"></div>
+<div>
+    <span>Message: </span>
+    <span id="text">N/A</span>
+</div>
+<div>
+    <span>Status: </span>
+    <span id="status">N/A</span>
+</div>
 
 <script>
-    const output = document.getElementById("output");
 
     // Connect to SSE endpoint
     const eventSource = new EventSource("/sse");
 
     eventSource.onmessage = function (event) {
-        const msg = document.createElement("p");
-        msg.textContent = event.data;
-        output.appendChild(msg);
+        document.getElementById("text").textContent = event.data;
     };
 
     function sendRequest() {
@@ -26,6 +30,7 @@
             method: "POST"
         });
     }
+
 </script>
 </body>
 </html>

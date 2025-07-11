@@ -54,10 +54,13 @@ public class HelloWorldController {
 
     @PostMapping("/send")
     public ResponseEntity<String> sendMessage() {
+
+        helloWorldService.sendMessage(message);
+
         List<SseEmitter> deadEmitters = new CopyOnWriteArrayList<>();
         for (SseEmitter emitter : emitters) {
             try {
-                emitter.send(SseEmitter.event().data("Hello World"));
+                emitter.send(SseEmitter.event().data(message));
             } catch (IOException e) {
                 deadEmitters.add(emitter);
             }

@@ -22,16 +22,27 @@ public class HelloWorldController {
 
     private final List<SseEmitter> emittersMessage = new CopyOnWriteArrayList<>();
 
+    private final List<SseEmitter> emittersStatus = new CopyOnWriteArrayList<>();
+
     public HelloWorldController(HelloWorldService helloWorldService) {
         this.helloWorldService = helloWorldService;
     }
 
     @GetMapping("/sse-message")
-    public SseEmitter streamSse() {
+    public SseEmitter streamSseMessage() {
         SseEmitter emitter = new SseEmitter(Long.MAX_VALUE);
         emittersMessage.add(emitter);
         emitter.onCompletion(() -> emittersMessage.remove(emitter));
         emitter.onTimeout(() -> emittersMessage.remove(emitter));
+        return emitter;
+    }
+
+    @GetMapping("/sse-status")
+    public SseEmitter streamSseStatus() {
+        SseEmitter emitter = new SseEmitter(Long.MAX_VALUE);
+        emittersStatus.add(emitter);
+        emitter.onCompletion(() -> emittersStatus.remove(emitter));
+        emitter.onTimeout(() -> emittersStatus.remove(emitter));
         return emitter;
     }
 
@@ -49,6 +60,16 @@ public class HelloWorldController {
             }
         }
         emittersMessage.removeAll(deadEmittersMessage);
+
+        List<SseEmitter> deadEmittersStatus = new CopyOnWriteArrayList<>();
+        for (SseEmitter emitter : emittersStatus) {
+            try {
+                emitter.send(SseEmitter.event().data("CREATED"));
+            } catch (IOException e) {
+                deadEmittersStatus.add(emitter);
+            }
+        }
+        emittersStatus.removeAll(deadEmittersMessage);
 
         return ResponseEntity.ok("Sent");
     }

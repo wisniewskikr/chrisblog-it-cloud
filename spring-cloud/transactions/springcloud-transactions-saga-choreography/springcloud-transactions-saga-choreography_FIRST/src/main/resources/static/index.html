@@ -19,9 +19,13 @@
 <script>
 
     const eventSourceMessage = new EventSource("/sse-message");
-
     eventSourceMessage.onmessage = function (event) {
         document.getElementById("message").textContent = event.data;
+    };
+
+    const eventSourceStatus = new EventSource("/sse-status");
+    eventSourceStatus.onmessage = function (event) {
+        document.getElementById("status").textContent = event.data;
     };
 
     function sendRequest() {

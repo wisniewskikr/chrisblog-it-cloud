@@ -1,6 +1,9 @@
 package com.example.services;
 
+import com.example.controllers.MessageSseController;
+import com.example.controllers.StatusSseController;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -9,16 +12,28 @@ public class KafkaService {
 
     private KafkaTemplate<String, String> kafkaTemplate;
 
+    private MessageSseController messageSseController;
+
+    private StatusSseController statusSseController;
+
     @Value("${topic.name}")
     private String topicName;
 
-    public KafkaService(KafkaTemplate<String, String> kafkaTemplate) {
+    public KafkaService(KafkaTemplate<String, String> kafkaTemplate,
+                        MessageSseController messageSseController,
+                        StatusSseController statusSseController) {
         this.kafkaTemplate = kafkaTemplate;
+        this.messageSseController = messageSseController;
+        this.statusSseController = statusSseController;
     }
 
-    public String sendMessage(String message) {
-        kafkaTemplate.send(topicName, message);
-        return "The message was sent to Consumer via Kafka";
+    public void sendStatus(String status) {
+        kafkaTemplate.send(topicName, status);
+    }
+
+    @KafkaListener(topics = "#{'${topic.name}'}")
+    public void statusListener(String status) {
+        statusSseController.emitStatus(status);
     }
 
 }

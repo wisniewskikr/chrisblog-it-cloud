@@ -20,25 +20,20 @@ public class HelloWorldController {
 
     private MessageSseController messageSseController;
 
-    private StatusSseController statusSseController;
-
     public HelloWorldController(HelloWorldService helloWorldService,
                                 KafkaService kafkaService,
-                                MessageSseController messageSseController,
-                                StatusSseController statusSseController) {
+                                MessageSseController messageSseController) {
         this.helloWorldService = helloWorldService;
         this.kafkaService = kafkaService;
         this.messageSseController = messageSseController;
-        this.statusSseController = statusSseController;
     }
 
     @PostMapping("/send")
     public ResponseEntity<String> sendMessage() {
 
         helloWorldService.sendMessage(message);
-        kafkaService.sendMessage(message);
         messageSseController.emitMessage(message);
-        statusSseController.emitStatus("CREATED");
+        kafkaService.sendStatus("IN PROGRESS");
         return ResponseEntity.ok("Sent");
 
     }

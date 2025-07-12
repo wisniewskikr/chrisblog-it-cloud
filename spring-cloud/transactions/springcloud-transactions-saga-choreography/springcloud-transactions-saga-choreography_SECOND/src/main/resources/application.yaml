@@ -1,0 +1,16 @@
+# Name
+spring:
+  application:
+    name: second
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+# Port
+server:
+  port: 8081
+
+topic:
+  name: transaction-status

@@ -1,0 +1,24 @@
+# Name
+spring:
+  application:
+    name: first
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+topic:
+  name: helloworld
+
+# Port
+server:
+  port: 8080
+
+# API
+api:
+  url: http://localhost:8081
+
+# Message
+global:
+  message: Hello World!

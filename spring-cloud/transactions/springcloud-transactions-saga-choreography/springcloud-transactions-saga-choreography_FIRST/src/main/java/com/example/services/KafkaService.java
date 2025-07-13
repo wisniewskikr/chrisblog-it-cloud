@@ -24,6 +24,9 @@ public class KafkaService {
     @Value("${topic.message}")
     private String topicMessage;
 
+    @Value("${global.message}")
+    private String message;
+
     public KafkaService(KafkaTemplate<String, String> kafkaTemplate,
                         MessageSseController messageSseController,
                         StatusSseController statusSseController) {
@@ -44,6 +47,11 @@ public class KafkaService {
     public void statusListener(String status) {
         log.info("Status: {}", status);
         statusSseController.emitStatus(status);
+
+        if ("FAILURE".equals(status)) {
+            messageSseController.emitMessage(message + " (rollback)");
+        }
+
     }
 
 }

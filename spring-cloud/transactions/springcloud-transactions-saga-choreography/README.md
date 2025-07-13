@@ -103,10 +103,14 @@ USAGE DOCKER COMPOSE
 ##### Required steps:
 1. Start **Docker** tool
 1. In any command line tool **start Docker containers** with `docker-compose -f .\docker-compose\full\docker-compose.yaml up -d --build`
-1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8081/public`
-   * Expected following **JSON**: {"text": "Hello World, Public!", "portFirst": "8081", "portSecond": "8082"}
-1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8081/secured`
-   * Expected following **JSON**: {"text": "Hello World, Secured!", "portFirst": "8081", "portSecond": "8082"}
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8080`
+   * Expected HTML page with "Send Hello" button
+   * Click "Send Hello" button
+   * Expected HTML page with "message" as "Hello World!" and "status" as "IN PROGRESS"
+   * After 3 seconds if random status is success: expected HTML page with "message" as "Hello World!"
+     and "status" as "SUCCESS"
+   * After 3 seconds if random status is failure: expected HTML page with "message" as "Hello World! (rollback)"
+     and "status" as "FAILURE"
 1. Clean up environment 
      * In a command line tool **remove Docker containers** with `docker-compose -f .\docker-compose\full\docker-compose.yaml down --rmi all`
      * Stop **Docker** tool

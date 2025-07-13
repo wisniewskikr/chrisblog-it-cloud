@@ -7,26 +7,28 @@ EXAMPLE
 
 ![My Image](readme-images/image-03.png)
 
+![My Image](readme-images/image-04.png)
+
 
 DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to create **basic ecosystem of microservices** with usage **Java** programming language and **Spring Cloud** and **Spring Boot 3** frameworks.
+The goal of this project is to present how to implement **distributed transactions management** 
+using **SAGA** architecture pattern type **choreography** with usage **Java** programming language 
+and **Spring Cloud** and **Spring Boot 3** frameworks.
+
+SAGA enables transaction management in distributed architecture. It means that if transaction fails in one
+microservice then it's rolled back in all microservices. Type choreography means every microservices handles
+rollback itself.
 
 ##### Services
 This project consists of following applications:
-* **Database**: SQL database - in this case type **MySql**
-* **Second Service**: an application created in **Java** programming language with usage **Spring Boot** framework. It has connection with MySql database
-* **First Service**: an application created in **Java** programming language with usage **Spring Boot** framework. It has connection with Second Service
-
-##### Inputs
-This project requires following inputs:
-* **First Service**: http requests from any Rest Client. It handles GET method for paths "/public" and "/secured"
-
-##### Outputs
-This project provides following outputs:
-* **First Service**: http responses with JSONs with data
+* **Second Service**: an application created in **Java** programming language with usage **Spring Boot** framework. 
+It waits 3 seconds and send back random status SUCCESS/FAILURE to Kafka
+* **First Service**: an application created in **Java** programming language with usage **Spring Boot** framework. 
+It displays message and status using SSE. 
+* **Kafka**: event-driven messaging server
 
 ##### Terminology
 Terminology explanation:
@@ -34,16 +36,22 @@ Terminology explanation:
 * **Maven**: tool for build automation
 * **Java**: object-oriented programming language
 * **Spring Boot**: framework for Java. It consists of: Spring + Container + Configuration
-* **Spring Cloud**: Spring Cloud is a framework within the Spring ecosystem that provides tools for building distributed systems and microservices. It simplifies tasks like service discovery, configuration management, load balancing, circuit breakers, and distributed tracing, allowing developers to build scalable and resilient cloud-native applications.
-* **Database**: A database is an organized collection of data that is stored and managed electronically, allowing for efficient retrieval, manipulation, and updating of information. It is typically managed by a database management system (DBMS).
-* **MySql**: MySQL is an open-source relational database management system (RDBMS) that uses Structured Query Language (SQL) for managing and organizing data. It's widely used for web applications and is known for its speed, reliability, and ease of use.
+* **Spring Cloud**: Spring Cloud is a framework within the Spring ecosystem that provides tools for building 
+distributed systems and microservices. It simplifies tasks like service discovery, configuration management, 
+load balancing, circuit breakers, and distributed tracing, allowing developers to build scalable and resilient 
+cloud-native applications.
+* **Kafka**: Kafka is a distributed event streaming platform used for building real-time data pipelines and applications. 
+It allows systems to publish, store, and subscribe to streams of records (events) in a fault-tolerant and scalable way.
+* **SAGA**: The Saga Pattern is a design pattern for managing long-running, distributed transactions by breaking them 
+into a sequence of local transactions. Each local transaction has a corresponding compensating action to undo its 
+effects in case of failure, ensuring eventual consistency without using distributed transactions.
 
 
 USAGES
 ------
 
 This project can be tested in following configurations:
-* **Usage Manual**: infrastucture services are started as Docker containers. Application services are started manually in command line
+* **Usage Manual**: infrastructure services are started as Docker containers. Application services are started manually in command line
 * **Usage Docker Compose**: all services are started as Docker containers definied in docker compose file.
 * **Usage Kubernetes (Kind)**: all services are started as Kubernetes pods.
 
@@ -51,7 +59,7 @@ This project can be tested in following configurations:
 USAGE MANUAL
 ------------
 
-> **Usage Manual** means that infrastucture services are started as Docker containers. Application services are started manually in command line.
+> **Usage Manual** means that infrastructure services are started as Docker containers. Application services are started manually in command line.
 
 > Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and then **proceed with steps below**.
 
@@ -65,10 +73,14 @@ USAGE MANUAL
 1. In a first command line tool **start Docker containers** with `docker-compose -f .\docker-compose\infrastructure\docker-compose.yaml up -d --build`
 1. In a second command line tool **start Second application** with `mvn -f ./springcloud-transactions-saga-choreography_SECOND spring-boot:run`
 1. In a third command line tool **start First application** with `mvn -f ./springcloud-transactions-saga-choreography_FIRST spring-boot:run`
-1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8081/public`
-   * Expected following **JSON**: {"text": "Hello World, Public!", "portFirst": "8081", "portSecond": "8082"}
-1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8081/secured`
-   * Expected following **JSON**: {"text": "Hello World, Secured!", "portFirst": "8081", "portSecond": "8082"}
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8080`
+   * Expected HTML page with "Send Hello" button
+   * Click "Send Hello" button
+   * Expected HTML page with "message" as "Hello World!" and "status" as "IN PROGRESS"
+   * After 3 seconds if random status is success: expected HTML page with "message" as "Hello World!" 
+     and "status" as "SUCCESS"
+   * After 3 seconds if random status is failure: expected HTML page with "message" as "Hello World! (rollback)" 
+     and "status" as "FAILURE"
 1. Clean up environment
    * In the third command line tool **stop First application** with `ctrl + C`
    * In the second command line tool **stop Second application** with `ctrl + C`

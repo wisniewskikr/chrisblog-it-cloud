@@ -18,8 +18,11 @@ public class KafkaService {
 
     private StatusSseController statusSseController;
 
-    @Value("${topic.name}")
-    private String topicName;
+    @Value("${topic.status}")
+    private String topicStatus;
+
+    @Value("${topic.message}")
+    private String topicMessage;
 
     public KafkaService(KafkaTemplate<String, String> kafkaTemplate,
                         MessageSseController messageSseController,
@@ -30,10 +33,14 @@ public class KafkaService {
     }
 
     public void sendStatus(String status) {
-        kafkaTemplate.send(topicName, status);
+        kafkaTemplate.send(topicStatus, status);
     }
 
-    @KafkaListener(topics = "#{'${topic.name}'}")
+    public void sendMessage(String message) {
+        kafkaTemplate.send(topicMessage, message);
+    }
+
+    @KafkaListener(topics = "#{'${topic.status}'}")
     public void statusListener(String status) {
         log.info("Status: {}", status);
         statusSseController.emitStatus(status);

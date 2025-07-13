@@ -15,15 +15,12 @@ spring:
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 
 topic:
-  name: transaction-status
+  status: transaction-status
+  message: message
 
 # Port
 server:
   port: 8080
-
-# API
-api:
-  url: http://localhost:8081
 
 # Message
 global:

@@ -18,14 +18,16 @@ spec:
       - name: second
         image: wisniewskikr/springcloud-transactions-saga-choreography_second:0.0.1
         ports:
-        - containerPort: 8082
+        - containerPort: 8081
         env:
-        - name: spring.datasource.url
-          value: jdbc:mysql://mysql:3306/database
+        - name: spring.kafka.producer.bootstrap-servers
+          value: kafka:9092
+        - name: spring.kafka.consumer.bootstrap-servers
+          value: kafka:9092
         readinessProbe:
           httpGet:
             path: /actuator/health
-            port: 8082
+            port: 8081
           initialDelaySeconds: 30
           periodSeconds: 10
           timeoutSeconds: 5
@@ -33,7 +35,7 @@ spec:
         livenessProbe:
           httpGet:
             path: /actuator/health
-            port: 8082
+            port: 8081
           initialDelaySeconds: 30
           periodSeconds: 10
           timeoutSeconds: 5
@@ -50,5 +52,5 @@ spec:
   selector:
     app: second
   ports:
-    - port: 8082
-      targetPort: 8082
+    - port: 8081
+      targetPort: 8081

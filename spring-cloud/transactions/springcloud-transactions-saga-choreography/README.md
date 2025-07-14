@@ -52,7 +52,7 @@ USAGES
 
 This project can be tested in following configurations:
 * **Usage Manual**: infrastructure services are started as Docker containers. Application services are started manually in command line
-* **Usage Docker Compose**: all services are started as Docker containers definied in docker compose file.
+* **Usage Docker Compose**: all services are started as Docker containers defined in docker compose file.
 * **Usage Kubernetes (Kind)**: all services are started as Kubernetes pods.
 
 
@@ -91,7 +91,7 @@ USAGE MANUAL
 USAGE DOCKER COMPOSE
 --------------------
 
-> **Usage Docker Compse** means all services are started as Docker containers definied in docker compose file.
+> **Usage Docker Compose** means all services are started as Docker containers defined in docker compose file.
 
 > Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and then **proceed with steps below**.
 
@@ -143,12 +143,16 @@ USAGE KUBERNETES (KIND)
 1. In the first command line tool **start Kubernetes Pods** with `kubectl apply -f ./k8s --recursive`
 1. In the first command line tool **check status of Kubernetes Pods** with `kubectl get pods`
    * Expected mysql, second and first as **READY 1/1** (it can take few minutes)
-1. In the second command line tool **forward port of Second service** with `kubectl port-forward service/second 8082:8082`
-1. In the third command line tool **forward port of First service** with `kubectl port-forward service/first 8081:8081`
-1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8081/public`
-   * Expected following **JSON**: {"text": "Hello World, Public!", "portFirst": "8081", "portSecond": "8082"}
-1. In any Rest Client (e.g. Postman) using GET method visit `http://localhost:8081/secured`
-   * Expected following **JSON**: {"text": "Hello World, Secured!", "portFirst": "8081", "portSecond": "8082"}
+1. In the second command line tool **forward port of Second service** with `kubectl port-forward service/second 8081:8081`
+1. In the third command line tool **forward port of First service** with `kubectl port-forward service/first 8080:8080`
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8080`
+   * Expected HTML page with "Send Hello" button
+   * Click "Send Hello" button
+   * Expected HTML page with "message" as "Hello World!" and "status" as "IN PROGRESS"
+   * After 3 seconds if random status is success: expected HTML page with "message" as "Hello World!"
+     and "status" as "SUCCESS"
+   * After 3 seconds if random status is failure: expected HTML page with "message" as "Hello World! (rollback)"
+     and "status" as "FAILURE"
 1. Clean up environment
      * In the third command line tool **stop forwarding port of First service** with `ctrl + C`
      * In the second command line tool **stop forwarding port of Second service** with `ctrl + C`

@@ -96,6 +96,10 @@ USAGE MANUAL
    * In the first command line tool **remove Docker containers** with `docker-compose -f .\docker-compose\infrastructure\docker-compose.yaml down --rmi all`
    * Stop **Docker** tool
 
+##### Optional steps:
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8086`
+   * Expected Kafka UI
+
 
 USAGE DOCKER COMPOSE
 --------------------
@@ -125,6 +129,8 @@ USAGE DOCKER COMPOSE
      * Stop **Docker** tool
 
 ##### Optional steps:
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8086`
+   * Expected Kafka UI
 1. In a command line tool validate Docker Compose with `docker-compose config`
 1. In a command line tool check list of Docker images with `docker images`
 1. In a command line tool check list of all Docker containers with `docker ps -a`
@@ -170,6 +176,8 @@ USAGE KUBERNETES (KIND)
      * Stop **Docker** tool
 
 ##### Optional steps:
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8086`
+   * Expected Kafka UI
 1. In a command line tool build Docker SECOND image with `docker build -f springcloud-transactions-saga-choreography_SECOND/Dockerfile -t wisniewskikr/springcloud-transactions-saga-choreography_second:0.0.1 ./springcloud-transactions-saga-choreography_SECOND`
 1. In a command line tool push Docker SECOND image to Docker Repository with `docker push wisniewskikr/springcloud-transactions-saga-choreography_second:0.0.1` 
 1. In a command line tool build Docker FIRST image with `docker build -f springcloud-transactions-saga-choreography_FIRST/Dockerfile -t wisniewskikr/springcloud-transactions-saga-choreography_first:0.0.1 ./springcloud-transactions-saga-choreography_FIRST`

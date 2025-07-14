@@ -18,9 +18,9 @@ The goal of this project is to present how to implement **distributed transactio
 using **SAGA** architecture pattern type **choreography** with usage **Java** programming language 
 and **Spring Cloud** and **Spring Boot 3** frameworks.
 
-SAGA enables transaction management in distributed architecture. It means that if transaction fails in one
-microservice then it's rolled back in all microservices. Type choreography means every microservices handles
-rollback itself.
+SAGA enables transaction management in distributed architecture. It means that if transaction fails in one of
+microservices then it's rolled back in all microservices. Type choreography means that every microservices handles
+rollback itself basing on event from some of messaging server (e.g. Kafka).
 
 ##### Services
 This project consists of following applications:

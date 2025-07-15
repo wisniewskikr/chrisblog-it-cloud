@@ -14,31 +14,18 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to create **chain of applications (microservices)** with a **config service** where configurations are stored as **files** with usage **Java** programming language and **Spring Cloud** framework. Config service enables reading configuration properties stored as files in "resources/configurations" folder. 
+The goal of this project is to present how to create **Config Server** which reads properties from **public github**
+repository and connect it with microservice with usage **Java** programming language and **Spring Cloud** framework. 
 
-Propeties are stored in different folders regarding to usage:
-* folder **manual**: for Usage Manual + Docker
-* folder **docker**: for Usage Docker
-* folder **docker-compose**: for *sage Docker Compose
-* folder **k8s**: for Usage Kubernetes
+Config service enables reading configuration properties from different sources like: github, file etc. In this
+case properties are read from public Github repository and sent to microservice. This microservice displays
+these properties: common, public and secret.
 
 ##### Content
 This project consists of following applications:
-* **Database**: SQL database - in this case type **MySql**
-* **Back-End**: an application created in **Java** programming language with usage **Spring Boot** framework
-* **Front-End**: an application created in **Java** programming language with usage **Spring Boot** framework. **Thymeleaf** engine is used to display data
-* **Config Server**: a tool which reads configuration from external source (like Github etc.)
-
-##### Input
-This project requires following inputs:
-* **FE**: FE service consumes http request from any browser
-
-##### Outputs
-This project provides following outpus:
-* **FE**: FE service produces http response to any browser. This response consists of:
-   * **Database Message**: the HTML displays the message stored in database. It's the simple text "Hello World!".
-   * **Back-End Port**: the HTML page displays the port of Back-End application.
-   * **Front-End Port**: the HTML page displays port of Front-End application.
+* **MS**: an application created in **Java** programming language with usage **Spring Boot** framework. It reads
+properties from Config Server
+* **Config**: a tool which reads configuration from external source (like Github etc.)
 
 ##### Terminology
 Terminology explanation:
@@ -46,24 +33,26 @@ Terminology explanation:
 * **Maven**: tool for build automation
 * **Java**: object-oriented programming language
 * **Spring Boot**: framework for Java. It consists of: Spring + Container + Configuration
-* **Database**: A database is an organized collection of data that is stored and managed electronically, allowing for efficient retrieval, manipulation, and updating of information. It is typically managed by a database management system (DBMS).
-* **MySql**: MySQL is an open-source relational database management system (RDBMS) that uses Structured Query Language (SQL) for managing and organizing data. It's widely used for web applications and is known for its speed, reliability, and ease of use.
-* **Back-End**: The back-end refers to the server-side part of a software application, responsible for managing the database, server logic, and application programming interface (API). It processes requests from the front-end (user interface), handles data storage, retrieval, and business logic, and sends the appropriate responses back to the front-end.
-* **Front-End**: Front-end refers to the part of a website or application that users interact with directly. It includes the visual elements, layout, and design, typically built using HTML, CSS, and JavaScript. The front-end is responsible for the user experience (UX) and interface (UI) that allows users to navigate and interact with the system.
-* **Thymeleaf**: Thymeleaf is a modern server-side Java template engine for Java-based web applications. It processes HTML, XML, JavaScript, CSS, and plain text, integrating with the Spring framework. It allows dynamic content rendering on the server while ensuring templates are HTML-compliant. Thymeleaf's key features include natural templates (which work as valid HTML even before rendering), easy integration with Spring MVC, and powerful expressions for iterating, conditional display, and data binding. It's often used to create dynamic web pages that combine static HTML with server-side logic in a clean and intuitive way.
-* **Spring Cloud**: Spring Cloud is a framework within the Spring ecosystem that provides tools for building distributed systems and microservices. It simplifies tasks like service discovery, configuration management, load balancing, circuit breakers, and distributed tracing, allowing developers to build scalable and resilient cloud-native applications.
-* **Microservices**: Microservices are a software architecture style where an application is built as a collection of small, independent services that communicate through APIs. Each service focuses on a specific business function, allowing for easier scaling, deployment, and maintenance.
-* **Spring Cloud Config**: Spring Cloud Config is a tool within the Spring Cloud ecosystem that provides server-side and client-side support for externalized configuration in distributed systems. It allows you to store configuration data centrally (e.g., in a Git repository) and share it across multiple microservices, ensuring consistent and manageable configuration settings for your entire application environment.
+* **Spring Cloud**: Spring Cloud is a framework within the Spring ecosystem that provides tools for building 
+distributed systems and microservices. It simplifies tasks like service discovery, configuration management, 
+load balancing, circuit breakers, and distributed tracing, allowing developers to build scalable 
+and resilient cloud-native applications.
+* **Microservices**: Microservices are a software architecture style where an application is built as a collection of 
+small, independent services that communicate through APIs. Each service focuses on a specific business function, 
+allowing for easier scaling, deployment, and maintenance.
+* **Spring Cloud Config**: Spring Cloud Config is a tool within the Spring Cloud ecosystem that provides server-side 
+and client-side support for externalized configuration in distributed systems. It allows you to store configuration 
+data centrally (e.g., in a Git repository) and share it across multiple microservices, ensuring consistent and 
+manageable configuration settings for your entire application environment.
 
 
 USAGES
 ------
 
 This project can be tested in following configurations:
-* **Usage Docker Compose (Recommended)**: all services are started as Docker containers definied in "docker-compose/with-custom-services/docker-compose.yaml" file.
-* **Usage Kubernetes (Kind) (Recommended)**: all services are started as Kubernetes pods.
-* **Usage Manual + Docker**: custom services are started manually from command line. Other services (like Sql Databases, NoSql Databases etc.) are started as Docker containers.
-* **Usage Docker**: all services are started as Docker containers.
+* **Usage Manual**: custom services are started manually from command line.
+* **Usage Docker Compose**: all services are started as Docker containers defined in docker-compose file
+* **Usage Kubernetes (Kind)**: all services are started as Kubernetes pods.
 
 
 USAGE DOCKER COMPOSE (RECOMMENDED)

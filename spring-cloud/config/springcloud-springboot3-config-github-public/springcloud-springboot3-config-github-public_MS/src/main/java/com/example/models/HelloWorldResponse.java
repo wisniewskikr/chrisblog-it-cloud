@@ -1,4 +1,4 @@
 package com.example.models;
 
-public record HelloWorldResponse(String publicMessage, String secretMessage) {
+public record HelloWorldResponse(String commonMessage, String publicMessage, String secretMessage) {
 }

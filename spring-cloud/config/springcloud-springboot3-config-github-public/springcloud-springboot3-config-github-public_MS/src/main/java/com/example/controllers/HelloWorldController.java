@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class HelloWorldController {
 
+    @Value("${message.common}")
+    private String commonMessage;
+
     @Value("${message.public}")
     private String publicMessage;
 
@@ -16,7 +19,7 @@ public class HelloWorldController {
 
     @GetMapping
     public ResponseEntity<HelloWorldResponse> helloWorld() {
-        return ResponseEntity.ok(new HelloWorldResponse(publicMessage, secretMessage));
+        return ResponseEntity.ok(new HelloWorldResponse(commonMessage, publicMessage, secretMessage));
     }
 
 }

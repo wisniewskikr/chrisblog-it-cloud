@@ -84,6 +84,40 @@ USAGE MANUAL
     * Remove **Github repository**
 
 
+USAGE DOCKER COMPOSE
+--------------------
+
+> **Usage Docker Compose** means all services are started as Docker containers defined in docker compose file.
+
+> Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and 
+then **proceed with steps below**.
+
+> **Prerequisites**:
+* **Operating System** (tested on Windows 11)
+* **Git** (tested on version 2.33.0.windows.2)
+* **Docker** (tested on version 4.33.1)
+
+##### Required steps:
+1. Start **Docker** tool
+1. In any command line tool **start Docker containers** with `docker-compose -f .\docker-compose\docker-compose.yaml up -d --build`
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8080`
+   * Expected HTML page with following JSON: `{"commonMessage":"Common Hello World, Manual!","publicMessage":"Public Hello World, Manual!","secretMessage":"Secret Hello World, Manual!"}`
+1. Clean up environment
+   * In a command line tool **remove Docker containers** with `docker-compose -f .\docker-compose\docker-compose.yaml down --rmi all`
+   * Stop **Docker** tool
+
+##### Optional steps:
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8086`
+   * Expected Kafka UI
+1. In a command line tool validate Docker Compose with `docker-compose config`
+1. In a command line tool check list of Docker images with `docker images`
+1. In a command line tool check list of all Docker containers with `docker ps -a`
+1. In a command line tool check list of active Docker containers with `docker ps`
+1. In a command line tool check list of Docker nerworks with `docker network ls`
+1. In a command line tool check CONFIG container logs with `docker logs config-container`
+1. In a command line tool check MS container logs with `docker logs ms-container`
+
+
 IMPLEMENTATION
 --------------
 

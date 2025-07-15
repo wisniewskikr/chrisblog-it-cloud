@@ -52,9 +52,36 @@ USAGES
 ------
 
 This project can be tested in following configurations:
-* **Usage Manual**: custom services are started manually from command line.
-* **Usage Docker Compose**: all services are started as Docker containers defined in docker-compose file
+* **Usage Manual**: application services are started manually in command line
+* **Usage Docker Compose**: all services are started as Docker containers defined in docker compose file.
 * **Usage Kubernetes (Kind)**: all services are started as Kubernetes pods.
+
+
+USAGE MANUAL
+------------
+
+> **Usage Manual** means that application services are started manually in command line.
+
+> Please **clone/download** project, open **project's main folder** in your favorite **command line tool** 
+> and then **proceed with steps below**.
+
+> **Prerequisites**:
+* **Operating System** (tested on Windows 11)
+* **Git** (tested on version 2.33.0.windows.2)
+
+##### Required steps:
+1. Create **Github repository** with **main** branch with following files:
+   * File **application.properties** with properties: `message.common = Common Hello World, Manual!`
+   * File **ms.properties** with properties: `message.public = Public Hello World, Manual!` and `message.secret = Secret Hello World, Manual!`
+1. In **Config** module update file **src/main/resources/application.properties** with property `spring.cloud.config.server.git.uri` which should contain URI to Github repository
+1. In a first command line tool **start CONFIG application** with `mvn -f ./springcloud-springboot3-config-github-public_CONFIG spring-boot:run`
+1. In a second command line tool **start MS application** with `mvn -f ./springcloud-springboot3-config-github-public_MS spring-boot:run`
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8080`
+    * Expected HTML page with following JSON: `{"commonMessage":"Common Hello World, Manual!","publicMessage":"Public Hello World, Manual!","secretMessage":"Secret Hello World, Manual!"}`
+1. Clean up environment
+    * In the second command line tool **stop MS application** with `ctrl + C`
+    * In the first command line tool **stop CONFIG application** with `ctrl + C`
+    * Remove **Github repository**
 
 
 IMPLEMENTATION

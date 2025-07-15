@@ -1,0 +1,58 @@
+version: '3'
+ 
+services:
+
+  config:
+    image: config-image
+    container_name: config-container
+    build:
+      context: ./../springcloud-springboot3-config-github-public_CONFIG
+      dockerfile: Dockerfile
+    environment:
+      spring:
+        cloud:
+          config:
+            server:
+              git:
+                uri: https://github.com/wisniewskikr/springcloud-springboot3-config-github-public
+    ports:
+      - 8888:8888
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8888/actuator/health"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+    networks:
+      - helloworld-network
+  
+  ms:
+    image: ms-image:0.0.1
+    container_name: ms-container
+    build:
+      context: ./../springcloud-springboot3-config-github-public_MS
+      dockerfile: Dockerfile
+    depends_on:
+      config:
+        condition: service_healthy
+    ports:
+      - 8080:8080
+    environment:
+      spring:
+        config:
+          import: optional:configserver:http://config:8888
+        cloud:
+          config:
+            label: docker-compose
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+    networks:
+      - helloworld-network
+
+networks:
+  helloworld-network:
+    name: helloworld-network-name

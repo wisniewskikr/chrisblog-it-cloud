@@ -120,6 +120,54 @@ then **proceed with steps below**.
 1. In a command line tool check MS container logs with `docker logs ms-container`
 
 
+USAGE KUBERNETES (KIND)
+---------------------------
+
+> **Usage Kubernetes** means that all services are started as Kubernetes pods.
+
+> Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and then **proceed with steps below**.
+
+> **Prerequisites**:
+* **Operating System** (tested on Windows 11)
+* **Git** (tested on version 2.33.0.windows.2)
+* **Kind** (tested on version 0.26.0)
+
+##### Required steps:
+1. Create **Github repository** with **main** branch with following files:
+   * File **application.properties** with properties: `message.common = Hello World, Common!`
+   * File **ms.properties** with properties: `message.public = Hello World, Public!` and `message.secret = Hello World, Secret!`
+1. In **Config** module update file **src/main/resources/application.properties** with property `spring.cloud.config.server.git.uri` which should contain URI to Github repository
+1. Start **Docker** tool
+1. In the first command line tool create and start cluster **Kind** with `kind create cluster --name helloworld`
+1. In the second command line tool **start Kubernetes Pods** with `kubectl apply -f ./k8s --recursive`
+1. In the second command line tool **check status of Kubernetes Pods** with `kubectl get pods`
+   * Expected services as **READY 1/1** (it can take few minutes)
+1. In the second command line tool **forward port of CONFIG service** with `kubectl port-forward service/config 8888:8888`
+1. In the third command line tool **forward port of MS service** with `kubectl port-forward service/ms 8080:8080`
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8080`
+   * Expected HTML page with following JSON: `{"commonMessage":"Hello World, Common!","publicMessage":"Hello World, Public!","secretMessage":"Hello World, Secret!"}`
+1. Clean up environment
+   * In the third command line tool **stop forwarding port of MS service** with `ctrl + C`
+   * In the second command line tool **stop forwarding port of CONFIG service** with `ctrl + C`
+   * In the first command line tool **remove Kubernetes Pods** with `kubectl delete -f ./k8s --recursive`
+   * In the first command line tool delete cluster **Kind** with `kind delete cluster --name helloworld`
+   * Stop **Docker** tool
+
+##### Optional steps:
+1. In a command line tool build Docker MS image with `docker build -f springcloud-springboot3-config-github-public_MS/Dockerfile -t wisniewskikr/springcloud-springboot3-config-github-public_ms:0.0.1 ./springcloud-springboot3-config-github-public_MS`
+1. In a command line tool push Docker MS image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-config-github-public_ms:0.0.1`
+1. In a command line tool build Docker CONFIG image with `docker build -f springcloud-springboot3-config-github-public_CONFIG/Dockerfile -t wisniewskikr/springcloud-springboot3-config-github-public_config:0.0.1 ./springcloud-springboot3-config-github-public_CONFIG`
+1. In a command line tool push Docker CONFIG image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-config-github-public_config:0.0.1`
+1. In the first command line tool with administrator privileges check clusters with `kind get clusters`
+1. In a command line tool check Kubernetes Deployments with `kubectl get deployments`
+1. In a command line tool check Kubernetes Deployments details with **kubectl describe deployment {deployment-name}**
+1. In a command line tool check Kubernetes Services with `kubectl get services`
+1. In a command line tool check Kubernetes Services details with **kubectl describe service {service-name}**
+1. In a command line tool check Kubernetes Pods with `kubectl get pods`
+1. In a command line tool check Kubernetes Pods details with **kubectl describe pod {pod-name}**
+1. In a command line tool check Kubernetes Pods logs with **kubectl logs {pod-name}**
+
+
 IMPLEMENTATION
 --------------
 

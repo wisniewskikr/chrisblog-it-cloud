@@ -23,6 +23,12 @@ these properties: common, public and secret.
 
 Github repository: https://github.com/wisniewskikr/springcloud-springboot3-config-github-public
 
+Checking Github properties on Spring Cloud: `http://<CONFIG-SERVER-HOST>:<PORT>/<application>/<profile>[/<label>]`
+
+Explanation:
+* **Profile**: Maven profile. Default is "default"
+* **Label**: Github branch. Default is "main"
+
 ##### Content
 This project consists of following applications:
 * **MS**: an application created in **Java** programming language with usage **Spring Boot** framework. It reads
@@ -83,6 +89,9 @@ USAGE MANUAL
     * In the first command line tool **stop CONFIG application** with `ctrl + C`
     * Remove **Github repository**
 
+##### Optional steps:
+1. Check properties of MS service with `http://localhost:8888/ms/default/main`
+
 
 USAGE DOCKER COMPOSE
 --------------------
@@ -111,6 +120,7 @@ then **proceed with steps below**.
    * Stop **Docker** tool
 
 ##### Optional steps:
+1. Check properties of MS service with `http://localhost:8888/ms/default/main`
 1. In a command line tool validate Docker Compose with `docker-compose config`
 1. In a command line tool check list of Docker images with `docker images`
 1. In a command line tool check list of all Docker containers with `docker ps -a`
@@ -154,6 +164,7 @@ USAGE KUBERNETES (KIND)
    * Stop **Docker** tool
 
 ##### Optional steps:
+1. Check properties of MS service with `http://localhost:8888/ms/default/main`
 1. In a command line tool build Docker MS image with `docker build -f springcloud-springboot3-config-github-public_MS/Dockerfile -t wisniewskikr/springcloud-springboot3-config-github-public_ms:0.0.1 ./springcloud-springboot3-config-github-public_MS`
 1. In a command line tool push Docker MS image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-config-github-public_ms:0.0.1`
 1. In a command line tool build Docker CONFIG image with `docker build -f springcloud-springboot3-config-github-public_CONFIG/Dockerfile -t wisniewskikr/springcloud-springboot3-config-github-public_config:0.0.1 ./springcloud-springboot3-config-github-public_CONFIG`

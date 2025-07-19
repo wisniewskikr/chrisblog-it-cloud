@@ -4,5 +4,6 @@ COPY pom.xml /home/app
 RUN mvn -f /home/app/pom.xml clean package -Dmaven.test.skip
 
 FROM eclipse-temurin:23-jre
+RUN apt-get update && apt-get install -y curl
 COPY --from=builder /home/app/target/*.jar  /opt/app/*.jar
 ENTRYPOINT ["java", "-jar", "/opt/app/*.jar"]

@@ -71,13 +71,13 @@ USAGE MANUAL
 
 ##### Required steps:
 1. Create **Github repository** with **main** branch with following files:
-   * File **application.properties** with properties: `message.common = Common Hello World, Manual!`
-   * File **ms.properties** with properties: `message.public = Public Hello World, Manual!` and `message.secret = Secret Hello World, Manual!`
+   * File **application.properties** with properties: `message.common = Hello World, Common!`
+   * File **ms.properties** with properties: `message.public = Hello World, Public!` and `message.secret = Hello World, Secret!`
 1. In **Config** module update file **src/main/resources/application.properties** with property `spring.cloud.config.server.git.uri` which should contain URI to Github repository
 1. In a first command line tool **start CONFIG application** with `mvn -f ./springcloud-springboot3-config-github-public_CONFIG spring-boot:run`
 1. In a second command line tool **start MS application** with `mvn -f ./springcloud-springboot3-config-github-public_MS spring-boot:run`
 1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8080`
-    * Expected HTML page with following JSON: `{"commonMessage":"Common Hello World, Manual!","publicMessage":"Public Hello World, Manual!","secretMessage":"Secret Hello World, Manual!"}`
+    * Expected HTML page with following JSON: `{"commonMessage":"Hello World, Common!","publicMessage":"Hello World, Public!","secretMessage":"Hello World, Secret!"}`
 1. Clean up environment
     * In the second command line tool **stop MS application** with `ctrl + C`
     * In the first command line tool **stop CONFIG application** with `ctrl + C`
@@ -98,17 +98,19 @@ then **proceed with steps below**.
 * **Docker** (tested on version 4.33.1)
 
 ##### Required steps:
+1. Create **Github repository** with **main** branch with following files:
+   * File **application.properties** with properties: `message.common = Hello World, Common!`
+   * File **ms.properties** with properties: `message.public = Hello World, Public!` and `message.secret = Hello World, Secret!`
+1. In **Config** module update file **src/main/resources/application.properties** with property `spring.cloud.config.server.git.uri` which should contain URI to Github repository
 1. Start **Docker** tool
 1. In any command line tool **start Docker containers** with `docker-compose -f .\docker-compose\docker-compose.yaml up -d --build`
 1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8080`
-   * Expected HTML page with following JSON: `{"commonMessage":"Common Hello World, Manual!","publicMessage":"Public Hello World, Manual!","secretMessage":"Secret Hello World, Manual!"}`
+   * Expected HTML page with following JSON: `{"commonMessage":"Hello World, Common!","publicMessage":"Hello World, Public!","secretMessage":"Hello World, Secret!"}`
 1. Clean up environment
    * In a command line tool **remove Docker containers** with `docker-compose -f .\docker-compose\docker-compose.yaml down --rmi all`
    * Stop **Docker** tool
 
 ##### Optional steps:
-1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8086`
-   * Expected Kafka UI
 1. In a command line tool validate Docker Compose with `docker-compose config`
 1. In a command line tool check list of Docker images with `docker images`
 1. In a command line tool check list of all Docker containers with `docker ps -a`

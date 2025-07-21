@@ -1,2 +1,0 @@
-env:
-  MESSAGE_SECRET: ${{ secrets.MESSAGE_SECRET }}

@@ -1,11 +1,14 @@
 TODO
 ----
 
-- saga
 - config + refresh
 - client-side loadbalancer
 - server-side loadbalancer
 - integration tests - mock server
+- kafka String
+- kafka JSON
+- zipkin
+- zipkin + tags
  
 - Prometheus and Grafana Dashboard - https://www.youtube.com/watch?v=FW8jr205Ap8
 - Hystrix

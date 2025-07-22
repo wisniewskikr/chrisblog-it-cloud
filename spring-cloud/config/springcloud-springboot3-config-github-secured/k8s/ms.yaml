@@ -22,6 +22,8 @@ spec:
           env:
             - name: spring.config.import
               value: optional:configserver:http://config:8888
+            - name: message.secret
+              value: ${MESSAGE_SECRET}
           readinessProbe:
             httpGet:
               path: /actuator/health

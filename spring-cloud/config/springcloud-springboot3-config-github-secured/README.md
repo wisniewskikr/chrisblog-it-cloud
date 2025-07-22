@@ -115,8 +115,6 @@ USAGE MANUAL
 1. Configure local environment variables (please check section **ENVIRONMENT VARIABLES CONFIGURATION**)
 1. In **Config** module update file **src/main/resources/application.properties** with properties
 * **spring.cloud.config.server.git.uri**: location of Github repository
-* **spring.cloud.config.server.git.username**: Github username
-* **spring.cloud.config.server.git.password**: Github token
 1. In a first command line tool **start CONFIG application** with `mvn -f ./springcloud-springboot3-config-github-secured_CONFIG spring-boot:run`
 1. In a second command line tool **start MS application** with `mvn -f ./springcloud-springboot3-config-github-secured_MS spring-boot:run`
 1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8080`
@@ -149,8 +147,6 @@ then **proceed with steps below**.
 1. Configure local environment variables (please check section **ENVIRONMENT VARIABLES CONFIGURATION**)
 1. In **Config** module update file **src/main/resources/application.properties** with properties
 * **spring.cloud.config.server.git.uri**: location of Github repository
-* **spring.cloud.config.server.git.username**: Github username
-* **spring.cloud.config.server.git.password**: Github token
 1. Start **Docker** tool
 1. In any command line tool **start Docker containers** with `docker-compose -f .\docker-compose\docker-compose.yaml up -d --build`
 1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8080`
@@ -185,10 +181,10 @@ USAGE KUBERNETES (KIND)
 * **Kind** (tested on version 0.26.0)
 
 ##### Required steps:
-1. Create **Github repository** with **main** branch with following files:
-   * File **application.properties** with properties: `message.common = Hello World, Common!`
-   * File **ms.properties** with properties: `message.public = Hello World, Public!` and `message.secret = Hello World, Secret!`
-1. In **Config** module update file **src/main/resources/application.properties** with property `spring.cloud.config.server.git.uri` which should contain URI to Github repository
+1. Configure Github repository (please check section **GITHUB CONFIGURATION**)
+1. Configure local environment variables (please check section **ENVIRONMENT VARIABLES CONFIGURATION**)
+1. In **Config** module update file **src/main/resources/application.properties** with properties
+* **spring.cloud.config.server.git.uri**: location of Github repository
 1. Start **Docker** tool
 1. In the first command line tool create and start cluster **Kind** with `kind create cluster --name helloworld`
 1. In the second command line tool **start Kubernetes Pods** with `kubectl apply -f ./k8s --recursive`
@@ -204,6 +200,8 @@ USAGE KUBERNETES (KIND)
    * In the first command line tool **remove Kubernetes Pods** with `kubectl delete -f ./k8s --recursive`
    * In the first command line tool delete cluster **Kind** with `kind delete cluster --name helloworld`
    * Stop **Docker** tool
+   * Remove **Github configuration**
+   * Remove **Environment Variables**
 
 ##### Optional steps:
 1. Check properties of MS service with `http://localhost:8888/ms/default/main`

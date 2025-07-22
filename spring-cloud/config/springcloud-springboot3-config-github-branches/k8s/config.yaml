@@ -19,6 +19,9 @@ spec:
           image: wisniewskikr/springcloud-springboot3-config-github-branches:0.0.1
           ports:
             - containerPort: 8888
+          env:
+            - name: spring.cloud.config.server.git.default-label
+              value: kubernetes
           readinessProbe:
             httpGet:
               path: /actuator/health

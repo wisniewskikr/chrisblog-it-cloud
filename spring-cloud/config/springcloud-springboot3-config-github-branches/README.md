@@ -151,9 +151,9 @@ USAGE KUBERNETES (KIND)
 * **Kind** (tested on version 0.26.0)
 
 ##### Required steps:
-1. Create **Github repository** with **main** branch with following files:
-   * File **application.properties** with properties: `message.common = Hello World, Common!`
-   * File **ms.properties** with properties: `message.public = Hello World, Public!` and `message.secret = Hello World, Secret!`
+1. Create **Github repository** with **kubernetes** branch with following files:
+   * File **application.properties** with properties: `message.common = Hello World, Common Kubernetes!`
+   * File **ms.properties** with properties: `message.public = Hello World, Public Kubernetes!` and `message.secret = Hello World, Secret Kubernetes!`
 1. In **Config** module update file **src/main/resources/application.properties** with property `spring.cloud.config.server.git.uri` which should contain URI to Github repository
 1. Start **Docker** tool
 1. In the first command line tool create and start cluster **Kind** with `kind create cluster --name helloworld`
@@ -163,7 +163,7 @@ USAGE KUBERNETES (KIND)
 1. In the second command line tool **forward port of CONFIG service** with `kubectl port-forward service/config 8888:8888`
 1. In the third command line tool **forward port of MS service** with `kubectl port-forward service/ms 8080:8080`
 1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8080`
-   * Expected HTML page with following JSON: `{"commonMessage":"Hello World, Common!","publicMessage":"Hello World, Public!","secretMessage":"Hello World, Secret!"}`
+   * Expected HTML page with following JSON: `{"commonMessage":"Hello World, Common Kubernetes!","publicMessage":"Hello World, Public Kubernetes!","secretMessage":"Hello World, Secret Kubernetes!"}`
 1. Clean up environment
    * In the third command line tool **stop forwarding port of MS service** with `ctrl + C`
    * In the second command line tool **stop forwarding port of CONFIG service** with `ctrl + C`

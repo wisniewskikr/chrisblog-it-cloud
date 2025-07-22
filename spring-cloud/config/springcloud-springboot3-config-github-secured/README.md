@@ -4,6 +4,30 @@ EXAMPLE
 ![My Image](readme-images/image-01.png)
 
 
+GITHUB CONFIGURATION
+--------------------
+
+![My Image](readme-images/github-01.png)
+
+![My Image](readme-images/github-02.png)
+
+![My Image](readme-images/github-03.png)
+
+![My Image](readme-images/github-04.png)
+
+![My Image](readme-images/github-05.png)
+
+![My Image](readme-images/github-06.png)
+
+![My Image](readme-images/github-07.png)
+
+![My Image](readme-images/github-08.png)
+
+![My Image](readme-images/github-09.png)
+
+![My Image](readme-images/github-10.png)
+
+
 DESCRIPTION
 -----------
 

@@ -28,6 +28,20 @@ GITHUB CONFIGURATION
 ![My Image](readme-images/github-10.png)
 
 
+ENVIRONMENT VARIABLES CONFIGURATION
+-----------------------------------
+
+![My Image](readme-images/env-01.png)
+
+![My Image](readme-images/env-02.png)
+
+![My Image](readme-images/env-03.png)
+
+![My Image](readme-images/env-04.png)
+
+![My Image](readme-images/env-05.png)
+
+
 DESCRIPTION
 -----------
 

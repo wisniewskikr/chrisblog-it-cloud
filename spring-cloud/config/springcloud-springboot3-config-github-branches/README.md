@@ -172,7 +172,7 @@ USAGE KUBERNETES (KIND)
    * Stop **Docker** tool
 
 ##### Optional steps:
-1. Check properties of MS service with `http://localhost:8888/ms/default/main`
+1. Check properties of MS service with `http://localhost:8888/ms/default/kubernetes`
 1. In a command line tool build Docker MS image with `docker build -f springcloud-springboot3-config-github-branches_MS/Dockerfile -t wisniewskikr/springcloud-springboot3-config-github-branches_ms:0.0.1 ./springcloud-springboot3-config-github-branches_MS`
 1. In a command line tool push Docker MS image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-config-github-branches_ms:0.0.1`
 1. In a command line tool build Docker CONFIG image with `docker build -f springcloud-springboot3-config-github-branches_CONFIG/Dockerfile -t wisniewskikr/springcloud-springboot3-config-github-branches_config:0.0.1 ./springcloud-springboot3-config-github-branches_CONFIG`

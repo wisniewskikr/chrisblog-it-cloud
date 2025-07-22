@@ -6,7 +6,7 @@ services:
     image: config-image
     container_name: config-container
     build:
-      context: ./../springcloud-springboot3-config-github-public_CONFIG
+      context: ./../springcloud-springboot3-config-github-branches_CONFIG
       dockerfile: Dockerfile
     ports:
       - 8888:8888
@@ -23,7 +23,7 @@ services:
     image: ms-image:0.0.1
     container_name: ms-container
     build:
-      context: ./../springcloud-springboot3-config-github-public_MS
+      context: ./../springcloud-springboot3-config-github-branches_MS
       dockerfile: Dockerfile
     depends_on:
       config:

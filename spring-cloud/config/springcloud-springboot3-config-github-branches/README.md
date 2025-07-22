@@ -21,7 +21,7 @@ Config service enables reading configuration properties from different sources l
 case properties are read from public Github repository and sent to microservice. This microservice displays
 these properties: common, public and secret.
 
-Github repository: https://github.com/wisniewskikr/springcloud-springboot3-config-github-public
+Github repository: https://github.com/wisniewskikr/springcloud-springboot3-config-github-branches
 
 Checking Github properties on Spring Cloud: `http://<CONFIG-SERVER-HOST>:<PORT>/<application>/<profile>[/<label>]`
 
@@ -80,8 +80,8 @@ USAGE MANUAL
    * File **application.properties** with properties: `message.common = Hello World, Common!`
    * File **ms.properties** with properties: `message.public = Hello World, Public!` and `message.secret = Hello World, Secret!`
 1. In **Config** module update file **src/main/resources/application.properties** with property `spring.cloud.config.server.git.uri` which should contain URI to Github repository
-1. In a first command line tool **start CONFIG application** with `mvn -f ./springcloud-springboot3-config-github-public_CONFIG spring-boot:run`
-1. In a second command line tool **start MS application** with `mvn -f ./springcloud-springboot3-config-github-public_MS spring-boot:run`
+1. In a first command line tool **start CONFIG application** with `mvn -f ./springcloud-springboot3-config-github-branches_CONFIG spring-boot:run`
+1. In a second command line tool **start MS application** with `mvn -f ./springcloud-springboot3-config-github-branches_MS spring-boot:run`
 1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8080`
     * Expected HTML page with following JSON: `{"commonMessage":"Hello World, Common!","publicMessage":"Hello World, Public!","secretMessage":"Hello World, Secret!"}`
 1. Clean up environment
@@ -165,10 +165,10 @@ USAGE KUBERNETES (KIND)
 
 ##### Optional steps:
 1. Check properties of MS service with `http://localhost:8888/ms/default/main`
-1. In a command line tool build Docker MS image with `docker build -f springcloud-springboot3-config-github-public_MS/Dockerfile -t wisniewskikr/springcloud-springboot3-config-github-public_ms:0.0.1 ./springcloud-springboot3-config-github-public_MS`
-1. In a command line tool push Docker MS image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-config-github-public_ms:0.0.1`
-1. In a command line tool build Docker CONFIG image with `docker build -f springcloud-springboot3-config-github-public_CONFIG/Dockerfile -t wisniewskikr/springcloud-springboot3-config-github-public_config:0.0.1 ./springcloud-springboot3-config-github-public_CONFIG`
-1. In a command line tool push Docker CONFIG image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-config-github-public_config:0.0.1`
+1. In a command line tool build Docker MS image with `docker build -f springcloud-springboot3-config-github-branches_MS/Dockerfile -t wisniewskikr/springcloud-springboot3-config-github-branches_ms:0.0.1 ./springcloud-springboot3-config-github-branches_MS`
+1. In a command line tool push Docker MS image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-config-github-branches_ms:0.0.1`
+1. In a command line tool build Docker CONFIG image with `docker build -f springcloud-springboot3-config-github-branches_CONFIG/Dockerfile -t wisniewskikr/springcloud-springboot3-config-github-branches_config:0.0.1 ./springcloud-springboot3-config-github-branches_CONFIG`
+1. In a command line tool push Docker CONFIG image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-config-github-branches_config:0.0.1`
 1. In the first command line tool with administrator privileges check clusters with `kind get clusters`
 1. In a command line tool check Kubernetes Deployments with `kubectl get deployments`
 1. In a command line tool check Kubernetes Deployments details with **kubectl describe deployment {deployment-name}**

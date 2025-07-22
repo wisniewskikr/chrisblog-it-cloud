@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: config
-          image: wisniewskikr/springcloud-springboot3-config-github-secured:0.0.1
+          image: wisniewskikr/springcloud-springboot3-config-github-secured_config:0.0.1
           ports:
             - containerPort: 8888
           env:

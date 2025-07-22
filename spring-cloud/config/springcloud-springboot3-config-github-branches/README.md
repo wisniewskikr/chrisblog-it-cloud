@@ -1,13 +1,11 @@
-EXAMPLE
--------
+EXAMPLE MANUAL
+--------------
 
-![My Image](readme-images/image-01.png)
+![My Image](readme-images/manual-01.png)
 
-![My Image](readme-images/image-02.png)
+![My Image](readme-images/manual-02.png)
 
-![My Image](readme-images/image-03.png)
-
-![My Image](readme-images/image-04.png)
+![My Image](readme-images/manual-03.png)
 
 
 DESCRIPTION
@@ -15,7 +13,7 @@ DESCRIPTION
 
 ##### Goal
 The goal of this project is to present how to create **Config Server** which reads properties from **public github**
-repository and connect it with microservice with usage **Java** programming language and **Spring Cloud** framework. 
+repository from specific **branch** and connect it with microservice with usage **Java** programming language and **Spring Cloud** framework. 
 
 Config service enables reading configuration properties from different sources like: github, file etc. In this
 case properties are read from public Github repository and sent to microservice. This microservice displays
@@ -76,14 +74,14 @@ USAGE MANUAL
 * **Git** (tested on version 2.33.0.windows.2)
 
 ##### Required steps:
-1. Create **Github repository** with **main** branch with following files:
-   * File **application.properties** with properties: `message.common = Hello World, Common!`
-   * File **ms.properties** with properties: `message.public = Hello World, Public!` and `message.secret = Hello World, Secret!`
+1. Create **Github repository** with **manual** branch with following files:
+   * File **application.properties** with properties: `message.common = Hello World, Common Manual!`
+   * File **ms.properties** with properties: `message.public = Hello World, Public Manual!` and `message.secret = Hello World, Secret Manual!`
 1. In **Config** module update file **src/main/resources/application.properties** with property `spring.cloud.config.server.git.uri` which should contain URI to Github repository
 1. In a first command line tool **start CONFIG application** with `mvn -f ./springcloud-springboot3-config-github-branches_CONFIG spring-boot:run`
 1. In a second command line tool **start MS application** with `mvn -f ./springcloud-springboot3-config-github-branches_MS spring-boot:run`
 1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8080`
-    * Expected HTML page with following JSON: `{"commonMessage":"Hello World, Common!","publicMessage":"Hello World, Public!","secretMessage":"Hello World, Secret!"}`
+    * Expected HTML page with following JSON: `{"commonMessage":"Hello World, Common Manual!","publicMessage":"Hello World, Public Manual!","secretMessage":"Hello World, Secret Manual!"}`
 1. Clean up environment
     * In the second command line tool **stop MS application** with `ctrl + C`
     * In the first command line tool **stop CONFIG application** with `ctrl + C`

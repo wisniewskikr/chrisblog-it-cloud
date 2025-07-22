@@ -46,12 +46,15 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to create **Config Server** which reads properties from **public github**
+The goal of this project is to present how to create **Config Server** which reads properties from **private github**
 repository and connect it with microservice with usage **Java** programming language and **Spring Cloud** framework. 
 
 Config service enables reading configuration properties from different sources like: github, file etc. In this
-case properties are read from public Github repository and sent to microservice. This microservice displays
+case properties are read from private Github repository and sent to microservice. This microservice displays
 these properties: common, public and secret.
+
+Additionally secret message, Github login and Github token are stored as **environment variables** on local
+machine. They are not publicly visible.
 
 Github repository: https://github.com/wisniewskikr/springcloud-springboot3-config-github-secured
 
@@ -108,10 +111,12 @@ USAGE MANUAL
 * **Git** (tested on version 2.33.0.windows.2)
 
 ##### Required steps:
-1. Create **Github repository** with **main** branch with following files:
-   * File **application.properties** with properties: `message.common = Hello World, Common!`
-   * File **ms.properties** with properties: `message.public = Hello World, Public!` and `message.secret = Hello World, Secret!`
-1. In **Config** module update file **src/main/resources/application.properties** with property `spring.cloud.config.server.git.uri` which should contain URI to Github repository
+1. Configure Github repository (please check section **GITHUB CONFIGURATION**)
+1. Configure local environment variables (please check section **ENVIRONMENT VARIABLES CONFIGURATION**)
+1. In **Config** module update file **src/main/resources/application.properties** with properties
+* **spring.cloud.config.server.git.uri**: location of Github repository
+* **spring.cloud.config.server.git.username**: Github username
+* **spring.cloud.config.server.git.password**: Github token
 1. In a first command line tool **start CONFIG application** with `mvn -f ./springcloud-springboot3-config-github-secured_CONFIG spring-boot:run`
 1. In a second command line tool **start MS application** with `mvn -f ./springcloud-springboot3-config-github-secured_MS spring-boot:run`
 1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8080`
@@ -119,7 +124,8 @@ USAGE MANUAL
 1. Clean up environment
     * In the second command line tool **stop MS application** with `ctrl + C`
     * In the first command line tool **stop CONFIG application** with `ctrl + C`
-    * Remove **Github repository**
+    * Remove **Github configuration**
+    * Remove **Environment Variables**
 
 ##### Optional steps:
 1. Check properties of MS service with `http://localhost:8888/ms/default/main`

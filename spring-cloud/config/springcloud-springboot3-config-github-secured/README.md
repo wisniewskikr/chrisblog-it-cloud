@@ -145,10 +145,12 @@ then **proceed with steps below**.
 * **Docker** (tested on version 4.33.1)
 
 ##### Required steps:
-1. Create **Github repository** with **main** branch with following files:
-   * File **application.properties** with properties: `message.common = Hello World, Common!`
-   * File **ms.properties** with properties: `message.public = Hello World, Public!` and `message.secret = Hello World, Secret!`
-1. In **Config** module update file **src/main/resources/application.properties** with property `spring.cloud.config.server.git.uri` which should contain URI to Github repository
+1. Configure Github repository (please check section **GITHUB CONFIGURATION**)
+1. Configure local environment variables (please check section **ENVIRONMENT VARIABLES CONFIGURATION**)
+1. In **Config** module update file **src/main/resources/application.properties** with properties
+* **spring.cloud.config.server.git.uri**: location of Github repository
+* **spring.cloud.config.server.git.username**: Github username
+* **spring.cloud.config.server.git.password**: Github token
 1. Start **Docker** tool
 1. In any command line tool **start Docker containers** with `docker-compose -f .\docker-compose\docker-compose.yaml up -d --build`
 1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8080`
@@ -156,6 +158,8 @@ then **proceed with steps below**.
 1. Clean up environment
    * In a command line tool **remove Docker containers** with `docker-compose -f .\docker-compose\docker-compose.yaml down --rmi all`
    * Stop **Docker** tool
+   * Remove **Github configuration**
+   * Remove **Environment Variables**
 
 ##### Optional steps:
 1. Check properties of MS service with `http://localhost:8888/ms/default/main`

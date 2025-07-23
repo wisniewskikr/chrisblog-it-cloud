@@ -33,7 +33,7 @@ DESCRIPTION
 
 ##### Goal
 The goal of this project is to present how to create **Config Server** which reads properties from **public github**
-repository from specific **branch** and connect it with microservice with usage **Java** programming language and **Spring Cloud** framework. 
+repository from specific **profile** and connect it with microservice with usage **Java** programming language and **Spring Cloud** framework. 
 
 Config service enables reading configuration properties from different sources like: github, file etc. In this
 case properties are read from public Github repository and sent to microservice. This microservice displays
@@ -95,8 +95,8 @@ USAGE MANUAL
 
 ##### Required steps:
 1. Create **Github repository** with **manual** branch with following files:
-   * File **application.properties** with properties: `message.common = Hello World, Common Manual!`
-   * File **ms.properties** with properties: `message.public = Hello World, Public Manual!` and `message.secret = Hello World, Secret Manual!`
+   * File **application-manual.properties** with properties: `message.common = Hello World, Common Manual!`
+   * File **ms-manual.properties** with properties: `message.public = Hello World, Public Manual!` and `message.secret = Hello World, Secret Manual!`
 1. In **Config** module update file **src/main/resources/application.properties** with property `spring.cloud.config.server.git.uri` which should contain URI to Github repository
 1. In a first command line tool **start CONFIG application** with `mvn -f ./springcloud-springboot3-config-github-profiles_CONFIG spring-boot:run`
 1. In a second command line tool **start MS application** with `mvn -f ./springcloud-springboot3-config-github-profiles_MS spring-boot:run`
@@ -108,7 +108,7 @@ USAGE MANUAL
     * Remove **Github repository**
 
 ##### Optional steps:
-1. Check properties of MS service with `http://localhost:8888/ms/default/manual`
+1. Check properties of MS service with `http://localhost:8888/ms/manual/main`
 
 
 USAGE DOCKER COMPOSE
@@ -138,7 +138,7 @@ then **proceed with steps below**.
    * Stop **Docker** tool
 
 ##### Optional steps:
-1. Check properties of MS service with `http://localhost:8888/ms/default/docker-compose`
+1. Check properties of MS service with `http://localhost:8888/ms/dockercompose/main`
 1. In a command line tool validate Docker Compose with `docker-compose config`
 1. In a command line tool check list of Docker images with `docker images`
 1. In a command line tool check list of all Docker containers with `docker ps -a`
@@ -182,7 +182,7 @@ USAGE KUBERNETES (KIND)
    * Stop **Docker** tool
 
 ##### Optional steps:
-1. Check properties of MS service with `http://localhost:8888/ms/default/kubernetes`
+1. Check properties of MS service with `http://localhost:8888/ms/kubernetes/main`
 1. In a command line tool build Docker MS image with `docker build -f springcloud-springboot3-config-github-profiles_MS/Dockerfile -t wisniewskikr/springcloud-springboot3-config-github-profiles_ms:0.0.1 ./springcloud-springboot3-config-github-profiles_MS`
 1. In a command line tool push Docker MS image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-config-github-profiles_ms:0.0.1`
 1. In a command line tool build Docker CONFIG image with `docker build -f springcloud-springboot3-config-github-profiles_CONFIG/Dockerfile -t wisniewskikr/springcloud-springboot3-config-github-profiles_config:0.0.1 ./springcloud-springboot3-config-github-profiles_CONFIG`
@@ -203,7 +203,6 @@ IMPLEMENTATION
 Implementation details:
 * In Config module update pom.xml file with `spring-cloud-config-server`
 * In Config module update application.properties file with `spring.cloud.config.server.git.uri`
-and `spring.cloud.config.server.git.default-label`
 * In Config module update ApplicationConfig class with `@EnableConfigServer`
 * In MS module update pom.xml file with `spring-cloud-starter-config`
-* In MS module update application.properties file with `spring.config.import`
+* In MS module update application.properties file with `spring.config.import` and `spring.profiles.active`

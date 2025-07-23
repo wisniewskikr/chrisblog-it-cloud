@@ -20,6 +20,8 @@ spec:
           ports:
             - containerPort: 8888
           env:
+            - name: spring.cloud.config.server.git.uri
+              value: https://github.com/wisniewskikr/springcloud-springboot3-config-github-branches
             - name: spring.cloud.config.server.git.default-label
               value: kubernetes
           readinessProbe:

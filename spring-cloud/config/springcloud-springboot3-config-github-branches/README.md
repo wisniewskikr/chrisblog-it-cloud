@@ -193,6 +193,7 @@ IMPLEMENTATION
 Implementation details:
 * In Config module update pom.xml file with `spring-cloud-config-server`
 * In Config module update application.properties file with `spring.cloud.config.server.git.uri`
+and `spring.cloud.config.server.git.default-label`
 * In Config module update ApplicationConfig class with `@EnableConfigServer`
 * In MS module update pom.xml file with `spring-cloud-starter-config`
 * In MS module update application.properties file with `spring.config.import`

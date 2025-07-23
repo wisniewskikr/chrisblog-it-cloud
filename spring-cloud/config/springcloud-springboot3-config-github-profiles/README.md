@@ -126,8 +126,8 @@ then **proceed with steps below**.
 
 ##### Required steps:
 1. Create **Github repository** with **docker-compose** branch with following files:
-   * File **application.properties** with properties: `message.common = Hello World, Common Docker Compose!`
-   * File **ms.properties** with properties: `message.public = Hello World, Public Docker Compose!` and `message.secret = Hello World, Secret Docker Compose!`
+   * File **application-dockercompose.properties** with properties: `message.common = Hello World, Common Docker Compose!`
+   * File **ms-dockercompose.properties** with properties: `message.public = Hello World, Public Docker Compose!` and `message.secret = Hello World, Secret Docker Compose!`
 1. Update file **docker-compose/docker-compose.yaml** with property `spring.cloud.config.server.git.uri` which should contain URI to Github repository
 1. Start **Docker** tool
 1. In any command line tool **start Docker containers** with `docker-compose -f .\docker-compose\docker-compose.yaml up -d --build`

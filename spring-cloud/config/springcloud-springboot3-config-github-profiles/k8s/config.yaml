@@ -22,8 +22,6 @@ spec:
           env:
             - name: spring.cloud.config.server.git.uri
               value: https://github.com/wisniewskikr/springcloud-springboot3-config-github-profiles
-            - name: spring.cloud.config.server.git.default-label
-              value: kubernetes
           readinessProbe:
             httpGet:
               path: /actuator/health

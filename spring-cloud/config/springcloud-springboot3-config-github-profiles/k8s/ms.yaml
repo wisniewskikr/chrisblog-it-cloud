@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms
+  labels:
+    app: ms
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms
+  template:
+    metadata:
+      labels:
+        app: ms
+    spec:
+      containers:
+        - name: ms
+          image: wisniewskikr/springcloud-springboot3-config-github-branches_ms:0.0.1
+          ports:
+            - containerPort: 8080
+          env:
+            - name: spring.config.import
+              value: optional:configserver:http://config:8888
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+      restartPolicy: Always
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: ms
+spec:
+  selector:
+    app: ms
+  ports:
+    - port: 8080
+      targetPort: 8080

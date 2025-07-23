@@ -18,6 +18,16 @@ EXAMPLE DOCKER COMPOSE
 ![My Image](readme-images/docker-compose-03.png)
 
 
+EXAMPLE KUBERNETES
+------------------
+
+![My Image](readme-images/kubernetes-01.png)
+
+![My Image](readme-images/kubernetes-02.png)
+
+![My Image](readme-images/kubernetes-03.png)
+
+
 DESCRIPTION
 -----------
 

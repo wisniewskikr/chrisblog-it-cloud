@@ -87,6 +87,11 @@ USAGE MANUAL
 1. In a second command line tool **start MS application** with `mvn -f ./springcloud-springboot3-config-github-refresh_MS spring-boot:run`
 1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8080`
     * Expected HTML page with following JSON: `{"commonMessage":"Hello World, Common!","publicMessage":"Hello World, Public!","secretMessage":"Hello World, Secret!"}`
+1. In your Github repository update file **application.properties** with properties: `message.common = Hello World, Common Updated!`
+1. In any Rest Client (e.g. Postman) refresh CONFIG service with POST request 'http://localhost:8888/actuator/refresh'
+1. In any Rest Client (e.g. Postman) refresh MS service with POST request 'http://localhost:8080/actuator/refresh'
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8080`
+   * Expected HTML page with following JSON: `{"commonMessage":"Hello World, Common Updated!","publicMessage":"Hello World, Public!","secretMessage":"Hello World, Secret!"}`
 1. Clean up environment
     * In the second command line tool **stop MS application** with `ctrl + C`
     * In the first command line tool **stop CONFIG application** with `ctrl + C`
@@ -113,11 +118,16 @@ then **proceed with steps below**.
 1. Create **Github repository** with **main** branch with following files:
    * File **application.properties** with properties: `message.common = Hello World, Common!`
    * File **ms.properties** with properties: `message.public = Hello World, Public!` and `message.secret = Hello World, Secret!`
-1. In **Config** module update file **src/main/resources/application.properties** with property `spring.cloud.config.server.git.uri` which should contain URI to Github repository
+1. Update file **docker-compose/docker-compose.yaml** with property `spring.cloud.config.server.git.uri` which should contain URI to Github repository
 1. Start **Docker** tool
 1. In any command line tool **start Docker containers** with `docker-compose -f .\docker-compose\docker-compose.yaml up -d --build`
 1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8080`
    * Expected HTML page with following JSON: `{"commonMessage":"Hello World, Common!","publicMessage":"Hello World, Public!","secretMessage":"Hello World, Secret!"}`
+1. In your Github repository update file **application.properties** with properties: `message.common = Hello World, Common Updated!`
+1. In any Rest Client (e.g. Postman) refresh CONFIG service with POST request 'http://localhost:8888/actuator/refresh'
+1. In any Rest Client (e.g. Postman) refresh MS service with POST request 'http://localhost:8080/actuator/refresh'
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8080`
+   * Expected HTML page with following JSON: `{"commonMessage":"Hello World, Common Updated!","publicMessage":"Hello World, Public!","secretMessage":"Hello World, Secret!"}`
 1. Clean up environment
    * In a command line tool **remove Docker containers** with `docker-compose -f .\docker-compose\docker-compose.yaml down --rmi all`
    * Stop **Docker** tool
@@ -159,6 +169,11 @@ USAGE KUBERNETES (KIND)
 1. In the third command line tool **forward port of MS service** with `kubectl port-forward service/ms 8080:8080`
 1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8080`
    * Expected HTML page with following JSON: `{"commonMessage":"Hello World, Common!","publicMessage":"Hello World, Public!","secretMessage":"Hello World, Secret!"}`
+1. In your Github repository update file **application.properties** with properties: `message.common = Hello World, Common Updated!`
+1. In any Rest Client (e.g. Postman) refresh CONFIG service with POST request 'http://localhost:8888/actuator/refresh'
+1. In any Rest Client (e.g. Postman) refresh MS service with POST request 'http://localhost:8080/actuator/refresh'
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8080`
+   * Expected HTML page with following JSON: `{"commonMessage":"Hello World, Common Updated!","publicMessage":"Hello World, Public!","secretMessage":"Hello World, Secret!"}`
 1. Clean up environment
    * In the third command line tool **stop forwarding port of MS service** with `ctrl + C`
    * In the second command line tool **stop forwarding port of CONFIG service** with `ctrl + C`

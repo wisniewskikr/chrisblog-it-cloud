@@ -8,14 +8,13 @@ import org.springframework.web.client.RestClient;
 import org.springframework.web.client.support.RestClientAdapter;
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 
-import com.example.clients.HelloWorldClient;
+import com.example.clients.ClientMs2;
 
 @Configuration
 public class RestClientConfig {
 
-    // TODO
-    @Value("${baseurl.be}")
-    private String baseUrlBe;
+    @Value("${baseurl.ms2}")
+    private String baseUrlMs2;
 
     @Bean
     @LoadBalanced
@@ -24,15 +23,15 @@ public class RestClientConfig {
     }
     
     @Bean
-    public HelloWorldClient helloWorldClient() {
+    public ClientMs2 helloWorldClient() {
 
         RestClient restClient = getRestClient()
-                .baseUrl("http://BE")
+                .baseUrl(baseUrlMs2)
                 .build();
         RestClientAdapter adapter = RestClientAdapter.create(restClient);
         HttpServiceProxyFactory factory
                 = HttpServiceProxyFactory.builderFor(adapter).build();
-        return factory.createClient(HelloWorldClient.class);
+        return factory.createClient(ClientMs2.class);
 
     }
 

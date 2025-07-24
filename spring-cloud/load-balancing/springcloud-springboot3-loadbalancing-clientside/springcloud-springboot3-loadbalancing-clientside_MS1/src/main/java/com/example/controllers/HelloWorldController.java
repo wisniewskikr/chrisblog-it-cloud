@@ -1,33 +1,29 @@
 package com.example.controllers;
 
+import com.example.clients.ClientMs2;
+import com.example.models.ResponseMs1;
+import com.example.models.ResponseMs2;
 import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.dtos.HelloWorldDto;
-import com.example.services.HelloWorldService;
-
-@Controller
-@RequestMapping("fe")
+@RestController
 public class HelloWorldController {
 
-    private HelloWorldService helloWorldService;
-    private Environment environment; 
+    private final Environment environment;
+    private final ClientMs2 clientMs2;
 
-    public HelloWorldController(HelloWorldService helloWorldService, Environment environment) {
-        this.helloWorldService = helloWorldService;
+    public HelloWorldController(Environment environment, ClientMs2 clientMs2) {
         this.environment = environment;
+        this.clientMs2 = clientMs2;
     }
 
     @GetMapping
-    String findById(Model model) {
+    public ResponseEntity<ResponseMs1> helloWorldMs1() {
 
-        HelloWorldDto helloWorldDto = helloWorldService.findById(1L);
-        model.addAttribute("message", helloWorldDto.text());        
-        model.addAttribute("portBe", helloWorldDto.portBe());
-        model.addAttribute("portFe", environment.getProperty("local.server.port"));
-        return "helloworld";
+        ResponseMs2 responseMs2 = clientMs2.helloWorld();
+        String portMs1 = environment.getProperty("local.server.port");
+        return ResponseEntity.ok(new ResponseMs1(portMs1, responseMs2.portMs2()));
 
     }
 

@@ -1,3 +1,13 @@
+EXAMPLE
+-------
+
+![My Image](readme-images/image-01.png)
+
+![My Image](readme-images/image-02.png)
+
+![My Image](readme-images/image-03.png)
+
+
 DESCRIPTION
 -----------
 
@@ -46,12 +56,6 @@ Implementation details:
 * **Other Services**: update pom.xml file with dependency **spring-cloud-starter-netflix-eureka-client**. Update Spring Boot starter class with annotation **@EnableEurekaClient** in starter class. Update file **application.properties** with services names, ports and eureka properties.
 
 
-EXAMPLE
--------
-
-![My Image](readme-images/image-01.png)
-
-
 USAGE MANUAL
 ------------
 
@@ -64,34 +68,24 @@ USAGE MANUAL
 * **Java** (tested on version 17.0.5)
 * **Maven** (tested on version 3.8.5)
 * **Git** (tested on version 2.33.0.windows.2)
-* **Docker** (tested on version 4.33.1 - it has to be up and running)
 
 ##### Required steps:
-1. In the first command line tool **start Docker MySql container** with `docker run -d --name mysql-container -e MYSQL_ROOT_PASSWORD=my_secret_password -e MYSQL_DATABASE=database -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin123 -p 3306:3306 mysql:5.7`
-1. In the second command line tool **start Discovery application** with `mvn -f ./springcloud-springboot3-loadbalancing-clientside_DISCOVERY spring-boot:run`
-1. In the third command line tool **start first Back-End application** with `mvn -f ./springcloud-springboot3-loadbalancing-clientside_MS2 spring-boot:run`
-1. In the fourth command line tool **start second Back-End application** with `mvn -f ./springcloud-springboot3-loadbalancing-clientside_MS2 spring-boot:run`
-1. In the fifth command line tool **start first Front-End application** with `mvn -f ./springcloud-springboot3-loadbalancing-clientside_MS1 spring-boot:run`
-1. In the sixth command line tool **start second Front-End application** with `mvn -f ./springcloud-springboot3-loadbalancing-clientside_MS1 spring-boot:run`
-1. In the seventh command line tool **start Routing application** with `mvn -f ./springcloud-loadbalancing-serverside_ROUTING spring-boot:run`
-1. In a browser visit `http://localhost:8060/fe`
-   * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
-1. Clean up environment 
-     * In the seventh command line tool **stop Routing application** with `ctrl + C`
-     * In the sixth command line tool **stop second Front-End application** with `ctrl + C`
-     * In the fifth command line tool **stop first Front-End application** with `ctrl + C`
-     * In the fourth command line tool **stop second Back-End application** with `ctrl + C`
-     * In the third command line tool **stop first Back-End application** with `ctrl + C`
-     * In the second command line tool **stop Discovery application** with `ctrl + C`
-     * In the first command line tool **stop and remove Docker MySql container** with `docker rm -f mysql-container`
-     * In the first command line tool **remove Docker MySql image** with `docker rmi mysql:5.7`
+1. In the first command line tool **start DISCOVERY application** with `mvn -f ./springcloud-springboot3-loadbalancing-clientside_DISCOVERY spring-boot:run`
+1. In the second command line tool **start MS1 application** with `mvn -f ./springcloud-springboot3-loadbalancing-clientside_MS1 spring-boot:run`
+1. In the third command line tool **start first instance of MS2 application** with `mvn -f ./springcloud-springboot3-loadbalancing-clientside_MS2 spring-boot:run`
+1. In the fourth command line tool **start second instance of MS2 application** with `mvn -f ./springcloud-springboot3-loadbalancing-clientside_MS2 spring-boot:run`
+1. In a browser visit `http://localhost:8080`
+   * Expected JSON with following structure: **{"portMs1":"8080","portMs2":"{port MS2}"}**
+   * After refresh **port MS2** should be changed to port of another instance of MS2
+1. Clean up environment
+     * In the fourth command line tool **stop second instance of MS2 application** with `ctrl + C`
+     * In the third command line tool **stop first instance of MS2 application** with `ctrl + C`
+     * In the second command line tool **stop MS1 application** with `ctrl + C`
+     * In the first command line tool **stop DISCOVERY application** with `ctrl + c`
 
 ##### Optional steps:
 1. In a browser visit `http://localhost:8761`
-   * Expected Discovery page with services **be**, **fe** and **routing** details
-1. In a command line tool check list of Docker images with `docker images`
-1. In a command line tool check list of all Docker containers with `docker ps -a`
-1. In a command line tool check list of active Docker containers with `docker ps`
+   * Expected Discovery page with services details
 
 
 USAGE DOCKER

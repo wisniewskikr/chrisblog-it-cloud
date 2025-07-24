@@ -2,9 +2,11 @@ package com.example.controllers;
 
 import com.example.models.HelloWorldResponse;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@RefreshScope
 @RestController
 public class HelloWorldController {
 

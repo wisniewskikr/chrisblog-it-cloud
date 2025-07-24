@@ -25,7 +25,7 @@ services:
     image: discovery-image
     container_name: discovery-container
     build:
-      context: ./springcloud-loadbalancing-serverside_DISCOVERY
+      context: ./springcloud-springboot3-loadbalancing-clientside_DISCOVERY
       dockerfile: Dockerfile
     depends_on:
       mysql:

@@ -219,7 +219,7 @@ spec:
     spec:
       containers:
       - name: fe
-        image: wisniewskikr/springcloud-loadbalancing-serverside_fe:0.0.1
+        image: wisniewskikr/springcloud-springboot3-loadbalancing-clientside_ms1:0.0.1
         ports:
         - containerPort: 8080
         env:

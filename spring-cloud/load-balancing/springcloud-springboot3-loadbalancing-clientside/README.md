@@ -71,8 +71,8 @@ USAGE MANUAL
 1. In the second command line tool **start Discovery application** with `mvn -f ./springcloud-springboot3-loadbalancing-clientside_DISCOVERY spring-boot:run`
 1. In the third command line tool **start first Back-End application** with `mvn -f ./springcloud-loadbalancing-serverside_BE spring-boot:run`
 1. In the fourth command line tool **start second Back-End application** with `mvn -f ./springcloud-loadbalancing-serverside_BE spring-boot:run`
-1. In the fifth command line tool **start first Front-End application** with `mvn -f ./springcloud-loadbalancing-serverside_FE spring-boot:run`
-1. In the sixth command line tool **start second Front-End application** with `mvn -f ./springcloud-loadbalancing-serverside_FE spring-boot:run`
+1. In the fifth command line tool **start first Front-End application** with `mvn -f ./springcloud-springboot3-loadbalancing-clientside_MS1 spring-boot:run`
+1. In the sixth command line tool **start second Front-End application** with `mvn -f ./springcloud-springboot3-loadbalancing-clientside_MS1 spring-boot:run`
 1. In the seventh command line tool **start Routing application** with `mvn -f ./springcloud-loadbalancing-serverside_ROUTING spring-boot:run`
 1. In a browser visit `http://localhost:8060/fe`
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
@@ -114,7 +114,7 @@ USAGE DOCKER
 1. In a command line tool build **Docker image BE** with `docker build -f springcloud-loadbalancing-serverside_BE/Dockerfile -t be-image:0.0.1 ./springcloud-loadbalancing-serverside_BE`
 1. In a command line tool build and start **Docker first container BE** with `docker run -P --name be-container-1 --network helloworld-network -e spring.datasource.url=jdbc:mysql://mysql-container:3306/database -e eureka.client.service-url.defaultZone=http://discovery-container:8761/eureka -d be-image:0.0.1`
 1. In a command line tool build and start **Docker second container BE** with `docker run -P --name be-container-2 --network helloworld-network -e spring.datasource.url=jdbc:mysql://mysql-container:3306/database -e eureka.client.service-url.defaultZone=http://discovery-container:8761/eureka -d be-image:0.0.1`
-1. In a command line tool build **Docker image FE** with `docker build -f springcloud-loadbalancing-serverside_FE/Dockerfile -t fe-image:0.0.1 ./springcloud-loadbalancing-serverside_FE`
+1. In a command line tool build **Docker image FE** with `docker build -f springcloud-springboot3-loadbalancing-clientside_MS1/Dockerfile -t fe-image:0.0.1 ./springcloud-springboot3-loadbalancing-clientside_MS1`
 1. In a command line tool build and start **Docker first container FE** with `docker run -P --name fe-container-1 --network helloworld-network -e eureka.client.service-url.defaultZone=http://discovery-container:8761/eureka -d fe-image:0.0.1`
 1. In a command line tool build and start **Docker second container FE** with `docker run -P --name fe-container-2 --network helloworld-network -e eureka.client.service-url.defaultZone=http://discovery-container:8761/eureka -d fe-image:0.0.1`
 1. In a command line tool build **Docker image GATEWAY** with `docker build -f springcloud-loadbalancing-serverside_ROUTING/Dockerfile -t gateway-image:0.0.1 ./springcloud-loadbalancing-serverside_ROUTING`
@@ -207,8 +207,8 @@ USAGE KUBERNETES (MINIKUBE)
 1. In a command line tool push Docker DISCOVERY image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-loadbalancing-clientside_discovery:0.0.1`
 1. In a command line tool build Docker BE image with `docker build -f springcloud-loadbalancing-serverside_BE/Dockerfile -t wisniewskikr/springcloud-loadbalancing-serverside_be:0.0.1 ./springcloud-loadbalancing-serverside_BE`
 1. In a command line tool push Docker BE image to Docker Repository with `docker push wisniewskikr/springcloud-loadbalancing-serverside_be:0.0.1` 
-1. In a command line tool build Docker FE image with `docker build -f springcloud-loadbalancing-serverside_FE/Dockerfile -t wisniewskikr/springcloud-loadbalancing-serverside_fe:0.0.1 ./springcloud-loadbalancing-serverside_FE`
-1. In a command line tool push Docker FE image to Docker Repository with `docker push wisniewskikr/springcloud-loadbalancing-serverside_fe:0.0.1` 
+1. In a command line tool build Docker FE image with `docker build -f springcloud-springboot3-loadbalancing-clientside_MS1/Dockerfile -t wisniewskikr/springcloud-springboot3-loadbalancing-clientside_ms1:0.0.1 ./springcloud-springboot3-loadbalancing-clientside_MS1`
+1. In a command line tool push Docker FE image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-loadbalancing-clientside_ms1:0.0.1` 
 1. In a command line tool build Docker ROUTING image with `docker build -f springcloud-loadbalancing-serverside_ROUTING/Dockerfile -t wisniewskikr/springcloud-loadbalancing-serverside_routing:0.0.1 ./springcloud-loadbalancing-serverside_ROUTING`
 1. In a command line tool push Docker ROUTING image to Docker Repository with `docker push wisniewskikr/springcloud-loadbalancing-serverside_routing:0.0.1`
 1. In the first command line tool **with administrator privileges** display DISCOVERY service in a Browser with `minikube service discovery-service-display`

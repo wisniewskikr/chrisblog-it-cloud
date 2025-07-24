@@ -61,7 +61,7 @@ services:
   fe:
     image: fe-image:0.0.1
     build:
-      context: ./springcloud-loadbalancing-serverside_FE
+      context: ./springcloud-springboot3-loadbalancing-clientside_MS1
       dockerfile: Dockerfile
     environment:
       eureka.client.service-url.defaultZone: http://discovery:8761/eureka

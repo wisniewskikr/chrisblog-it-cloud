@@ -1,32 +1,26 @@
 package com.example.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.models.ResponseMs2;
+import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.dtos.HelloWorldDto;
-import com.example.services.HelloWorldService;
-
 @RestController
-@RequestMapping("be")
 public class HelloWorldController {
 
-	private HelloWorldService helloWorldService;
+	private final Environment environment;
 
-	@Autowired
-	public HelloWorldController(HelloWorldService helloWorldService) {
-		this.helloWorldService = helloWorldService;
+	public HelloWorldController(Environment environment) {
+		this.environment = environment;
 	}
 
-	@GetMapping("/message/{id}")
-	public ResponseEntity<HelloWorldDto> helloWorld(@PathVariable Long id) {
+	@GetMapping
+	public ResponseEntity<ResponseMs2> helloWorld() {
 
-		HelloWorldDto helloWorldDto = helloWorldService.findById(id);
-		return ResponseEntity.ok(helloWorldDto);		
-		
+		String portMs2 = environment.getProperty("local.server.port");
+		return ResponseEntity.ok(new ResponseMs2(portMs2));
+
 	}
 	
 }

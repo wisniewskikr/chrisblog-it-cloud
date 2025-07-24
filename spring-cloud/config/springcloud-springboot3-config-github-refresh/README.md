@@ -159,7 +159,7 @@ USAGE KUBERNETES (KIND)
 1. Create **Github repository** with **main** branch with following files:
    * File **application.properties** with properties: `message.common = Hello World, Common!`
    * File **ms.properties** with properties: `message.public = Hello World, Public!` and `message.secret = Hello World, Secret!`
-1. In **Config** module update file **src/main/resources/application.properties** with property `spring.cloud.config.server.git.uri` which should contain URI to Github repository
+1. Update file **k8s/config.yaml** with property `spring.cloud.config.server.git.uri` which should contain URI to Github repository
 1. Start **Docker** tool
 1. In the first command line tool create and start cluster **Kind** with `kind create cluster --name helloworld`
 1. In the second command line tool **start Kubernetes Pods** with `kubectl apply -f ./k8s --recursive`

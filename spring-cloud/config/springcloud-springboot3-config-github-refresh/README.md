@@ -183,6 +183,8 @@ IMPLEMENTATION
 --------------
 
 Implementation details:
+* In CONFIG module update pom.xml file with `spring-boot-starter-actuator`
+* In CONFIG module update application.properties file with `management.endpoints.web.exposure.include=health,info,refresh`
 * In MS module update pom.xml file with `spring-boot-starter-actuator`
 * In MS module update application.properties file with `management.endpoints.web.exposure.include=health,info,refresh`
 * In MS module update controllers with `@RefreshScope`

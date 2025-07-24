@@ -14,7 +14,8 @@ DESCRIPTION
 ##### Goal
 The goal of this project is to present how to create a **load balancing** 
 type **client-side** with usage **Java** programming language and **Spring Boot 3** and **Spring Cloud** frameworks. 
-Client-side loadbalancing means that all traffic is redirected in Microservice which calls API, not in Eureca.
+Client-side loadbalancing means that all traffic is redirected in Microservice which calls API, 
+not in Eureka Discovery Server.
 
 This chain of services consists of following applications:
 * **MS1**: an application created in **Java** programming language with usage **Spring Boot** framework. 

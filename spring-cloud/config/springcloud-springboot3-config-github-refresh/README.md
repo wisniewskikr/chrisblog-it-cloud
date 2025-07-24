@@ -18,12 +18,11 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to create **Config Server** which reads properties from **public github**
-repository and connect it with microservice with usage **Java** programming language and **Spring Cloud** framework. 
+The goal of this project is to present how to implement **refresh** functionality for **Config Server** 
+connected with **Github** and microservice with usage **Java** programming language and **Spring Cloud** framework. 
 
-Config service enables reading configuration properties from different sources like: github, file etc. In this
-case properties are read from public Github repository and sent to microservice. This microservice displays
-these properties: common, public and secret.
+Refresh functionality means that user is able to refresh properties in Config Server and Microservice without
+restarting them.
 
 Github repository: https://github.com/wisniewskikr/springcloud-springboot3-config-github-refresh
 

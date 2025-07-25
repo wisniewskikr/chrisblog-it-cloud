@@ -80,32 +80,36 @@ USAGE MANUAL
 USAGE DOCKER COMPOSE
 --------------------
 
-> **Usage Docker Compse** means that microservices and Database are provided as **Docker containers** definied in **Docker Compose** file. 
+> **Usage Docker Compose** means all services are started as Docker containers defined in docker compose file.
 
-> Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and then **proceed with steps below**.
+> Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and
+then **proceed with steps below**.
 
-> Please be aware that following tools should be installed on your local PC:  
+> **Prerequisites**:
 * **Operating System** (tested on Windows 11)
 * **Git** (tested on version 2.33.0.windows.2)
-* **Docker** (tested on version 4.33.1 - it has to be up and running)
+* **Docker** (tested on version 4.33.1)
 
 ##### Required steps:
-1. In a command line tool **start Docker containers** with `docker-compose up -d --build`
-1. In a browser visit `http://localhost:8060/fe`
-   * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
-1. Clean up environment 
-     * In a command line tool **remove Docker containers** with `docker-compose down --rmi all`
+1. Start **Docker** tool
+1. In any command line tool **start Docker containers** with `docker-compose -f .\docker-compose\docker-compose.yaml up -d --build`
+1. In a browser visit `http://localhost:8080`
+   * Expected JSON with following structure: **{"portMs1":"8080","portMs2":"{port MS2}"}**
+   * After refresh **port MS2** should be changed to port of another instance of MS2
+1. Clean up environment
+   * In a command line tool **remove Docker containers** with `docker-compose -f .\docker-compose\docker-compose.yaml down --rmi all`
+   * Stop **Docker** tool
 
 ##### Optional steps:
 1. In a browser visit `http://localhost:8761`
-   * Expected Discovery page with services **be**, **fe** and **gateway** details 
+   * Expected Discovery page with services details
 1. In a command line tool validate Docker Compose with `docker-compose config`
 1. In a command line tool check list of Docker images with `docker images`
 1. In a command line tool check list of all Docker containers with `docker ps -a`
 1. In a command line tool check list of active Docker containers with `docker ps`
 1. In a command line tool check list of Docker nerworks with `docker network ls`
-1. In a command line tool check BE container logs with `docker logs be-container`
-1. In a command line tool check FE container logs with `docker logs fe-container`
+1. In a command line tool check CONFIG container logs with `docker logs config-container`
+1. In a command line tool check MS container logs with `docker logs ms-container`
 
 
 USAGE KUBERNETES (MINIKUBE)

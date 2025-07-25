@@ -36,16 +36,25 @@ Terminology explanation:
 * **Client-side load balancing**: Client-side load balancing is a method where the client (or service consumer) chooses which server or instance to send a request to, based on available data like service registry or load metrics, rather than relying on a central load balancer.
 
 
+USAGES
+------
+
+This project can be tested in following configurations:
+* **Usage Manual**: application services are started manually in command line
+* **Usage Docker Compose**: all services are started as Docker containers defined in docker compose file.
+* **Usage Kubernetes (Kind)**: all services are started as Kubernetes pods.
+
+
 USAGE MANUAL
 ------------
 
-> **Usage Manual** means that microservices are provided as **Java and Maven applications** and started **manually**. Database is provided as **Docker container**.
+> **Usage Manual** means that application services are started manually in command line
 
 > Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and then **proceed with steps below**. 
 
 > Please be aware that following tools should be installed on your local PC:  
 * **Operating System** (tested on Windows 11)
-* **Java** (tested on version 17.0.5)
+* **Java** (tested on version 23.0.1)
 * **Maven** (tested on version 3.8.5)
 * **Git** (tested on version 2.33.0.windows.2)
 

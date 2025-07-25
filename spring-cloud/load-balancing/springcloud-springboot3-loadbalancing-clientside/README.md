@@ -148,5 +148,11 @@ USAGE KUBERNETES (MINIKUBE)
 
 ##### Implementation
 Implementation details:
-* **Eureka Service Discovery**: update pom.xml file with dependency **spring-cloud-starter-netflix-eureka-server**. Update Spring Boot starter class with annotation **@EnableEurekaServer** in starter class. Update file **application.properties** with service name, port and eureka properties.
-* **Other Services**: update pom.xml file with dependency **spring-cloud-starter-netflix-eureka-client**. Update Spring Boot starter class with annotation **@EnableEurekaClient** in starter class. Update file **application.properties** with services names, ports and eureka properties.
+* In DISCOVERY update **pom.xml** file with dependency `spring-cloud-starter-netflix-eureka-server`
+* In DISCOVERY update **ApplicationDiscovery** class with annotation `@EnableEurekaServer`
+* In DISCOVERY update **application.properties** file with properties `eureka.client.fetch-registry=false` 
+and `eureka.client.register-with-eureka=false`
+* In MS1 and MS2 update **pom.xml** files with dependency `spring-cloud-starter-netflix-eureka-client`
+* In MS1 and MS2 update **application.properties** files with property `eureka.client.service-url.defaultZone=http://localhost:8761/eureka`
+* In MS1 update **application.properties** file with property `baseurl.ms2=http://MS2` (name from DISCOVERY, no more host and port)
+* In MS1 update **RestClientConfig** class with annotation `@LodaBalanced`

@@ -145,8 +145,10 @@ USAGE KUBERNETES (KIND)
 ##### Optional steps:
 1. In a browser visit `http://localhost:8761`
    * Expected Discovery page with services details
-1. In a command line tool build Docker MS image with `docker build -f springcloud-springboot3-loadbalancing-clientside_MS1/Dockerfile -t wisniewskikr/springcloud-springboot3-loadbalancing-clientside_ms1:0.0.1 ./springcloud-springboot3-loadbalancing-clientside_MS1`
-1. In a command line tool push Docker MS image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-loadbalancing-clientside_ms1:0.0.1`
+1. In a command line tool build Docker MS1 image with `docker build -f springcloud-springboot3-loadbalancing-clientside_MS1/Dockerfile -t wisniewskikr/springcloud-springboot3-loadbalancing-clientside_ms1:0.0.1 ./springcloud-springboot3-loadbalancing-clientside_MS1`
+1. In a command line tool push Docker MS1 image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-loadbalancing-clientside_ms1:0.0.1`
+1. In a command line tool build Docker MS2 image with `docker build -f springcloud-springboot3-loadbalancing-clientside_MS2/Dockerfile -t wisniewskikr/springcloud-springboot3-loadbalancing-clientside_ms2:0.0.1 ./springcloud-springboot3-loadbalancing-clientside_MS2`
+1. In a command line tool push Docker MS2 image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-loadbalancing-clientside_ms2:0.0.1`
 1. In a command line tool build Docker CONFIG image with `docker build -f springcloud-springboot3-loadbalancing-clientside_DISCOVERY/Dockerfile -t wisniewskikr/springcloud-springboot3-loadbalancing-clientside_discovery:0.0.1 ./springcloud-springboot3-loadbalancing-clientside_DISCOVERY`
 1. In a command line tool push Docker CONFIG image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-loadbalancing-clientside_discovery:0.0.1`
 1. In the first command line tool with administrator privileges check clusters with `kind get clusters`

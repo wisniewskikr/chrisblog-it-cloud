@@ -1,0 +1,52 @@
+services:
+
+  discovery:
+    image: discovery-image
+    container_name: discovery-container
+    build:
+      context: ./../springcloud-springboot3-loadbalancing-clientside_DISCOVERY
+      dockerfile: Dockerfile
+    ports:
+      - 8761:8761
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8761/actuator/health"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+    networks:
+      - helloworld-network
+  
+  ms1:
+    image: ms1-image:0.0.1
+    build:
+      context: ./../springcloud-springboot3-loadbalancing-clientside_MS1
+      dockerfile: Dockerfile
+    environment:
+      eureka.client.service-url.defaultZone: http://discovery:8761/eureka
+    depends_on:
+      - discovery
+    ports:
+      - 8080:8080
+    networks:
+      - helloworld-network
+
+  ms2:
+    image: ms2-image:0.0.1
+    build:
+      context: ./../springcloud-springboot3-loadbalancing-clientside_MS2
+      dockerfile: Dockerfile
+    environment:
+      eureka.client.service-url.defaultZone: http://discovery:8761/eureka
+    depends_on:      
+      - discovery
+    deploy:
+      replicas: 2
+    ports:
+      - 0:80
+    networks:
+      - helloworld-network
+
+networks:
+  helloworld-network:
+    name: helloworld-network-name

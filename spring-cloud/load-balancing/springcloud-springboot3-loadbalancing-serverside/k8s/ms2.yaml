@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms2
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ms2
+  template:
+    metadata:
+      labels:
+        app: ms2
+    spec:
+      containers:
+        - name: ms2
+          image: wisniewskikr/springcloud-springboot3-loadbalancing-clientside_ms2:0.0.1
+          ports:
+            - containerPort: 80
+          env:
+            - name: eureka.client.service-url.defaultZone
+              value: http://discovery:8761/eureka
+      restartPolicy: Always
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: ms2
+spec:
+  selector:
+    app: ms2
+  ports:
+    - port: 80
+      targetPort: 80

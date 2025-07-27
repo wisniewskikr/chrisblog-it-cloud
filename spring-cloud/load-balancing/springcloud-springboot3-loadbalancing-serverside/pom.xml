@@ -9,6 +9,7 @@
     <version>0.1.0</version>
     <modules>
         <module>springcloud-springboot3-loadbalancing-serverside_DISCOVERY</module>
+		<module>springcloud-springboot3-loadbalancing-serverside_GATEWAY</module>
         <module>springcloud-springboot3-loadbalancing-serverside_MS1</module>
 		<module>springcloud-springboot3-loadbalancing-serverside_MS2</module>
     </modules>

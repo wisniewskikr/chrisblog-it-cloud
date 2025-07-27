@@ -112,51 +112,51 @@ then **proceed with steps below**.
 1. In a command line tool check MS container logs with `docker logs ms-container`
 
 
-USAGE KUBERNETES (MINIKUBE)
+USAGE KUBERNETES (KIND)
 ---------------------------
 
-> **Usage Kubernetes** means that microservices and Database are provided as **Docker containers** managed by **Kubernetes** type **Minikube**. 
+> **Usage Kubernetes** means that all services are started as Kubernetes pods.
 
 > Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and then **proceed with steps below**.
 
-> Please be aware that following tools should be installed on your local PC:  
+> **Prerequisites**:
 * **Operating System** (tested on Windows 11)
 * **Git** (tested on version 2.33.0.windows.2)
-* **Minikube** (tested on version 1.33.1)
+* **Kind** (tested on version 0.26.0)
 
 ##### Required steps:
-1. In the first command line tool **with administrator privileges** start **Minikube** with `minikube start`
-1. In the second command line tool **start Kubernetes Pods** with `kubectl apply -f kubernetes.yaml`
+1. Start **Docker** tool
+1. In the first command line tool create and start cluster **Kind** with `kind create cluster --name helloworld`
+1. In the second command line tool **start Kubernetes Pods** with `kubectl apply -f ./k8s --recursive`
 1. In the second command line tool **check status of Kubernetes Pods** with `kubectl get pods`
-   * Expected mysql, be and fe as **READY 1/1** (it can take few minutes)
-1. In the first command line tool **with administrator privileges** display ROUTING service in a Browser with `minikube service routing-service`
-   * In a browser change address to **URL + /fe**
-   * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
-1. Clean up environment 
-     * In the second command line tool **remove Kubernetes Pods** with `kubectl delete -f kubernetes.yaml`
-     * In the first command line tool **with administrator privileges** stop **Minikube** with `minikube stop`
+   * Expected services as **READY 1/1** (it can take few minutes)
+1. In the second command line tool **forward port of DISCOVERY service** with `kubectl port-forward service/discovery 8761:8761`
+1. In the third command line tool **forward port of MS1 service** with `kubectl port-forward service/ms1 8080:8080`
+1. In a browser visit `http://localhost:8080`
+   * Expected JSON with following structure: **{"portMs1":"8080","portMs2":"{port MS2}"}**
+   * After refresh **port MS2** should be changed to port of another instance of MS2
+1. Clean up environment
+   * In the third command line tool **stop forwarding port of MS1 service** with `ctrl + C`
+   * In the second command line tool **stop forwarding port of DISCOVERY service** with `ctrl + C`
+   * In the first command line tool **remove Kubernetes Pods** with `kubectl delete -f ./k8s --recursive`
+   * In the first command line tool delete cluster **Kind** with `kind delete cluster --name helloworld`
+   * Stop **Docker** tool
 
 ##### Optional steps:
-1. In a command line tool build Docker DISCOVERY image with `docker build -f springcloud-springboot3-loadbalancing-clientside_DISCOVERY/Dockerfile -t wisniewskikr/springcloud-springboot3-loadbalancing-clientside_discovery:0.0.1 ./springcloud-springboot3-loadbalancing-clientside_DISCOVERY`
-1. In a command line tool push Docker DISCOVERY image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-loadbalancing-clientside_discovery:0.0.1`
-1. In a command line tool build Docker BE image with `docker build -f springcloud-springboot3-loadbalancing-clientside_MS2/Dockerfile -t wisniewskikr/springcloud-springboot3-loadbalancing-clientside_ms2:0.0.1 ./springcloud-springboot3-loadbalancing-clientside_MS2`
-1. In a command line tool push Docker BE image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-loadbalancing-clientside_ms2:0.0.1` 
-1. In a command line tool build Docker FE image with `docker build -f springcloud-springboot3-loadbalancing-clientside_MS1/Dockerfile -t wisniewskikr/springcloud-springboot3-loadbalancing-clientside_ms1:0.0.1 ./springcloud-springboot3-loadbalancing-clientside_MS1`
-1. In a command line tool push Docker FE image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-loadbalancing-clientside_ms1:0.0.1` 
-1. In a command line tool build Docker ROUTING image with `docker build -f springcloud-loadbalancing-serverside_ROUTING/Dockerfile -t wisniewskikr/springcloud-loadbalancing-serverside_routing:0.0.1 ./springcloud-loadbalancing-serverside_ROUTING`
-1. In a command line tool push Docker ROUTING image to Docker Repository with `docker push wisniewskikr/springcloud-loadbalancing-serverside_routing:0.0.1`
-1. In the first command line tool **with administrator privileges** display DISCOVERY service in a Browser with `minikube service discovery-service-display`
-   * Expected Discovery page with services **be**, **fe** and **routing** details
-1. In the first command line tool with administrator privileges check status of Minikube with `minikube status`
-1. In the first command line tool with administrator privileges check Docker images in Minikube with `minikube ssh docker images`
-1. In the first command line tool with administrator privileges check Docker containers in Minikube with `minikube ssh docker ps`
+1. In a browser visit `http://localhost:8761`
+   * Expected Discovery page with services details
+1. In a command line tool build Docker MS image with `docker build -f springcloud-springboot3-loadbalancing-clientside_MS1/Dockerfile -t wisniewskikr/springcloud-springboot3-loadbalancing-clientside_ms1:0.0.1 ./springcloud-springboot3-loadbalancing-clientside_MS1`
+1. In a command line tool push Docker MS image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-loadbalancing-clientside_ms1:0.0.1`
+1. In a command line tool build Docker CONFIG image with `docker build -f springcloud-springboot3-loadbalancing-clientside_DISCOVERY/Dockerfile -t wisniewskikr/springcloud-springboot3-loadbalancing-clientside_discovery:0.0.1 ./springcloud-springboot3-loadbalancing-clientside_DISCOVERY`
+1. In a command line tool push Docker CONFIG image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-loadbalancing-clientside_discovery:0.0.1`
+1. In the first command line tool with administrator privileges check clusters with `kind get clusters`
 1. In a command line tool check Kubernetes Deployments with `kubectl get deployments`
 1. In a command line tool check Kubernetes Deployments details with **kubectl describe deployment {deployment-name}**
 1. In a command line tool check Kubernetes Services with `kubectl get services`
 1. In a command line tool check Kubernetes Services details with **kubectl describe service {service-name}**
 1. In a command line tool check Kubernetes Pods with `kubectl get pods`
 1. In a command line tool check Kubernetes Pods details with **kubectl describe pod {pod-name}**
-1. In a command line tool check Kubernetes Pods logs with **kubectl log {pod-name}**
+1. In a command line tool check Kubernetes Pods logs with **kubectl logs {pod-name}**
 
 
 ##### Implementation

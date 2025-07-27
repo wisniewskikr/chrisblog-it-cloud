@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: discovery
-          image: wisniewskikr/springcloud-springboot3-loadbalancing-clientside_discovery:0.0.1
+          image: wisniewskikr/springcloud-springboot3-loadbalancing-serverside_discovery:0.0.1
           ports:
             - containerPort: 8761
           readinessProbe:

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: ms2
-          image: wisniewskikr/springcloud-springboot3-loadbalancing-clientside_ms2:0.0.1
+          image: wisniewskikr/springcloud-springboot3-loadbalancing-serverside_ms2:0.0.1
           ports:
             - containerPort: 80
           env:

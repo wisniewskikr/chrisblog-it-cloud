@@ -4,7 +4,7 @@ services:
     image: discovery-image
     container_name: discovery-container
     build:
-      context: ./../springcloud-springboot3-loadbalancing-clientside_DISCOVERY
+      context: ./../springcloud-springboot3-loadbalancing-serverside_DISCOVERY
       dockerfile: Dockerfile
     ports:
       - 8761:8761
@@ -20,7 +20,7 @@ services:
   ms1:
     image: ms1-image:0.0.1
     build:
-      context: ./../springcloud-springboot3-loadbalancing-clientside_MS1
+      context: ./../springcloud-springboot3-loadbalancing-serverside_MS1
       dockerfile: Dockerfile
     environment:
       eureka.client.service-url.defaultZone: http://discovery:8761/eureka
@@ -34,7 +34,7 @@ services:
   ms2:
     image: ms2-image:0.0.1
     build:
-      context: ./../springcloud-springboot3-loadbalancing-clientside_MS2
+      context: ./../springcloud-springboot3-loadbalancing-serverside_MS2
       dockerfile: Dockerfile
     environment:
       eureka.client.service-url.defaultZone: http://discovery:8761/eureka

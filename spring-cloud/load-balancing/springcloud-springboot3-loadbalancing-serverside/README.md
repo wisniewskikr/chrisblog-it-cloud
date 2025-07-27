@@ -59,10 +59,10 @@ USAGE MANUAL
 * **Git** (tested on version 2.33.0.windows.2)
 
 ##### Required steps:
-1. In the first command line tool **start DISCOVERY application** with `mvn -f ./springcloud-springboot3-loadbalancing-clientside_DISCOVERY spring-boot:run`
-1. In the second command line tool **start MS1 application** with `mvn -f ./springcloud-springboot3-loadbalancing-clientside_MS1 spring-boot:run`
-1. In the third command line tool **start first instance of MS2 application** with `mvn -f ./springcloud-springboot3-loadbalancing-clientside_MS2 spring-boot:run`
-1. In the fourth command line tool **start second instance of MS2 application** with `mvn -f ./springcloud-springboot3-loadbalancing-clientside_MS2 spring-boot:run`
+1. In the first command line tool **start DISCOVERY application** with `mvn -f ./springcloud-springboot3-loadbalancing-serverside_DISCOVERY spring-boot:run`
+1. In the second command line tool **start MS1 application** with `mvn -f ./springcloud-springboot3-loadbalancing-serverside_MS1 spring-boot:run`
+1. In the third command line tool **start first instance of MS2 application** with `mvn -f ./springcloud-springboot3-loadbalancing-serverside_MS2 spring-boot:run`
+1. In the fourth command line tool **start second instance of MS2 application** with `mvn -f ./springcloud-springboot3-loadbalancing-serverside_MS2 spring-boot:run`
 1. In a browser visit `http://localhost:8080`
    * Expected JSON with following structure: **{"portMs1":"8080","portMs2":"{port MS2}"}**
    * After refresh **port MS2** should be changed to port of another instance of MS2
@@ -145,12 +145,12 @@ USAGE KUBERNETES (KIND)
 ##### Optional steps:
 1. In a browser visit `http://localhost:8761`
    * Expected Discovery page with services details
-1. In a command line tool build Docker MS1 image with `docker build -f springcloud-springboot3-loadbalancing-clientside_MS1/Dockerfile -t wisniewskikr/springcloud-springboot3-loadbalancing-clientside_ms1:0.0.1 ./springcloud-springboot3-loadbalancing-clientside_MS1`
-1. In a command line tool push Docker MS1 image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-loadbalancing-clientside_ms1:0.0.1`
-1. In a command line tool build Docker MS2 image with `docker build -f springcloud-springboot3-loadbalancing-clientside_MS2/Dockerfile -t wisniewskikr/springcloud-springboot3-loadbalancing-clientside_ms2:0.0.1 ./springcloud-springboot3-loadbalancing-clientside_MS2`
-1. In a command line tool push Docker MS2 image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-loadbalancing-clientside_ms2:0.0.1`
-1. In a command line tool build Docker CONFIG image with `docker build -f springcloud-springboot3-loadbalancing-clientside_DISCOVERY/Dockerfile -t wisniewskikr/springcloud-springboot3-loadbalancing-clientside_discovery:0.0.1 ./springcloud-springboot3-loadbalancing-clientside_DISCOVERY`
-1. In a command line tool push Docker CONFIG image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-loadbalancing-clientside_discovery:0.0.1`
+1. In a command line tool build Docker MS1 image with `docker build -f springcloud-springboot3-loadbalancing-serverside_MS1/Dockerfile -t wisniewskikr/springcloud-springboot3-loadbalancing-serverside_ms1:0.0.1 ./springcloud-springboot3-loadbalancing-serverside_MS1`
+1. In a command line tool push Docker MS1 image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-loadbalancing-serverside_ms1:0.0.1`
+1. In a command line tool build Docker MS2 image with `docker build -f springcloud-springboot3-loadbalancing-serverside_MS2/Dockerfile -t wisniewskikr/springcloud-springboot3-loadbalancing-serverside_ms2:0.0.1 ./springcloud-springboot3-loadbalancing-serverside_MS2`
+1. In a command line tool push Docker MS2 image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-loadbalancing-serverside_ms2:0.0.1`
+1. In a command line tool build Docker CONFIG image with `docker build -f springcloud-springboot3-loadbalancing-serverside_DISCOVERY/Dockerfile -t wisniewskikr/springcloud-springboot3-loadbalancing-serverside_discovery:0.0.1 ./springcloud-springboot3-loadbalancing-serverside_DISCOVERY`
+1. In a command line tool push Docker CONFIG image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-loadbalancing-serverside_discovery:0.0.1`
 1. In the first command line tool with administrator privileges check clusters with `kind get clusters`
 1. In a command line tool check Kubernetes Deployments with `kubectl get deployments`
 1. In a command line tool check Kubernetes Deployments details with **kubectl describe deployment {deployment-name}**

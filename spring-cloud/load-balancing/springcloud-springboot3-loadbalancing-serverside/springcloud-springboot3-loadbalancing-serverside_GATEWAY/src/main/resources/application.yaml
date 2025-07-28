@@ -8,11 +8,11 @@ spring:
         - id: MS1
           uri: http://localhost:9090
           predicates:
-            - Path:/api/ms1/**
+            - Path=/api/ms1/**
         - id: MS2
-          uri: http://localhost:????
+          uri: http://localhost:63989
           predicates:
-            - Path:/api/ms2/**
+            - Path=/api/ms2/**
 
 
 # Server Port

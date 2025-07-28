@@ -13,15 +13,16 @@ DESCRIPTION
 
 ##### Goal
 The goal of this project is to present how to create a **load balancing** 
-type **client-side** with usage **Java** programming language and **Spring Boot 3** and **Spring Cloud** frameworks. 
-Client-side loadbalancing means that all traffic is redirected in Microservice which calls API, 
-not in Eureka Discovery Server.
+type **server-side** with usage **Java** programming language and **Spring Boot 3** and **Spring Cloud** frameworks. 
+Server-side loadbalancing means that all traffic is redirected in one place basing on information from DISCOVERY
+SERVICE - in this case loadbalancing is done by API GATEWAY.
 
 This chain of services consists of following applications:
 * **MS1**: an application created in **Java** programming language with usage **Spring Boot** framework. 
 This application calls MS2 application and is responsible for loadbalancing.
 * **MS2**: an application created in **Java** programming language with usage **Spring Boot** framework. 
 * **Eureka**: a tool which displays basic information - like status, port etc. - about microservices
+* **API Gateway**: an application which redirects traffic
 
 ##### Terminology
 Terminology explanation:
@@ -33,7 +34,8 @@ Terminology explanation:
 * **Microservices**: Microservices are a software architecture style where an application is built as a collection of small, independent services that communicate through APIs. Each service focuses on a specific business function, allowing for easier scaling, deployment, and maintenance.
 * **Service Discovery**: Service discovery in microservices is the process of automatically detecting and connecting services within a distributed system. It allows services to find each other dynamically without hardcoding network locations, enabling seamless scaling and communication across microservices.
 * **Eureka Service Discovery**: Eureka Service Discovery is a system that allows microservices in a distributed architecture to dynamically register themselves and discover other services. It acts as a registry where services announce their availability, enabling seamless communication between services without needing hard-coded network addresses. Eureka is commonly used in Netflix's microservices architecture and part of the Spring Cloud ecosystem.
-* **Client-side load balancing**: Client-side load balancing is a method where the client (or service consumer) chooses which server or instance to send a request to, based on available data like service registry or load metrics, rather than relying on a central load balancer.
+* **Server-side load balancing**: Server-side load balancing is the process of distributing network or application traffic across multiple servers by a central load balancer located on the server side (typically at the backend or data center) to optimize resource use, improve performance, and ensure high availability.
+* **API Gateway**: An API Gateway is a server that acts as a single entry point for client requests to multiple backend services, handling tasks like request routing, authentication, rate limiting, and response transformation.
 
 
 USAGES
@@ -63,10 +65,12 @@ USAGE MANUAL
 1. In the second command line tool **start MS1 application** with `mvn -f ./springcloud-springboot3-loadbalancing-serverside_MS1 spring-boot:run`
 1. In the third command line tool **start first instance of MS2 application** with `mvn -f ./springcloud-springboot3-loadbalancing-serverside_MS2 spring-boot:run`
 1. In the fourth command line tool **start second instance of MS2 application** with `mvn -f ./springcloud-springboot3-loadbalancing-serverside_MS2 spring-boot:run`
-1. In a browser visit `http://localhost:8080`
+1. In the fifth command line tool **start GATEWAY application** with `mvn -f ./springcloud-springboot3-loadbalancing-serverside_GATEWAY spring-boot:run`
+1. In a browser visit `http://localhost:8080/api/ms1`
    * Expected JSON with following structure: **{"portMs1":"8080","portMs2":"{port MS2}"}**
    * After refresh **port MS2** should be changed to port of another instance of MS2
 1. Clean up environment
+     * In the fifth command line tool **stop GATEWAY application** with `ctrl + C`
      * In the fourth command line tool **stop second instance of MS2 application** with `ctrl + C`
      * In the third command line tool **stop first instance of MS2 application** with `ctrl + C`
      * In the second command line tool **stop MS1 application** with `ctrl + C`

@@ -97,7 +97,7 @@ then **proceed with steps below**.
 ##### Required steps:
 1. Start **Docker** tool
 1. In any command line tool **start Docker containers** with `docker-compose -f .\docker-compose\docker-compose.yaml up -d --build`
-1. In a browser visit `http://localhost:8080`
+1. In a browser visit `http://localhost:8080/api/ms1`
    * Expected JSON with following structure: **{"portMs1":"8080","portMs2":"{port MS2}"}**
    * After refresh **port MS2** should be changed to port of another instance of MS2
 1. Clean up environment

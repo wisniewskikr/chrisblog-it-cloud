@@ -167,7 +167,7 @@ Implementation details:
 * In DISCOVERY update **ApplicationDiscovery** class with annotation `@EnableEurekaServer`
 * In DISCOVERY update **application.properties** file with properties `eureka.client.fetch-registry=false` 
 and `eureka.client.register-with-eureka=false`
-* In MS1 and MS2 update **pom.xml** files with dependency `spring-cloud-starter-netflix-eureka-client`
-* In MS1 and MS2 update **application.properties** files with property `eureka.client.service-url.defaultZone=http://localhost:8761/eureka`
-* In MS1 update **application.properties** file with property `baseurl.ms2=http://MS2` (name from DISCOVERY, no more host and port)
-* In MS1 update **RestClientConfig** class with annotation `@LodaBalanced`
+* In MS1, MS2 and GATEWAY update **pom.xml** files with dependency `spring-cloud-starter-netflix-eureka-client`
+* In MS1, MS2 and GATEWAY update **application.properties** files with property `eureka.client.service-url.defaultZone=http://localhost:8761/eureka`
+* In MS1 update **application.properties** file with property `baseurl.ms2=http://localhost:8080/api/ms2` (API GATEWAY host and port)
+* In GATEWAY change **uri** for load balancer: "http" -> "lb" and "{host}:{port}" -> "{microservice_name}" (e.g. "lb://MS2")

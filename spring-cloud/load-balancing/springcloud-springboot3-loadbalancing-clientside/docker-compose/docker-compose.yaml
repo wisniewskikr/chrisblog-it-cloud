@@ -25,7 +25,8 @@ services:
     environment:
       eureka.client.service-url.defaultZone: http://discovery:8761/eureka
     depends_on:
-      - discovery
+      discovery:
+        condition: service_healthy
     ports:
       - 8080:8080
     networks:
@@ -38,8 +39,9 @@ services:
       dockerfile: Dockerfile
     environment:
       eureka.client.service-url.defaultZone: http://discovery:8761/eureka
-    depends_on:      
-      - discovery
+    depends_on:
+      discovery:
+        condition: service_healthy
     deploy:
       replicas: 2
     ports:

@@ -16,14 +16,16 @@ spec:
         - name: ms1
           image: wisniewskikr/springcloud-springboot3-loadbalancing-serverside_ms1:0.0.1
           ports:
-            - containerPort: 8080
+            - containerPort: 9090
           env:
             - name: eureka.client.service-url.defaultZone
               value: http://discovery:8761/eureka
+            - name: baseurl.ms2
+              value: http://gateway:8080/api/ms2
           readinessProbe:
             httpGet:
               path: /actuator/health
-              port: 8080
+              port: 9090
             initialDelaySeconds: 30
             periodSeconds: 10
             timeoutSeconds: 5
@@ -31,7 +33,7 @@ spec:
           livenessProbe:
             httpGet:
               path: /actuator/health
-              port: 8080
+              port: 9090
             initialDelaySeconds: 30
             periodSeconds: 10
             timeoutSeconds: 5
@@ -47,5 +49,5 @@ spec:
   selector:
     app: ms1
   ports:
-    - port: 8080
-      targetPort: 8080
+    - port: 9090
+      targetPort: 9090

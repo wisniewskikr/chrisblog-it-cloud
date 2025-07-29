@@ -135,12 +135,12 @@ USAGE KUBERNETES (KIND)
 1. In the second command line tool **check status of Kubernetes Pods** with `kubectl get pods`
    * Expected services as **READY 1/1** (it can take few minutes)
 1. In the second command line tool **forward port of DISCOVERY service** with `kubectl port-forward service/discovery 8761:8761`
-1. In the third command line tool **forward port of MS1 service** with `kubectl port-forward service/ms1 8080:8080`
-1. In a browser visit `http://localhost:8080`
+1. In the third command line tool **forward port of GATEWAY service** with `kubectl port-forward service/gateway 8080:8080`
+1. In a browser visit `http://localhost:8080/api/ms1`
    * Expected JSON with following structure: **{"portMs1":"8080","portMs2":"{port MS2}"}**
    * After refresh **port MS2** should be changed to port of another instance of MS2
 1. Clean up environment
-   * In the third command line tool **stop forwarding port of MS1 service** with `ctrl + C`
+   * In the third command line tool **stop forwarding port of GATEWAY service** with `ctrl + C`
    * In the second command line tool **stop forwarding port of DISCOVERY service** with `ctrl + C`
    * In the first command line tool **remove Kubernetes Pods** with `kubectl delete -f ./k8s --recursive`
    * In the first command line tool delete cluster **Kind** with `kind delete cluster --name helloworld`
@@ -153,8 +153,10 @@ USAGE KUBERNETES (KIND)
 1. In a command line tool push Docker MS1 image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-loadbalancing-serverside_ms1:0.0.1`
 1. In a command line tool build Docker MS2 image with `docker build -f springcloud-springboot3-loadbalancing-serverside_MS2/Dockerfile -t wisniewskikr/springcloud-springboot3-loadbalancing-serverside_ms2:0.0.1 ./springcloud-springboot3-loadbalancing-serverside_MS2`
 1. In a command line tool push Docker MS2 image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-loadbalancing-serverside_ms2:0.0.1`
-1. In a command line tool build Docker CONFIG image with `docker build -f springcloud-springboot3-loadbalancing-serverside_DISCOVERY/Dockerfile -t wisniewskikr/springcloud-springboot3-loadbalancing-serverside_discovery:0.0.1 ./springcloud-springboot3-loadbalancing-serverside_DISCOVERY`
-1. In a command line tool push Docker CONFIG image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-loadbalancing-serverside_discovery:0.0.1`
+1. In a command line tool build Docker DISCOVERY image with `docker build -f springcloud-springboot3-loadbalancing-serverside_DISCOVERY/Dockerfile -t wisniewskikr/springcloud-springboot3-loadbalancing-serverside_discovery:0.0.1 ./springcloud-springboot3-loadbalancing-serverside_DISCOVERY`
+1. In a command line tool push Docker DISCOVERY image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-loadbalancing-serverside_discovery:0.0.1`
+1. In a command line tool build Docker GATEWAY image with `docker build -f springcloud-springboot3-loadbalancing-serverside_GATEWAY/Dockerfile -t wisniewskikr/springcloud-springboot3-loadbalancing-serverside_gateway:0.0.1 ./springcloud-springboot3-loadbalancing-serverside_GATEWAY`
+1. In a command line tool push Docker GATEWAY image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-loadbalancing-serverside_gateway:0.0.1`
 1. In the first command line tool with administrator privileges check clusters with `kind get clusters`
 1. In a command line tool check Kubernetes Deployments with `kubectl get deployments`
 1. In a command line tool check Kubernetes Deployments details with **kubectl describe deployment {deployment-name}**

@@ -1,9 +1,9 @@
 TODO
 ----
 
-- kafka String
-- kafka JSON
-- kafka config
+- kafka String config
+- kafka JSON config
+- kafka external model
 - kafka type queue
 - kafka type topic
 - integration tests - mock server

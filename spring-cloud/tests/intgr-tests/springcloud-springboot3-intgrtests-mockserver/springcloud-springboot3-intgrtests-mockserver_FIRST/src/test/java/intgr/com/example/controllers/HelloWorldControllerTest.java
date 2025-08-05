@@ -22,7 +22,7 @@ import static org.hamcrest.Matchers.equalTo;
 class HelloWorldControllerTest {
 
     @Container
-    static GenericContainer<?> secondServiceContainer = new GenericContainer<>("wisniewskikr/springcloud-springboot3-intgrtests-restclient_second:0.0.1")
+    static GenericContainer<?> secondServiceContainer = new GenericContainer<>("wisniewskikr/springcloud-springboot3-intgrtests-mockserver_second:0.0.1")
             .withExposedPorts(8082);
 
     @LocalServerPort

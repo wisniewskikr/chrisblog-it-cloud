@@ -61,8 +61,8 @@ USAGE MANUAL
    * N/A
 
 ##### Optional steps:
-1. In a command line tool build Docker SECOND image with `docker build -f springcloud-springboot3-intgrtests-restclient_SECOND/Dockerfile -t wisniewskikr/springcloud-springboot3-intgrtests-restclient_second:0.0.1 ./springcloud-springboot3-intgrtests-restclient_SECOND`
-1. In a command line tool push Docker SECOND image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-intgrtests-restclient_second:0.0.1`
+1. In a command line tool build Docker SECOND image with `docker build -f springcloud-springboot3-intgrtests-mockserver_SECOND/Dockerfile -t wisniewskikr/springcloud-springboot3-intgrtests-mockserver_second:0.0.1 ./springcloud-springboot3-intgrtests-mockserver_SECOND`
+1. In a command line tool push Docker SECOND image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-intgrtests-mockserver_second:0.0.1`
 
 
 USAGE DOCKER COMPOSE

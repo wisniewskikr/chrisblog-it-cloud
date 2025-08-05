@@ -1,12 +1,12 @@
 TODO
 ----
 
-- config + refresh
-- client-side loadbalancer
-- server-side loadbalancer
+- kafka String config
+- kafka JSON config
+- kafka external model
+- kafka type queue
+- kafka type topic
 - integration tests - mock server
-- kafka String
-- kafka JSON
 - zipkin
 - zipkin + tags
  

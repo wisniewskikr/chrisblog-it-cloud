@@ -169,3 +169,4 @@ IMPLEMENTATION
 Services:
 * In pom.xml file add following dependencies **micrometer-tracing-bridge-brave** and **zipkin-reporter-brave**
 * In application.properties file add property **management.tracing.sampling.probability** if you want to change default **0.1**
+* In FE service in class **RestClientConfig** add **requestInterceptor()** method

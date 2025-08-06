@@ -125,7 +125,7 @@ USAGE DOCKER COMPOSE
 USAGE KUBERNETES (MINIKUBE)
 ---------------------------
 
-> **Usage Kubernetes** means that Back-End, Front-End services and Database are provided as **Docker containers** managed by **Kubernetes** type **Minikube**. 
+> **Usage Kubernetes** means that all services are started as Kubernetes pods. 
 
 > Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and then **proceed with steps below**.
 

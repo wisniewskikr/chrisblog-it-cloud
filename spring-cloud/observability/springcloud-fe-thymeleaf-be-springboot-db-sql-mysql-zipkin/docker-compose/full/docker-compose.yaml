@@ -45,7 +45,7 @@ services:
     container_name: be-container
     build:
       context: ../../springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-zipkin_BE
-      dockerfile: ../../springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-zipkin_BE/Dockerfile
+      dockerfile: Dockerfile
     environment:
       spring.datasource.url: jdbc:mysql://mysql:3306/database
       management.zipkin.tracing.endpoint: http://zipkin:9411/api/v2/spans
@@ -67,7 +67,7 @@ services:
     container_name: fe-container
     build:
       context: ../../springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-zipkin_FE
-      dockerfile: ../../springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-zipkin_FE/Dockerfile
+      dockerfile: Dockerfile
     environment:
       api.url: http://be:8081
       management.zipkin.tracing.endpoint: http://zipkin:9411/api/v2/spans

@@ -89,7 +89,7 @@ USAGE MANUAL
 USAGE DOCKER COMPOSE
 --------------------
 
-> **Usage Docker Compse** means that Back-End, Front-End services and Database are provided as **Docker containers** definied in **Docker Compose** file. 
+> **Usage Docker Compse** means that all services are started as Docker containers defined in docker compose file. 
 
 > Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and then **proceed with steps below**.
 
@@ -99,13 +99,15 @@ USAGE DOCKER COMPOSE
 * **Docker** (tested on version 4.33.1 - it has to be up and running)
 
 ##### Required steps:
-1. In a command line tool **start Docker containers** with `docker-compose up -d --build`
+1. Start **Docker** tool
+1. In a command line tool **start Docker containers** with `docker-compose -f .\docker-compose\full\docker-compose.yaml up -d --build`
 1. In a browser visit `http://localhost:8080`
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
 1. In a browser visit `http://localhost:9411`
    * Expected HTML page with **Zipkin** dashboard
 1. Clean up environment 
-     * In a command line tool **remove Docker containers** with `docker-compose down --rmi all`
+     * In a command line tool **remove Docker containers** with `docker-compose -f .\docker-compose\full\docker-compose.yaml down --rmi all`
+     * Stop **Docker** tool
 
 ##### Optional steps:
 1. In a browser check Back-End application healthcheck with `http://localhost:8081/actuator/health`

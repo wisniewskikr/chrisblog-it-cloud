@@ -1,3 +1,11 @@
+EXAMPLE
+-------
+
+![My Image](readme-images/image-01.png)
+
+![My Image](readme-images/image-02.png)
+
+
 DESCRIPTION
 -----------
 
@@ -30,24 +38,20 @@ Terminology explanation:
 * **Microservices**: Microservices are a software architecture style where an application is built as a collection of small, independent services that communicate through APIs. Each service focuses on a specific business function, allowing for easier scaling, deployment, and maintenance.
 * **Zipkin**: it is an open-source distributed tracing system that helps track the flow of requests across microservices, enabling developers to diagnose latency issues and analyze system behavior. It collects and visualizes traces and spans, providing insights into the performance of individual services and their interactions.
 
-##### Implementation
-Services:
-* In pom.xml file add following dependencies **micrometer-tracing-bridge-brave** and **zipkin-reporter-brave**
-* In application.properties file add property **management.tracing.sampling.probability** if you want to change default **0.1**
 
+USAGES
+------
 
-EXAMPLE
--------
-
-![My Image](readme-images/image-01.png)
-
-![My Image](readme-images/image-02.png)
+This project can be tested in following configurations:
+* **Usage Manual**: infrastructure services are started as Docker containers. Application services are started manually in command line
+* **Usage Docker Compose**: all services are started as Docker containers defined in docker compose file.
+* **Usage Kubernetes (Kind)**: all services are started as Kubernetes pods.
 
 
 USAGE MANUAL
 ------------
 
-> **Usage Manual** means that Back-End and Front-End services are provided as **Java and Maven applications** and started **manually**. Database is provided as **Docker container**.
+> **Usage Manual** means that infrastructure services are started as Docker containers. Application services are started manually in command line
 
 > Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and then **proceed with steps below**. 
 
@@ -59,21 +63,19 @@ USAGE MANUAL
 * **Docker** (tested on version 4.33.1 - it has to be up and running)
 
 ##### Required steps:
-1. In the first command line tool **start Docker MySql container** with `docker run -d --name mysql-container -e MYSQL_ROOT_PASSWORD=my_secret_password -e MYSQL_DATABASE=database -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin123 -p 3306:3306 mysql:5.7`
-1. In the second command line tool **start Docker Zipkin container** with `docker run -d -p 9411:9411 --name zipkin-container openzipkin/zipkin:3.4.2`
-1. In the third command line tool **start Back-End application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-zipkin_BE spring-boot:run`
-1. In the fourth command line tool **start Front-End application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-zipkin_FE spring-boot:run`
+1. Start **Docker** tool
+1. In a first command line tool **start infrastructure Docker containers** with `docker-compose -f .\docker-compose\infrastructure\docker-compose.yaml up -d --build`
+1. In a second command line tool **start Back-End application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-zipkin_BE spring-boot:run`
+1. In a third command line tool **start Front-End application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-zipkin_FE spring-boot:run`
 1. In a browser visit `http://localhost:8080`
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port**
 1. In a browser visit `http://localhost:9411`
    * Expected HTML page with **Zipkin** dashboard 
 1. Clean up environment 
-     * In the fourth command line tool **stop Front-End application** with `ctrl + C`
-     * In the third command line tool **stop Back-End application** with `ctrl + C`
-     * In the second command line tool **stop and remove Docker Zipkin container** with `docker rm -f zipkin-container`
-     * In the second command line tool **remove Docker Zipkin image** with `docker rmi openzipkin/zipkin:3.4.2`
-     * In the first command line tool **stop and remove Docker MySql container** with `docker rm -f mysql-container`
-     * In the first command line tool **remove Docker MySql image** with `docker rmi mysql:5.7`
+     * In a third command line tool **stop Front-End application** with `ctrl + C`
+     * In a second command line tool **stop Back-End application** with `ctrl + C`
+     * In a first command line tool **stop infrastructure Docker containers** with `docker-compose -f .\docker-compose\infrastructure\docker-compose.yaml down --rmi all`
+     * Stop **Docker** tool
 
 ##### Optional steps:
 1. In a browser check Back-End application healthcheck with `http://localhost:8081/actuator/health`
@@ -82,53 +84,6 @@ USAGE MANUAL
 1. In a command line tool check list of Docker images with `docker images`
 1. In a command line tool check list of all Docker containers with `docker ps -a`
 1. In a command line tool check list of active Docker containers with `docker ps`
-
-
-USAGE DOCKER
-------------
-
-> **Usage Docker** means that Back-End, Front-End services and Database are provided as **Docker containers**. 
-
-> Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and then **proceed with steps below**.
-
-> Please be aware that following tools should be installed on your local PC:  
-* **Operating System** (tested on Windows 11)
-* **Git** (tested on version 2.33.0.windows.2)
-* **Docker** (tested on version 4.33.1 - it has to be up and running)
-
-##### Required steps:
-1. In a command line tool create **Docker Network** with `docker network create helloworld-network`
-1. In a command line tool build and start **Docker container MySql** database with `docker run -d --name mysql-container -e MYSQL_ROOT_PASSWORD=my_secret_password -e MYSQL_DATABASE=database -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin123 -p 3306:3306 --network helloworld-network mysql:5.7`
-1. In a command line tool **start Docker Zipkin container** with `docker run -d -p 9411:9411 --network helloworld-network --name zipkin-container openzipkin/zipkin:3.4.2`
-1. In a command line tool build **Docker image BE** with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-zipkin_BE/Dockerfile -t be-image:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-zipkin_BE`
-1. In a command line tool build and start **Docker container BE** with `docker run -p 8081:8081 --name be-container --network helloworld-network -e spring.datasource.url=jdbc:mysql://mysql-container:3306/database -e management.zipkin.tracing.endpoint=http://zipkin-container:9411/api/v2/spans -d be-image:0.0.1`
-1. In a command line tool build **Docker image FE** with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-zipkin_FE/Dockerfile -t fe-image:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-zipkin_FE`
-1. In a command line tool build and start **Docker container FE** with `docker run -p 8080:8080 --name fe-container --network helloworld-network -e api.url=http://be-container:8081 -e management.zipkin.tracing.endpoint=http://zipkin-container:9411/api/v2/spans -d fe-image:0.0.1`
-1. In a browser visit `http://localhost:8080`
-   * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port**
-1. In a browser visit `http://localhost:9411`
-   * Expected HTML page with **Zipkin** dashboard   
-1. Clean up environment 
-     * In a command line tool stop and remove **FE Docker container** with `docker rm -f fe-container`
-     * In a command line tool remove **FE Docker image** with `docker rmi fe-image:0.0.1`
-     * In a command line tool stop and remove **BE Docker container** with `docker rm -f be-container`
-     * In a command line tool remove **BE Docker image** with `docker rmi be-image:0.0.1`
-     * In a command line tool stop and remove **Docker Zipkin container** with `docker rm -f zipkin-container`
-     * In a command line tool remove **Docker Zipkin image** with `docker rmi openzipkin/zipkin:3.4.2`
-     * In a command line tool stop and remove **Database Docker container** with `docker rm -f mysql-container`
-     * In a command line tool remove **Database Docker image** with `docker rmi mysql:5.7`
-     * In a command line tool remove **Docker Nerwork** with `docker network rm helloworld-network`
-
-##### Optional steps:
-1. In a browser check Back-End application healthcheck with `http://localhost:8081/actuator/health`
-1. In a browser check Back-End application API result with `http://localhost:8081/message/1`
-1. In a browser check Front-End application healthcheck with `http://localhost:8080/actuator/health`
-1. In a command line tool check list of Docker images with `docker images`
-1. In a command line tool check list of all Docker containers with `docker ps -a`
-1. In a command line tool check list of active Docker containers with `docker ps`
-1. In a command line tool check list of Docker nerworks with `docker network ls`
-1. In a command line tool check BE container logs with `docker logs be-container`
-1. In a command line tool check FE container logs with `docker logs fe-container`
 
 
 USAGE DOCKER COMPOSE
@@ -205,3 +160,12 @@ USAGE KUBERNETES (MINIKUBE)
 1. In a command line tool check Kubernetes Pods with `kubectl get pods`
 1. In a command line tool check Kubernetes Pods details with **kubectl describe pod {pod-name}**
 1. In a command line tool check Kubernetes Pods logs with **kubectl log {pod-name}**
+
+
+
+IMPLEMENTATION
+--------------
+
+Services:
+* In pom.xml file add following dependencies **micrometer-tracing-bridge-brave** and **zipkin-reporter-brave**
+* In application.properties file add property **management.tracing.sampling.probability** if you want to change default **0.1**

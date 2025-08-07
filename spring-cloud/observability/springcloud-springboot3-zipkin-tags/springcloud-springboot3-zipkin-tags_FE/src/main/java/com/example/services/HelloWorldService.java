@@ -1,5 +1,7 @@
 package com.example.services;
 
+import brave.Span;
+import brave.Tracer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,15 +11,26 @@ import com.example.dtos.HelloWorldDto;
 @Service
 public class HelloWorldService {
     
-    private HelloWorldClient helloWorldClient;    
+    private final HelloWorldClient helloWorldClient;
+    private final Tracer tracer;
 
     @Autowired
-    public HelloWorldService(HelloWorldClient helloWorldClient) {
+    public HelloWorldService(HelloWorldClient helloWorldClient, Tracer tracer) {
         this.helloWorldClient = helloWorldClient;
+        this.tracer = tracer;
     }
 
     public HelloWorldDto findById(Long id) {
-        return helloWorldClient.findById(id);
+
+        Span span = tracer.nextSpan().name("test-span").start();
+        span.tag("id", id.toString());
+
+        try {
+            return helloWorldClient.findById(id);
+        } finally {
+            span.finish();
+        }
+
     }
 
 }

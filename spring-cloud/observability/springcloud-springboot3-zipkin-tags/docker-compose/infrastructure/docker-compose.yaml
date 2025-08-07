@@ -1,0 +1,45 @@
+version: '3'
+ 
+services:
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: my_secret_password
+      MYSQL_DATABASE: database
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin123
+    ports:
+      - 3306:3306
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s    
+    networks:
+      - helloworld-network
+#    volumes:
+#      - dbdata:/var/lib/mysql
+
+  zipkin:
+    image: openzipkin/zipkin:3.4.2
+    container_name: zipkin-container
+    depends_on:
+      mysql:
+        condition: service_healthy
+    ports:
+      - 9411:9411  
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9411/actuator/health"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 10s  
+    networks:
+      - helloworld-network
+
+networks:
+  helloworld-network:
+    name: helloworld-network-name

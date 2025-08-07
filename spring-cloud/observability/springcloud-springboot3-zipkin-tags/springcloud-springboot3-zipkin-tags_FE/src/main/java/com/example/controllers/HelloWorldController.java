@@ -20,10 +20,32 @@ public class HelloWorldController {
     }
 
     @GetMapping
-    String findById(Model model) {
+    String defaultMethod(Model model) {
+
+        HelloWorldDto helloWorldDto = helloWorldService.findById(1L);
+        model.addAttribute("message", helloWorldDto.text());
+        model.addAttribute("portBe", helloWorldDto.portBe());
+        model.addAttribute("portFe", environment.getProperty("local.server.port"));
+        return "helloworld";
+
+    }
+
+    @GetMapping("/public")
+    String publicMethod(Model model) {
 
         HelloWorldDto helloWorldDto = helloWorldService.findById(1L);
         model.addAttribute("message", helloWorldDto.text());        
+        model.addAttribute("portBe", helloWorldDto.portBe());
+        model.addAttribute("portFe", environment.getProperty("local.server.port"));
+        return "helloworld";
+
+    }
+
+    @GetMapping("/secured")
+    String securedMethod(Model model) {
+
+        HelloWorldDto helloWorldDto = helloWorldService.findById(2L);
+        model.addAttribute("message", helloWorldDto.text());
         model.addAttribute("portBe", helloWorldDto.portBe());
         model.addAttribute("portFe", environment.getProperty("local.server.port"));
         return "helloworld";

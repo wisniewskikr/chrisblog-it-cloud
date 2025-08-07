@@ -67,7 +67,7 @@ USAGE MANUAL
 1. In a first command line tool **start infrastructure Docker containers** with `docker-compose -f .\docker-compose\infrastructure\docker-compose.yaml up -d --build`
 1. In a second command line tool **start Back-End application** with `mvn -f ./springcloud-springboot3-zipkin-tags_BE spring-boot:run`
 1. In a third command line tool **start Front-End application** with `mvn -f ./springcloud-springboot3-zipkin-tags_FE spring-boot:run`
-1. In a browser visit `http://localhost:8080`
+1. In a browser visit `http://localhost:8080/public`
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port**
 1. In a browser visit `http://localhost:9411`
    * Expected HTML page with **Zipkin** dashboard 

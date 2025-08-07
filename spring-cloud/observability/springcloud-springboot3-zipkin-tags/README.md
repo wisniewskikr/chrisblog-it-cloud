@@ -65,8 +65,8 @@ USAGE MANUAL
 ##### Required steps:
 1. Start **Docker** tool
 1. In a first command line tool **start infrastructure Docker containers** with `docker-compose -f .\docker-compose\infrastructure\docker-compose.yaml up -d --build`
-1. In a second command line tool **start Back-End application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-zipkin_BE spring-boot:run`
-1. In a third command line tool **start Front-End application** with `mvn -f ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-zipkin_FE spring-boot:run`
+1. In a second command line tool **start Back-End application** with `mvn -f ./springcloud-springboot3-zipkin-tags_BE spring-boot:run`
+1. In a third command line tool **start Front-End application** with `mvn -f ./springcloud-springboot3-zipkin-tags_FE spring-boot:run`
 1. In a browser visit `http://localhost:8080`
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port**
 1. In a browser visit `http://localhost:9411`
@@ -148,10 +148,10 @@ USAGE KUBERNETES (MINIKUBE)
      * In the first command line tool **with administrator privileges** stop **Minikube** with `minikube stop`
 
 ##### Optional steps:
-1. In a command line tool build Docker BE image with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-zipkin_BE/Dockerfile -t wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-zipkin_be:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-zipkin_BE`
-1. In a command line tool push Docker BE image to Docker Repository with `docker push wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-zipkin_be:0.0.1` 
-1. In a command line tool build Docker FE image with `docker build -f springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-zipkin_FE/Dockerfile -t wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-zipkin_fe:0.0.1 ./springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-zipkin_FE`
-1. In a command line tool push Docker FE image to Docker Repository with `docker push wisniewskikr/springcloud-fe-thymeleaf-be-springboot-db-sql-mysql-zipkin_fe:0.0.1` 
+1. In a command line tool build Docker BE image with `docker build -f springcloud-springboot3-zipkin-tags_BE/Dockerfile -t wisniewskikr/springcloud-springboot3-zipkin-tags_be:0.0.1 ./springcloud-springboot3-zipkin-tags_BE`
+1. In a command line tool push Docker BE image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-zipkin-tags_be:0.0.1` 
+1. In a command line tool build Docker FE image with `docker build -f springcloud-springboot3-zipkin-tags_FE/Dockerfile -t wisniewskikr/springcloud-springboot3-zipkin-tags_fe:0.0.1 ./springcloud-springboot3-zipkin-tags_FE`
+1. In a command line tool push Docker FE image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-zipkin-tags_fe:0.0.1` 
 1. In the first command line tool with administrator privileges check status of Minikube with `minikube status`
 1. In the first command line tool with administrator privileges check Docker images in Minikube with `minikube ssh docker images`
 1. In the first command line tool with administrator privileges check Docker containers in Minikube with `minikube ssh docker ps`

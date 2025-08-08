@@ -22,13 +22,21 @@ public class HelloWorldService {
 
     public HelloWorldDto findById(Long id) {
 
-        Span span = tracer.nextSpan().name("test-span").start();
-        span.tag("id", id.toString());
+        Span spanFirst = tracer.nextSpan().name("span-first").start();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        } finally {
+            spanFirst.finish();
+        }
 
+        Span spanSecond = tracer.nextSpan().name("span-second").start();
+        spanSecond.tag("id", id.toString());
         try {
             return helloWorldClient.findById(id);
         } finally {
-            span.finish();
+            spanSecond.finish();
         }
 
     }

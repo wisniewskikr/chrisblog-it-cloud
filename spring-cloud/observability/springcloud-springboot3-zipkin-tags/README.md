@@ -69,8 +69,12 @@ USAGE MANUAL
 1. In a third command line tool **start Front-End application** with `mvn -f ./springcloud-springboot3-zipkin-tags_FE spring-boot:run`
 1. In a browser visit `http://localhost:8080/public`
    * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port**
+1. In a browser visit `http://localhost:8080/secured`
+   * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port**
 1. In a browser visit `http://localhost:9411`
-   * Expected HTML page with **Zipkin** dashboard 
+   * Expected HTML page with **Zipkin** dashboard
+   * Filter **Public** tags using **tagQuery=id=1**
+   * Filter **Secured** tags using **tagQuery=id=2**
 1. Clean up environment 
      * In a third command line tool **stop Front-End application** with `ctrl + C`
      * In a second command line tool **stop Back-End application** with `ctrl + C`

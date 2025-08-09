@@ -124,10 +124,14 @@ USAGE DOCKER COMPOSE
 ##### Required steps:
 1. Start **Docker** tool
 1. In a command line tool **start Docker containers** with `docker-compose -f .\docker-compose\full\docker-compose.yaml up -d --build`
-1. In a browser visit `http://localhost:8080`
-   * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
+1. In a browser visit `http://localhost:8080/public`
+   * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port**
+1. In a browser visit `http://localhost:8080/secured`
+   * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port**
 1. In a browser visit `http://localhost:9411`
    * Expected HTML page with **Zipkin** dashboard
+   * Filter **Public** tags using **tagQuery=id=1**
+   * Filter **Secured** tags using **tagQuery=id=2**
 1. Clean up environment 
      * In a command line tool **remove Docker containers** with `docker-compose -f .\docker-compose\full\docker-compose.yaml down --rmi all`
      * Stop **Docker** tool
@@ -195,3 +199,4 @@ Services:
 * In pom.xml file add following dependencies **micrometer-tracing-bridge-brave** and **zipkin-reporter-brave**
 * In application.properties file add property **management.tracing.sampling.probability** if you want to change default **0.1**
 * In FE service in class **RestClientConfig** add **requestInterceptor()** method
+* In FE service in class **HelloWorldService** add **spanFirst** and **spanSecond (with tag "id")** 

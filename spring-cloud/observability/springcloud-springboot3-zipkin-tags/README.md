@@ -26,18 +26,21 @@ DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to create **chain of applications (microservices)** with **observability** service type **Zipkin** with usage **Java** programming language and **Spring Cloud** framework. Observability service Zipkin enables observing traffic between services. 
+The goal of this project is to present how to create **chain of applications (microservices)** with **observability** 
+service type **Zipkin** with **tags** with usage **Java** programming language and **Spring Cloud** framework. 
+
+Observability service Zipkin enables observing traffic between services.
+
+Tags enable filter requests only with some specific tag. In this case there are two custom spans on every request:
+* **span-first**: thread is stopped for one second
+* **span-second**: API request from first to second service is surrounded by this span. Additionally tag with
+**id** of request is added: **id 1** means **public**, **id 2** means secured.
 
 This chain of services consists of following applications:
 * **Database**: SQL database - in this case type **MySql**
 * **Back-End**: an application created in **Java** programming language with usage **Spring Boot** framework
 * **Front-End**: an application created in **Java** programming language with usage **Spring Boot** framework. **Thymeleaf** engine is used to display data
 * **Zipkin**: distributed tracing system that helps track the flow of requests across microservices
-
-This output consists of following elements:
-* **Database Message**: the HTML displays the message stored in database. It's the simple text "Hello World!".
-* **Back-End Port**: the HTML page displays the port of Back-End application.
-* **Front-End Port**: the HTML page displays port of Front-End application.
 
 ##### Terminology
 Terminology explanation:

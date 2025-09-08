@@ -2,7 +2,6 @@ package com.example.configs;
 
 import java.io.IOException;
 
-import com.example.errors.Custom400Exception;
 import org.apache.hc.client5.http.config.RequestConfig;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
@@ -51,17 +50,6 @@ public class RestClientConfig {
             public ClientHttpResponse intercept(HttpRequest request, byte[] body,
                                                 ClientHttpRequestExecution execution) throws IOException {
                 ClientHttpResponse response = execution.execute(request, body);
-
-                if (response.getStatusCode().value() == 400) {
-                    System.out.println("First service handles status 400 using interceptor");
-                    throw new Custom400Exception("Temporary problem with the application. "
-                            + "Our administrators will resolve it as soon as possible!");
-                }
-
-                if (response.getStatusCode().value() == 500) {
-                    System.out.println("First service handles status 500 using interceptor");
-                }
-
                 return response;
             }
 

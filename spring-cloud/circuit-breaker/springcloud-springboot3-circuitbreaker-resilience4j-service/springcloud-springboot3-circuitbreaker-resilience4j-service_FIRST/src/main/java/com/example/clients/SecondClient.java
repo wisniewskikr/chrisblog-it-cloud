@@ -25,7 +25,7 @@ public interface SecondClient {
 
     @GetExchange("/status/timeout")
     @CircuitBreaker(name = "fallback-second", fallbackMethod = "fallbackSecond")
-    @Retry(name = "fallback-second", fallbackMethod = "fallbackSecond")
+    @Retry(name = "fallback-second")
     public ResponseEntity<String> statusTimeout();
 
     default ResponseEntity<String> fallbackSecond(Throwable throwable) {

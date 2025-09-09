@@ -10,7 +10,6 @@ import org.apache.hc.core5.util.Timeout;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.client.*;
 
 import org.springframework.web.client.RestClient;
@@ -42,29 +41,18 @@ public class RestClientConfig {
                 .setConnectionManager(new PoolingHttpClientConnectionManager())
                 .build();
 
-        HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(httpClient);
-
-        ClientHttpRequestInterceptor errorInterceptor = new ClientHttpRequestInterceptor() {
-
-            @Override
-            public ClientHttpResponse intercept(HttpRequest request, byte[] body,
-                                                ClientHttpRequestExecution execution) throws IOException {
-                ClientHttpResponse response = execution.execute(request, body);
-                return response;
-            }
-
-        };
-
-        InterceptingClientHttpRequestFactory interceptingFactory =
-                new InterceptingClientHttpRequestFactory(requestFactory, java.util.List.of(errorInterceptor));
+        HttpComponentsClientHttpRequestFactory requestFactory =
+                new HttpComponentsClientHttpRequestFactory(httpClient);
 
         RestClient restClient = restClientBuilder
-                .requestFactory(interceptingFactory)
+                .requestFactory(requestFactory)   // directly use requestFactory
                 .baseUrl(apiUrl)
                 .build();
 
         var restClientAdapter = RestClientAdapter.create(restClient);
         var httpServiceProxyFactory = HttpServiceProxyFactory.builderFor(restClientAdapter).build();
+
         return httpServiceProxyFactory.createClient(SecondClient.class);
     }
+
 }

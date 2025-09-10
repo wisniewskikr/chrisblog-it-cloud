@@ -29,7 +29,7 @@ public class HelloWorldController {
 	public ResponseEntity<String> statusTimeout() {
 
         try {
-            Thread.sleep(5000);
+            Thread.sleep(20000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

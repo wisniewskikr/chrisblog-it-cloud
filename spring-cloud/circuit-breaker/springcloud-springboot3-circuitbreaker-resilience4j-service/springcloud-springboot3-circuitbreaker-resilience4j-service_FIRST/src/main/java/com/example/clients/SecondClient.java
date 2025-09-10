@@ -1,7 +1,6 @@
 package com.example.clients;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
-import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.service.annotation.GetExchange;
@@ -25,7 +24,6 @@ public interface SecondClient {
 
     @GetExchange("/status/timeout")
     @CircuitBreaker(name = "fallback-second", fallbackMethod = "fallbackSecond")
-    @Retry(name = "fallback-second")
     public ResponseEntity<String> statusTimeout();
 
     default ResponseEntity<String> fallbackSecond(Throwable throwable) {

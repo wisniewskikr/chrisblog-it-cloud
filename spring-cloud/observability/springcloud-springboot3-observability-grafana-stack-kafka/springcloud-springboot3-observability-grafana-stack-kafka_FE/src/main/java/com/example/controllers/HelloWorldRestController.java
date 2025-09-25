@@ -11,14 +11,14 @@ import com.example.dtos.HelloWorldDto;
 import com.example.services.HelloWorldService;
 
 @Controller
-public class HelloWorldController {
+public class HelloWorldRestController {
 
-    Logger logger = LoggerFactory.getLogger(HelloWorldController.class);
+    Logger logger = LoggerFactory.getLogger(HelloWorldRestController.class);
 
     private HelloWorldService helloWorldService;
     private Environment environment; 
 
-    public HelloWorldController(HelloWorldService helloWorldService, Environment environment) {
+    public HelloWorldRestController(HelloWorldService helloWorldService, Environment environment) {
         this.helloWorldService = helloWorldService;
         this.environment = environment;
     }
@@ -26,7 +26,7 @@ public class HelloWorldController {
     @GetMapping
     String findById(Model model) {
 
-        logger.info("Called FE method HelloWorldController.findById()");
+        logger.info("Called FE method HelloWorldRestController.findById()");
 
         HelloWorldDto helloWorldDto = helloWorldService.findById(1L);
         model.addAttribute("message", helloWorldDto.text());        

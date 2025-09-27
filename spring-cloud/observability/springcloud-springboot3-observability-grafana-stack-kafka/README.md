@@ -84,17 +84,19 @@ USAGE MANUAL
 
 ##### Required steps:
 1. Start **Docker** tool
-1. In the first command line tool **start Docker containers** with `docker-compose -f .\docker-compose\without-custom-services\docker-compose.yaml up -d`
+1. In the first command line tool **start Docker containers** with `docker-compose -f .\docker-compose\infrastructure\docker-compose.yaml up -d`
 1. In the second command line tool **start Back-End application** with `mvn -f ./springcloud-springboot3-observability-grafana-stack-kafka_BE spring-boot:run`
 1. In the third command line tool **start Front-End application** with `mvn -f ./springcloud-springboot3-observability-grafana-stack-kafka_FE spring-boot:run`
-1. In a browser visit `http://localhost:8080`
-   * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port**
+1. In a browser visit `http://localhost:8080/api/fe?name=Stranger`
+   * Expected message **The message was sent to Consumer via Kafka**
+1. In a browser visit `http://localhost:8080/api/be`
+   * Expected message **Message from Producer via Kafka is: Hello World Stranger**
 1. In a browser visit `http://localhost:3000`
    * Expected HTML page with **Grafana dashboard** (please check section **EXAMPLE**).
 1. Clean up environment
    * In the third command line tool **stop Front-End application** with `ctrl + C`
    * In the second command line tool **stop Back-End application** with `ctrl + C`
-   * In the first command line tool **remove Docker containers** with `docker-compose -f .\docker-compose\without-custom-services\docker-compose.yaml down --rmi all`
+   * In the first command line tool **remove Docker containers** with `docker-compose -f .\docker-compose\infrastructure\docker-compose.yaml down --rmi all`
    * Stop **Docker** tool
 
 ##### Optional steps:

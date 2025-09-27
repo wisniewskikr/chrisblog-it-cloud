@@ -66,8 +66,8 @@ USAGES
 
 This project can be tested in following configurations:
 * **Usage Manual**: custom services are started manually from command line. Other services (like Sql Databases, NoSql Databases etc.) are started as Docker containers definied in "docker-compose/without-custom-services/docker-compose.yaml" file.
-* **Usage Docker Compose**: all services are started as Docker containers definied in "docker-compose/with-custom-services/docker-compose.yaml" file.
-* **Usage Kubernetes (Minikube)**: all services are started as Kubernetes pods.
+* **Usage Docker Compose**: N/A
+* **Usage Kubernetes (Minikube)**: N/A
 
 
 USAGE MANUAL
@@ -113,105 +113,20 @@ USAGE MANUAL
 USAGE DOCKER COMPOSE
 --------------------
 
-> **Usage Docker Compse** means all services are started as Docker containers definied in "docker-compose/with-custom-services/docker-compose.yaml" file.
-
-> Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and then **proceed with steps below**.
-
-> **Prerequisites**:  
-* **Operating System** (tested on Windows 11)
-* **Git** (tested on version 2.33.0.windows.2)
-* **Docker** (tested on version 4.33.1)
-
-##### Required steps:
-1. Start **Docker** tool
-1. In a command line tool **start Docker containers** with `docker-compose -f .\docker-compose\with-custom-services\docker-compose.yaml up -d --build`
-1. In a browser visit `http://localhost:8080`
-   * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
-1. In a browser visit `http://localhost:3000`
-   * Expected HTML page with **Grafana dashboard** (please check section **EXAMPLE**).
-1. Clean up environment 
-     * In a command line tool **remove Docker containers** with `docker-compose -f .\docker-compose\with-custom-services\docker-compose.yaml down --rmi all`
-     * Stop **Docker** tool
-
-##### Optional steps:
-1. In a browser check Back-End application healthcheck with `http://localhost:8081/actuator/health`
-1. In a browser check Back-End application API result with `http://localhost:8081/message/1`
-1. In a browser check Front-End application healthcheck with `http://localhost:8080/actuator/health`
-1. In a command line tool validate Docker Compose with `docker-compose config`
-1. In a command line tool check list of Docker images with `docker images`
-1. In a command line tool check list of all Docker containers with `docker ps -a`
-1. In a command line tool check list of active Docker containers with `docker ps`
-1. In a command line tool check list of Docker nerworks with `docker network ls`
-1. In a command line tool check BE container logs with `docker logs be-container`
-1. In a command line tool check FE container logs with `docker logs fe-container`
+N/A
 
 
 USAGE KUBERNETES (MINIKUBE)
 ---------------------------
 
-> **Usage Kubernetes** means that all services are started as Kubernetes pods. 
-
-> Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and then **proceed with steps below**.
-
-> **Prerequisites**:  
-* **Operating System** (tested on Windows 11)
-* **Git** (tested on version 2.33.0.windows.2)
-* **Minikube** (tested on version 1.33.1)
-
-##### Required steps:
-1. In the first command line tool **with administrator privileges** start **Minikube** with `minikube start --cpus 4 --memory 7000`
-1. In the second command line tool **start Kubernetes Pods** with `kubectl apply -f ./k8s/kubernetes.yaml`
-1. In the second command line tool **check status of Kubernetes Pods** with `kubectl get pods`
-   * Expected mysql, be and fe as **READY 1/1** (it can take few minutes)
-1. In the first command line tool **with administrator privileges** display FE service in a Browser with `minikube service fe-service`
-   * Expected HTML page with **Database Message**, **Back-End Port** and **Front-End Port** 
-1. In the first command line tool **with administrator privileges** display Grafana service in a Browser with `minikube service grafana`
-   * Expected HTML page with **Grafana dashboard** (please check section **EXAMPLE**).
-1. Clean up environment 
-     * In the second command line tool **remove Kubernetes Pods** with `kubectl delete -f ./k8s/kubernetes.yaml`
-     * In the first command line tool **with administrator privileges** stop **Minikube** with `minikube stop`
-
-##### Optional steps:
-1. In a command line tool build Docker BE image with `docker build -f springcloud-springboot3-observability-grafana-stack-kafka_BE/Dockerfile -t wisniewskikr/springcloud-springboot3-observability-grafana-stack-kafka_be:0.0.1 ./springcloud-springboot3-observability-grafana-stack-kafka_BE`
-1. In a command line tool push Docker BE image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-observability-grafana-stack-kafka_be:0.0.1` 
-1. In a command line tool build Docker FE image with `docker build -f springcloud-springboot3-observability-grafana-stack-kafka_FE/Dockerfile -t wisniewskikr/springcloud-springboot3-observability-grafana-stack-kafka_fe:0.0.1 ./springcloud-springboot3-observability-grafana-stack-kafka_FE`
-1. In a command line tool push Docker FE image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-observability-grafana-stack-kafka_fe:0.0.1` 
-1. In the first command line tool with administrator privileges check status of Minikube with `minikube status`
-1. In the first command line tool with administrator privileges check Docker images in Minikube with `minikube ssh docker images`
-1. In the first command line tool with administrator privileges check Docker containers in Minikube with `minikube ssh docker ps`
-1. In a command line tool check Kubernetes Deployments with `kubectl get deployments`
-1. In a command line tool check Kubernetes Deployments details with **kubectl describe deployment {deployment-name}**
-1. In a command line tool check Kubernetes Services with `kubectl get services`
-1. In a command line tool check Kubernetes Services details with **kubectl describe service {service-name}**
-1. In a command line tool check Kubernetes Pods with `kubectl get pods`
-1. In a command line tool check Kubernetes Pods details with **kubectl describe pod {pod-name}**
-1. In a command line tool check Kubernetes Pods logs with **kubectl logs {pod-name}**
+N/A
 
 
 IMPLEMENTATION
 --------------
 
-Implementation steps for **Loki (logs)**:
-* In every custom service add file **src/main/resources/logback-spring.xml**
-* In every custom servide update **pom.xml** file with **loki-logback-appender**
-* In every custom servide update **application.properties** file with **logging.pattern.correlation=[${spring.application.name:},%X{traceId:-},%X{spanId:-}]**
+In FE application:
+* Add class **KafkaProducerConfig**
 
-Implementation steps for **Prometeus (metrics)**:
-* In every custom servide update **pom.xml** file with **spring-boot-starter-actuator** and **micrometer-registry-prometheus**
-* In every custom servide update **application.properties** file with **management.endpoints.web.exposure.include**, **management.metrics.distribution.percentiles-histogram.http.server.requests** and **management.observations.key-values.application**
-* In root folder create file **docker/prometheus/prometheus.yml**
-
-Implementation steps for **Tempo (tracks)**:
-* In every custom servide update **pom.xml** file with **micrometer-tracing-bridge-brave** and **zipkin-reporter-brave**
-* In every custom servide update **application.properties** file with **management.tracing.sampling.probability=1.0**
-* In root folder create file **docker/tempo/tempo.yml**
-
-Implementation steps for **Grafana (dashboard)**:
-* In root folder create file **docker/grafana/datasource.yml**
-
-
-ADDITIONAL SOURCES
-------------------
-
-Sources:
-* https://www.youtube.com/watch?v=PT2yZTBnUwQ&list=PLSVW22jAG8pBnhAdq9S8BpLnZ0_jVBj0c
+In BE application:
+* Add class **KafkaConsumerConfig**

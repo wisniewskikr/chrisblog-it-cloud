@@ -5,12 +5,22 @@ EXAMPLE
 
 ![My Image](readme-images/image-02.png)
 
+![My Image](readme-images/image-03.png)
+
+![My Image](readme-images/image-04.png)
+
+![My Image](readme-images/image-05.png)
+
 
 DESCRIPTION
 -----------
 
 ##### Goal
-The goal of this project is to present how to create **chain of applications (microservices)** with **observability** type **Grafana Stack (Loki + Prometeus + Tempo)** with usage **Java** programming language and **Spring Cloud** and **Spring Boot 3** frameworks. Grafana Stack enables observing many microservices (Logs, Metrics and Traces) in one central Grafana dashboard. Class **RestClient** is used to handle REST connection between FE and BE services.
+The goal of this project is to present how to create **chain of applications (microservices)** with **observability** 
+type **Grafana Stack (Loki + Prometeus + Tempo)** with usage **Java** programming language 
+and **Spring Cloud** and **Spring Boot 3** frameworks. Grafana Stack enables observing many microservices 
+(Logs, Metrics and Traces) in one central Grafana dashboard.
+Tool **Kafka** is used to handle asynchronous communication between FE and BE services.
 
 ##### Services
 This project consists of following applications:
@@ -45,10 +55,6 @@ Terminology explanation:
 * **Java**: object-oriented programming language
 * **Spring Boot**: framework for Java. It consists of: Spring + Container + Configuration
 * **Spring Cloud**: Spring Cloud is a framework within the Spring ecosystem that provides tools for building distributed systems and microservices. It simplifies tasks like service discovery, configuration management, load balancing, circuit breakers, and distributed tracing, allowing developers to build scalable and resilient cloud-native applications.
-* **Database**: A database is an organized collection of data that is stored and managed electronically, allowing for efficient retrieval, manipulation, and updating of information. It is typically managed by a database management system (DBMS).
-* **MySql**: MySQL is an open-source relational database management system (RDBMS) that uses Structured Query Language (SQL) for managing and organizing data. It's widely used for web applications and is known for its speed, reliability, and ease of use.
-* **Back-End**: The back-end refers to the server-side part of a software application, responsible for managing the database, server logic, and application programming interface (API). It processes requests from the front-end (user interface), handles data storage, retrieval, and business logic, and sends the appropriate responses back to the front-end.
-* **Front-End**: Front-end refers to the part of a website or application that users interact with directly. It includes the visual elements, layout, and design, typically built using HTML, CSS, and JavaScript. The front-end is responsible for the user experience (UX) and interface (UI) that allows users to navigate and interact with the system.
 * **Loki**: Grafana Loki is a log aggregation system designed to store, query, and visualize logs efficiently. Unlike traditional log management tools, Loki is lightweight and cost-effective, as it indexes logs by labels (like Kubernetes pod or service name) rather than indexing the entire log content. It's tightly integrated with Grafana, enabling unified metrics and log analysis within the same interface, making it ideal for cloud-native environments.
 * **Prometeus**: Prometheus is an open-source monitoring and alerting toolkit designed for collecting, storing, and querying time-series data, primarily metrics from servers, applications, and services.
 * **Tempo**: Grafana Tempo is a highly scalable, distributed tracing backend used to collect, store, and query traces from applications. It supports open standards like OpenTelemetry, integrates seamlessly with Grafana for visualization, and is optimized for low-cost storage by only indexing trace IDs while keeping the rest of the trace data in object storage.
@@ -67,9 +73,12 @@ This project can be tested in following configurations:
 USAGE MANUAL
 ------------
 
-> **Usage Manual** means that custom services are started manually from command line. Other services (like Sql Databases, NoSql Databases etc.) are started as Docker containers definied in "docker-compose/without-custom-services/docker-compose.yaml" file.
+> **Usage Manual** means that custom services are started manually from command line.
+> Other services (like Sql Databases, NoSql Databases etc.) are started as Docker containers defined in 
+> "docker-compose/infrastructure/docker-compose.yaml" file.
 
-> Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and then **proceed with steps below**.
+> Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and then 
+> **proceed with steps below**.
 
 > **Prerequisites**:
 * **Operating System** (tested on Windows 11)
@@ -95,15 +104,12 @@ USAGE MANUAL
 
 ##### Optional steps:
 1. In a browser check Back-End application healthcheck with `http://localhost:8081/actuator/health`
-1. In a browser check Back-End application API result with `http://localhost:8081/message/1`
 1. In a browser check Front-End application healthcheck with `http://localhost:8080/actuator/health`
 1. In a command line tool validate Docker Compose with `docker-compose config`
 1. In a command line tool check list of Docker images with `docker images`
 1. In a command line tool check list of all Docker containers with `docker ps -a`
 1. In a command line tool check list of active Docker containers with `docker ps`
 1. In a command line tool check list of Docker nerworks with `docker network ls`
-1. In a command line tool check BE container logs with `docker logs be-container`
-1. In a command line tool check FE container logs with `docker logs fe-container`
 
 
 USAGE DOCKER COMPOSE

@@ -5,12 +5,6 @@ EXAMPLE
 
 ![My Image](readme-images/image-02.png)
 
-![My Image](readme-images/image-03.png)
-
-![My Image](readme-images/image-04.png)
-
-![My Image](readme-images/image-05.png)
-
 
 DESCRIPTION
 -----------
@@ -89,7 +83,7 @@ USAGE MANUAL
 1. In the third command line tool **start Front-End application** with `mvn -f ./springcloud-springboot3-observability-grafana-stack-kafka_FE spring-boot:run`
 1. In a browser visit `http://localhost:8080/api/fe?name=Stranger`
    * Expected message **The message was sent to Consumer via Kafka**
-1. In a browser visit `http://localhost:8080/api/be`
+1. In a browser visit `http://localhost:8081/api/be`
    * Expected message **Message from Producer via Kafka is: Hello World Stranger**
 1. In a browser visit `http://localhost:3000`
    * Expected HTML page with **Grafana dashboard** (please check section **EXAMPLE**).

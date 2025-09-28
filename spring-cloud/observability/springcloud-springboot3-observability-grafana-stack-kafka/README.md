@@ -24,29 +24,12 @@ Tool **Kafka** is used to handle asynchronous communication between FE and BE se
 
 ##### Services
 This project consists of following applications:
-* **Database**: SQL database - in this case type **MySql**
 * **Back-End**: an application created in **Java** programming language with usage **Spring Boot** framework
-* **Front-End**: an application created in **Java** programming language with usage **Spring Boot** framework. **Thymeleaf** engine is used to display data
+* **Front-End**: an application created in **Java** programming language with usage **Spring Boot** framework.
 * **Loki**: it enables collecting logs from many microservices
 * **Prometeus**" it enables collecting metrics from many microservices
 * **Tempo**: it enables collecting traces from many microservices
 * **Grafana**: it enables displaying logs, metrics and traces from Loki, Prometeus and Tempo tools 
-
-##### Inputs
-This project requires following inputs:
-* **FE**: http call from any browser
-* **Grafana**: http call from any browser
-
-##### Outputs
-This project provides following outputs:
-* **FE**: Front-End service connects with Back-End service which connects with database. Output displayed by FE:
-   * **Database Message**: the HTML displays the message stored in database. It's the simple text "Hello World!".
-   * **Back-End Port**: the HTML page displays the port of Back-End application.
-   * **Front-End Port**: the HTML page displays port of Front-End application.
-* **Grafana**: this dashboard contains following data: 
-   * **Logs**: logs of all custom services 
-   * **Metrics**: metrics of all custom services
-   * **Traces**: traces of all custom services
 
 ##### Terminology
 Terminology explanation:

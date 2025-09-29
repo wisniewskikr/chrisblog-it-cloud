@@ -105,8 +105,6 @@ USAGE MANUAL
 1. In a command line tool check list of all Docker containers with `docker ps -a`
 1. In a command line tool check list of active Docker containers with `docker ps`
 1. In a command line tool check list of Docker nerworks with `docker network ls`
-1. In a command line tool check BE container logs with `docker logs be-container`
-1. In a command line tool check FE container logs with `docker logs fe-container`
 
 
 USAGE DOCKER COMPOSE

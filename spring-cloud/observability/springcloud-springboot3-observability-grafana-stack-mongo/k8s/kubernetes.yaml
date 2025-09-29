@@ -427,7 +427,7 @@ spec:
     spec:
       containers:
       - name: be
-        image: wisniewskikr/springcloud-springboot3-observability-grafana-stack-dbtracking_be:0.0.1
+        image: wisniewskikr/springcloud-springboot3-observability-grafana-stack-mongo_be:0.0.1
         ports:
         - containerPort: 8081
         env:
@@ -490,7 +490,7 @@ spec:
     spec:
       containers:
       - name: fe
-        image: wisniewskikr/springcloud-springboot3-observability-grafana-stack-dbtracking_fe:0.0.1
+        image: wisniewskikr/springcloud-springboot3-observability-grafana-stack-mongo_fe:0.0.1
         ports:
         - containerPort: 8080
         env:

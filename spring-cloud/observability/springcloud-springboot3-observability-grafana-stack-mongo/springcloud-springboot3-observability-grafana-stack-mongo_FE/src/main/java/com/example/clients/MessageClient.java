@@ -15,7 +15,7 @@ public class MessageClient {
     }
 
     public Message message() {
-        return beRestTemplate.exchange("/api/message/",
+        return beRestTemplate.exchange("/api/message",
                         HttpMethod.GET, null, Message.class)
                 .getBody();
     }

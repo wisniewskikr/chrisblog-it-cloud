@@ -30,6 +30,10 @@ public class MessageController {
         message.setText("Hello World");
         message = messageService.create(message);
 
+        logger.info("Created new message with id {}", message.getId());
+
+        message = messageService.read(message.getId());
+
         return ResponseEntity.ok(message);
 
     }

@@ -71,7 +71,7 @@ spec:
     spec:
       containers:
       - name: be
-        image: wisniewskikr/springcloud-springboot3-gateway-secured_service:0.0.1
+        image: wisniewskikr/springcloud-springboot3-gateway-secured-email_service:0.0.1
         ports:
         - containerPort: 9090
         readinessProbe:
@@ -127,7 +127,7 @@ spec:
     spec:
       containers:
       - name: gateway
-        image: wisniewskikr/springcloud-springboot3-gateway-secured_routing:0.0.1
+        image: wisniewskikr/springcloud-springboot3-gateway-secured-email_routing:0.0.1
         ports:
         - containerPort: 8762
         env:

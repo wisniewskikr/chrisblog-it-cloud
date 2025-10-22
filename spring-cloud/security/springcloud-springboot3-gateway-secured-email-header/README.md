@@ -20,7 +20,8 @@ DESCRIPTION
 ##### Goal
 The goal of this project is to present how to use **Keycloak** to **secure** routing type **Gateway API** 
 with usage **Java** programming language and **Spring Cloud** framework. Gateway API enables routing - mapping - 
-from one route to another. Additionally an **email** from Keycloak is displayed in returned message.
+from one route to another. Additionally an **email** from Keycloak is sent in request **header** of Gateway and 
+displayed in returned message of Service.
 
 This chain of services consists of following applications:
 * **Service**: java REST API application which displays "Hello World!" text
@@ -47,7 +48,7 @@ This project can be tested in following configurations:
 USAGE DOCKER COMPOSE
 --------------------
 
-> **Usage Docker Compse** means that microservices and Database are provided as **Docker containers** defined in **Docker Compose** file. 
+> **Usage Docker Compose** means that microservices and Database are provided as **Docker containers** defined in **Docker Compose** file. 
 
 > Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and then **proceed with steps below**.
 

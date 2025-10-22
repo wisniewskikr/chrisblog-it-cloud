@@ -74,9 +74,6 @@ spec:
         image: wisniewskikr/springcloud-springboot3-gateway-secured-email-header_service:0.0.1
         ports:
         - containerPort: 9090
-        env:
-        - name: SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI
-          value: http://keycloak.default.svc.cluster.local:8080/realms/helloworld-realm
         readinessProbe:
           httpGet:
             path: /actuator/health

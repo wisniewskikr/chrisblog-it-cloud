@@ -2,6 +2,7 @@ package com.example.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -13,11 +14,8 @@ public class HelloWorldController {
 	}
 
 	@GetMapping("/secured")
-	public ResponseEntity<String> helloWorldSecured() {
-
-		String email = null;
+	public ResponseEntity<String> helloWorldSecured(@RequestHeader(value = "email", required = false) String email) {
 		return ResponseEntity.ok("Hello World, Secured! Email: " + email);
-
 	}
 	
 }

@@ -40,8 +40,57 @@ USAGES
 ------
 
 This project can be tested in following configurations:
-* **Usage Docker Compose**: all services are started as Docker containers definied in docker compose file.
+* **Usage Manual**: infrastructure services are started as Docker containers. Services are started manually.
+* **Usage Docker Compose**: all services are started as Docker containers defined in docker compose file.
 * **Usage Kubernetes (Kind)**: all services are started as Kubernetes pods.
+
+
+USAGE MANUAL
+------------
+
+> **Usage Manual** means that infrastructure services are started as Docker containers. Services are started manually.
+
+> Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and then **proceed with steps below**.
+
+> Please be aware that following tools should be installed on your local PC:
+* **Operating System** (tested on Windows 11)
+* **Git** (tested on version 2.33.0.windows.2)
+* **Docker** (tested on version 4.33.1)
+
+##### Required steps:
+1. Start **Docker** tool
+1. In a command line tool **start Docker containers** with `docker-compose -f docker-compose-infrastructure.yaml up -d --build`
+   * Wait until **Keycloak** is fully loaded
+1. In the first Command Line tool start Routing with mvn -f ./springcloud-springboot3-gateway-secured-both_routing spring-boot:run
+1. In the second Command Line tool start Service with mvn -f ./springcloud-springboot3-gateway-secured-both_service spring-boot:run
+1. In any REST Client (e.g. Postman) use GET method and visit `http://localhost:8762/public`
+   * Expected message **Hello World, Public!**
+1. In any REST Client (e.g. Postman) use GET method and visit `http://localhost:8762/secured`
+   * Authorization -> Type -> OAuth 2.0
+   * Token Name: **Token**
+   * Grant Type: **Authorization Code (With PKCE)
+   * Callback URL: **http://localhost:8762**
+   * Auth URL: **http://keycloak:8080/realms/helloworld-realm/protocol/openid-connect/auth**
+   * Access Token URL: **http://keycloak:8080/realms/helloworld-realm/protocol/openid-connect/token**
+   * Client ID: **helloworld-client**
+   * Code Challenge Method: **SHA-256**
+   * Click **Get New Access Token -> Use Token**
+   * Click **Send**
+   * Expected message **Hello World, Secured!**
+1. Clean up environment
+   * In the second Command Line tool stop Service with `ctrl + c`
+   * In the first Command Line tool stop Routing with `ctrl + c`
+   * In a command line tool **remove Docker containers** with `docker-compose -f docker-compose-infrastructure.yaml down --rmi all`
+   * Stop **Docker** tool
+   * Remove new line from **hosts**
+
+##### Optional steps:
+1. In a command line tool validate Docker Compose with `docker-compose config`
+1. In a command line tool check list of Docker images with `docker images`
+1. In a command line tool check list of all Docker containers with `docker ps -a`
+1. In a command line tool check list of active Docker containers with `docker ps`
+1. In a command line tool check list of Docker nerworks with `docker network ls`
+1. In a command line tool check Service container logs with `docker logs service-container`
 
 
 USAGE DOCKER COMPOSE

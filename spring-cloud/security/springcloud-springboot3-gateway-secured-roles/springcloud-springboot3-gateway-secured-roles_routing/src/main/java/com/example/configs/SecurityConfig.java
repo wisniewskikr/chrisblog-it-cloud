@@ -22,7 +22,13 @@ public class SecurityConfig {
             .csrf(AbstractHttpConfigurer::disable)
             .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
+
                 .requestMatchers("/actuator/**", "/public").permitAll()
+
+                .requestMatchers("/user").hasRole("USER")
+
+                .requestMatchers("/admin").hasRole("ADMIN")
+
                 .anyRequest().authenticated()
             )
             .oauth2ResourceServer(oauth2 ->

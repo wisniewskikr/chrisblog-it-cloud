@@ -12,9 +12,14 @@ public class HelloWorldController {
 		return ResponseEntity.ok("Hello World, Public!");		
 	}
 
-	@GetMapping("/secured")
-	public ResponseEntity<String> helloWorldSecured() {
-		return ResponseEntity.ok("Hello World, Secured!");
+	@GetMapping("/user")
+	public ResponseEntity<String> helloWorldUser() {
+		return ResponseEntity.ok("Hello World, User!");
+	}
+
+	@GetMapping("/admin")
+	public ResponseEntity<String> helloWorldAdmin() {
+		return ResponseEntity.ok("Hello World, Admin!");
 	}
 	
 }

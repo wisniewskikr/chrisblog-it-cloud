@@ -63,8 +63,8 @@ USAGE MANUAL
 1. Start **Docker** tool
 1. In a command line tool **start Docker containers** with `docker-compose -f docker-compose-infrastructure.yaml up -d --build`
    * Wait until **Keycloak** is fully loaded
-1. In the first Command Line tool start Routing with mvn -f ./springcloud-springboot3-gateway-secured-both_routing spring-boot:run
-1. In the second Command Line tool start Service with mvn -f ./springcloud-springboot3-gateway-secured-both_service spring-boot:run
+1. In the first Command Line tool start Routing with mvn -f ./springcloud-springboot3-gateway-secured-roles_routing spring-boot:run
+1. In the second Command Line tool start Service with mvn -f ./springcloud-springboot3-gateway-secured-roles_service spring-boot:run
 1. In any REST Client (e.g. Postman) use GET method and visit `http://localhost:8762/public`
    * Expected message **Hello World, Public!**
 1. In any REST Client (e.g. Postman) use GET method and visit `http://localhost:8762/secured`
@@ -184,10 +184,10 @@ USAGE KUBERNETES (KIND)
      * Remove new line from **hosts**
 
 ##### Optional steps:
-1. In a command line tool build Docker Service image with `docker build -f springcloud-springboot3-gateway-secured-both_service/Dockerfile -t wisniewskikr/springcloud-springboot3-gateway-secured-both_service:0.0.1 ./springcloud-springboot3-gateway-secured-both_service`
-1. In a command line tool push Docker Service image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-gateway-secured-both_service:0.0.1` 
-1. In a command line tool build Docker GATEWAY image with `docker build -f springcloud-springboot3-gateway-secured-both_routing/Dockerfile -t wisniewskikr/springcloud-springboot3-gateway-secured-both_routing:0.0.1 ./springcloud-springboot3-gateway-secured-both_routing`
-1. In a command line tool push Docker GATEWAY image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-gateway-secured-both_routing:0.0.1` 
+1. In a command line tool build Docker Service image with `docker build -f springcloud-springboot3-gateway-secured-roles_service/Dockerfile -t wisniewskikr/springcloud-springboot3-gateway-secured-roles_service:0.0.1 ./springcloud-springboot3-gateway-secured-roles_service`
+1. In a command line tool push Docker Service image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-gateway-secured-roles_service:0.0.1` 
+1. In a command line tool build Docker GATEWAY image with `docker build -f springcloud-springboot3-gateway-secured-roles_routing/Dockerfile -t wisniewskikr/springcloud-springboot3-gateway-secured-roles_routing:0.0.1 ./springcloud-springboot3-gateway-secured-roles_routing`
+1. In a command line tool push Docker GATEWAY image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-gateway-secured-roles_routing:0.0.1` 
 1. In a command line tool check Kubernetes Deployments with `kubectl get deployments`
 1. In a command line tool check Kubernetes Deployments details with **kubectl describe deployment {deployment-name}**
 1. In a command line tool check Kubernetes Services with `kubectl get services`

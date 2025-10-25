@@ -12,3 +12,9 @@ spring:
 # Server Port
 server:
     port: 9090
+
+jwt:
+    auth:
+        converter:
+            resource-id: helloworld-client
+            principle-attribute: preferred_username

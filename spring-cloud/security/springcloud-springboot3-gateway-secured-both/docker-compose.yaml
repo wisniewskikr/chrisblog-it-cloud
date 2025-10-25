@@ -20,7 +20,7 @@ services:
     image: service-image:0.0.1
     container_name: service-container
     build:
-      context: ./springcloud-springboot3-gateway-secured-email_service
+      context: ./springcloud-springboot3-gateway-secured-both_service
       dockerfile: Dockerfile
     environment:
       SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER-URI: http://keycloak:8080/realms/helloworld-realm
@@ -39,7 +39,7 @@ services:
     image: gateway-image
     container_name: gateway-container
     build:
-      context: ./springcloud-springboot3-gateway-secured-email_routing
+      context: ./springcloud-springboot3-gateway-secured-both_routing
       dockerfile: Dockerfile
     environment:
       SERVICE_URL: http://service:9090

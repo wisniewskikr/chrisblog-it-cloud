@@ -23,9 +23,16 @@ public class RoutesConfig {
     }
 
     @Bean
-    public RouterFunction<ServerResponse> securedServiceRoute() {
-        return GatewayRouterFunctions.route("securedService")
-                .route(RequestPredicates.path("/secured"), HandlerFunctions.http(serviceUrl + "/secured"))                
+    public RouterFunction<ServerResponse> userServiceRoute() {
+        return GatewayRouterFunctions.route("userService")
+                .route(RequestPredicates.path("/user"), HandlerFunctions.http(serviceUrl + "/user"))
+                .build();
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> adminServiceRoute() {
+        return GatewayRouterFunctions.route("adminService")
+                .route(RequestPredicates.path("/admin"), HandlerFunctions.http(serviceUrl + "/admin"))
                 .build();
     }
     

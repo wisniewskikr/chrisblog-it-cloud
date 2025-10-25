@@ -96,7 +96,7 @@ USAGE MANUAL
 USAGE DOCKER COMPOSE
 --------------------
 
-> **Usage Docker Compse** means that microservices and Database are provided as **Docker containers** defined in **Docker Compose** file. 
+> **Usage Docker Compose** means that microservices and Database are provided as **Docker containers** defined in **Docker Compose** file. 
 
 > Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and then **proceed with steps below**.
 

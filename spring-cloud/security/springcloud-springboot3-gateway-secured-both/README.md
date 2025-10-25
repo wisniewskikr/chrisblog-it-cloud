@@ -20,7 +20,9 @@ DESCRIPTION
 ##### Goal
 The goal of this project is to present how to use **Keycloak** to **secure** routing type **Gateway API** 
 with usage **Java** programming language and **Spring Cloud** framework. Gateway API enables routing - mapping - 
-from one route to another. Additionally an **email** from Keycloak is displayed in returned message.
+from one route to another. 
+
+Additionally **both** parts are secured - routing and service.
 
 This chain of services consists of following applications:
 * **Service**: java REST API application which displays "Hello World!" text

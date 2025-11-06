@@ -126,9 +126,13 @@ USAGE KUBERNETES (KIND)
 1. In the first command line tool **check status of Kubernetes Pods** with `kubectl get pods`
    * Expected mysql, second and first as **READY 1/1** (it can take few minutes)
 1. In the second command line tool **forward port of Gateway service** with `kubectl port-forward service/gateway 8762:8762`
+1. In the third command line tool **forward port of First service** with `kubectl port-forward service/first 8081:8081`
+1. In the fourth command line tool **forward port of Second service** with `kubectl port-forward service/second 8082:8082`
 1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8762/swagger-ui.html`
    * Expected HTML page with First and Second services documentation
 1. Clean up environment
+     * In the fourth command line tool **stop forwarding port of Second service** with `ctrl + C`
+     * In the third command line tool **stop forwarding port of First service** with `ctrl + C`
      * In the second command line tool **stop forwarding port of Gateway service** with `ctrl + C`
      * In the first command line tool **remove Kubernetes Pods** with `kubectl delete -f ./k8s --recursive`
      * In the first command line tool delete cluster **Kind** with `kind delete cluster --name helloworld`

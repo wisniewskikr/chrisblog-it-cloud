@@ -160,7 +160,9 @@ IMPLEMENTATION
 
 Implementation steps:
 * In all projects update **pom.xml** file with dependencies: **springdoc-openapi-starter-webmvc-ui** and **springdoc-openapi-starter-webmvc-api**
-* In service projects update **application.properties** file with properties: **springdoc.swagger-ui.path** and **springdoc.api-docs.path**
+* In service projects update **application.properties** file with properties: **springdoc.swagger-ui.path**, 
+**springdoc.api-docs.path** and **swagger.app.uri**
 * In service projects add **OpenAPIConfig** class
+* In service projects add **CorsConfig** class
 * In Route project update **application.properties** with swagger properties
 * In Route project update **RoutesConfig** class with swagger routes

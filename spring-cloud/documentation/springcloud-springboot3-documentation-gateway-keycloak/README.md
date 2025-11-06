@@ -63,9 +63,9 @@ USAGE MANUAL
 ##### Required steps:
 1. Start **Docker** tool
 1. In a first command line tool **start Docker containers** with `docker-compose -f .\docker-compose\infrastructure\docker-compose.yaml up -d --build`
-1. In a second command line tool **start Second application** with `mvn -f ./springcloud-springboot3-documentation-gateway_SECOND spring-boot:run`
-1. In a third command line tool **start First application** with `mvn -f ./springcloud-springboot3-documentation-gateway_FIRST spring-boot:run`
-1. In a fourth command line tool **start Routing application** with `mvn -f ./springcloud-springboot3-documentation-gateway_ROUTING spring-boot:run`
+1. In a second command line tool **start Second application** with `mvn -f ./springcloud-springboot3-documentation-gateway-keycloak_SECOND spring-boot:run`
+1. In a third command line tool **start First application** with `mvn -f ./springcloud-springboot3-documentation-gateway-keycloak_FIRST spring-boot:run`
+1. In a fourth command line tool **start Routing application** with `mvn -f ./springcloud-springboot3-documentation-gateway-keycloak_ROUTING spring-boot:run`
 1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8762/swagger-ui.html`
    * Expected HTML page with First and Second services documentation
 1. Clean up environment:
@@ -135,12 +135,12 @@ USAGE KUBERNETES (KIND)
      * Stop **Docker** tool
 
 ##### Optional steps:
-1. In a command line tool build Docker SECOND image with `docker build -f springcloud-springboot3-documentation-gateway_SECOND/Dockerfile -t wisniewskikr/springcloud-springboot3-documentation-gateway_second:0.0.1 ./springcloud-springboot3-documentation-gateway_SECOND`
-1. In a command line tool push Docker SECOND image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-documentation-gateway_second:0.0.1` 
-1. In a command line tool build Docker FIRST image with `docker build -f springcloud-springboot3-documentation-gateway_FIRST/Dockerfile -t wisniewskikr/springcloud-springboot3-documentation-gateway_first:0.0.1 ./springcloud-springboot3-documentation-gateway_FIRST`
-1. In a command line tool push Docker FIRST image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-documentation-gateway_first:0.0.1`
-1. In a command line tool build Docker ROUTING image with `docker build -f springcloud-springboot3-documentation-gateway_ROUTING/Dockerfile -t wisniewskikr/springcloud-springboot3-documentation-gateway_routing:0.0.1 ./springcloud-springboot3-documentation-gateway_ROUTING`
-1. In a command line tool push Docker ROUTING image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-documentation-gateway_routing:0.0.1`
+1. In a command line tool build Docker SECOND image with `docker build -f springcloud-springboot3-documentation-gateway-keycloak_SECOND/Dockerfile -t wisniewskikr/springcloud-springboot3-documentation-gateway-keycloak_second:0.0.1 ./springcloud-springboot3-documentation-gateway-keycloak_SECOND`
+1. In a command line tool push Docker SECOND image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-documentation-gateway-keycloak_second:0.0.1` 
+1. In a command line tool build Docker FIRST image with `docker build -f springcloud-springboot3-documentation-gateway-keycloak_FIRST/Dockerfile -t wisniewskikr/springcloud-springboot3-documentation-gateway-keycloak_first:0.0.1 ./springcloud-springboot3-documentation-gateway-keycloak_FIRST`
+1. In a command line tool push Docker FIRST image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-documentation-gateway-keycloak_first:0.0.1`
+1. In a command line tool build Docker ROUTING image with `docker build -f springcloud-springboot3-documentation-gateway-keycloak_ROUTING/Dockerfile -t wisniewskikr/springcloud-springboot3-documentation-gateway-keycloak_routing:0.0.1 ./springcloud-springboot3-documentation-gateway-keycloak_ROUTING`
+1. In a command line tool push Docker ROUTING image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-documentation-gateway-keycloak_routing:0.0.1`
 1. In the first command line tool with administrator privileges check clusers with `kind get clusters`
 1. In a command line tool check Kubernetes Deployments with `kubectl get deployments`
 1. In a command line tool check Kubernetes Deployments details with **kubectl describe deployment {deployment-name}**

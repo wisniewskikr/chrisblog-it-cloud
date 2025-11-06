@@ -43,7 +43,7 @@ USAGES
 ------
 
 This project can be tested in following configurations:
-* **Usage Manual**: infrastucture services are started as Docker containers. Application services are started manually in command line
+* **Usage Manual**: infrastructure services are started as Docker containers. Application services are started manually in command line
 * **Usage Docker Compose**: all services are started as Docker containers definied in docker compose file.
 * **Usage Kubernetes (Kind)**: all services are started as Kubernetes pods.
 

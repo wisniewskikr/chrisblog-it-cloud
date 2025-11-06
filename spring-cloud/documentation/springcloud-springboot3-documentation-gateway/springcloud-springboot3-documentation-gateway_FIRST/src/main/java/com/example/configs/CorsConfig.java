@@ -12,16 +12,13 @@ public class CorsConfig {
     @Value("${service.url.gateway}")
     private String serviceUrlGateway;
 
-    @Value("${service.url.first}")
-    private String serviceUrlFirst;
-
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins(serviceUrlGateway, serviceUrlFirst)
+                        .allowedOrigins(serviceUrlGateway)
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);

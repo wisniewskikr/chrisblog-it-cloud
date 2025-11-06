@@ -43,7 +43,7 @@ USAGES
 ------
 
 This project can be tested in following configurations:
-* **Usage Manual**: infrastucture services are started as Docker containers. Application services are started manually in command line
+* **Usage Manual**: infrastructure services are started as Docker containers. Application services are started manually in command line
 * **Usage Docker Compose**: all services are started as Docker containers definied in docker compose file.
 * **Usage Kubernetes (Kind)**: all services are started as Kubernetes pods.
 
@@ -79,7 +79,7 @@ USAGE MANUAL
 USAGE DOCKER COMPOSE
 --------------------
 
-> **Usage Docker Compse** means all services are started as Docker containers definied in docker compose file.
+> **Usage Docker Compose** means all services are started as Docker containers defined in docker compose file.
 
 > Please **clone/download** project, open **project's main folder** in your favorite **command line tool** and then **proceed with steps below**.
 

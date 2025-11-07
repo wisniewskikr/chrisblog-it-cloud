@@ -66,7 +66,7 @@ USAGE MANUAL
 1. In a second command line tool **start Second application** with `mvn -f ./springcloud-springboot3-documentation-gateway-keycloak_SECOND spring-boot:run`
 1. In a third command line tool **start First application** with `mvn -f ./springcloud-springboot3-documentation-gateway-keycloak_FIRST spring-boot:run`
 1. In a fourth command line tool **start Routing application** with `mvn -f ./springcloud-springboot3-documentation-gateway-keycloak_ROUTING spring-boot:run`
-1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8762/swagger-ui/index.html`
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8762/swagger-ui.html`
    * Expected HTML page with First and Second services documentation
 1. Clean up environment:
    * In the fourth command line tool **stop Routing application** with `ctrl + C`
@@ -91,7 +91,7 @@ USAGE DOCKER COMPOSE
 ##### Required steps:
 1. Start **Docker** tool
 1. In any command line tool **start Docker containers** with `docker-compose -f .\docker-compose\full\docker-compose.yaml up -d --build`
-1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8762/swagger-ui/index.html`
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8762/swagger-ui.html`
    * Expected HTML page with First and Second services documentation
 1. Clean up environment 
      * In a command line tool **remove Docker containers** with `docker-compose -f .\docker-compose\full\docker-compose.yaml down --rmi all`
@@ -128,7 +128,7 @@ USAGE KUBERNETES (KIND)
 1. In the second command line tool **forward port of Gateway service** with `kubectl port-forward service/gateway 8762:8762`
 1. In the third command line tool **forward port of First service** with `kubectl port-forward service/first 8081:8081`
 1. In the fourth command line tool **forward port of Second service** with `kubectl port-forward service/second 8082:8082`
-1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8762/swagger-ui/index.html`
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8762/swagger-ui.html`
    * Expected HTML page with First and Second services documentation
 1. Clean up environment
      * In the fourth command line tool **stop forwarding port of Second service** with `ctrl + C`

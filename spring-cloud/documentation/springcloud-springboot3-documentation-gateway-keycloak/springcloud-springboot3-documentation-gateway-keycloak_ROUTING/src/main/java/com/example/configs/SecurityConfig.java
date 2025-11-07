@@ -29,7 +29,10 @@ public class SecurityConfig {
                 );
 
         http
-                .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                .oauth2Login(Customizer.withDefaults());
+
+        http
+                .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED));
 
         return http.build();
 

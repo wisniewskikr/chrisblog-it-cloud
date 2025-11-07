@@ -8,6 +8,17 @@ spring:
         jwt:
           issuer-uri: http://localhost:8080/realms/helloworld-realm
           jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+      client:
+        registration:
+          keycloak:
+            client-id: helloworld-client
+            authorization-grant-type: authorization_code
+            client-authentication-method: none
+            scope: openid
+            redirect-uri: http://localhost:8762/login/oauth2/code/helloworld-client
+        provider:
+          keycloak:
+            issuer-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}
 
 # Server Port
 server:

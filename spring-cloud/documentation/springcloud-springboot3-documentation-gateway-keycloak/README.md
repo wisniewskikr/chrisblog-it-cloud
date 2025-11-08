@@ -79,8 +79,22 @@ USAGE MANUAL
 1. In a second command line tool **start Second application** with `mvn -f ./springcloud-springboot3-documentation-gateway-keycloak_SECOND spring-boot:run`
 1. In a third command line tool **start First application** with `mvn -f ./springcloud-springboot3-documentation-gateway-keycloak_FIRST spring-boot:run`
 1. In a fourth command line tool **start Routing application** with `mvn -f ./springcloud-springboot3-documentation-gateway-keycloak_ROUTING spring-boot:run`
+1. In any REST Client (e.g. Postman) visit **REST API** application with `http://localhost:8762/secured`
+   * Authorization -> Type -> OAuth 2.0
+   * Token Name: **Token**
+   * Grant Type: **Authorization Code (With PKCE)
+   * Callback URL: **http://localhost:8762/login/oauth2/code/helloworld-client**
+   * Auth URL: **http://localhost:8080/realms/helloworld-realm/protocol/openid-connect/auth**
+   * Access Token URL: **http://localhost:7070/realms/helloworld-realm/protocol/openid-connect/token**
+   * Client ID: **helloworld-client**
+   * Code Challenge Method: **SHA-256**
+   * Click **Get New Access Token -> Register new user with credentials user/user -> Use Token**
+   * Click **Send**
+   * Expected text **Hello World, Secured!**
 1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8762/swagger-ui.html`
+   * Log in with credentials user/user
    * Expected HTML page with First and Second services documentation
+   * Try out endpoint **secured** for First service
 1. Clean up environment:
    * In the fourth command line tool **stop Routing application** with `ctrl + C`
    * In the third command line tool **stop First application** with `ctrl + C`

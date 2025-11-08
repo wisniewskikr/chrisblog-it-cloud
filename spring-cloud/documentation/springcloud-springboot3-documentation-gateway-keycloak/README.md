@@ -85,7 +85,7 @@ USAGE MANUAL
    * Grant Type: **Authorization Code (With PKCE)
    * Callback URL: **http://localhost:8762/login/oauth2/code/helloworld-client**
    * Auth URL: **http://localhost:8080/realms/helloworld-realm/protocol/openid-connect/auth**
-   * Access Token URL: **http://localhost:7070/realms/helloworld-realm/protocol/openid-connect/token**
+   * Access Token URL: **http://localhost:8080/realms/helloworld-realm/protocol/openid-connect/token**
    * Client ID: **helloworld-client**
    * Code Challenge Method: **SHA-256**
    * Click **Get New Access Token -> Register new user with credentials user/user -> Use Token**
@@ -118,8 +118,22 @@ USAGE DOCKER COMPOSE
 ##### Required steps:
 1. Start **Docker** tool
 1. In any command line tool **start Docker containers** with `docker-compose -f .\docker-compose\full\docker-compose.yaml up -d --build`
+1. In any REST Client (e.g. Postman) visit **REST API** application with `http://localhost:8762/secured`
+   * Authorization -> Type -> OAuth 2.0
+   * Token Name: **Token**
+   * Grant Type: **Authorization Code (With PKCE)
+   * Callback URL: **http://localhost:8762/login/oauth2/code/helloworld-client**
+   * Auth URL: **http://keycloak:8080/realms/helloworld-realm/protocol/openid-connect/auth**
+   * Access Token URL: **http://keycloak:8080/realms/helloworld-realm/protocol/openid-connect/token**
+   * Client ID: **helloworld-client**
+   * Code Challenge Method: **SHA-256**
+   * Click **Get New Access Token -> Register new user with credentials user/user -> Use Token**
+   * Click **Send**
+   * Expected text **Hello World, Secured!**
 1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8762/swagger-ui.html`
+   * Log in with credentials user/user
    * Expected HTML page with First and Second services documentation
+   * Try out endpoint **secured** for First service
 1. Clean up environment 
      * In a command line tool **remove Docker containers** with `docker-compose -f .\docker-compose\full\docker-compose.yaml down --rmi all`
      * Stop **Docker** tool

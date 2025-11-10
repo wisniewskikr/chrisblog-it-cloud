@@ -75,8 +75,8 @@ services:
       context: ./../../springcloud-springboot3-documentation-gateway-keycloak_ROUTING
       dockerfile: Dockerfile
     environment:
-      service.first.url: http://first:8081
-      service.second.url: http://second:8082
+      SERVICE_FIRST_URL: http://first:8081
+      SERVICE_SECOND_URL: http://second:8082
       WAIT_HOSTS: keycloak:8080
       WAIT_TIMEOUT: 60
       SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI: "http://keycloak:8080/realms/helloworld-realm"

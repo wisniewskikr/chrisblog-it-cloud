@@ -169,8 +169,22 @@ USAGE KUBERNETES (KIND)
 1. In the second command line tool **forward port of Gateway service** with `kubectl port-forward service/gateway 8762:8762`
 1. In the third command line tool **forward port of First service** with `kubectl port-forward service/first 8081:8081`
 1. In the fourth command line tool **forward port of Second service** with `kubectl port-forward service/second 8082:8082`
+1. In any REST Client (e.g. Postman) visit **REST API** application with `http://localhost:8762/secured`
+   * Authorization -> Type -> OAuth 2.0
+   * Token Name: **Token**
+   * Grant Type: **Authorization Code (With PKCE)
+   * Callback URL: **http://localhost:8762/login/oauth2/code/helloworld-client**
+   * Auth URL: **http://keycloak.default.svc.cluster.local:8080/realms/helloworld-realm/protocol/openid-connect/auth**
+   * Access Token URL: **http://keycloak.default.svc.cluster.local:8080/realms/helloworld-realm/protocol/openid-connect/token**
+   * Client ID: **helloworld-client**
+   * Code Challenge Method: **SHA-256**
+   * Click **Get New Access Token -> Register new user with credentials user/user -> Use Token**
+   * Click **Send**
+   * Expected text **Hello World, Secured!**
 1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8762/swagger-ui.html`
+   * Log in with credentials user/user
    * Expected HTML page with First and Second services documentation
+   * Try out endpoint **secured** for First service
 1. Clean up environment
      * In the fourth command line tool **stop forwarding port of Second service** with `ctrl + C`
      * In the third command line tool **stop forwarding port of First service** with `ctrl + C`

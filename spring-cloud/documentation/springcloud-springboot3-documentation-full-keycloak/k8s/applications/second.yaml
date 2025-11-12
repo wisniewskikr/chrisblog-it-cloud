@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: second
+  labels:
+    app: second
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: second
+  template:
+    metadata:
+      labels:
+        app: second
+    spec:
+      containers:
+      - name: second
+        image: wisniewskikr/springcloud-springboot3-documentation-gateway-keycloak_second:0.0.1
+        ports:
+        - containerPort: 8082
+        env:
+        - name: spring.datasource.url
+          value: jdbc:mysql://mysql:3306/database
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8082
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8082
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+      restartPolicy: Always
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: second
+spec:
+  selector:
+    app: second
+  ports:
+    - port: 8082
+      targetPort: 8082

@@ -116,6 +116,7 @@ USAGE DOCKER COMPOSE
 * **Docker** (tested on version 4.33.1)
 
 ##### Required steps:
+1. Update **hosts** file (Run as Administrator; Windows: "Windows\System32\drivers\etc\hosts"; MAC/Linux: "etc/hosts") with new line **127.0.0.1 keycloak**
 1. Start **Docker** tool
 1. In any command line tool **start Docker containers** with `docker-compose -f .\docker-compose\full\docker-compose.yaml up -d --build`
 1. In any REST Client (e.g. Postman) visit **REST API** application with `http://localhost:8762/secured`
@@ -161,6 +162,7 @@ USAGE KUBERNETES (KIND)
 * **Kind** (tested on version 0.26.0)
 
 ##### Required steps:
+1. Update **hosts** file (Run as Administrator; Windows: "Windows\System32\drivers\etc\hosts"; MAC/Linux: "etc/hosts") with new line **127.0.0.1 keycloak.default.svc.cluster.local**
 1. Start **Docker** tool
 1. In the first command line tool create and start cluster **Kind** with `kind create cluster --name helloworld`
 1. In the first command line tool **start Kubernetes Pods** with `kubectl apply -f ./k8s --recursive`
@@ -169,6 +171,7 @@ USAGE KUBERNETES (KIND)
 1. In the second command line tool **forward port of Gateway service** with `kubectl port-forward service/gateway 8762:8762`
 1. In the third command line tool **forward port of First service** with `kubectl port-forward service/first 8081:8081`
 1. In the fourth command line tool **forward port of Second service** with `kubectl port-forward service/second 8082:8082`
+1. In the fifth command line tool **forward port of Keycloak service** with `kubectl port-forward service/keycloak 8080:8080`
 1. In any REST Client (e.g. Postman) visit **REST API** application with `http://localhost:8762/secured`
    * Authorization -> Type -> OAuth 2.0
    * Token Name: **Token**
@@ -186,6 +189,7 @@ USAGE KUBERNETES (KIND)
    * Expected HTML page with First and Second services documentation
    * Try out endpoint **secured** for First service
 1. Clean up environment
+     * In the fifth command line tool **stop forwarding port of Keycloak service** with `ctrl + C`
      * In the fourth command line tool **stop forwarding port of Second service** with `ctrl + C`
      * In the third command line tool **stop forwarding port of First service** with `ctrl + C`
      * In the second command line tool **stop forwarding port of Gateway service** with `ctrl + C`

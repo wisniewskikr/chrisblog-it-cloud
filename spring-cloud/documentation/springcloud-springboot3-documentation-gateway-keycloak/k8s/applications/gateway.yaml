@@ -20,9 +20,9 @@ spec:
           ports:
             - containerPort: 8762
           env:
-            - name: service.first.url
+            - name: SERVICE_FIRST_URL
               value: http://first:8081
-            - name: service.second.url
+            - name: SERVICE_SECOND_URL
               value: http://second:8082
             - name: SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI
               value: http://keycloak.default.svc.cluster.local:8080/realms/helloworld-realm

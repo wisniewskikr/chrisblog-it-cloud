@@ -13,7 +13,10 @@ import org.springframework.context.annotation.Configuration;
 public class Swagger3Config {
 
     @Value("${service.url.gateway}")
-    public String appUrl;
+    public String gatewayUrl;
+
+    @Value("${swagger.app.uri}")
+    public String directUrl;
 
     @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
     public String keycloakBaseUrl;
@@ -21,9 +24,13 @@ public class Swagger3Config {
     @Bean
     public OpenAPI myOpenAPI() {
 
-        Server server = new Server()
-                .url(appUrl)
-                .description("Local server");
+        Server gateway = new Server()
+                .url(gatewayUrl)
+                .description("Gateway server");
+
+        Server direct = new Server()
+                .url(directUrl)
+                .description("Direct server");
 
         Contact contact = new Contact()
                 .email("helloworld@gmail.com")
@@ -49,7 +56,8 @@ public class Swagger3Config {
 
         return new OpenAPI()
                 .info(info)
-                .addServersItem(server)
+                .addServersItem(gateway)
+                .addServersItem(direct)
                 .components(new Components().addSecuritySchemes("keycloak", keycloakSecurityScheme));
 
     }

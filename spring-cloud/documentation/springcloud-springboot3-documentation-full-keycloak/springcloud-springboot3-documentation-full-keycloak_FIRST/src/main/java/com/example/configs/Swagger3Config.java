@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class Swagger3Config {
 
-    @Value("${swagger.app.uri}")
+    @Value("${service.url.gateway}")
     public String appUrl;
 
     @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")

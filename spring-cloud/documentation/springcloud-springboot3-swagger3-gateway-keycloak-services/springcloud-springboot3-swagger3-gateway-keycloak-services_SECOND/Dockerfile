@@ -5,4 +5,5 @@ RUN mvn -f /home/app/pom.xml clean package -Dmaven.test.skip
 
 FROM eclipse-temurin:23-jre
 COPY --from=builder /home/app/target/*.jar  /opt/app/*.jar
-ENTRYPOINT ["java", "-jar", "/opt/app/*.jar"]
+COPY --from=ghcr.io/ufoscout/docker-compose-wait:latest /wait /wait
+ENTRYPOINT ["/bin/sh", "-c", "/wait && java -jar /opt/app/*.jar"]

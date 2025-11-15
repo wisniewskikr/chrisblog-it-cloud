@@ -38,7 +38,10 @@ services:
       context: ./../../springcloud-springboot3-swagger3-gateway-keycloak-services_SECOND
       dockerfile: Dockerfile
     environment:
-      spring.datasource.url: jdbc:mysql://mysql:3306/database
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/database
+      WAIT_HOSTS: keycloak:8080
+      WAIT_TIMEOUT: 60
+      SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_ISSUER_URI: "http://keycloak:8080/realms/helloworld-realm"
     depends_on:
       mysql:
         condition: service_healthy
@@ -58,7 +61,10 @@ services:
       context: ./../../springcloud-springboot3-swagger3-gateway-keycloak-services_FIRST
       dockerfile: Dockerfile
     environment:
-      api.url: http://second:8082
+      API_URL: http://second:8082
+      WAIT_HOSTS: keycloak:8080
+      WAIT_TIMEOUT: 60
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI: "http://keycloak:8080/realms/helloworld-realm"
     ports:
       - 8081:8081
     healthcheck:
@@ -77,9 +83,6 @@ services:
     environment:
       SERVICE_FIRST_URL: http://first:8081
       SERVICE_SECOND_URL: http://second:8082
-      WAIT_HOSTS: keycloak:8080
-      WAIT_TIMEOUT: 60
-      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI: "http://keycloak:8080/realms/helloworld-realm"
     depends_on:
       - first
     ports:

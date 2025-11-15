@@ -35,7 +35,7 @@ DESCRIPTION
 The goal of this project is to present how to create **Open API documentation** for **Gateway** service and 
 custom microservices with usage **Java** programming language and **Spring Cloud** and **Spring Boot 3** frameworks.
 
-Additionally Gateway and documentation is secured by **Keycloak**.
+Additionally services - First and Second - and their documentation is secured by **Keycloak**.
 
 ##### Services
 This project consists of following applications:
@@ -98,6 +98,7 @@ USAGE MANUAL
 1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8762/swagger-ui.html`
    * Log in with credentials user/user
    * Expected HTML page with First and Second services documentation
+   * Make sure that URL is still `http://localhost:8762/swagger-ui.html`
    * Try out endpoint **secured** for First service
 1. Clean up environment:
    * In the fourth command line tool **stop Routing application** with `ctrl + C`

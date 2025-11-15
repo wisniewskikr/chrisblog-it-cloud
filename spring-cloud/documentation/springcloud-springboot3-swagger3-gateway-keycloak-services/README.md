@@ -95,10 +95,9 @@ USAGE MANUAL
    * Click **Get New Access Token -> Register new user with credentials user/user -> Use Token**
    * Click **Send**
    * Expected text **Hello World, Secured!**
-1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8762/swagger-ui.html`
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8081/swagger-ui/index.html`
    * Log in with credentials user/user
-   * Expected HTML page with First and Second services documentation
-   * Make sure that URL is still `http://localhost:8762/swagger-ui.html`
+   * Expected HTML page with First service documentation
    * Try out endpoint **secured** for First service
 1. Clean up environment:
    * In the fourth command line tool **stop Routing application** with `ctrl + C`
@@ -136,9 +135,9 @@ USAGE DOCKER COMPOSE
    * Click **Get New Access Token -> Register new user with credentials user/user -> Use Token**
    * Click **Send**
    * Expected text **Hello World, Secured!**
-1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8762/swagger-ui.html`
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8081/swagger-ui/index.html`
    * Log in with credentials user/user
-   * Expected HTML page with First and Second services documentation
+   * Expected HTML page with First service documentation
    * Try out endpoint **secured** for First service
 1. Clean up environment 
      * In a command line tool **remove Docker containers** with `docker-compose -f .\docker-compose\full\docker-compose.yaml down --rmi all`

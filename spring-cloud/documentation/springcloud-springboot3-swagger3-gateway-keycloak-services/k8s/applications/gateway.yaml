@@ -24,8 +24,6 @@ spec:
               value: http://first:8081
             - name: SERVICE_SECOND_URL
               value: http://second:8082
-            - name: SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI
-              value: http://keycloak.default.svc.cluster.local:8080/realms/helloworld-realm
           readinessProbe:
             httpGet:
               path: /actuator/health

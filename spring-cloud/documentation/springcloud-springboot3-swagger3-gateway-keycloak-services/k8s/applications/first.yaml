@@ -20,8 +20,10 @@ spec:
         ports:
         - containerPort: 8081
         env:
-        - name: api.url
+        - name: API_URL
           value: http://second:8082
+        - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_ISSUER_URI
+          value: http://keycloak.default.svc.cluster.local:8080/realms/helloworld-realm
         readinessProbe:
           httpGet:
             path: /actuator/health

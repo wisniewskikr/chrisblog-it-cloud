@@ -20,8 +20,10 @@ spec:
         ports:
         - containerPort: 8082
         env:
-        - name: spring.datasource.url
+        - name: SPRING_DATASOURCE_URL
           value: jdbc:mysql://mysql:3306/database
+        - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_ISSUER_URI
+          value: http://keycloak.default.svc.cluster.local:8080/realms/helloworld-realm
         readinessProbe:
           httpGet:
             path: /actuator/health

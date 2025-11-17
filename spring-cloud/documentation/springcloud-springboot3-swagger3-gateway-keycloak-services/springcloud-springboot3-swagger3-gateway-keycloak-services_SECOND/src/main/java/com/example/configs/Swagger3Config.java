@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class OpenAPIConfig {
+public class Swagger3Config {
 
     @Value("${swagger.app.uri}")
     public String appUrl;

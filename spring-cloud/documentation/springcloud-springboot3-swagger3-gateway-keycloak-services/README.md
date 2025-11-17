@@ -188,9 +188,9 @@ USAGE KUBERNETES (KIND)
    * Click **Get New Access Token -> Register new user with credentials user/user -> Use Token**
    * Click **Send**
    * Expected text **Hello World, Secured!**
-1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8762/swagger-ui.html`
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8081/swagger-ui/index.html`
    * Log in with credentials user/user
-   * Expected HTML page with First and Second services documentation
+   * Expected HTML page with First service documentation
    * Try out endpoint **secured** for First service
 1. Clean up environment
      * In the fifth command line tool **stop forwarding port of Keycloak service** with `ctrl + C`

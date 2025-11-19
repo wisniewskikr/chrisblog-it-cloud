@@ -35,7 +35,7 @@ DESCRIPTION
 The goal of this project is to present how to create **Open API documentation** for **Gateway** service and 
 custom microservices with usage **Java** programming language and **Spring Cloud** and **Spring Boot 3** frameworks.
 
-Additionally services - First and Second - and their documentation is secured by **Keycloak**.
+Additionally services - First and Second - and their documentation are secured by **Keycloak**.
 
 ##### Services
 This project consists of following applications:

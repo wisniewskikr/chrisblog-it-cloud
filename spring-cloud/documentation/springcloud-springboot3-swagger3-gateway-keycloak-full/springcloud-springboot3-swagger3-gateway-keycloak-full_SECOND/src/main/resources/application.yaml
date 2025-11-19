@@ -1,0 +1,55 @@
+spring:
+
+  application:
+    name: second
+
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: helloworld-client
+            authorization-grant-type: authorization_code
+            client-authentication-method: none
+            scope: openid
+            redirect-uri: http://localhost:8082/login/oauth2/code/helloworld-client
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8080/realms/helloworld-realm
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/database
+    username: admin
+    password: admin123
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    defer-datasource-initialization: true
+
+  sql:
+    init:
+      mode: always
+
+server:
+  port: 8082
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /api-docs
+
+service:
+  url:
+    gateway: http://localhost:8762
+
+swagger:
+  app:
+    uri: http://localhost:8082

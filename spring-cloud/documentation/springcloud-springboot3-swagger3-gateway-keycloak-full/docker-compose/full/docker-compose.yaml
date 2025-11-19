@@ -35,7 +35,7 @@ services:
     image: second-image:0.0.1
     container_name: second-container
     build:
-      context: ./../../springcloud-springboot3-swagger3-gateway-keycloak-services_SECOND
+      context: ./../../springcloud-springboot3-swagger3-gateway-keycloak-full_SECOND
       dockerfile: Dockerfile
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/database
@@ -58,7 +58,7 @@ services:
     image: first-image:0.0.1
     container_name: first-container
     build:
-      context: ./../../springcloud-springboot3-swagger3-gateway-keycloak-services_FIRST
+      context: ./../../springcloud-springboot3-swagger3-gateway-keycloak-full_FIRST
       dockerfile: Dockerfile
     environment:
       API_URL: http://second:8082
@@ -78,7 +78,7 @@ services:
     image: gateway-image
     container_name: gateway-container
     build:
-      context: ./../../springcloud-springboot3-swagger3-gateway-keycloak-services_ROUTING
+      context: ./../../springcloud-springboot3-swagger3-gateway-keycloak-full_ROUTING
       dockerfile: Dockerfile
     environment:
       SERVICE_FIRST_URL: http://first:8081

@@ -95,7 +95,7 @@ USAGE MANUAL
    * Click **Get New Access Token -> Register new user with credentials user/user -> Use Token**
    * Click **Send**
    * Expected text **Hello World, Secured!**
-1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8081/swagger-ui/index.html`
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8762/swagger-ui.html`
    * Log in with credentials user/user
    * Expected HTML page with First service documentation
    * Try out endpoint **secured** for First service

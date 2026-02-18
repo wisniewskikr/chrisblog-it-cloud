@@ -82,12 +82,11 @@ USAGE MANUAL
 1. In a first command line tool **start Docker containers** with `docker-compose -f .\docker-compose\infrastructure\docker-compose.yaml up -d --build`
 1. In a second command line tool **start Second application** with `mvn -f ./springcloud-springboot3-swagger3-gateway-keycloak-services_SECOND spring-boot:run`
 1. In a third command line tool **start First application** with `mvn -f ./springcloud-springboot3-swagger3-gateway-keycloak-services_FIRST spring-boot:run`
-1. In a fourth command line tool **start Routing application** with `mvn -f ./springcloud-springboot3-swagger3-gateway-keycloak-services_ROUTING spring-boot:run`
-1. In any REST Client (e.g. Postman) visit **REST API** application with `http://localhost:8762/secured`
+1. In any REST Client (e.g. Postman) visit **REST API** application with `http://localhost:8081/secured`
    * Authorization -> Type -> OAuth 2.0
    * Token Name: **Token**
    * Grant Type: **Authorization Code (With PKCE)
-   * Callback URL: **http://localhost:8762/login/oauth2/code/helloworld-client**
+   * Callback URL: **http://localhost:8081/login/oauth2/code/helloworld-client**
    * Auth URL: **http://localhost:8080/realms/helloworld-realm/protocol/openid-connect/auth**
    * Access Token URL: **http://localhost:8080/realms/helloworld-realm/protocol/openid-connect/token**
    * Client ID: **helloworld-client**
@@ -100,7 +99,6 @@ USAGE MANUAL
    * Expected HTML page with First service documentation
    * Try out endpoint **secured** for First service
 1. Clean up environment:
-   * In the fourth command line tool **stop Routing application** with `ctrl + C`
    * In the third command line tool **stop First application** with `ctrl + C`
    * In the second command line tool **stop Second application** with `ctrl + C`
    * In the first command line tool **remove Docker containers** with `docker-compose -f .\docker-compose\infrastructure\docker-compose.yaml down --rmi all`
@@ -123,11 +121,11 @@ USAGE DOCKER COMPOSE
 1. Update **hosts** file (Run as Administrator; Windows: "Windows\System32\drivers\etc\hosts"; MAC/Linux: "etc/hosts") with new line **127.0.0.1 keycloak**
 1. Start **Docker** tool
 1. In any command line tool **start Docker containers** with `docker-compose -f .\docker-compose\full\docker-compose.yaml up -d --build`
-1. In any REST Client (e.g. Postman) visit **REST API** application with `http://localhost:8762/secured`
+1. In any REST Client (e.g. Postman) visit **REST API** application with `http://localhost:8081/secured`
    * Authorization -> Type -> OAuth 2.0
    * Token Name: **Token**
    * Grant Type: **Authorization Code (With PKCE)
-   * Callback URL: **http://localhost:8762/login/oauth2/code/helloworld-client**
+   * Callback URL: **http://localhost:8081/login/oauth2/code/helloworld-client**
    * Auth URL: **http://keycloak:8080/realms/helloworld-realm/protocol/openid-connect/auth**
    * Access Token URL: **http://keycloak:8080/realms/helloworld-realm/protocol/openid-connect/token**
    * Client ID: **helloworld-client**
@@ -172,15 +170,14 @@ USAGE KUBERNETES (KIND)
 1. In the first command line tool **start Kubernetes Pods** with `kubectl apply -f ./k8s --recursive`
 1. In the first command line tool **check status of Kubernetes Pods** with `kubectl get pods`
    * Expected mysql, second and first as **READY 1/1** (it can take few minutes)
-1. In the second command line tool **forward port of Gateway service** with `kubectl port-forward service/gateway 8762:8762`
 1. In the third command line tool **forward port of First service** with `kubectl port-forward service/first 8081:8081`
 1. In the fourth command line tool **forward port of Second service** with `kubectl port-forward service/second 8082:8082`
 1. In the fifth command line tool **forward port of Keycloak service** with `kubectl port-forward service/keycloak 8080:8080`
-1. In any REST Client (e.g. Postman) visit **REST API** application with `http://localhost:8762/secured`
+1. In any REST Client (e.g. Postman) visit **REST API** application with `http://localhost:8081/secured`
    * Authorization -> Type -> OAuth 2.0
    * Token Name: **Token**
    * Grant Type: **Authorization Code (With PKCE)
-   * Callback URL: **http://localhost:8762/login/oauth2/code/helloworld-client**
+   * Callback URL: **http://localhost:8081/login/oauth2/code/helloworld-client**
    * Auth URL: **http://keycloak.default.svc.cluster.local:8080/realms/helloworld-realm/protocol/openid-connect/auth**
    * Access Token URL: **http://keycloak.default.svc.cluster.local:8080/realms/helloworld-realm/protocol/openid-connect/token**
    * Client ID: **helloworld-client**
@@ -196,7 +193,6 @@ USAGE KUBERNETES (KIND)
      * In the fifth command line tool **stop forwarding port of Keycloak service** with `ctrl + C`
      * In the fourth command line tool **stop forwarding port of Second service** with `ctrl + C`
      * In the third command line tool **stop forwarding port of First service** with `ctrl + C`
-     * In the second command line tool **stop forwarding port of Gateway service** with `ctrl + C`
      * In the first command line tool **remove Kubernetes Pods** with `kubectl delete -f ./k8s --recursive`
      * In the first command line tool delete cluster **Kind** with `kind delete cluster --name helloworld`
      * Stop **Docker** tool

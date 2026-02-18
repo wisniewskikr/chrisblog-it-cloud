@@ -12,9 +12,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class Swagger3Config {
 
-    @Value("${service.url.gateway}")
-    public String gatewayUrl;
-
     @Value("${swagger.app.uri}")
     public String directUrl;
 
@@ -23,10 +20,6 @@ public class Swagger3Config {
 
     @Bean
     public OpenAPI myOpenAPI() {
-
-        Server gateway = new Server()
-                .url(gatewayUrl)
-                .description("Gateway server");
 
         Server direct = new Server()
                 .url(directUrl)
@@ -56,7 +49,6 @@ public class Swagger3Config {
 
         return new OpenAPI()
                 .info(info)
-                .addServersItem(gateway)
                 .addServersItem(direct)
                 .components(new Components().addSecuritySchemes("keycloak", keycloakSecurityScheme));
 

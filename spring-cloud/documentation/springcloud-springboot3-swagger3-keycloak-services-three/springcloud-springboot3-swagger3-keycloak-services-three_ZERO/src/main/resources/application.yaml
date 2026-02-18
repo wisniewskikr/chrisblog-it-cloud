@@ -1,7 +1,7 @@
 # Name
 spring:
   application:
-    name: first
+    name: zero
   security:
     oauth2:
       resourceserver:
@@ -15,7 +15,7 @@ spring:
             authorization-grant-type: authorization_code
             client-authentication-method: none
             scope: openid
-            redirect-uri: http://localhost:8081/login/oauth2/code/helloworld-client
+            redirect-uri: http://localhost:7070/login/oauth2/code/helloworld-client
         provider:
           keycloak:
             issuer-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}
@@ -23,17 +23,17 @@ spring:
 
 # Port
 server:
-  port: 8081
+  port: 7070
 
 # API
 api:
-  url: http://localhost:8082
+  url: http://localhost:8081
 
 # Metrics
 management:
   observations:
     key-values:
-      application: first
+      application: zero
 
 # Documentation
 springdoc:
@@ -45,4 +45,4 @@ springdoc:
 # Swagger
 swagger:
   app:
-    uri: http://localhost:8081
+    uri: http://localhost:7070

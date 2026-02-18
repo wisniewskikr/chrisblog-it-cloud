@@ -1,15 +1,17 @@
 package com.example.clients;
 
-import org.springframework.web.bind.annotation.PathVariable;
+import com.example.dtos.HelloWorldFirstDto;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.service.annotation.GetExchange;
 import org.springframework.web.service.annotation.HttpExchange;
-
-import com.example.dtos.HelloWorldSecondDto;
 
 @HttpExchange
 public interface FirstClient {
 
-    @GetExchange("/message/{id}")
-    HelloWorldSecondDto findById(@PathVariable("id") Long id);
+    @GetExchange("/public")
+    ResponseEntity<HelloWorldFirstDto> publicHelloWorld();
+
+    @GetExchange("/secured")
+    public ResponseEntity<HelloWorldFirstDto> securedHelloWorld();
 
 }

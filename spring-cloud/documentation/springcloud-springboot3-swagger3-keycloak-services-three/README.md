@@ -80,8 +80,8 @@ USAGE MANUAL
 ##### Required steps:
 1. Start **Docker** tool
 1. In a first command line tool **start Docker containers** with `docker-compose -f .\docker-compose\infrastructure\docker-compose.yaml up -d --build`
-1. In a second command line tool **start Second application** with `mvn -f ./springcloud-springboot3-swagger3-keycloak-services-two_SECOND spring-boot:run`
-1. In a third command line tool **start First application** with `mvn -f ./springcloud-springboot3-swagger3-keycloak-services-two_FIRST spring-boot:run`
+1. In a second command line tool **start Second application** with `mvn -f ./springcloud-springboot3-swagger3-keycloak-services-three_SECOND spring-boot:run`
+1. In a third command line tool **start First application** with `mvn -f ./springcloud-springboot3-swagger3-keycloak-services-three_FIRST spring-boot:run`
 1. In any REST Client (e.g. Postman) visit **REST API** application with `http://localhost:8081/secured`
    * Authorization -> Type -> OAuth 2.0
    * Token Name: **Token**
@@ -198,12 +198,12 @@ USAGE KUBERNETES (KIND)
      * Stop **Docker** tool
 
 ##### Optional steps:
-1. In a command line tool build Docker SECOND image with `docker build -f springcloud-springboot3-swagger3-keycloak-services-two_SECOND/Dockerfile -t wisniewskikr/springcloud-springboot3-swagger3-keycloak-services-two_second:0.0.1 ./springcloud-springboot3-swagger3-keycloak-services-two_SECOND`
-1. In a command line tool push Docker SECOND image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-swagger3-keycloak-services-two_second:0.0.1` 
-1. In a command line tool build Docker FIRST image with `docker build -f springcloud-springboot3-swagger3-keycloak-services-two_FIRST/Dockerfile -t wisniewskikr/springcloud-springboot3-swagger3-keycloak-services-two_first:0.0.1 ./springcloud-springboot3-swagger3-keycloak-services-two_FIRST`
-1. In a command line tool push Docker FIRST image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-swagger3-keycloak-services-two_first:0.0.1`
-1. In a command line tool build Docker ROUTING image with `docker build -f springcloud-springboot3-swagger3-keycloak-services-two_ROUTING/Dockerfile -t wisniewskikr/springcloud-springboot3-swagger3-keycloak-services-two_routing:0.0.1 ./springcloud-springboot3-swagger3-keycloak-services-two_ROUTING`
-1. In a command line tool push Docker ROUTING image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-swagger3-keycloak-services-two_routing:0.0.1`
+1. In a command line tool build Docker SECOND image with `docker build -f springcloud-springboot3-swagger3-keycloak-services-three_SECOND/Dockerfile -t wisniewskikr/springcloud-springboot3-swagger3-keycloak-services-three_second:0.0.1 ./springcloud-springboot3-swagger3-keycloak-services-three_SECOND`
+1. In a command line tool push Docker SECOND image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-swagger3-keycloak-services-three_second:0.0.1` 
+1. In a command line tool build Docker FIRST image with `docker build -f springcloud-springboot3-swagger3-keycloak-services-three_FIRST/Dockerfile -t wisniewskikr/springcloud-springboot3-swagger3-keycloak-services-three_first:0.0.1 ./springcloud-springboot3-swagger3-keycloak-services-three_FIRST`
+1. In a command line tool push Docker FIRST image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-swagger3-keycloak-services-three_first:0.0.1`
+1. In a command line tool build Docker ROUTING image with `docker build -f springcloud-springboot3-swagger3-keycloak-services-three_ROUTING/Dockerfile -t wisniewskikr/springcloud-springboot3-swagger3-keycloak-services-three_routing:0.0.1 ./springcloud-springboot3-swagger3-keycloak-services-three_ROUTING`
+1. In a command line tool push Docker ROUTING image to Docker Repository with `docker push wisniewskikr/springcloud-springboot3-swagger3-keycloak-services-three_routing:0.0.1`
 1. In the first command line tool with administrator privileges check clusers with `kind get clusters`
 1. In a command line tool check Kubernetes Deployments with `kubectl get deployments`
 1. In a command line tool check Kubernetes Deployments details with **kubectl describe deployment {deployment-name}**

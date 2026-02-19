@@ -53,11 +53,12 @@ USAGE MANUAL
 1. In a first command line tool **start Docker containers** with `docker-compose -f .\docker-compose\infrastructure\docker-compose.yaml up -d --build`
 1. In a second command line tool **start Second application** with `mvn -f ./springcloud-springboot3-swagger3-keycloak-services-three_SECOND spring-boot:run`
 1. In a third command line tool **start First application** with `mvn -f ./springcloud-springboot3-swagger3-keycloak-services-three_FIRST spring-boot:run`
-1. In any REST Client (e.g. Postman) visit **REST API** application with `http://localhost:8081/secured`
+1. In a fourth command line tool **start Zero application** with `mvn -f ./springcloud-springboot3-swagger3-keycloak-services-three_ZERO spring-boot:run`
+1. In any REST Client (e.g. Postman) visit **REST API** application with `http://localhost:7070/secured`
    * Authorization -> Type -> OAuth 2.0
    * Token Name: **Token**
    * Grant Type: **Authorization Code (With PKCE)
-   * Callback URL: **http://localhost:8081/login/oauth2/code/helloworld-client**
+   * Callback URL: **http://localhost:7070/login/oauth2/code/helloworld-client**
    * Auth URL: **http://localhost:8080/realms/helloworld-realm/protocol/openid-connect/auth**
    * Access Token URL: **http://localhost:8080/realms/helloworld-realm/protocol/openid-connect/token**
    * Client ID: **helloworld-client**
@@ -65,11 +66,12 @@ USAGE MANUAL
    * Click **Get New Access Token -> Register new user with credentials user/user -> Use Token**
    * Click **Send**
    * Expected text **Hello World, Secured!**
-1. In any Internet Browser (e.g. Chrome) visit `http://localhost:8081/swagger-ui/index.html`
+1. In any Internet Browser (e.g. Chrome) visit `http://localhost:7070/swagger-ui/index.html`
    * Log in with credentials user/user
    * Expected HTML page with First service documentation
    * Try out endpoint **secured** for First service
 1. Clean up environment:
+   * In the fourth command line tool **stop Zero application** with `ctrl + C`
    * In the third command line tool **stop First application** with `ctrl + C`
    * In the second command line tool **stop Second application** with `ctrl + C`
    * In the first command line tool **remove Docker containers** with `docker-compose -f .\docker-compose\infrastructure\docker-compose.yaml down --rmi all`

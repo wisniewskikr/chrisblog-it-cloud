@@ -18,7 +18,11 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.GET, "/", "/public", "/actuator/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/", "/public", "/actuator/**"
+//                                Turn off Keycloak for Swagger
+//                                , "/swagger-ui.html", "/swagger-ui/index.html"
+//                                , "/swagger-ui/**", "/api-docs/swagger-config", "/api-docs"
+                        ).permitAll()
                         .anyRequest().authenticated()
                 );
 

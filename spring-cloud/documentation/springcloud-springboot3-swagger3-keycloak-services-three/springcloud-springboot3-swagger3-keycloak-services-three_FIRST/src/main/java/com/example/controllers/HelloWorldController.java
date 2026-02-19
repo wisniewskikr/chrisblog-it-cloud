@@ -1,7 +1,6 @@
 package com.example.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -40,8 +39,7 @@ public class HelloWorldController {
 
     @Operation(
             summary = "Read secured message",
-            description = "Read secured message",
-            security = @SecurityRequirement(name = "keycloak"))
+            description = "Read secured message")
     @GetMapping("/secured")
     public ResponseEntity<HelloWorldFirstDto> securedHelloWorld() {
 

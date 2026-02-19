@@ -1,9 +1,7 @@
 package com.example.configs;
 
-import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.*;
-import io.swagger.v3.oas.models.security.*;
 import io.swagger.v3.oas.models.servers.Server;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -42,15 +40,9 @@ public class Swagger3Config {
                 .termsOfService("http://helloworld.com")
                 .license(mitLicense);
 
-        SecurityScheme keycloakSecurityScheme = new SecurityScheme()
-                .type(SecurityScheme.Type.OPENIDCONNECT)
-                .openIdConnectUrl(keycloakBaseUrl + "/.well-known/openid-configuration")
-                .description("OAuth2 flow via Keycloak (PKCE enabled)");
-
         return new OpenAPI()
                 .info(info)
-                .addServersItem(direct)
-                .components(new Components().addSecuritySchemes("keycloak", keycloakSecurityScheme));
+                .addServersItem(direct);
 
     }
 

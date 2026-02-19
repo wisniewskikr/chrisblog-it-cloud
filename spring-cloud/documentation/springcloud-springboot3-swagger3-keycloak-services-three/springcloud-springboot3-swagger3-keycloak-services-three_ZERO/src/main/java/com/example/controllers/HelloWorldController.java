@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.dtos.HelloWorldFirstDto;
+import com.example.dtos.HelloWorldZeroDto;
 import com.example.services.HelloWorldService;
 
 @RestController
@@ -20,7 +20,7 @@ public class HelloWorldController {
     private HelloWorldService helloWorldService;
 
     @GetMapping("/")
-    public ResponseEntity<HelloWorldFirstDto> defaultHelloWorld() {
+    public ResponseEntity<HelloWorldZeroDto> defaultHelloWorld() {
         return publicHelloWorld();
     }
 
@@ -29,12 +29,12 @@ public class HelloWorldController {
             description = "Read public message",
             security = {})
     @GetMapping("/public")
-    public ResponseEntity<HelloWorldFirstDto> publicHelloWorld() {
+    public ResponseEntity<HelloWorldZeroDto> publicHelloWorld() {
 
-        log.info("Called FIRST method HelloWorldController.publicHelloWorld()");
+        log.info("Called ZERO method HelloWorldController.publicHelloWorld()");
 
-        HelloWorldFirstDto helloWorldFirstDto = helloWorldService.getPublicMessage();
-        return ResponseEntity.ok(helloWorldFirstDto);
+        HelloWorldZeroDto HelloWorldZeroDto = helloWorldService.getPublicMessage();
+        return ResponseEntity.ok(HelloWorldZeroDto);
 
     }
 
@@ -43,12 +43,12 @@ public class HelloWorldController {
             description = "Read secured message",
             security = @SecurityRequirement(name = "keycloak"))
     @GetMapping("/secured")
-    public ResponseEntity<HelloWorldFirstDto> securedHelloWorld() {
+    public ResponseEntity<HelloWorldZeroDto> securedHelloWorld() {
 
-        log.info("Called FIRST method HelloWorldController.securedHelloWorld()");
+        log.info("Called ZERO method HelloWorldController.securedHelloWorld()");
 
-        HelloWorldFirstDto helloWorldFirstDto = helloWorldService.getSecuredMessage();
-        return ResponseEntity.ok(helloWorldFirstDto);
+        HelloWorldZeroDto HelloWorldZeroDto = helloWorldService.getSecuredMessage();
+        return ResponseEntity.ok(HelloWorldZeroDto);
 
     }
 

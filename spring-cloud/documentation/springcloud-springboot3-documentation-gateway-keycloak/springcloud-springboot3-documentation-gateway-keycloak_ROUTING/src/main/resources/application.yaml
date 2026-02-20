@@ -43,3 +43,10 @@ springdoc:
         url: /aggregate/second-service/v3/api-docs
   api-docs:
     enabled: true
+
+# Converter
+jwt:
+  auth:
+    converter:
+      resource-id: helloworld-client
+      principle-attribute: preferred_username

@@ -1,10 +1,10 @@
 package com.example.configs;
 
-import com.example.converters.JwtAuthConverter;
 import com.example.converters.OidcConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -13,8 +13,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @RequiredArgsConstructor
 public class SecurityConfig {
-
-    private final JwtAuthConverter jwtAuthConverter;
 
     private final OidcConverter oidcConverter;
 
@@ -30,10 +28,8 @@ public class SecurityConfig {
                 );
 
         http
-                .oauth2ResourceServer(oauth2 ->
-                        oauth2.jwt(jwt ->
-                                jwt.jwtAuthenticationConverter(jwtAuthConverter)
-                        )
+                .oauth2ResourceServer(oauth2 -> oauth2
+                        .jwt(Customizer.withDefaults())
                 );
 
         http

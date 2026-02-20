@@ -11,7 +11,25 @@ EXAMPLE
 
 ![My Image](readme-images/image-05.png)
 
-![My Image](readme-images/image-06.png)
+![My Image](readme-images/image-06a.png)
+
+![My Image](readme-images/image-06b.png)
+
+![My Image](readme-images/image-06c.png)
+
+![My Image](readme-images/image-06d.png)
+
+![My Image](readme-images/image-06e.png)
+
+![My Image](readme-images/image-06f.png)
+
+![My Image](readme-images/image-06g.png)
+
+![My Image](readme-images/image-06h.png)
+
+![My Image](readme-images/image-06i.png)
+
+![My Image](readme-images/image-06j.png)
 
 ![My Image](readme-images/image-07.png)
 

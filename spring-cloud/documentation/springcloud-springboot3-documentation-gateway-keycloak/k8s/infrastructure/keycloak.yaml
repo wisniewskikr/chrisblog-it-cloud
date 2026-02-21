@@ -2485,3 +2485,17 @@ data:
         "clientSessionIdleTimeout": "0",
         "parRequestUriLifespan": "60",
         "clientSessionMaxLifespan": "0",
+        "clientOfflineSessionIdleTimeout": "0",
+        "cibaInterval": "5",
+        "realmReusableOtpCode": "false"
+      },
+      "keycloakVersion": "26.0.8",
+      "userManagedAccessAllowed": false,
+      "organizationsEnabled": false,
+      "clientProfiles": {
+        "profiles": []
+      },
+      "clientPolicies": {
+        "policies": []
+      }
+    }

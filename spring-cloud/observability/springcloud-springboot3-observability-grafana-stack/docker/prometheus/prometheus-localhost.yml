@@ -9,8 +9,8 @@ scrape_configs:
   - job_name: 'fe'
     metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: ['host.docker.internal:8080'] ## only for demo purposes don't use host.docker.internal in production
+      - targets: ['host.docker.internal:8080'] ## It doesn't work for Podman Desktop
   - job_name: 'be'
     metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: ['host.docker.internal:8081'] ## only for demo purposes don't use host.docker.internal in production
+      - targets: ['host.docker.internal:8081'] ## It doesn't work for Podman Desktop
